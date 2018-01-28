@@ -671,10 +671,8 @@ uint32_t usim_server_command_GSM_algorithm_ble(uint8_t *bytes_command, uint32_t 
     /* write the SIM returned status bytes to phone */
     write_bytes(2, READ_BYTE_UICC_TERMINAL + 1, etu_length_phone, PIN_DATA_PHONE);
 	
-    /* stop timer1 */
-    NRF_TIMER1->TASKS_SHUTDOWN = 1;
-    /* stop SIM clock */
-    clock_sim_stop_4m(PIN_CLOCK_SIM);	
+		/* stop SIM clock signal and timer 1*/
+    stop_sim_clock_timer1( );
 		
     WATCH_COMMAND_GSM_ALGORITHM_BLE_STAGE = USIM_SERVER_COMMAND_GSM_ALGORITHM_BLE_stage4;
   }
@@ -797,10 +795,8 @@ uint32_t usim_server_command_get_data_ble(uint8_t *bytes_command, uint32_t etu_l
     /* write the SIM returned bytes to phone */
     write_bytes(*(READ_BYTE_UICC_TERMINAL + 0), READ_BYTE_UICC_TERMINAL + 1, etu_length_phone, PIN_DATA_PHONE);
 	
-    /* stop timer1 */
-    NRF_TIMER1->TASKS_SHUTDOWN = 1;
-    /* stop SIM clock */
-    clock_sim_stop_4m(PIN_CLOCK_SIM);	
+		/* stop SIM clock signal and timer 1*/
+    stop_sim_clock_timer1( );
 		
 	  USIM_SERVER_COMMAND_GET_DATA_BLE_STAGE = USIM_SERVER_COMMAND_GET_DATA_BLE_stage2;
 	}
@@ -845,11 +841,8 @@ uint32_t usim_command_authentication_0x88(void)
   
   if(read_bytes_sim(2, response_length_byte, PIN_DATA_SIM, ETU_TICKS_SIM, 1))
   {
-	  /* stop ETU timer tick */
-	  NRF_TIMER1->TASKS_CLEAR = 1;
-	  NRF_TIMER1->TASKS_SHUTDOWN = 1;
-    /* stop SIM interface 4M clock signal */
-    clock_sim_stop_4m(PIN_CLOCK_SIM);
+		/* stop SIM clock signal and timer 1*/
+    stop_sim_clock_timer1( );
     return(1);
   }
   if (!(*(response_length_byte + 1) == 0x61))
@@ -857,11 +850,9 @@ uint32_t usim_command_authentication_0x88(void)
 #if (IF_LOG_OUTPUT)    
     printf("Authentication error......\r\n");
 #endif  
-	  /* stop ETU timer tick */
-	  NRF_TIMER1->TASKS_CLEAR = 1;
-	  NRF_TIMER1->TASKS_SHUTDOWN = 1;
-    /* stop SIM interface 4M clock signal */
-    clock_sim_stop_4m(PIN_CLOCK_SIM);
+		/* stop SIM clock signal and timer 1*/
+    stop_sim_clock_timer1( );
+
     return(1);
   }
   
@@ -873,20 +864,15 @@ uint32_t usim_command_authentication_0x88(void)
   
   if(read_bytes_sim(get_response_command_byte[4] + 3, READ_BYTE_UICC_TERMINAL + 1, PIN_DATA_SIM, ETU_TICKS_SIM, 0))
   {
-	  /* stop ETU timer tick */
-	  NRF_TIMER1->TASKS_CLEAR = 1;
-	  NRF_TIMER1->TASKS_SHUTDOWN = 1;
-    /* stop SIM interface 4M clock signal */
-    clock_sim_stop_4m(PIN_CLOCK_SIM);
+		/* stop SIM clock signal and timer 1*/
+    stop_sim_clock_timer1( );
+
     return(1);
   }
 	
-  /* stop ETU timer tick */
-  NRF_TIMER1->TASKS_CLEAR = 1;
-  NRF_TIMER1->TASKS_SHUTDOWN = 1;
-  /* stop SIM interface 4M clock signal */
-  clock_sim_stop_4m(PIN_CLOCK_SIM);
-	return(0);
-	
+	/* stop SIM clock signal and timer 1*/
+  stop_sim_clock_timer1( );
+
+	return(0);	
 }
 

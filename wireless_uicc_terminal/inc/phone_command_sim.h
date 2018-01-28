@@ -44,6 +44,7 @@ uint32_t printf_selected_file(uint64_t selected_file);
 uint32_t sim_command_usim_card_update_binary_0xd6_ble(uint32_t update_file_id, uint32_t start_time_us, uint32_t time_length_us);
 uint32_t get_usim_file_position_index(uint32_t file_id, uint8_t *file_size, uint32_t *file_offset, uint32_t *flag_offset);
 uint32_t sim_command_usim_card_update_binary_0xd6(uint32_t update_file_id);
+void stop_sim_clock_timer1(void);
 
 #endif
 

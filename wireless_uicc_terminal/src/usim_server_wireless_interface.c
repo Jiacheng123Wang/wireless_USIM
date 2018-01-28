@@ -196,11 +196,8 @@ void main_watch_phone_sim_wireless(void)
 			                
       usim_server_authentication_wireless(USIM_SERVER_COMMAND_WIRELESS_RECEIVE);
 			  
-	    /* stop SIM interface 4M clock signal */
-	    clock_sim_stop_4m(PIN_CLOCK_SIM);
-		  /* stop ETU timer tick */
-		  NRF_TIMER1->TASKS_CLEAR = 1;
-		  NRF_TIMER1->TASKS_SHUTDOWN = 1;
+			/* stop SIM clock signal and timer 1*/
+      stop_sim_clock_timer1( );
 			
 			/* if the wireless USIM logical address is 7, let re-access network by local USIM */
 			if ((USIM_CLIENT_WIRELESS_LOGICAL_ADDRESS == 7) && 
@@ -981,10 +978,8 @@ uint32_t usim_server_authentication_wireless_ble(uint8_t *phone_command, uint32_
       sd_nvic_SetPendingIRQ(SWI3_EGU3_IRQn);
 		  FLAG_SWI3_EGU3_IRQn = SWI3_EGU3_ISR_STOP_BLE_STACK;
 		
-      /* stop SIM interface 4M clock signal */
-      clock_sim_stop_4m(PIN_CLOCK_SIM);
-	    /* stop timer1 */
-	    NRF_TIMER1->TASKS_SHUTDOWN = 1;
+			/* stop SIM clock signal and timer 1*/
+      stop_sim_clock_timer1( );
 			
       return(1);
     }
@@ -1012,10 +1007,8 @@ uint32_t usim_server_authentication_wireless_ble(uint8_t *phone_command, uint32_
       sd_nvic_SetPendingIRQ(SWI3_EGU3_IRQn);
 		  FLAG_SWI3_EGU3_IRQn = SWI3_EGU3_ISR_STOP_BLE_STACK;
 
-      /* stop SIM interface 4M clock signal */
-      clock_sim_stop_4m(PIN_CLOCK_SIM);
-	    /* stop timer1 */
-	    NRF_TIMER1->TASKS_SHUTDOWN = 1;
+			/* stop SIM clock signal and timer 1*/
+      stop_sim_clock_timer1( );
       return(1);
     }
   	
@@ -1035,10 +1028,8 @@ uint32_t usim_server_authentication_wireless_ble(uint8_t *phone_command, uint32_
     /* re-load watch dog request register */
     NRF_WDT->RR[0] = 0x6E524635;
   
-    /* stop SIM interface 4M clock signal */
-    clock_sim_stop_4m(PIN_CLOCK_SIM);
-    /* stop timer1 */
-    NRF_TIMER1->TASKS_SHUTDOWN = 1;
+		/* stop SIM clock signal and timer 1*/
+    stop_sim_clock_timer1( );
 	  /* set USIM_SERVER_AUTHENTICATION_WIRELESS_BLE_STAGE, to send the USIM authentication results */
 	  USIM_SERVER_AUTHENTICATION_WIRELESS_BLE_STAGE = USIM_SERVER_AUTHENTICATION_WIRELESS_BLE_stage2;
 	}

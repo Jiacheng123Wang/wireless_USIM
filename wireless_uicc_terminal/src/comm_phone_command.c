@@ -865,11 +865,9 @@ void SWI3_EGU3_IRQHandler(void)
 			/* start sim clock signal */
 			clock_sim_start_4m(PIN_CLOCK_SIM);
 			sim_file_7fff_selected_check( );
-			/* stop SIM clock */
-			clock_sim_stop_4m(PIN_CLOCK_SIM);
-		  /* stop ETU timer tick */
-		  NRF_TIMER1->TASKS_CLEAR = 1;
-		  NRF_TIMER1->TASKS_SHUTDOWN = 1;
+			
+			/* stop SIM clock signal and timer 1*/
+      stop_sim_clock_timer1( );
 						
 			/* re-start softdevice */
 			start_ble_data( );

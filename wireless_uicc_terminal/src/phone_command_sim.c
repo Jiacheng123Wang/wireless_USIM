@@ -3068,7 +3068,7 @@ uint32_t sim_command_update_binary_get_offset_0xd6(uint8_t *phone_command, uint3
 }
 		
 /********************************************************************************/
-static void stop_sim_clock_timer1(void)
+void stop_sim_clock_timer1(void)
 /*--------------------------------------------------------------------------------
 | SIM command 0xD6 to update EF data
 |

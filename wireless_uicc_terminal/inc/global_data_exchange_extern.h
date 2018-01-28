@@ -82,7 +82,6 @@ extern volatile uint8_t    PHONE_COMMAND_GET_FILE_DATA_BLE_STAGE;
 extern volatile uint8_t    FLASH_UPDATE_WAITING_STAGE;
 extern volatile uint8_t    FLAG_DEFAULT_RECEIVER;
 extern volatile uint8_t    FLAG_RECEIVE_CALL_UPDATE; 
-extern volatile uint8_t    CONNECTION_LISTENING_SIM_BLE_STAGE;
 extern volatile uint8_t    WATCH_COMMAND_GSM_ALGORITHM_BLE_STAGE;
 extern volatile uint8_t    USIM_SERVER_COMMAND_GET_DATA_BLE_STAGE;
 extern volatile uint8_t    SIM_READ_BYTES_NUMBER; 
@@ -106,6 +105,5 @@ extern volatile uint8_t    TIME_SLOT_EVENT_TYPE;
 extern volatile uint32_t   TIME_SLOT_REQUEST_LENGTH_US; 
 extern volatile uint8_t    PHONE_CONNECTION_REQUEST_TYPE;                                 
 extern volatile uint32_t   FLASH_DATA_WRITE_CHECK_TASK_QUEUE; 
-
 
 #endif

@@ -153,37 +153,68 @@ volatile uint32_t   BLE_STOPPED_TASK_QUEUE = 0;
 volatile uint8_t    DATA_CARRIER_FREQ = 0;
 /* selected file between smart sim connector and phone */
 volatile uint64_t   SELECTED_FILE = 0x0;
+/* time slot task stage for USIM card binary update */
 volatile uint8_t    SIM_COMMAND_UPDATE_BINARY_0XD6_BLE_STAGE = 0;
+/* task queue for USIM card binary update */
 volatile uint32_t   SIM_FILE_UPDATE_BINARY_TASK_QUEUE = 0;
+/* time slot task stage for wireless-SIM authentication phone command 0x88, USIM client side */
 volatile uint8_t    PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_STAGE = 0;
+/* time slot task stage for wireless-SIM get data phone command 0xc0, USIM client side */
 volatile uint8_t    PHONE_COMMAND_GET_FILE_DATA_BLE_STAGE = 0;
+/* flast write stage with BLE stach softdevice sctive */
 volatile uint8_t    FLASH_UPDATE_WAITING_STAGE = 0;
+/* mark the authentication from logical address 7 (reserved for iPAD) */
 volatile uint8_t    FLAG_DEFAULT_RECEIVER = 1;
+/* mark the authentication from logical address 7 (reserved for iPAD) */
 volatile uint8_t    FLAG_RECEIVE_CALL_UPDATE = 0; 
-volatile uint8_t    CONNECTION_LISTENING_SIM_BLE_STAGE = 0;
+/* time slot task stage for USIM server local authentication phone command 0x88 */
 volatile uint8_t    WATCH_COMMAND_GSM_ALGORITHM_BLE_STAGE = 0;
+/* time slot task stage forUSIM server local get data phone command 0xc0 */
 volatile uint8_t    USIM_SERVER_COMMAND_GET_DATA_BLE_STAGE = 0;
-volatile uint8_t    SIM_READ_BYTES_NUMBER = 0; 
+/* SIM data read number inside GPIOTE handler, for authentication USIM byte read */
+volatile uint8_t    SIM_READ_BYTES_NUMBER = 0;
+/* mark the ICCID EF 0x2fe2 selected, for USIM server local SIM use */
 volatile uint8_t    IF_2FE2_SELECTED = 0; 
+/* time slot task stage for wireless-SIM authentication phone command 0x88, USIM server side */
 volatile uint8_t    USIM_SERVER_AUTHENTICATION_WIRELESS_BLE_STAGE = 0;
+/* if the phone call is on for USIM server side phone. 
+0: call off, only provide wireless-SIM authentication phone command 0x88 server,
+1: call on, both USIM client and server can initial a phone call
+current in RAM  */
 volatile uint8_t    USIM_SERVER_CALL_ON_FLAG_GLOBAL =0;
+/* task queue for wireless-SIM connection command between USIM server and client */
 volatile uint32_t   USIM_PHONE_CONNECTION_COMMAND = 0;
-
+/* time stamp of the phome command 0xc0 start time */
 volatile uint32_t   PHONE_COMMAND_GET_FILE_DATA_START_TIME = 0;
+/* time stamp of receiving SIM data start time from wireless-SIM interface */
 volatile uint32_t   SIM_DATA_RECEIVE_COMMAND_START_TIME = 0;                                   
+/* time stamp of the wireless authentication phone command start time */
 volatile uint32_t   PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_START_TIME = 0;
+/* return value for time slot signal handler of wireless authentication at USIM client side */
 volatile uint32_t   RETURN_PHONE_AUTHENTICATION_WIRELESS             = SIGNAL_CALLBACK_RETURN_UNDO;
+/* return value for time slot signal handler of wireless data transmission at USIM client side */
 volatile uint32_t   RETURN_PHONE_CONNECTION_REQUEST_DATA_SEND        = SIGNAL_CALLBACK_RETURN_UNDO;
+/* return value for time slot signal handler of wireless EF data get (connection request) at USIM client side */
 volatile uint32_t   RETURN_PHONE_GET_FILE_DATA_REQUEST               = SIGNAL_CALLBACK_RETURN_UNDO;
+/* return value for time slot signal handler of wireless EF data get (data receive) at USIM client side */
 volatile uint32_t   RETURN_PHONE_GET_FILE_DATA_RECEIVE               = SIGNAL_CALLBACK_RETURN_UNDO;
+/* return value for time slot signal handler of wireless USIM connection request at USIM client side */
 volatile uint32_t   RETURN_PHONE_CONNECTION_REQUEST                  = SIGNAL_CALLBACK_RETURN_UNDO;
+/* return value for time slot signal handler of USIM card binary update at USIM server side */
 volatile uint32_t   RETURN_USIM_FILE_BINAREY_UPDATE                  = SIGNAL_CALLBACK_RETURN_UNDO;
+/* time slot request semaphore, 1: lock the time slot request semaphore. 0: free the time slot request semaphore */
 volatile uint8_t    SEMAPHORE_TIME_SLOT_REQUEST = 0;  
+/* time slot request task type in side handler  */
 volatile uint8_t    TIME_SLOT_SIGNAL_TYPE_SET = TIME_SLOT_SIGNAL_DEFAULT_VALUE; 
+/* time slot request task type in side time slot signal handler  */
 volatile uint8_t    TIME_SLOT_SIGNAL_TYPE; 
-volatile uint8_t    TIME_SLOT_EVENT_TYPE = TIME_SLOT_EVENT_DEFAULT_VALUE; 
+/* time slot event type in side time slot event handler  */
+volatile uint8_t    TIME_SLOT_EVENT_TYPE = TIME_SLOT_EVENT_DEFAULT_VALUE;
+/* time slot request time length, in us */ 
 volatile uint32_t   TIME_SLOT_REQUEST_LENGTH_US = 1000; 
-volatile uint8_t    PHONE_CONNECTION_REQUEST_TYPE;                                 
+/* phone connection request type, to indicate the request is a random access request or data transmission */
+volatile uint8_t    PHONE_CONNECTION_REQUEST_TYPE;
+/* flash data write task queue for different data flash write */                                
 volatile uint32_t   FLASH_DATA_WRITE_CHECK_TASK_QUEUE = 0; 
 
 #endif

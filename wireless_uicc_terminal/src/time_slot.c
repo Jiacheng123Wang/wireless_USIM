@@ -85,6 +85,7 @@ void time_slot_request_time_out(void)
 	{
 		case TIME_SLOT_SIGNAL_PHONE_COMMAND:
 		{
+			/* for phone command status, since the time is less, write the reaponse byte to phone directly */
 			if (*(PHONE_COMMAND + 2) == 0xf2)
 			{
 	      phone_command_status_response_0xf2(PHONE_COMMAND, ETU_TICKS_PHONE, PIN_DATA_PHONE);
@@ -93,6 +94,7 @@ void time_slot_request_time_out(void)
 			break;
 		}
 		
+		/* phone command waiting status set, ready for read the nect phone command */
 		case TIME_SLOT_SIGNAL_PHONE_COMMAND_WIRELESS_AUTHENTICATION:
 		case TIME_SLOT_SIGNAL_USIM_SERVER_SIM_COMMAND_AUTHENTICATION:
 		case TIME_SLOT_SIGNAL_USIM_SERVER_SIM_COMMAND_GET_DATA:
@@ -102,6 +104,7 @@ void time_slot_request_time_out(void)
 			break;
 		}
 		
+		/* do nothing, just extend the CC value of RTC2 */
 		case TIME_SLOT_SIGNAL_USIM_SERVER_WIRELESS_AUTHENTICATION_SIM_COMMAND:
 	  case TIME_SLOT_SIGNAL_USIM_SERVER_WIRELESS_SIM_COMMAND_RECEIVE:
 		case TIME_SLOT_SIGNAL_USIM_SERVER_SIM_CONFIG_DATA_RECEIVE:
@@ -147,6 +150,7 @@ void time_slot_request_queue(void)
 		return;			
 	}		
 	
+	/* if there is another time slot task ongoing, wait for some time and request again */
 	if (SEMAPHORE_TIME_SLOT_REQUEST)
 	{
 		NRF_RTC2->CC[1] = NRF_RTC2->COUNTER + TIME_SLOT_REQUEST_RETRY_INTERVAL_MS;
@@ -158,16 +162,17 @@ void time_slot_request_queue(void)
   m_timeslot_request.params.earliest.length_us   = TIME_SLOT_REQUEST_LENGTH_US;
   m_timeslot_request.params.earliest.timeout_us  = 1500000;
 	
+	/* time slot request successfully */
   if (sd_radio_request(&m_timeslot_request) == NRF_SUCCESS)
 	{
-		/* lock the time lot request semaphore */
+		/* lock the time slot request semaphore */
 		SEMAPHORE_TIME_SLOT_REQUEST = 1;
 		/* set the time slot callback signal type */
 		TIME_SLOT_SIGNAL_TYPE = TIME_SLOT_SIGNAL_TYPE_SET;
 		/* set the time slot callback event type */
     TIME_SLOT_EVENT_TYPE = TIME_SLOT_EVENT_DEFAULT_VALUE;	
 	}
-	else
+	else /* time slot request error, wait for some time and request again */
 	{
 		NRF_RTC2->CC[1] = NRF_RTC2->COUNTER + TIME_SLOT_REQUEST_RETRY_INTERVAL_MS;		
 	}		
@@ -183,9 +188,10 @@ void nrf_evt_signal_handler(uint32_t evt_id, void * p_context)
   switch (evt_id)
   {
     case NRF_EVT_RADIO_SIGNAL_CALLBACK_INVALID_RETURN:
-      //No implementation needed
+      /* No implementation needed */
       break;
-			
+		
+		/* the task handler is finished in time slot */ 
     case NRF_EVT_RADIO_SESSION_IDLE:
 		{
 			switch (TIME_SLOT_EVENT_TYPE)
@@ -286,8 +292,12 @@ void nrf_evt_signal_handler(uint32_t evt_id, void * p_context)
 		}
 		
     case NRF_EVT_RADIO_SESSION_CLOSED:
-      //No implementation needed, session ended
+		{
+      /* No implementation needed, session ended */
+		}
       break;
+			
+		/* the tiem slot request is blocked */	
     case NRF_EVT_RADIO_BLOCKED:
 		{
 #if (IF_LOG_OUTPUT)
@@ -427,7 +437,9 @@ void nrf_evt_signal_handler(uint32_t evt_id, void * p_context)
 		}
 			
     default:
+		{
       break;
+		}
   }
 }
 

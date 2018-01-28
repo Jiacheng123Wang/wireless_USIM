@@ -1730,11 +1730,9 @@ void usim_power_on_status_check(void)
 	      clock_sim_start_4m(PIN_CLOCK_SIM);
 				/* EF 0x7FFF selection */		
         sim_file_7fff_selected_check( );
-        /* stop SIM clock */
-	      clock_sim_stop_4m(PIN_CLOCK_SIM);	
-			  /* stop ETU timer tick */
-			  NRF_TIMER1->TASKS_CLEAR = 1;
-			  NRF_TIMER1->TASKS_SHUTDOWN = 1;
+				
+				/* stop SIM clock signal and timer 1*/
+        stop_sim_clock_timer1( );
 			}
 #if (IF_LOG_OUTPUT)
 			else
@@ -1772,11 +1770,8 @@ void usim_power_on_status_check(void)
 	      clock_sim_start_4m(PIN_CLOCK_SIM);
 				/* EF 0x7FFF selection */		
         sim_file_7fff_selected_check( );
-        /* stop SIM clock */
-	      clock_sim_stop_4m(PIN_CLOCK_SIM);	
-			  /* stop ETU timer tick */
-			  NRF_TIMER1->TASKS_CLEAR = 1;
-			  NRF_TIMER1->TASKS_SHUTDOWN = 1;
+				/* stop SIM clock signal and timer 1*/
+        stop_sim_clock_timer1( );
 			}		
 #if (IF_LOG_OUTPUT)
 			else
@@ -1861,10 +1856,8 @@ void usim_file_update_status_check(void)
 						IF_USIM_FILE_DATA_UPDATED |= (1 << 0);
 					}
 			
-		      clock_sim_stop_4m(PIN_CLOCK_SIM0);
-			    /* stop ETU timer tick */
-			    NRF_TIMER1->TASKS_CLEAR = 1;
-			    NRF_TIMER1->TASKS_SHUTDOWN = 1;
+					/* stop SIM clock signal and timer 1*/
+          stop_sim_clock_timer1( );
 				}
 			}
 		}
@@ -1896,10 +1889,8 @@ void usim_file_update_status_check(void)
 						IF_USIM_FILE_DATA_UPDATED |= (1 << 1);
 					}
 			
-		      clock_sim_stop_4m(PIN_CLOCK_SIM1);
-			    /* stop ETU timer tick */
-			    NRF_TIMER1->TASKS_CLEAR = 1;
-			    NRF_TIMER1->TASKS_SHUTDOWN = 1;
+					/* stop SIM clock signal and timer 1*/
+          stop_sim_clock_timer1( );
 				}
       }			
 		}
@@ -1954,10 +1945,8 @@ void ble_stop_task_queue_check(void)
 		    USAT_BYTE_LENGTH_BACK = 14 + strlen((char *)USIM0_EF_UPDATE_SUCCESSFULLY_DISPLAY_TEXT);
 			}
 			
-      clock_sim_stop_4m(PIN_CLOCK_SIM0);
-	    /* stop ETU timer tick */
-	    NRF_TIMER1->TASKS_CLEAR = 1;
-	    NRF_TIMER1->TASKS_SHUTDOWN = 1;
+			/* stop SIM clock signal and timer 1*/
+      stop_sim_clock_timer1( );
 		}
 #if (PIN_VCC_SIM1 != PIN_NULL)					
 		/* update USIM1 EF data */
@@ -1977,10 +1966,8 @@ void ble_stop_task_queue_check(void)
 		    USAT_BYTE_LENGTH_BACK = 14 + strlen((char *)USIM1_EF_UPDATE_SUCCESSFULLY_DISPLAY_TEXT);
 			}
 			
-      clock_sim_stop_4m(PIN_CLOCK_SIM1);
-	    /* stop ETU timer tick */
-	    NRF_TIMER1->TASKS_CLEAR = 1;
-	    NRF_TIMER1->TASKS_SHUTDOWN = 1;
+			/* stop SIM clock signal and timer 1*/
+      stop_sim_clock_timer1( );
 		}
 #endif			
 	}
