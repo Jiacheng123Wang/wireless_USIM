@@ -1,0 +1,277 @@
+Plot Report
+-----------
+
+Report Written:     Tuesday, January 16, 2018
+Design Path:        \\Mac\Home\Desktop\PCB\wireless_SIM_LED4_0201_5x5_20180116.pcb
+Design Title:       
+Created:            2015/5/19 15:26:34
+Last Saved:         2018/1/16 21:34:01
+Editing Time:       20650 min
+Units:              mm (precision 4)
+
+
+Device Settings
+===============
+
+
+Gerber Settings
+===============
+
+    Leading zero suppression.
+    G01 assumed throughout.
+    Line termination <*> <CR> <LF>.
+    3.5 format absolute inches.
+    Format commands defined in Gerber file.
+    Aperture table defined in Gerber file.
+    Hardware arcs allowed.
+
+
+Drill Settings
+==============
+
+    Excellon Format 1    Format 3.5 absolute in mm.
+    No zero suppression.
+
+
+Plots Output
+============
+
+
+Gerber Output
+=============
+
+\\Mac\Home\Desktop\PCB\wireless_SIM_LED4_0201_5x5_20180116 - Top Documentation.gbr
+
+    Layers:
+    ---------------------
+    Top Documentation
+    Board Outlines
+
+    D-Code Shape  (thou)
+    -----------------------
+    D10    Round 0.39
+    D11    Round 0.04
+    D12    Round 1.57
+    D14    Round 0.79
+
+Gerber Output
+=============
+
+\\Mac\Home\Desktop\PCB\wireless_SIM_LED4_0201_5x5_20180116 - Top Silkscreen.gbr
+
+    Layers:
+    ------------------
+    Top Silkscreen
+    Board Outlines
+
+    D-Code Shape  (thou)
+    -----------------------
+    D11    Round 0.04
+    D12    Round 1.57
+    D13    Round 1.18
+    D14    Round 0.79
+
+Gerber Output
+=============
+
+\\Mac\Home\Desktop\PCB\wireless_SIM_LED4_0201_5x5_20180116 - Top Copper.gbr
+
+    Layers:
+    ------------------
+    Top Copper
+    Board Outlines
+
+    D-Code Shape  (thou)
+    --------------------------------------------------------------
+    D11    Round 0.04
+    D14    Round 0.79
+    D16    Round 78.74
+    D18    Round 39.37
+    D70    Round 19.69
+    D71    Square 11.81
+    D21    Round 8.66
+    D23    Round 15.75
+    D24    Round 5.91
+    D25    Round 7.87
+    D93    Round 3.94
+    D96    Square 19.69
+    D100   Round 27.56
+    D113   Round 47.24
+    D115   Round 11.81
+    D116   Round 2.36
+    D120   Rounded Rectangle 39.37 X 62.99 X 15.75  Rotation 90
+    D123   Rectangle 51.18 X 62.99
+    D126   Rounded Rectangle 39.37 X 70.87 X 15.75  Rotation 90
+
+Gerber Output
+=============
+
+\\Mac\Home\Desktop\PCB\wireless_SIM_LED4_0201_5x5_20180116 - Top Copper (Resist).gbr
+
+    Layers:
+    ------------------
+    Top Copper
+    Board Outlines
+
+    D-Code Shape  (thou)
+    --------------------------------------------------------------
+    D11    Round 0.04
+    D14    Round 0.79
+    D26    Round 88.74
+    D28    Round 49.37
+    D72    Round 29.69
+    D73    Square 21.81
+    D75    Round 18.66
+    D101   Square 29.69
+    D121   Rounded Rectangle 39.37 X 62.99 X 15.75  Rotation 90
+    D124   Rectangle 61.18 X 72.99
+    D127   Rounded Rectangle 39.37 X 70.87 X 15.75  Rotation 90
+
+Gerber Output
+=============
+
+\\Mac\Home\Desktop\PCB\wireless_SIM_LED4_0201_5x5_20180116 - Top Copper (Paste).gbr
+
+    Layers:
+    ------------------
+    Top Copper
+    Board Outlines
+
+    D-Code Shape  (thou)
+    --------------------------------------------------------------
+    D11    Round 0.04
+    D14    Round 0.79
+    D77    Round 74.74
+    D79    Round 35.37
+    D81    Round 15.69
+    D82    Square 7.81
+    D84    Round 4.66
+    D105   Square 15.69
+    D122   Rounded Rectangle 39.37 X 62.99 X 15.75  Rotation 90
+    D125   Rectangle 47.18 X 58.99
+    D128   Rounded Rectangle 39.37 X 70.87 X 15.75  Rotation 90
+
+Gerber Output
+=============
+
+\\Mac\Home\Desktop\PCB\wireless_SIM_LED4_0201_5x5_20180116 - Bottom Copper.gbr
+
+    Layers:
+    ------------------
+    Bottom Copper
+    Board Outlines
+
+    D-Code Shape  (thou)
+    ---------------------------------------------------------------
+    D11    Round 0.04
+    D14    Round 0.79
+    D23    Round 15.75
+    D25    Round 7.87
+    D86    Rounded Rectangle 70.87 X 165.35 X 19.69  Rotation 90
+    D100   Round 27.56
+    D113   Round 47.24
+    D115   Round 11.81
+
+Gerber Output
+=============
+
+\\Mac\Home\Desktop\PCB\wireless_SIM_LED4_0201_5x5_20180116 - Bottom Copper (Resist).gbr
+
+    Layers:
+    ------------------
+    Bottom Copper
+    Board Outlines
+
+    D-Code Shape  (thou)
+    ---------------------------------------------------------------
+    D11    Round 0.04
+    D14    Round 0.79
+    D87    Rounded Rectangle 70.87 X 165.35 X 19.69  Rotation 90
+
+Gerber Output
+=============
+
+\\Mac\Home\Desktop\PCB\wireless_SIM_LED4_0201_5x5_20180116 - Bottom Copper (Paste).gbr
+
+    Layers:
+    ------------------
+    Bottom Copper
+    Board Outlines
+
+    D-Code Shape  (thou)
+    ---------------------------------------------------------------
+    D11    Round 0.04
+    D14    Round 0.79
+    D88    Rounded Rectangle 70.87 X 165.35 X 19.69  Rotation 90
+
+Gerber Output
+=============
+
+\\Mac\Home\Desktop\PCB\wireless_SIM_LED4_0201_5x5_20180116 - Bottom Silkscreen.gbr
+
+    Layers:
+    ---------------------
+    Bottom Silkscreen
+    Board Outlines
+
+    D-Code Shape  (thou)
+    -----------------------
+    D11    Round 0.04
+    D12    Round 1.57
+    D14    Round 0.79
+
+Gerber Output
+=============
+
+\\Mac\Home\Desktop\PCB\wireless_SIM_LED4_0201_5x5_20180116 - Bottom Documentation.gbr
+
+    Layers:
+    ------------------------
+    Bottom Documentation
+    Board Outlines
+
+    D-Code Shape  (thou)
+    -----------------------
+    D10    Round 0.39
+    D11    Round 0.04
+    D12    Round 1.57
+    D14    Round 0.79
+
+NC Drill Output
+===============
+
+\\Mac\Home\Desktop\PCB\wireless_SIM_LED4_0201_5x5_20180116 - Drill Data - [Through Hole].drl
+
+    Output:
+    ---------------------------
+    Plated Round Drill Holes
+    Plated Slots
+    Plated Board Outlines
+
+    Tool  Size         Count   ID
+    ------------------------------------
+    T001  000.00591 in 10    F
+    T002  000.00787 in 1320  A
+    T003  000.01969 in 325   D
+    T004  000.03937 in 20    E
+    ------------------------------------
+    Total              1675
+    ------------------------------------
+
+\\Mac\Home\Desktop\PCB\wireless_SIM_LED4_0201_5x5_20180116 - Drill Data - [Through Hole] (Unplated).drl
+
+    Output:
+    -----------------------------
+    Unplated Round Drill Holes
+    Unplated Slots
+    Unplated Board Outlines
+
+    Tool  Size         Count   ID
+    ------------------------------------
+    T001  000.02500 in 26
+    ------------------------------------
+    Total              26
+    ------------------------------------
+
+
+End Of Report.

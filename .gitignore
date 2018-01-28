@@ -4,4 +4,8 @@ _build/
 # ignore all the files in the wireless_uicc_terminal/lib/ directory
 wireless_uicc_terminal/lib/
 
+# ignore file .DS_Store
+.DS_Store
 
+#ignore some files in hardware/ directory
+hardware/_*
