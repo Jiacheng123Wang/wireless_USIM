@@ -1,0 +1,7 @@
+# ignore all the files in the _build/ directory
+_build/
+
+# ignore all the files in the wireless_uicc_terminal/lib/ directory
+wireless_uicc_terminal/lib/
+
+
