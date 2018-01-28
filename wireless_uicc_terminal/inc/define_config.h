@@ -81,7 +81,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define PIN_LED_BLUE          24
   #define PIN_LED_GREEN         23
   #define PIN_LED_YELLOW        22
-  #define PIN_LED_ORANGE        20
+  #define PIN_LED_ORANGE        18
   #define PIN_LED_RED           20
   #define PIN_LED_WHITE         19
 

@@ -9,3 +9,4 @@ wireless_uicc_terminal/lib/
 
 #ignore some files in hardware/ directory
 hardware/_*
+hardware/~*

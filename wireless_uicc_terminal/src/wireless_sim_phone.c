@@ -1027,7 +1027,6 @@ void phone_data_send_check(void)
 }
 
 #ifdef PIN_LED_BLUE	
-
 /********************************************************************************/	
 void led_wireless_sim_status_indicator(uint32_t led_status_counter)
 /*--------------------------------------------------------------------------------
@@ -1418,66 +1417,106 @@ void led_status_check(void)
 #endif	
 	else if (*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == '9')
 	{
-#ifdef PIN_LED_BLUE
-		if (led_status_counter % 2)
-		{		
-			nrf_gpio_pin_write(PIN_LED_BLUE, 1); 	
-		}
-    else
-		{		
-			nrf_gpio_pin_write(PIN_LED_BLUE, 0); 	
-		}
-#endif		
+		switch (led_status_counter % 4)
+		{
+			case 0:
+			{
+#ifdef PIN_LED_BLUE	
+	      nrf_gpio_pin_write(PIN_LED_BLUE, 1);
+#endif	
 #ifdef PIN_LED_GREEN
-		if (led_status_counter % 4)
-		{		
-			nrf_gpio_pin_write(PIN_LED_GREEN, 1); 	
-		}
-		else
-		{		
-			nrf_gpio_pin_write(PIN_LED_GREEN, 0); 	
-		}
+				nrf_gpio_pin_write(PIN_LED_GREEN, 0); 	
 #endif		
 #ifdef PIN_LED_WHITE
-		if (led_status_counter % 8)
-		{	
-			nrf_gpio_pin_write(PIN_LED_WHITE, 1); 	
-		}
-		else
-		{	
-			nrf_gpio_pin_write(PIN_LED_WHITE, 0); 	
-		}			
+				nrf_gpio_pin_write(PIN_LED_WHITE, 0); 	
 #endif		
 #ifdef PIN_LED_RED
-		if (led_status_counter % 16)
-		{	
-			nrf_gpio_pin_write(PIN_LED_RED, 1); 	
-		}
-		else
-		{	
-			nrf_gpio_pin_write(PIN_LED_RED, 0); 	
-		}			
+				nrf_gpio_pin_write(PIN_LED_RED, 0); 	
 #endif		
 #ifdef PIN_LED_YELLOW
-		if (led_status_counter % 32)
-		{		
-			nrf_gpio_pin_write(PIN_LED_YELLOW, 1); 	
-		}
-		else
-		{		
-			nrf_gpio_pin_write(PIN_LED_YELLOW, 0); 	
-		}
+				nrf_gpio_pin_write(PIN_LED_YELLOW, 0); 	
 #endif		
 #ifdef PIN_LED_ORANGE
-		if (led_status_counter % 64)
-		{	
-			nrf_gpio_pin_write(PIN_LED_ORANGE, 1); 	
-		}
-		else
-		{	
-			nrf_gpio_pin_write(PIN_LED_ORANGE, 0); 	
-		}			
+				nrf_gpio_pin_write(PIN_LED_ORANGE, 0); 	
+#endif
+						
+				break;
+			}
+			case 1:
+			{
+#ifdef PIN_LED_BLUE
+				nrf_gpio_pin_write(PIN_LED_BLUE, 0); 	
 #endif		
+#ifdef PIN_LED_GREEN
+				nrf_gpio_pin_write(PIN_LED_GREEN, 1); 	
+#endif		
+#ifdef PIN_LED_WHITE
+				nrf_gpio_pin_write(PIN_LED_WHITE, 0); 	
+#endif		
+#ifdef PIN_LED_RED
+				nrf_gpio_pin_write(PIN_LED_RED, 0); 	
+#endif		
+#ifdef PIN_LED_YELLOW
+				nrf_gpio_pin_write(PIN_LED_YELLOW, 0); 	
+#endif		
+#ifdef PIN_LED_ORANGE
+				nrf_gpio_pin_write(PIN_LED_ORANGE, 0); 	
+#endif
+						
+				break;
+			}
+			case 2:
+			{
+#ifdef PIN_LED_BLUE
+				nrf_gpio_pin_write(PIN_LED_BLUE, 0); 	
+#endif		
+#ifdef PIN_LED_GREEN
+				nrf_gpio_pin_write(PIN_LED_GREEN, 0); 	
+#endif		
+#ifdef PIN_LED_WHITE
+				nrf_gpio_pin_write(PIN_LED_WHITE, 1); 	
+#endif		
+#ifdef PIN_LED_RED
+				nrf_gpio_pin_write(PIN_LED_RED, 0); 	
+#endif		
+#ifdef PIN_LED_YELLOW
+				nrf_gpio_pin_write(PIN_LED_YELLOW, 0); 	
+#endif		
+#ifdef PIN_LED_ORANGE
+				nrf_gpio_pin_write(PIN_LED_ORANGE, 0); 	
+#endif
+						
+				break;
+			}
+			case 3:
+			{
+#ifdef PIN_LED_BLUE
+				nrf_gpio_pin_write(PIN_LED_BLUE, 0); 	
+#endif		
+#ifdef PIN_LED_GREEN
+				nrf_gpio_pin_write(PIN_LED_GREEN, 0); 	
+#endif		
+#ifdef PIN_LED_WHITE
+				nrf_gpio_pin_write(PIN_LED_WHITE, 0); 	
+#endif		
+#ifdef PIN_LED_RED
+				nrf_gpio_pin_write(PIN_LED_RED, 1); 	
+#endif		
+#ifdef PIN_LED_YELLOW
+				nrf_gpio_pin_write(PIN_LED_YELLOW, 0); 	
+#endif		
+#ifdef PIN_LED_ORANGE
+				nrf_gpio_pin_write(PIN_LED_ORANGE, 0); 	
+#endif
+						
+				break;
+			}
+			
+			default:
+			{
+				break;
+			}			
+		}	
 	}
 	else
 	{

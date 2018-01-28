@@ -192,7 +192,7 @@ void usim_data_initialization(void)
 						 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
   uint8_t user_password[16] = {'0', '0', '0', '0', '0', '0', 0, 0, 0, 0, 0, 0, 
              0, 0, 0, 0};
-	uint8_t led_pattern_tmp[16] = {15, 'a', 'H', 'e', 'l', 'l', 'o', ',', 'W', 'o', 'r', 'l', 'd', '!', ' ', ' '};
+	uint8_t led_pattern_tmp[16] = {15, '9', 'H', 'e', 'l', 'l', 'o', ',', 'W', 'o', 'r', 'l', 'd', '!', ' ', ' '};
   uint32_t i;
   
   /* Name of the BLE device. Will be included in the advertising data. */
