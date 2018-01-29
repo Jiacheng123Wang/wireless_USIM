@@ -330,11 +330,7 @@ void nrf_evt_signal_handler(uint32_t evt_id, void * p_context)
 					}
 					else
 					{
-#if (IF_CONNECTION_CC_CODED)
-				    time_slot_request(2 * TIMER_SLOT_PHONE_CONNECTION_REQUEST_US + 2 * TIMER_SLOT_CC_ENCODING_TIME_US + TIMER_SLOT_CC_DECODING_TIME_US );
-#else										
 				    time_slot_request(TIMER_SLOT_PHONE_CONNECTION_REQUEST_US);
-#endif					
             break;
 					}
 				}
@@ -359,11 +355,7 @@ void nrf_evt_signal_handler(uint32_t evt_id, void * p_context)
 					}
 					else
 					{
-#if (IF_CONNECTION_CC_CODED)
-            time_slot_request(3 * TIMER_SLOT_SIM_CONNECTION_LISTENING_US + TIMER_SLOT_CC_ENCODING_TIME_US + TIMER_SLOT_CC_DECODING_TIME_US);
-#else	
             time_slot_request(TIMER_SLOT_SIM_CONNECTION_LISTENING_US);
-#endif	
             break;
 					}
 				}
@@ -512,13 +504,8 @@ nrf_radio_signal_callback_return_param_t *time_slot_callback(uint8_t signal_type
           NRF_RADIO->POWER = 1;
 					radio_configure();
 				
-#if (IF_CONNECTION_CC_CODED)
-					RETURN_PHONE_CONNECTION_REQUEST = connection_request_phone_ble(0x11, start_time_stamp_timer0, 
-					  2 * TIMER_SLOT_PHONE_CONNECTION_REQUEST_US + 2 * TIMER_SLOT_CC_ENCODING_TIME_US + TIMER_SLOT_CC_DECODING_TIME_US - TIMER_SLOT_SIGNAL_CALLBACK_MARGIN_US);
-#else					
 					RETURN_PHONE_CONNECTION_REQUEST = connection_request_phone_ble(0x11, start_time_stamp_timer0, 
 					  TIMER_SLOT_PHONE_CONNECTION_REQUEST_US - TIMER_SLOT_SIGNAL_CALLBACK_MARGIN_US);
-#endif
 												
 					TIME_SLOT_EVENT_TYPE = TIME_SLOT_EVENT_PHONE_CONNECTION_REQUEST_RADIO_LINK;
           NRF_RADIO->POWER = 0;    					
@@ -529,11 +516,7 @@ nrf_radio_signal_callback_return_param_t *time_slot_callback(uint8_t signal_type
 				{
 					if (PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_STAGE == PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_stage1)
 					{
-#if (IF_CONNECTION_CC_CODED)			
-						request_time_slot_length_us = 2 * TIMER_SLOT_PHONE_CONNECTION_REQUEST_US + 2 * TIMER_SLOT_CC_ENCODING_TIME_US + TIMER_SLOT_CC_DECODING_TIME_US;
-#else
 						request_time_slot_length_us = TIMER_SLOT_PHONE_CONNECTION_REQUEST_US;
-#endif						
 					}
 					else if (PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_STAGE == PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_stage3)
 					{
@@ -580,13 +563,8 @@ nrf_radio_signal_callback_return_param_t *time_slot_callback(uint8_t signal_type
           NRF_RADIO->POWER = 1;
 					radio_configure();
 					
-#if (IF_CONNECTION_CC_CODED)
-					RETURN_WATCH_SIM_LISTENING = connection_listening_sim(start_time_stamp_timer0, 
-					  3 * TIMER_SLOT_SIM_CONNECTION_LISTENING_US  + TIMER_SLOT_CC_ENCODING_TIME_US + TIMER_SLOT_CC_DECODING_TIME_US - TIMER_SLOT_SIGNAL_CALLBACK_MARGIN_US);
-#else					
 					RETURN_WATCH_SIM_LISTENING = connection_listening_sim(start_time_stamp_timer0, 
 					  TIMER_SLOT_SIM_CONNECTION_LISTENING_US - TIMER_SLOT_SIGNAL_CALLBACK_MARGIN_US);
-#endif
 						
 					TIME_SLOT_EVENT_TYPE = TIME_SLOT_EVENT_USIM_SERVER_LISTENING_RADIO_LINK;
           NRF_RADIO->POWER = 0;    
@@ -862,11 +840,7 @@ void handler_time_slot_event_signal_usim_client_random_access_connection_request
 				/* free the time slot request semaphore */
 				SEMAPHORE_TIME_SLOT_REQUEST = 0;
 				
-#if (IF_CONNECTION_CC_CODED)
-        time_slot_request(2 * TIMER_SLOT_PHONE_CONNECTION_REQUEST_US + 2 * TIMER_SLOT_CC_ENCODING_TIME_US + TIMER_SLOT_CC_DECODING_TIME_US);
-#else	
         time_slot_request(TIMER_SLOT_PHONE_CONNECTION_REQUEST_US);
-#endif	
 			}
 			else
 			{
@@ -901,11 +875,7 @@ void handler_time_slot_event_signal_usim_client_wireless_authentication(void)
 
 			/* free the time slot request semaphore */
 			SEMAPHORE_TIME_SLOT_REQUEST = 0;
-#if (IF_CONNECTION_CC_CODED)
-      time_slot_request(2 * TIMER_SLOT_PHONE_CONNECTION_REQUEST_US + 2 * TIMER_SLOT_CC_ENCODING_TIME_US + TIMER_SLOT_CC_DECODING_TIME_US);
-#else	
       time_slot_request(TIMER_SLOT_PHONE_CONNECTION_REQUEST_US);
-#endif	
 	  }
     else
     {
@@ -936,11 +906,7 @@ void handler_time_slot_event_signal_usim_client_wireless_authentication(void)
 			
 				/* free the time slot request semaphore */
 				SEMAPHORE_TIME_SLOT_REQUEST = 0;
-#if (IF_CONNECTION_CC_CODED)
-        time_slot_request(2 * TIMER_SLOT_PHONE_CONNECTION_REQUEST_US + 2 * TIMER_SLOT_CC_ENCODING_TIME_US + TIMER_SLOT_CC_DECODING_TIME_US);
-#else	
         time_slot_request(TIMER_SLOT_PHONE_CONNECTION_REQUEST_US);
-#endif	
       }
       else
       {

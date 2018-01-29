@@ -38,15 +38,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 |  0: not writed to USIM card */
 #define IF_USIM_BINARY_UPDATE                1
 
-/* if convolutional codes is used for data transmission link
+/* if convolutional code is used for data transmission link
 |  1: cc coding is used 
 |  0: cc coding not used */
 #define IF_DATA_CC_CODED                     1
 
-/* if convolutional codes is used for random access link  
+/* if convolutional code is used for connection request random access link  
 |  1: cc coding is used 
 |  0: cc coding not used */
-#define IF_CONNECTION_CC_CODED               0
+#define IF_CONNECTION_CC_CODED               1
 
 /* if softdevice BLE stack code is complied in the final target
 |  1: softdevice is compiled in the target
@@ -297,12 +297,23 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* time resolution is 1us */
 /* time duration for SIM to listen command from phone in us */
-#define SIM_LISTEN_TIME_MS             5
+#if (IF_CONNECTION_CC_CODED)
+  #define SIM_LISTEN_TIME_MS             15
+#else
+  #define SIM_LISTEN_TIME_MS             5
+#endif
 /* time duration for phone to send out random access request message */
-#define PHONE_REQUEST_TX_TIME_MS       1
+#if (IF_CONNECTION_CC_CODED)
+  #define PHONE_REQUEST_TX_TIME_MS       3
+#else
+  #define PHONE_REQUEST_TX_TIME_MS       1
+#endif
 /* time duration for phone to wait confirm message of random access from SIM */
-#define PHONE_REQUEST_WAIT_TIME_MS     2
-
+#if (IF_CONNECTION_CC_CODED)
+  #define PHONE_REQUEST_WAIT_TIME_MS     8
+#else
+  #define PHONE_REQUEST_WAIT_TIME_MS     2
+#endif
 /* time resolution is 1ms */
 /* max time for a data package transmission, may be several transmission try */
 #define DATA_TX_TIME_MS                980

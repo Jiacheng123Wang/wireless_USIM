@@ -185,9 +185,17 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER_SLOT_CC_ENCODING_TIME_US                    500
 #define TIMER_SLOT_CC_DECODING_TIME_US                    5500
 /* time length in us for USIM server wireless connection signal listening windows tiem slot */
-#define TIMER_SLOT_SIM_CONNECTION_LISTENING_US            5000
+#if (IF_CONNECTION_CC_CODED)
+  #define TIMER_SLOT_SIM_CONNECTION_LISTENING_US          20000
+#else
+  #define TIMER_SLOT_SIM_CONNECTION_LISTENING_US          5000
+#endif
 /* time length in us for USIM client wireless connection request time slot */
-#define TIMER_SLOT_PHONE_CONNECTION_REQUEST_US            2400
+#if (IF_CONNECTION_CC_CODED)
+  #define TIMER_SLOT_PHONE_CONNECTION_REQUEST_US          10000
+#else
+  #define TIMER_SLOT_PHONE_CONNECTION_REQUEST_US          2400
+#endif
 /* time length in us for phone command 0xf2 process window time slot */
 #define TIMER_SLOT_PHONE_COMMAND_0xF2_US                  1500
 /* time length in us for phone command 0xa4 process window time slot */
@@ -246,16 +254,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define	TIME_SLOT_EVENT_USIM_SERVER_SIM_COMMAND_ADF_SELECTION               13
 #define	TIME_SLOT_EVENT_USIM_CARD_BINARY_UPDATE                             14
 		
-#define	SIGNAL_CALLBACK_RETURN_UNDO                                   0xff
+#define	SIGNAL_CALLBACK_RETURN_UNDO                                         0xff
 
-#define USIM_SERVER_COMMAND_GSM_ALGORITHM_BLE_stage0       0
-#define USIM_SERVER_COMMAND_GSM_ALGORITHM_BLE_stage1       1
-#define USIM_SERVER_COMMAND_GSM_ALGORITHM_BLE_stage2       2
-#define USIM_SERVER_COMMAND_GSM_ALGORITHM_BLE_stage3       3
-#define USIM_SERVER_COMMAND_GSM_ALGORITHM_BLE_stage4       4
-#define USIM_SERVER_COMMAND_GET_DATA_BLE_stage0            5
-#define USIM_SERVER_COMMAND_GET_DATA_BLE_stage1            6
-#define USIM_SERVER_COMMAND_GET_DATA_BLE_stage2            7
+#define USIM_SERVER_COMMAND_GSM_ALGORITHM_BLE_stage0              0
+#define USIM_SERVER_COMMAND_GSM_ALGORITHM_BLE_stage1              1
+#define USIM_SERVER_COMMAND_GSM_ALGORITHM_BLE_stage2              2
+#define USIM_SERVER_COMMAND_GSM_ALGORITHM_BLE_stage3              3
+#define USIM_SERVER_COMMAND_GSM_ALGORITHM_BLE_stage4              4
+#define USIM_SERVER_COMMAND_GET_DATA_BLE_stage0                   5
+#define USIM_SERVER_COMMAND_GET_DATA_BLE_stage1                   6
+#define USIM_SERVER_COMMAND_GET_DATA_BLE_stage2                   7
 
 #define SIM_LISTENING_RETURN_DATA_TRANSMISSION                    0
 #define SIM_LISTENING_RETURN_NOT_RECEIVED                         1

@@ -477,11 +477,7 @@ void usim_client_connection_request_time_slot_request(void)
 	
 	PHONE_CONNECTION_REQUEST_START_TIME = NRF_RTC2->COUNTER;
 	TIME_SLOT_SIGNAL_TYPE_SET = TIME_SLOT_SIGNAL_PHONE_CONNECTION_REQUEST_RADIO_LINK;	
-#if (IF_CONNECTION_CC_CODED)
-  time_slot_request(2 * TIMER_SLOT_PHONE_CONNECTION_REQUEST_US + 2 * TIMER_SLOT_CC_ENCODING_TIME_US + TIMER_SLOT_CC_DECODING_TIME_US);
-#else	
   time_slot_request(TIMER_SLOT_PHONE_CONNECTION_REQUEST_US);
-#endif	
 }
 
 /********************************************************************************/
@@ -504,11 +500,7 @@ void usim_server_listening_time_slot_request(void)
 	}
 	
 	TIME_SLOT_SIGNAL_TYPE_SET = TIME_SLOT_SIGNAL_USIM_SERVER_LISTENING_RADIO_LINK;
-#if (IF_CONNECTION_CC_CODED)
-  time_slot_request(3 * TIMER_SLOT_SIM_CONNECTION_LISTENING_US + TIMER_SLOT_CC_ENCODING_TIME_US + TIMER_SLOT_CC_DECODING_TIME_US);
-#else	
   time_slot_request(TIMER_SLOT_SIM_CONNECTION_LISTENING_US);
-#endif	
 }
 
 /********************************************************************************/	
