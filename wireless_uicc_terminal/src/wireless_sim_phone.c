@@ -618,10 +618,13 @@ void nus_command_process(uint8_t *nus_string)
     printf("====================== LED Pattern Input =======================\r\n");
 	  printf_log_rx(*(LED_PATTERN_RAM + 0), LED_PATTERN_RAM + 1);
 #endif
-		/* set flash write flag */
-		FLASH_DATA_WRITE_CHECK_TASK_QUEUE |= (1 << FLASH_DATA_WRITE_TASK_OFFSET_POS);
-		/* set the mark bit for flash data write check */
-		FLASH_DATA_WRITE_CHECK_TASK_QUEUE |= (1 << FLASH_DATA_WRITE_CHECK_LED_PATTERN_OFFSET_POS);
+		if (*(LED_PATTERN_RAM + 1) != 8)
+		{
+		  /* set flash write flag */
+		  FLASH_DATA_WRITE_CHECK_TASK_QUEUE |= (1 << FLASH_DATA_WRITE_TASK_OFFSET_POS);
+		  /* set the mark bit for flash data write check */
+		  FLASH_DATA_WRITE_CHECK_TASK_QUEUE |= (1 << FLASH_DATA_WRITE_CHECK_LED_PATTERN_OFFSET_POS);
+		}
 	}
 	
 	/* CRS: user config restore to default value */
@@ -1060,6 +1063,171 @@ void led_wireless_sim_status_indicator(uint32_t led_status_counter)
 #endif		
 }
 
+/********************************************************************************/	
+void led_flash_pattern_1(uint32_t led_status_counter, uint8_t speed_factor, uint8_t flash_pattern)
+/*--------------------------------------------------------------------------------
+| LED indicator for wireless sim connection status
+|
+--------------------------------------------------------------------------------*/
+{
+	if ((led_status_counter % (4 * speed_factor)) == (0 * speed_factor))
+	{
+#ifdef PIN_LED_BLUE	
+	  nrf_gpio_pin_write(PIN_LED_BLUE, 1);
+#endif	
+#ifdef PIN_LED_GREEN
+		nrf_gpio_pin_write(PIN_LED_GREEN, 0); 	
+#endif		
+#ifdef PIN_LED_WHITE
+	  nrf_gpio_pin_write(PIN_LED_WHITE, 0); 	
+#endif		
+#ifdef PIN_LED_RED
+		nrf_gpio_pin_write(PIN_LED_RED, 0); 	
+#endif		
+#ifdef PIN_LED_YELLOW
+		nrf_gpio_pin_write(PIN_LED_YELLOW, 0); 	
+#endif		
+#ifdef PIN_LED_ORANGE
+		nrf_gpio_pin_write(PIN_LED_ORANGE, 0); 	
+#endif						
+	}		
+	else if ((led_status_counter % (4 * speed_factor)) == (1 * speed_factor))
+	{
+#ifdef PIN_LED_BLUE
+		nrf_gpio_pin_write(PIN_LED_BLUE, 0); 	
+#endif		
+#ifdef PIN_LED_GREEN
+		nrf_gpio_pin_write(PIN_LED_GREEN, 1); 	
+#endif		
+#ifdef PIN_LED_WHITE
+		nrf_gpio_pin_write(PIN_LED_WHITE, 0); 	
+#endif		
+#ifdef PIN_LED_RED
+		nrf_gpio_pin_write(PIN_LED_RED, 0); 	
+#endif		
+#ifdef PIN_LED_YELLOW
+		nrf_gpio_pin_write(PIN_LED_YELLOW, 0); 	
+#endif		
+#ifdef PIN_LED_ORANGE
+		nrf_gpio_pin_write(PIN_LED_ORANGE, 0); 	
+#endif
+	}
+	else if ((led_status_counter % (4 * speed_factor)) == (2 * speed_factor))
+	{
+#ifdef PIN_LED_BLUE
+		nrf_gpio_pin_write(PIN_LED_BLUE, 0); 	
+#endif		
+#ifdef PIN_LED_GREEN
+		nrf_gpio_pin_write(PIN_LED_GREEN, 0); 	
+#endif		
+#ifdef PIN_LED_WHITE
+		nrf_gpio_pin_write(PIN_LED_WHITE, 1); 	
+#endif		
+#ifdef PIN_LED_RED
+		nrf_gpio_pin_write(PIN_LED_RED, 0); 	
+#endif		
+#ifdef PIN_LED_YELLOW
+		nrf_gpio_pin_write(PIN_LED_YELLOW, 0); 	
+#endif		
+#ifdef PIN_LED_ORANGE
+		nrf_gpio_pin_write(PIN_LED_ORANGE, 0); 	
+#endif
+	}		
+	else if ((led_status_counter % (4 * speed_factor)) == (3 * speed_factor))
+	{
+#ifdef PIN_LED_BLUE
+		nrf_gpio_pin_write(PIN_LED_BLUE, 0); 	
+#endif		
+#ifdef PIN_LED_GREEN
+		nrf_gpio_pin_write(PIN_LED_GREEN, 0); 	
+#endif		
+#ifdef PIN_LED_WHITE
+		nrf_gpio_pin_write(PIN_LED_WHITE, 0); 	
+#endif		
+#ifdef PIN_LED_RED
+		nrf_gpio_pin_write(PIN_LED_RED, 1); 	
+#endif		
+#ifdef PIN_LED_YELLOW
+		nrf_gpio_pin_write(PIN_LED_YELLOW, 0); 	
+#endif		
+#ifdef PIN_LED_ORANGE
+		nrf_gpio_pin_write(PIN_LED_ORANGE, 0); 	
+#endif
+	}
+	else if (flash_pattern)
+	{
+#ifdef PIN_LED_BLUE
+		nrf_gpio_pin_write(PIN_LED_BLUE, 0); 	
+#endif		
+#ifdef PIN_LED_GREEN
+		nrf_gpio_pin_write(PIN_LED_GREEN, 0); 	
+#endif		
+#ifdef PIN_LED_WHITE
+		nrf_gpio_pin_write(PIN_LED_WHITE, 0); 	
+#endif		
+#ifdef PIN_LED_RED
+		nrf_gpio_pin_write(PIN_LED_RED, 0); 	
+#endif		
+#ifdef PIN_LED_YELLOW
+		nrf_gpio_pin_write(PIN_LED_YELLOW, 0); 	
+#endif		
+#ifdef PIN_LED_ORANGE
+		nrf_gpio_pin_write(PIN_LED_ORANGE, 0); 	
+#endif
+	}	
+}
+
+/********************************************************************************/	
+void led_flash_pattern_all(uint32_t led_status_counter, uint8_t speed_factor)
+/*--------------------------------------------------------------------------------
+| LED indicator for wireless sim connection status
+|
+--------------------------------------------------------------------------------*/
+{
+	if (led_status_counter % (2 * speed_factor))
+	{
+#ifdef PIN_LED_BLUE	
+	  nrf_gpio_pin_write(PIN_LED_BLUE, 0);
+#endif	
+#ifdef PIN_LED_GREEN
+		nrf_gpio_pin_write(PIN_LED_GREEN, 0); 	
+#endif		
+#ifdef PIN_LED_WHITE
+	  nrf_gpio_pin_write(PIN_LED_WHITE, 0); 	
+#endif		
+#ifdef PIN_LED_RED
+		nrf_gpio_pin_write(PIN_LED_RED, 0); 	
+#endif		
+#ifdef PIN_LED_YELLOW
+		nrf_gpio_pin_write(PIN_LED_YELLOW, 0); 	
+#endif		
+#ifdef PIN_LED_ORANGE
+		nrf_gpio_pin_write(PIN_LED_ORANGE, 0); 	
+#endif						
+	}		
+	else
+	{
+#ifdef PIN_LED_BLUE
+		nrf_gpio_pin_write(PIN_LED_BLUE, 1); 	
+#endif		
+#ifdef PIN_LED_GREEN
+		nrf_gpio_pin_write(PIN_LED_GREEN, 1); 	
+#endif		
+#ifdef PIN_LED_WHITE
+		nrf_gpio_pin_write(PIN_LED_WHITE, 1); 	
+#endif		
+#ifdef PIN_LED_RED
+		nrf_gpio_pin_write(PIN_LED_RED, 1); 	
+#endif		
+#ifdef PIN_LED_YELLOW
+		nrf_gpio_pin_write(PIN_LED_YELLOW, 1); 	
+#endif		
+#ifdef PIN_LED_ORANGE
+		nrf_gpio_pin_write(PIN_LED_ORANGE, 1); 	
+#endif
+	}	
+}
+
 #if (IF_SOFTDEIVE_USED)
 /********************************************************************************/	
 void led_ancs_indicator(uint32_t led_status_counter)
@@ -1076,7 +1244,7 @@ void led_ancs_indicator(uint32_t led_status_counter)
 		{
 		  if (i == ANCS_NOTIF_LED_PATTERN_TYPE_INCOMING_CALL)
 			{
-				if ((led_status_counter % 6) == 0)
+				if ((led_status_counter % 4) == 0)
 				{
 #ifdef PIN_LED_BLUE
 					nrf_gpio_pin_write(PIN_LED_BLUE, 1);
@@ -1097,7 +1265,7 @@ void led_ancs_indicator(uint32_t led_status_counter)
 					nrf_gpio_pin_write(PIN_LED_RED, 0);
 #endif								
 				}
-				else if ((led_status_counter % 6) == 1)
+				else if ((led_status_counter % 4) == 1)
 				{
 #ifdef PIN_LED_BLUE
 					nrf_gpio_pin_write(PIN_LED_BLUE, 0);
@@ -1118,7 +1286,7 @@ void led_ancs_indicator(uint32_t led_status_counter)
 					nrf_gpio_pin_write(PIN_LED_RED, 0);
 #endif								
 				}
-				else if ((led_status_counter % 6) == 2)
+				else if ((led_status_counter % 4) == 2)
 				{
 #ifdef PIN_LED_BLUE
 					nrf_gpio_pin_write(PIN_LED_BLUE, 0);
@@ -1139,7 +1307,7 @@ void led_ancs_indicator(uint32_t led_status_counter)
 					nrf_gpio_pin_write(PIN_LED_RED, 0);
 #endif								
 				}
-				else if ((led_status_counter % 6) == 3)
+				else if ((led_status_counter % 4) == 3)
 				{
 #ifdef PIN_LED_BLUE
 					nrf_gpio_pin_write(PIN_LED_BLUE, 0);
@@ -1158,48 +1326,6 @@ void led_ancs_indicator(uint32_t led_status_counter)
 #endif								
 #ifdef PIN_LED_ORANGE
 					nrf_gpio_pin_write(PIN_LED_ORANGE, 0);								
-#endif								
-				}
-				else if ((led_status_counter % 6) == 4)
-				{
-#ifdef PIN_LED_BLUE
-					nrf_gpio_pin_write(PIN_LED_BLUE, 0);
-#endif								
-#ifdef PIN_LED_GREEN
-					nrf_gpio_pin_write(PIN_LED_GREEN, 0);	
-#endif								
-#ifdef PIN_LED_WHITE
-					nrf_gpio_pin_write(PIN_LED_WHITE, 0);
-#endif								
-#ifdef PIN_LED_RED
-					nrf_gpio_pin_write(PIN_LED_RED, 0);
-#endif								
-#ifdef PIN_LED_YELLOW
-					nrf_gpio_pin_write(PIN_LED_YELLOW, 1);
-#endif								
-#ifdef PIN_LED_ORANGE
-					nrf_gpio_pin_write(PIN_LED_ORANGE, 0);								
-#endif								
-				}
-				else if ((led_status_counter % 6) == 5)
-				{
-#ifdef PIN_LED_BLUE
-					nrf_gpio_pin_write(PIN_LED_BLUE, 0);
-#endif								
-#ifdef PIN_LED_GREEN
-					nrf_gpio_pin_write(PIN_LED_GREEN, 0);	
-#endif								
-#ifdef PIN_LED_WHITE
-					nrf_gpio_pin_write(PIN_LED_WHITE, 0);
-#endif								
-#ifdef PIN_LED_RED
-					nrf_gpio_pin_write(PIN_LED_RED, 0);
-#endif								
-#ifdef PIN_LED_YELLOW
-					nrf_gpio_pin_write(PIN_LED_YELLOW, 0);
-#endif								
-#ifdef PIN_LED_ORANGE
-					nrf_gpio_pin_write(PIN_LED_ORANGE, 1);								
 #endif								
 				}
 							
@@ -1329,7 +1455,7 @@ void led_status_check(void)
 	
 	led_status_counter++;
 	
-	if (*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == '0')	
+	if (*(LED_PATTERN_RAM + 1) == '0')	
 	{
     nrf_gpio_pin_write(PIN_LED_BLUE, 0);  
 #ifdef PIN_LED_GREEN	
@@ -1348,12 +1474,12 @@ void led_status_check(void)
     nrf_gpio_pin_write(PIN_LED_RED, 0);  
 #endif
 	}
-	else if (*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == '1')	
+	else if (*(LED_PATTERN_RAM + 1) == '1')	
 	{
     led_wireless_sim_status_indicator(led_status_counter);
 	}	
 #if (IF_SOFTDEIVE_USED)
-	else if (*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == '2')	
+	else if (*(LED_PATTERN_RAM + 1) == '2')	
 	{
 		for (i=0; i<ANCS_NOTIF_LED_PATTERN_TYPE_TOTAL_NUMBER; i++)
 		{
@@ -1390,7 +1516,7 @@ void led_status_check(void)
 		}				
 #endif		
 	}
-	else if (*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == '3')
+	else if (*(LED_PATTERN_RAM + 1) == '3')
 	{
 		for (i=0; i<ANCS_NOTIF_LED_PATTERN_TYPE_TOTAL_NUMBER; i++)
 		{
@@ -1407,108 +1533,52 @@ void led_status_check(void)
 		}
 	}	
 #endif	
-	else if (*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == '9')
+	else if (*(LED_PATTERN_RAM + 1) == '8')
 	{
-		switch (led_status_counter % 4)
+		if (*(LED_PATTERN_RAM + 2) == '0')
 		{
-			case 0:
-			{
-#ifdef PIN_LED_BLUE	
-	      nrf_gpio_pin_write(PIN_LED_BLUE, 1);
-#endif	
-#ifdef PIN_LED_GREEN
-				nrf_gpio_pin_write(PIN_LED_GREEN, 0); 	
-#endif		
-#ifdef PIN_LED_WHITE
-				nrf_gpio_pin_write(PIN_LED_WHITE, 0); 	
-#endif		
-#ifdef PIN_LED_RED
-				nrf_gpio_pin_write(PIN_LED_RED, 0); 	
-#endif		
-#ifdef PIN_LED_YELLOW
-				nrf_gpio_pin_write(PIN_LED_YELLOW, 0); 	
-#endif		
-#ifdef PIN_LED_ORANGE
-				nrf_gpio_pin_write(PIN_LED_ORANGE, 0); 	
-#endif
-						
-				break;
-			}
-			case 1:
-			{
-#ifdef PIN_LED_BLUE
-				nrf_gpio_pin_write(PIN_LED_BLUE, 0); 	
-#endif		
-#ifdef PIN_LED_GREEN
-				nrf_gpio_pin_write(PIN_LED_GREEN, 1); 	
-#endif		
-#ifdef PIN_LED_WHITE
-				nrf_gpio_pin_write(PIN_LED_WHITE, 0); 	
-#endif		
-#ifdef PIN_LED_RED
-				nrf_gpio_pin_write(PIN_LED_RED, 0); 	
-#endif		
-#ifdef PIN_LED_YELLOW
-				nrf_gpio_pin_write(PIN_LED_YELLOW, 0); 	
-#endif		
-#ifdef PIN_LED_ORANGE
-				nrf_gpio_pin_write(PIN_LED_ORANGE, 0); 	
-#endif
-						
-				break;
-			}
-			case 2:
-			{
-#ifdef PIN_LED_BLUE
-				nrf_gpio_pin_write(PIN_LED_BLUE, 0); 	
-#endif		
-#ifdef PIN_LED_GREEN
-				nrf_gpio_pin_write(PIN_LED_GREEN, 0); 	
-#endif		
-#ifdef PIN_LED_WHITE
-				nrf_gpio_pin_write(PIN_LED_WHITE, 1); 	
-#endif		
-#ifdef PIN_LED_RED
-				nrf_gpio_pin_write(PIN_LED_RED, 0); 	
-#endif		
-#ifdef PIN_LED_YELLOW
-				nrf_gpio_pin_write(PIN_LED_YELLOW, 0); 	
-#endif		
-#ifdef PIN_LED_ORANGE
-				nrf_gpio_pin_write(PIN_LED_ORANGE, 0); 	
-#endif
-						
-				break;
-			}
-			case 3:
-			{
-#ifdef PIN_LED_BLUE
-				nrf_gpio_pin_write(PIN_LED_BLUE, 0); 	
-#endif		
-#ifdef PIN_LED_GREEN
-				nrf_gpio_pin_write(PIN_LED_GREEN, 0); 	
-#endif		
-#ifdef PIN_LED_WHITE
-				nrf_gpio_pin_write(PIN_LED_WHITE, 0); 	
-#endif		
-#ifdef PIN_LED_RED
-				nrf_gpio_pin_write(PIN_LED_RED, 1); 	
-#endif		
-#ifdef PIN_LED_YELLOW
-				nrf_gpio_pin_write(PIN_LED_YELLOW, 0); 	
-#endif		
-#ifdef PIN_LED_ORANGE
-				nrf_gpio_pin_write(PIN_LED_ORANGE, 0); 	
-#endif
-						
-				break;
-			}
-			
-			default:
-			{
-				break;
-			}			
-		}	
+      led_flash_pattern_1(led_status_counter, 1, 1);
+		}
+		if (*(LED_PATTERN_RAM + 2) == '1')
+		{
+      led_flash_pattern_1(led_status_counter, 2, 1);
+		}
+		if (*(LED_PATTERN_RAM + 2) == '2')
+		{
+      led_flash_pattern_1(led_status_counter, 4, 1);
+		}
+		if (*(LED_PATTERN_RAM + 2) == '3')
+		{
+      led_flash_pattern_1(led_status_counter, 1, 0);
+		}
+		if (*(LED_PATTERN_RAM + 2) == '4')
+		{
+      led_flash_pattern_1(led_status_counter, 2, 0);
+		}
+		if (*(LED_PATTERN_RAM + 2) == '5')
+		{
+      led_flash_pattern_1(led_status_counter, 4, 0);
+		}
+		if (*(LED_PATTERN_RAM + 2) == '6')
+		{
+      led_flash_pattern_all(led_status_counter, 1);
+		}
+		if (*(LED_PATTERN_RAM + 2) == '7')
+		{
+      led_flash_pattern_all(led_status_counter, 2);
+		}
+		if (*(LED_PATTERN_RAM + 2) == '8')
+		{
+      led_flash_pattern_all(led_status_counter, 4);
+		}
+		if (*(LED_PATTERN_RAM + 2) == '9')
+		{
+      led_flash_pattern_all(led_status_counter, 8);
+		}
+	}
+	else if (*(LED_PATTERN_RAM + 1) == '9')
+	{
+    led_flash_pattern_all(led_status_counter, 2);
 	}
 	else
 	{
@@ -1519,31 +1589,31 @@ void led_status_check(void)
     uint8_t led_flash_cycle;
 	  uint8_t led_string_length_bits = (*(uint8_t *)LED_PATTERN_FLASH_ADDR - 1) * 8 + led_flash_starting_length;
 		
-		if ((*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == 'A') || (*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == 'a'))
+		if ((*(LED_PATTERN_RAM + 1) == 'A') || (*(LED_PATTERN_RAM + 1) == 'a'))
 		{
 			led_flash_cycle = 2;
 		}
-		else if ((*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == 'B') || (*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == 'b'))
+		else if ((*(LED_PATTERN_RAM + 1) == 'B') || (*(LED_PATTERN_RAM + 1) == 'b'))
 		{
 			led_flash_cycle = 4;
 		}
-		else if ((*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == 'C') || (*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == 'c'))
+		else if ((*(LED_PATTERN_RAM + 1) == 'C') || (*(LED_PATTERN_RAM + 1) == 'c'))
 		{
 			led_flash_cycle = 8;
 		}
-		else if ((*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == 'D') || (*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == 'd'))
+		else if ((*(LED_PATTERN_RAM + 1) == 'D') || (*(LED_PATTERN_RAM + 1) == 'd'))
 		{
 			led_flash_cycle = 16;
 		}
-		else if ((*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == 'E') || (*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == 'e'))
+		else if ((*(LED_PATTERN_RAM + 1) == 'E') || (*(LED_PATTERN_RAM + 1) == 'e'))
 		{
 			led_flash_cycle = 32;
 		}
-		else if ((*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == 'F') || (*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == 'f'))
+		else if ((*(LED_PATTERN_RAM + 1) == 'F') || (*(LED_PATTERN_RAM + 1) == 'f'))
 		{
 			led_flash_cycle = 64;
 		}
-		else if ((*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == 'G') || (*((uint8_t *)LED_PATTERN_FLASH_ADDR + 1) == 'g'))
+		else if ((*(LED_PATTERN_RAM + 1) == 'G') || (*(LED_PATTERN_RAM + 1) == 'g'))
 		{
 			led_flash_cycle = 128;
 		}
@@ -1603,7 +1673,7 @@ void led_status_check(void)
 			  char_led = (bit_led_in_total - led_flash_starting_length) / 8;
 				bit_led_in_char = (bit_led_in_total - led_flash_starting_length) % 8;
 				
-		    if (((*((uint8_t *)LED_PATTERN_FLASH_ADDR + char_led + 2)) << bit_led_in_char) & 0x80)
+		    if (((*(LED_PATTERN_RAM + char_led + 2)) << bit_led_in_char) & 0x80)
 			  {
 					if((led_status_counter / led_flash_cycle) % 2)
 					{

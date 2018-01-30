@@ -501,14 +501,24 @@ nrf_radio_signal_callback_return_param_t *time_slot_callback(uint8_t signal_type
 				
 				case TIME_SLOT_SIGNAL_PHONE_CONNECTION_REQUEST_RADIO_LINK:
 				{
-          NRF_RADIO->POWER = 1;
-					radio_configure();
+					/* the the time slot is too close to next status phone command 0xf2, break immediately  */
+					if ((NEXT_PHONE_COMMAND_0XF2_TIME > NRF_RTC2->COUNTER) && 
+						((NEXT_PHONE_COMMAND_0XF2_TIME - NRF_RTC2->COUNTER) < TIMER_SLOT_PHONE_CONNECTION_REQUEST_US / 1000 + 1))
+					{
+		        TIME_SLOT_EVENT_TYPE = TIME_SLOT_EVENT_DEFAULT_VALUE;
+					}
+					else
+					{
+            NRF_RADIO->POWER = 1;
+					  radio_configure();
 				
-					RETURN_PHONE_CONNECTION_REQUEST = connection_request_phone_ble(0x11, start_time_stamp_timer0, 
-					  TIMER_SLOT_PHONE_CONNECTION_REQUEST_US - TIMER_SLOT_SIGNAL_CALLBACK_MARGIN_US);
+					  RETURN_PHONE_CONNECTION_REQUEST = connection_request_phone_ble(0x11, start_time_stamp_timer0, 
+					    TIMER_SLOT_PHONE_CONNECTION_REQUEST_US - TIMER_SLOT_SIGNAL_CALLBACK_MARGIN_US);
 												
-					TIME_SLOT_EVENT_TYPE = TIME_SLOT_EVENT_PHONE_CONNECTION_REQUEST_RADIO_LINK;
-          NRF_RADIO->POWER = 0;    					
+					  TIME_SLOT_EVENT_TYPE = TIME_SLOT_EVENT_PHONE_CONNECTION_REQUEST_RADIO_LINK;
+            NRF_RADIO->POWER = 0;
+					}
+					   					
 					break;
 				}
 				
@@ -560,14 +570,23 @@ nrf_radio_signal_callback_return_param_t *time_slot_callback(uint8_t signal_type
 				
 				case TIME_SLOT_SIGNAL_USIM_SERVER_LISTENING_RADIO_LINK:
 				{
-          NRF_RADIO->POWER = 1;
-					radio_configure();
+					/* the the time slot is too close to next status phone command 0xf2, break immediately  */
+					if ((NEXT_PHONE_COMMAND_0XF2_TIME > NRF_RTC2->COUNTER) && 
+						((NEXT_PHONE_COMMAND_0XF2_TIME - NRF_RTC2->COUNTER) < TIMER_SLOT_SIM_CONNECTION_LISTENING_US / 1000 + 1))
+					{
+            TIME_SLOT_EVENT_TYPE = TIME_SLOT_EVENT_DEFAULT_VALUE;
+					}
+					else
+					{
+            NRF_RADIO->POWER = 1;
+            radio_configure();
 					
-					RETURN_WATCH_SIM_LISTENING = connection_listening_sim(start_time_stamp_timer0, 
-					  TIMER_SLOT_SIM_CONNECTION_LISTENING_US - TIMER_SLOT_SIGNAL_CALLBACK_MARGIN_US);
+            RETURN_WATCH_SIM_LISTENING = connection_listening_sim(start_time_stamp_timer0, 
+              TIMER_SLOT_SIM_CONNECTION_LISTENING_US - TIMER_SLOT_SIGNAL_CALLBACK_MARGIN_US);
 						
-					TIME_SLOT_EVENT_TYPE = TIME_SLOT_EVENT_USIM_SERVER_LISTENING_RADIO_LINK;
-          NRF_RADIO->POWER = 0;    
+            TIME_SLOT_EVENT_TYPE = TIME_SLOT_EVENT_USIM_SERVER_LISTENING_RADIO_LINK;
+            NRF_RADIO->POWER = 0;  
+				  }  
 	
 					break;
 				}
