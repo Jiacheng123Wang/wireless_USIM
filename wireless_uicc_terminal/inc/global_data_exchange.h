@@ -216,5 +216,9 @@ volatile uint32_t   TIME_SLOT_REQUEST_LENGTH_US = 1000;
 volatile uint8_t    PHONE_CONNECTION_REQUEST_TYPE;
 /* flash data write task queue for different data flash write */                                
 volatile uint32_t   FLASH_DATA_WRITE_CHECK_TASK_QUEUE = 0; 
-
+/* start time in ms for connection time slot */
+volatile uint32_t   CONNECTION_SLOT_TIME_MS = 0;
+/* LED flash pattern */
+volatile uint8_t    LED_PATTERN_RAM[8];
+	
 #endif

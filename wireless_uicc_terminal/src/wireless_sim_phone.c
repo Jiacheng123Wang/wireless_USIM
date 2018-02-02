@@ -250,11 +250,11 @@ void RTC2_IRQHandler(void)
 #if (IF_LOG_OUTPUT)
 		if ((PHONE_LOCAL_USED_USIM & 0xF0) != 0)
 		{
-	    printf("Wireless SIM client side, NRF_RTC2->COUNTER = %ld, NRF_RTC2->CC[0] = %ld, -------- \r\n",  NRF_RTC2->COUNTER, NRF_RTC2->CC[0]);
+	    printf("Wireless SIM client side, CONNECTION_SLOT_TIME_MS = %ld, NRF_RTC2->CC[0] = %ld, -------- \r\n",  CONNECTION_SLOT_TIME_MS, NRF_RTC2->CC[0]);
 		}
 		else
 		{
-	    printf("Wireless SIM server side, NRF_RTC2->COUNTER = %ld, NRF_RTC2->CC[0] = %ld, -------- \r\n",  NRF_RTC2->COUNTER, NRF_RTC2->CC[0]);
+	    printf("Wireless SIM server side, CONNECTION_SLOT_TIME_MS = %ld, NRF_RTC2->CC[0] = %ld, -------- \r\n",  CONNECTION_SLOT_TIME_MS, NRF_RTC2->CC[0]);
 		}
 #endif	
 		
@@ -272,12 +272,6 @@ void RTC2_IRQHandler(void)
 		    sprintf((char *)tmp_ble_data, "%ld", NRF_RTC2->COUNTER);
 
 			  nus_send_bytes(tmp_ble_data, 20);
-			}
-			
-			/* BLE NUS received command */
-		  if (RECEIVED_STRING_NUS[0])
-			{
-        nus_command_process(RECEIVED_STRING_NUS);
 			}
 		}
 #endif
@@ -344,6 +338,12 @@ void RTC2_IRQHandler(void)
 	    flash_data_write_task( );
 	  }
 		 
+		/* BLE NUS received command */
+	  if (RECEIVED_STRING_NUS[0])
+		{
+      nus_command_process(RECEIVED_STRING_NUS);
+		}
+		
 #ifdef PIN_LED_BLUE
 		/* led check */
 		if (status_check_couter % 2 == 0)
@@ -616,7 +616,7 @@ void nus_command_process(uint8_t *nus_string)
 		
 #if (IF_LOG_OUTPUT)
     printf("====================== LED Pattern Input =======================\r\n");
-	  printf_log_rx(*(LED_PATTERN_RAM + 0), LED_PATTERN_RAM + 1);
+	  printf_log_rx(*(LED_PATTERN_RAM + 0), (uint8_t *)LED_PATTERN_RAM + 1);
 #endif
 		if (*(LED_PATTERN_RAM + 1) != 8)
 		{
@@ -1578,7 +1578,7 @@ void led_status_check(void)
 	}
 	else if (*(LED_PATTERN_RAM + 1) == '9')
 	{
-    led_flash_pattern_all(led_status_counter, 2);
+    led_flash_pattern_1(led_status_counter, 2, 1);
 	}
 	else
 	{

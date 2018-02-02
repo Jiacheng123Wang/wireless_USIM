@@ -501,15 +501,17 @@ nrf_radio_signal_callback_return_param_t *time_slot_callback(uint8_t signal_type
 				
 				case TIME_SLOT_SIGNAL_PHONE_CONNECTION_REQUEST_RADIO_LINK:
 				{
+          CONNECTION_SLOT_TIME_MS = NRF_RTC2->COUNTER;
+
 					/* the the time slot is too close to next status phone command 0xf2, break immediately  */
 					if ((NEXT_PHONE_COMMAND_0XF2_TIME > NRF_RTC2->COUNTER) && 
-						((NEXT_PHONE_COMMAND_0XF2_TIME - NRF_RTC2->COUNTER) < TIMER_SLOT_PHONE_CONNECTION_REQUEST_US / 1000 + 1))
+						((NEXT_PHONE_COMMAND_0XF2_TIME - NRF_RTC2->COUNTER) < TIME_SLOT_NEXT_COMMAND_0XF2_MARGIN_MS / 2))
 					{
 		        TIME_SLOT_EVENT_TYPE = TIME_SLOT_EVENT_DEFAULT_VALUE;
 					}
 					else
 					{
-            NRF_RADIO->POWER = 1;
+	          NRF_RADIO->POWER = 1;
 					  radio_configure();
 				
 					  RETURN_PHONE_CONNECTION_REQUEST = connection_request_phone_ble(0x11, start_time_stamp_timer0, 
@@ -570,9 +572,11 @@ nrf_radio_signal_callback_return_param_t *time_slot_callback(uint8_t signal_type
 				
 				case TIME_SLOT_SIGNAL_USIM_SERVER_LISTENING_RADIO_LINK:
 				{
+          CONNECTION_SLOT_TIME_MS = NRF_RTC2->COUNTER;
+
 					/* the the time slot is too close to next status phone command 0xf2, break immediately  */
 					if ((NEXT_PHONE_COMMAND_0XF2_TIME > NRF_RTC2->COUNTER) && 
-						((NEXT_PHONE_COMMAND_0XF2_TIME - NRF_RTC2->COUNTER) < TIMER_SLOT_SIM_CONNECTION_LISTENING_US / 1000 + 1))
+						((NEXT_PHONE_COMMAND_0XF2_TIME - NRF_RTC2->COUNTER) < TIME_SLOT_NEXT_COMMAND_0XF2_MARGIN_MS / 2))
 					{
             TIME_SLOT_EVENT_TYPE = TIME_SLOT_EVENT_DEFAULT_VALUE;
 					}

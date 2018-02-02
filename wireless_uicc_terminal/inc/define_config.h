@@ -46,7 +46,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* if convolutional code is used for connection request random access link  
 |  1: cc coding is used 
 |  0: cc coding not used */
-#define IF_CONNECTION_CC_CODED               1
+#define IF_CONNECTION_CC_CODED               0
 
 /* if softdevice BLE stack code is complied in the final target
 |  1: softdevice is compiled in the target

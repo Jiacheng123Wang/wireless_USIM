@@ -3549,7 +3549,7 @@ uint32_t usta_command_line(uint8_t *command_line_string)
 		if (IF_SOFTDEVICE_RUNNING == 0)
 		{
       printf("====================== LED Pattern Input =======================\r\n");
-			printf_log_rx(*(LED_PATTERN_RAM + 0), LED_PATTERN_RAM + 1);
+			printf_log_rx(*(LED_PATTERN_RAM + 0), (uint8_t *)LED_PATTERN_RAM + 1);
 		}
 #endif
 	  /* set flash write flag */

@@ -2948,6 +2948,20 @@ uint32_t phone_command_read_binary_0xb0(uint8_t *phone_command, uint32_t etu_len
   return(0);
 }
 
+/********************************************************************************/
+void stop_sim_clock_timer1(void)
+/*--------------------------------------------------------------------------------
+| SIM command 0xD6 to update EF data
+|
+--------------------------------------------------------------------------------*/
+{
+	/* stop SIM clock */
+	clock_sim_stop_4m(PIN_CLOCK_SIM);
+  /* stop ETU timer tick */
+  NRF_TIMER1->TASKS_CLEAR = 1;
+  NRF_TIMER1->TASKS_SHUTDOWN = 1;	
+}
+		
 #if (IF_USIM_BINARY_UPDATE)	
 /********************************************************************************/
 uint32_t sim_command_update_binary_get_offset_0xd6(uint8_t *phone_command, uint32_t update_file_id)
@@ -3065,20 +3079,6 @@ uint32_t sim_command_update_binary_get_offset_0xd6(uint8_t *phone_command, uint3
 	}
 	
 	return(0);	
-}
-		
-/********************************************************************************/
-void stop_sim_clock_timer1(void)
-/*--------------------------------------------------------------------------------
-| SIM command 0xD6 to update EF data
-|
---------------------------------------------------------------------------------*/
-{
-	/* stop SIM clock */
-	clock_sim_stop_4m(PIN_CLOCK_SIM);
-  /* stop ETU timer tick */
-  NRF_TIMER1->TASKS_CLEAR = 1;
-  NRF_TIMER1->TASKS_SHUTDOWN = 1;	
 }
 		
 /********************************************************************************/
