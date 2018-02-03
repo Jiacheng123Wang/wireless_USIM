@@ -82,7 +82,7 @@ void radio_configure()
                      (PACKET0_PAYLOAD_SIZE << RADIO_PCNF0_LFLEN_Pos); 
 
   /* Packet configuration */
-  NRF_RADIO->PCNF1 = (RADIO_PCNF1_WHITEEN_Disabled << RADIO_PCNF1_WHITEEN_Pos)    |
+  NRF_RADIO->PCNF1 = (RADIO_PCNF1_WHITEEN_Enabled << RADIO_PCNF1_WHITEEN_Pos)     |
                      (RADIO_PCNF1_ENDIAN_Big << RADIO_PCNF1_ENDIAN_Pos)           |
                      (PACKET1_BASE_ADDRESS_LENGTH << RADIO_PCNF1_BALEN_Pos)       |
                      (PACKET1_STATIC_LENGTH << RADIO_PCNF1_STATLEN_Pos)           |
@@ -91,7 +91,7 @@ void radio_configure()
   /* CRC Config */
 	NRF_RADIO->CRCCNF = (RADIO_CRCCNF_LEN_Two << RADIO_CRCCNF_LEN_Pos);
   NRF_RADIO->CRCINIT = 0xEFDCAUL;      /* Initial value */   
-  NRF_RADIO->CRCPOLY = 0x11021UL;     /* CRC poly: x^16+x^12^x^5+1 */
+  NRF_RADIO->CRCPOLY = 0x11021UL;      /* CRC poly: x^16+x^12^x^5+1 */
 }
 
 /********************************************************************************/
@@ -667,7 +667,7 @@ uint32_t wireless_sim_authentication_algorithm(uint8_t *user_password, uint8_t *
   
   for (i=0; i<key_length; i++)
   {
-    *(response_data + i) = (((*(user_password + i)) | (*(system_key + i))) & (*(challenge_data + i)));
+    *(response_data + i) = (((*(user_password + i)) ^ (*(system_key + i))) ^ (*(challenge_data + i)));
   }
   
   return(0);

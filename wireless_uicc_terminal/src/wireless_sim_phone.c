@@ -618,7 +618,7 @@ void nus_command_process(uint8_t *nus_string)
     printf("====================== LED Pattern Input =======================\r\n");
 	  printf_log_rx(*(LED_PATTERN_RAM + 0), (uint8_t *)LED_PATTERN_RAM + 1);
 #endif
-		if (*(LED_PATTERN_RAM + 1) != 8)
+		if (*(LED_PATTERN_RAM + 1) != '8')
 		{
 		  /* set flash write flag */
 		  FLASH_DATA_WRITE_CHECK_TASK_QUEUE |= (1 << FLASH_DATA_WRITE_TASK_OFFSET_POS);

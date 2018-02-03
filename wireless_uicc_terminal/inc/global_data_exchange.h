@@ -219,6 +219,6 @@ volatile uint32_t   FLASH_DATA_WRITE_CHECK_TASK_QUEUE = 0;
 /* start time in ms for connection time slot */
 volatile uint32_t   CONNECTION_SLOT_TIME_MS = 0;
 /* LED flash pattern */
-volatile uint8_t    LED_PATTERN_RAM[8];
+volatile uint8_t    LED_PATTERN_RAM[16];
 	
 #endif
