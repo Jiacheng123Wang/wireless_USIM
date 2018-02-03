@@ -271,6 +271,11 @@ void on_conn_params_evt(ble_conn_params_evt_t * p_evt)
 
     if (p_evt->evt_type == BLE_CONN_PARAMS_EVT_FAILED)
     {
+#if (IF_LOG_OUTPUT)
+            printf("\r\n=====================================================================================\r\n");
+            printf("p_evt->evt_type = BLE_CONN_PARAMS_EVT_FAILED\r\n");
+            printf("=====================================================================================\r\n");
+#endif
         err_code = sd_ble_gap_disconnect(m_conn_handle, BLE_HCI_CONN_INTERVAL_UNACCEPTABLE);
         APP_ERROR_CHECK(err_code);
     }

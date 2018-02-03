@@ -1066,7 +1066,7 @@ void led_wireless_sim_status_indicator(uint32_t led_status_counter)
 /********************************************************************************/	
 void led_flash_pattern_1(uint32_t led_status_counter, uint8_t speed_factor, uint8_t flash_pattern)
 /*--------------------------------------------------------------------------------
-| LED indicator for wireless sim connection status
+| LED flash pattern
 |
 --------------------------------------------------------------------------------*/
 {
@@ -1180,7 +1180,7 @@ void led_flash_pattern_1(uint32_t led_status_counter, uint8_t speed_factor, uint
 /********************************************************************************/	
 void led_flash_pattern_all(uint32_t led_status_counter, uint8_t speed_factor)
 /*--------------------------------------------------------------------------------
-| LED indicator for wireless sim connection status
+| LED flash pattern
 |
 --------------------------------------------------------------------------------*/
 {
@@ -1226,6 +1226,204 @@ void led_flash_pattern_all(uint32_t led_status_counter, uint8_t speed_factor)
 		nrf_gpio_pin_write(PIN_LED_ORANGE, 1); 	
 #endif
 	}	
+}
+
+/********************************************************************************/
+void led_flash_pattern_bar(uint8_t speed_factor)
+/*--------------------------------------------------------------------------------
+| LED flash pattern
+|
+--------------------------------------------------------------------------------*/
+{
+	if (speed_factor == 'a')
+	{
+#ifdef PIN_LED_BLUE
+	  nrf_gpio_pin_write(PIN_LED_BLUE, 0);
+#endif
+#ifdef PIN_LED_GREEN
+		nrf_gpio_pin_write(PIN_LED_GREEN, 0);
+#endif
+#ifdef PIN_LED_WHITE
+	  nrf_gpio_pin_write(PIN_LED_WHITE, 0);
+#endif
+#ifdef PIN_LED_RED
+		nrf_gpio_pin_write(PIN_LED_RED, 0);
+#endif
+#ifdef PIN_LED_YELLOW
+		nrf_gpio_pin_write(PIN_LED_YELLOW, 0);
+#endif
+#ifdef PIN_LED_ORANGE
+		nrf_gpio_pin_write(PIN_LED_ORANGE, 0);
+#endif
+	}
+	else if (speed_factor == 'b')
+	{
+#ifdef PIN_LED_BLUE
+	  nrf_gpio_pin_toggle(PIN_LED_BLUE);
+#endif
+#ifdef PIN_LED_GREEN
+		nrf_gpio_pin_write(PIN_LED_GREEN, 0);
+#endif
+#ifdef PIN_LED_WHITE
+	  nrf_gpio_pin_write(PIN_LED_WHITE, 0);
+#endif
+#ifdef PIN_LED_RED
+		nrf_gpio_pin_write(PIN_LED_RED, 0);
+#endif
+#ifdef PIN_LED_YELLOW
+		nrf_gpio_pin_write(PIN_LED_YELLOW, 0);
+#endif
+#ifdef PIN_LED_ORANGE
+		nrf_gpio_pin_write(PIN_LED_ORANGE, 0);
+#endif
+	}
+	else if (speed_factor == 'c')
+	{
+#ifdef PIN_LED_BLUE
+	  nrf_gpio_pin_write(PIN_LED_BLUE, 0);
+#endif
+#ifdef PIN_LED_GREEN
+		nrf_gpio_pin_toggle(PIN_LED_GREEN);
+#endif
+#ifdef PIN_LED_WHITE
+	  nrf_gpio_pin_write(PIN_LED_WHITE, 0);
+#endif
+#ifdef PIN_LED_RED
+		nrf_gpio_pin_write(PIN_LED_RED, 0);
+#endif
+#ifdef PIN_LED_YELLOW
+		nrf_gpio_pin_write(PIN_LED_YELLOW, 0);
+#endif
+#ifdef PIN_LED_ORANGE
+		nrf_gpio_pin_write(PIN_LED_ORANGE, 0);
+#endif
+	}
+	else if (speed_factor == 'd')
+	{
+#ifdef PIN_LED_BLUE
+	  nrf_gpio_pin_write(PIN_LED_BLUE, 0);
+#endif
+#ifdef PIN_LED_GREEN
+		nrf_gpio_pin_write(PIN_LED_GREEN, 0);
+#endif
+#ifdef PIN_LED_WHITE
+	  nrf_gpio_pin_toggle(PIN_LED_WHITE);
+#endif
+#ifdef PIN_LED_RED
+		nrf_gpio_pin_write(PIN_LED_RED, 0);
+#endif
+#ifdef PIN_LED_YELLOW
+		nrf_gpio_pin_write(PIN_LED_YELLOW, 0);
+#endif
+#ifdef PIN_LED_ORANGE
+		nrf_gpio_pin_write(PIN_LED_ORANGE, 0);
+#endif
+	}
+	else if (speed_factor == 'e')
+	{
+#ifdef PIN_LED_BLUE
+	  nrf_gpio_pin_write(PIN_LED_BLUE, 0);
+#endif
+#ifdef PIN_LED_GREEN
+		nrf_gpio_pin_write(PIN_LED_GREEN, 0);
+#endif
+#ifdef PIN_LED_WHITE
+	  nrf_gpio_pin_write(PIN_LED_WHITE, 0);
+#endif
+#ifdef PIN_LED_RED
+		nrf_gpio_pin_toggle(PIN_LED_RED);
+#endif
+#ifdef PIN_LED_YELLOW
+		nrf_gpio_pin_write(PIN_LED_YELLOW, 0);
+#endif
+#ifdef PIN_LED_ORANGE
+		nrf_gpio_pin_write(PIN_LED_ORANGE, 0);
+#endif
+	}
+	else if (speed_factor == 'f')
+	{
+#ifdef PIN_LED_BLUE
+	  nrf_gpio_pin_write(PIN_LED_BLUE, 1);
+#endif
+#ifdef PIN_LED_GREEN
+		nrf_gpio_pin_toggle(PIN_LED_GREEN);
+#endif
+#ifdef PIN_LED_WHITE
+	  nrf_gpio_pin_write(PIN_LED_WHITE, 0);
+#endif
+#ifdef PIN_LED_RED
+		nrf_gpio_pin_write(PIN_LED_RED, 0);
+#endif
+#ifdef PIN_LED_YELLOW
+		nrf_gpio_pin_write(PIN_LED_YELLOW, 0);
+#endif
+#ifdef PIN_LED_ORANGE
+		nrf_gpio_pin_write(PIN_LED_ORANGE, 0);
+#endif
+	}
+	else if (speed_factor == 'g')
+	{
+#ifdef PIN_LED_BLUE
+	  nrf_gpio_pin_write(PIN_LED_BLUE, 1);
+#endif
+#ifdef PIN_LED_GREEN
+		nrf_gpio_pin_write(PIN_LED_GREEN, 1);
+#endif
+#ifdef PIN_LED_WHITE
+	  nrf_gpio_pin_toggle(PIN_LED_WHITE);
+#endif
+#ifdef PIN_LED_RED
+		nrf_gpio_pin_write(PIN_LED_RED, 0);
+#endif
+#ifdef PIN_LED_YELLOW
+		nrf_gpio_pin_write(PIN_LED_YELLOW, 0);
+#endif
+#ifdef PIN_LED_ORANGE
+		nrf_gpio_pin_write(PIN_LED_ORANGE, 0);
+#endif
+	}
+	else if (speed_factor == 'h')
+	{
+#ifdef PIN_LED_BLUE
+	  nrf_gpio_pin_write(PIN_LED_BLUE, 1);
+#endif
+#ifdef PIN_LED_GREEN
+		nrf_gpio_pin_write(PIN_LED_GREEN, 1);
+#endif
+#ifdef PIN_LED_WHITE
+	  nrf_gpio_pin_write(PIN_LED_WHITE, 1);
+#endif
+#ifdef PIN_LED_RED
+		nrf_gpio_pin_toggle(PIN_LED_RED);
+#endif
+#ifdef PIN_LED_YELLOW
+		nrf_gpio_pin_write(PIN_LED_YELLOW, 0);
+#endif
+#ifdef PIN_LED_ORANGE
+		nrf_gpio_pin_write(PIN_LED_ORANGE, 0);
+#endif
+	}
+	else
+	{
+#ifdef PIN_LED_BLUE
+		nrf_gpio_pin_write(PIN_LED_BLUE, 1);
+#endif
+#ifdef PIN_LED_GREEN
+		nrf_gpio_pin_write(PIN_LED_GREEN, 1);
+#endif
+#ifdef PIN_LED_WHITE
+		nrf_gpio_pin_write(PIN_LED_WHITE, 1);
+#endif
+#ifdef PIN_LED_RED
+		nrf_gpio_pin_write(PIN_LED_RED, 1);
+#endif
+#ifdef PIN_LED_YELLOW
+		nrf_gpio_pin_write(PIN_LED_YELLOW, 1);
+#endif
+#ifdef PIN_LED_ORANGE
+		nrf_gpio_pin_write(PIN_LED_ORANGE, 1);
+#endif
+	}
 }
 
 #if (IF_SOFTDEIVE_USED)
@@ -1535,45 +1733,53 @@ void led_status_check(void)
 #endif	
 	else if (*(LED_PATTERN_RAM + 1) == '8')
 	{
-		if (*(LED_PATTERN_RAM + 2) == '0')
+		switch (*(LED_PATTERN_RAM + 2))
 		{
-      led_flash_pattern_1(led_status_counter, 1, 1);
-		}
-		if (*(LED_PATTERN_RAM + 2) == '1')
-		{
-      led_flash_pattern_1(led_status_counter, 2, 1);
-		}
-		if (*(LED_PATTERN_RAM + 2) == '2')
-		{
-      led_flash_pattern_1(led_status_counter, 4, 1);
-		}
-		if (*(LED_PATTERN_RAM + 2) == '3')
-		{
-      led_flash_pattern_1(led_status_counter, 1, 0);
-		}
-		if (*(LED_PATTERN_RAM + 2) == '4')
-		{
-      led_flash_pattern_1(led_status_counter, 2, 0);
-		}
-		if (*(LED_PATTERN_RAM + 2) == '5')
-		{
-      led_flash_pattern_1(led_status_counter, 4, 0);
-		}
-		if (*(LED_PATTERN_RAM + 2) == '6')
-		{
-      led_flash_pattern_all(led_status_counter, 1);
-		}
-		if (*(LED_PATTERN_RAM + 2) == '7')
-		{
-      led_flash_pattern_all(led_status_counter, 2);
-		}
-		if (*(LED_PATTERN_RAM + 2) == '8')
-		{
-      led_flash_pattern_all(led_status_counter, 4);
-		}
-		if (*(LED_PATTERN_RAM + 2) == '9')
-		{
-      led_flash_pattern_all(led_status_counter, 8);
+			case '0':
+			case '1':
+			case '2':
+			{
+			  led_flash_pattern_1(led_status_counter, 1 << (*(LED_PATTERN_RAM + 2) & 0xf), 1);
+
+				break;
+			}
+			case '3':
+			case '4':
+			case '5':
+			{
+			  led_flash_pattern_1(led_status_counter, 1 << ((*(LED_PATTERN_RAM + 2) & 0xf) - 2), 0);
+
+				break;
+			}
+			case '6':
+			case '7':
+			case '8':
+			case '9':
+			{
+			  led_flash_pattern_all(led_status_counter, 1 << ((*(LED_PATTERN_RAM + 2) & 0xf) - 6));
+
+				break;
+			}
+
+			case 'a':
+			case 'b':
+			case 'c':
+			case 'd':
+			case 'e':
+			case 'f':
+			case 'g':
+			case 'h':
+			case 'i':
+			{
+			  led_flash_pattern_bar(*(LED_PATTERN_RAM + 2));
+
+				break;
+			}
+
+			default:
+			{
+				break;
+			}
 		}
 	}
 	else if (*(LED_PATTERN_RAM + 1) == '9')
