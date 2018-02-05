@@ -106,6 +106,6 @@ extern volatile uint32_t   TIME_SLOT_REQUEST_LENGTH_US;
 extern volatile uint8_t    PHONE_CONNECTION_REQUEST_TYPE;                                 
 extern volatile uint32_t   FLASH_DATA_WRITE_CHECK_TASK_QUEUE; 
 extern volatile uint32_t   CONNECTION_SLOT_TIME_MS;
-extern volatile uint8_t    LED_PATTERN_RAM[16];
+extern volatile uint8_t    LED_PATTERN_FLASH_BLE[16];
 
 #endif

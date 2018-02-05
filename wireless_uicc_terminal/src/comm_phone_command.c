@@ -3521,20 +3521,20 @@ uint32_t usta_command_line(uint8_t *command_line_string)
 	{
 		if (*(command_line_string + 0) == 5)
 		{
-			*(LED_PATTERN_RAM + 1) = *(command_line_string + 5);
+			*(LED_PATTERN_FLASH_BLE + 1) = *(command_line_string + 5);
 		}
 		else if(*(command_line_string + 0) > 5)
 		{
       /* get the user input cammand line string */
-      *(LED_PATTERN_RAM + 0) = *(command_line_string + 0) - 4 <= 15 ? *(command_line_string + 0) - 4 : 15;
-      for (i=0; i<*(LED_PATTERN_RAM + 0); i++)
+      *(LED_PATTERN_FLASH_BLE + 0) = *(command_line_string + 0) - 4 <= 15 ? *(command_line_string + 0) - 4 : 15;
+      for (i=0; i<*(LED_PATTERN_FLASH_BLE + 0); i++)
       {
-        *(LED_PATTERN_RAM + i + 1) = *(command_line_string + 5 + i);
+        *(LED_PATTERN_FLASH_BLE + i + 1) = *(command_line_string + 5 + i);
       }
 		  /* if the LED setting input is only the first char to indicate the LED flash speed, keep the LED pattern unchanged */
-      for (i=(*(LED_PATTERN_RAM + 0)); i<15; i++)  
+      for (i=(*(LED_PATTERN_FLASH_BLE + 0)); i<15; i++)  
       {
-        *(LED_PATTERN_RAM + i + 1) = 0;
+        *(LED_PATTERN_FLASH_BLE + i + 1) = 0;
 			}
     }
 		else
@@ -3549,9 +3549,11 @@ uint32_t usta_command_line(uint8_t *command_line_string)
 		if (IF_SOFTDEVICE_RUNNING == 0)
 		{
       printf("====================== LED Pattern Input =======================\r\n");
-			printf_log_rx(*(LED_PATTERN_RAM + 0), (uint8_t *)LED_PATTERN_RAM + 1);
+			printf_log_rx(*(LED_PATTERN_FLASH_BLE + 0), (uint8_t *)LED_PATTERN_FLASH_BLE + 1);
 		}
 #endif
+		/* copy the LED flash pattern seting */
+		memcpy(LED_PATTERN_RAM, (uint8_t *)LED_PATTERN_FLASH_BLE, KEY_LENGTH);
 	  /* set flash write flag */
 		FLASH_DATA_WRITE_CHECK_TASK_QUEUE |= (1 << FLASH_DATA_WRITE_TASK_OFFSET_POS);
 		/* set the mark bit for flash data write check */

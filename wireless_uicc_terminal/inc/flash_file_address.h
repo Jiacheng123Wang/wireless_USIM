@@ -408,8 +408,8 @@ uint8_t P_UINT8_FLASH_DATA_RAM_BUFFER[FLASH_WRITE_DATA_SIZE_IN_WORD << 2];
 /* random authentication challenge or wireless SIM air interface authentication, 16 bytes = 128 bits,
 |  will be transmitted in the data packet */
 #define AUTH_CHALL_DATA_RAM                  (P_UINT8_FLASH_DATA_RAM_BUFFER + AUTH_CHALL_DATA_OFFSET_IN_CONFIG)
-
-// #define LED_PATTERN_RAM                      (P_UINT8_FLASH_DATA_RAM_BUFFER + LED_PATTERN_OFFSET_IN_CONFIG)
+/* LED flash pattern in RAM */
+#define LED_PATTERN_RAM                      (P_UINT8_FLASH_DATA_RAM_BUFFER + LED_PATTERN_OFFSET_IN_CONFIG)
 /* device logical address saved in RAM: 1 ~ 7 */
 #define DEVICE_LOGICAL_ADDRESS_RAM           (*(P_UINT8_FLASH_DATA_RAM_BUFFER + DEVICE_LOG_ADD_OFFSET_IN_CONFIG))
 /* wireless SIM air interface on/off 

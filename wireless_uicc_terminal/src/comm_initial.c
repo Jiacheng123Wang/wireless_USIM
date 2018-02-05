@@ -193,42 +193,19 @@ void usim_data_initialization(void)
   uint8_t user_password[16] = {'0', '0', '0', '0', '0', '0', 0, 0, 0, 0, 0, 0, 
              0, 0, 0, 0};
 	uint8_t led_pattern_tmp[16] = {15, '9', 'H', 'e', 'l', 'l', 'o', ',', 'W', 'o', 'r', 'l', 'd', '!', ' ', ' '};
+	uint8_t device_name_tmp[16] = {0xff, 'w', 'i', 'r', 'e', 'l', 'e', 's', 's', 'S', 'I', 'M', '0', '0', '0', '0'};
   uint32_t i;
   
   /* Name of the BLE device. Will be included in the advertising data. */
-  *(SMART_USIM_DEVICE_NAME_RAM	+ 0) = 0xff;
-  *(SMART_USIM_DEVICE_NAME_RAM	+ 1) = 'w';
-  *(SMART_USIM_DEVICE_NAME_RAM	+ 2) = 'i';
-  *(SMART_USIM_DEVICE_NAME_RAM	+ 3) = 'r';
-  *(SMART_USIM_DEVICE_NAME_RAM	+ 4) = 'e';
-  *(SMART_USIM_DEVICE_NAME_RAM	+ 5) = 'l';
-  *(SMART_USIM_DEVICE_NAME_RAM	+ 6) = 'e';
-  *(SMART_USIM_DEVICE_NAME_RAM	+ 7) = 's';
-  *(SMART_USIM_DEVICE_NAME_RAM	+ 8) = 's';
-  *(SMART_USIM_DEVICE_NAME_RAM	+ 9) = 'S';
-  *(SMART_USIM_DEVICE_NAME_RAM	+ 10) = 'I';
-  *(SMART_USIM_DEVICE_NAME_RAM	+ 11) = 'M';
-  *(SMART_USIM_DEVICE_NAME_RAM	+ 12) = '0';
-  *(SMART_USIM_DEVICE_NAME_RAM	+ 13) = '0';
-  *(SMART_USIM_DEVICE_NAME_RAM	+ 14) = '0';
-  *(SMART_USIM_DEVICE_NAME_RAM	+ 15) = '0';
+	memcpy(SMART_USIM_DEVICE_NAME_RAM, device_name_tmp, KEY_LENGTH);
   /* password initialization */        
   // random_vector_generate(user_password, 16, NRF_RTC2->COUNTER, RANDOM_BYTE_NUMBER_TIME_OUT_MS, 0);
-	for (i=0; i<KEY_LENGTH; i++)
-	{
-    *(USER_PASSWORD_RAM + i) = user_password[i];			
-	}
+	memcpy(USER_PASSWORD_RAM, user_password, KEY_LENGTH);
   /* system key initialization */        
   // random_vector_generate(user_password, 16, NRF_RTC2->COUNTER, RANDOM_BYTE_NUMBER_TIME_OUT_MS, 0);
-	for (i=0; i<KEY_LENGTH; i++)
-	{
-    *(SYSTEM_KEY_RAM + i) = user_password[i];			
-	}
+	memcpy(SYSTEM_KEY_RAM, user_password, KEY_LENGTH);
 	/* LED pattern initialization */
-	for (i=0; i<KEY_LENGTH; i++)
-	{
-    *(LED_PATTERN_RAM + i) = led_pattern_tmp[i];			
-	}
+	memcpy(LED_PATTERN_RAM, led_pattern_tmp, KEY_LENGTH);
 	
 	/* USIM file data initialization */
 	memcpy(USIM0_EF_DATA_RAM, EF_data_USIM, ALL_USIM_EF_FLAG_SIZE);
@@ -352,6 +329,9 @@ void update_user_configuration(void)
   {
     *(P_UINT8_FLASH_DATA_RAM_BUFFER + i) = *((uint8_t *)USER_CONFIG_FLASH_ADDR + i);
   }
+	
+	/* copy the LED flash pattern seting */
+	memcpy((uint8_t *)LED_PATTERN_FLASH_BLE, LED_PATTERN_RAM, KEY_LENGTH);
 		
   /* the configured default USIN card */
 	if ((*((uint8_t *)DEFAULT_USED_USIM_FLASH_ADDR)) == 0)

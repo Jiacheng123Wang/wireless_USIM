@@ -188,13 +188,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if (IF_CONNECTION_CC_CODED)
   #define TIMER_SLOT_SIM_CONNECTION_LISTENING_US          20000
 #else
-  #define TIMER_SLOT_SIM_CONNECTION_LISTENING_US          5000
+  #define TIMER_SLOT_SIM_CONNECTION_LISTENING_US          5500
 #endif
 /* time length in us for USIM client wireless connection request time slot */
 #if (IF_CONNECTION_CC_CODED)
   #define TIMER_SLOT_PHONE_CONNECTION_REQUEST_US          10000
 #else
-  #define TIMER_SLOT_PHONE_CONNECTION_REQUEST_US          2400
+  #define TIMER_SLOT_PHONE_CONNECTION_REQUEST_US          2200
 #endif
 /* time length in us for phone command 0xf2 process window time slot */
 #define TIMER_SLOT_PHONE_COMMAND_0xF2_US                  1500

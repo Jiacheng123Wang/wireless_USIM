@@ -591,18 +591,18 @@ void nus_command_process(uint8_t *nus_string)
     /* get the user input cammand line string */
 		if (RECEIVED_STRING_NUS[0] == 5)
 		{
-			*(LED_PATTERN_RAM + 1) = *(RECEIVED_STRING_NUS + 5);
+			*(LED_PATTERN_FLASH_BLE + 1) = *(RECEIVED_STRING_NUS + 5);
 		}
 		else if (RECEIVED_STRING_NUS[0] > 5)
 		{
-      *(LED_PATTERN_RAM + 0) = (RECEIVED_STRING_NUS[0] - 4 <= 15 ? RECEIVED_STRING_NUS[0] - 4 : 15);
-      for (i=0; i<*(LED_PATTERN_RAM + 0); i++)
+      *(LED_PATTERN_FLASH_BLE + 0) = (RECEIVED_STRING_NUS[0] - 4 <= 15 ? RECEIVED_STRING_NUS[0] - 4 : 15);
+      for (i=0; i<*(LED_PATTERN_FLASH_BLE + 0); i++)
       {
-        *(LED_PATTERN_RAM + i + 1) = *(RECEIVED_STRING_NUS + 5 + i);
+        *(LED_PATTERN_FLASH_BLE + i + 1) = *(RECEIVED_STRING_NUS + 5 + i);
       }
-      for (i=*(LED_PATTERN_RAM + 0); i<15; i++)  
+      for (i=*(LED_PATTERN_FLASH_BLE + 0); i<15; i++)  
       {
-        *(LED_PATTERN_RAM + i + 1) = 0;
+        *(LED_PATTERN_FLASH_BLE + i + 1) = 0;
       }
 		}
 		else
@@ -616,10 +616,12 @@ void nus_command_process(uint8_t *nus_string)
 		
 #if (IF_LOG_OUTPUT)
     printf("====================== LED Pattern Input =======================\r\n");
-	  printf_log_rx(*(LED_PATTERN_RAM + 0), (uint8_t *)LED_PATTERN_RAM + 1);
+	  printf_log_rx(*(LED_PATTERN_FLASH_BLE + 0), (uint8_t *)LED_PATTERN_FLASH_BLE + 1);
 #endif
-		if (*(LED_PATTERN_RAM + 1) != '8')
+		if (*(LED_PATTERN_FLASH_BLE + 1) != '8')
 		{
+			/* copy the LED flash pattern seting */
+			memcpy(LED_PATTERN_RAM, (uint8_t *)LED_PATTERN_FLASH_BLE, KEY_LENGTH);
 		  /* set flash write flag */
 		  FLASH_DATA_WRITE_CHECK_TASK_QUEUE |= (1 << FLASH_DATA_WRITE_TASK_OFFSET_POS);
 		  /* set the mark bit for flash data write check */
@@ -1653,7 +1655,7 @@ void led_status_check(void)
 	
 	led_status_counter++;
 	
-	if (*(LED_PATTERN_RAM + 1) == '0')	
+	if (*(LED_PATTERN_FLASH_BLE + 1) == '0')	
 	{
     nrf_gpio_pin_write(PIN_LED_BLUE, 0);  
 #ifdef PIN_LED_GREEN	
@@ -1672,12 +1674,12 @@ void led_status_check(void)
     nrf_gpio_pin_write(PIN_LED_RED, 0);  
 #endif
 	}
-	else if (*(LED_PATTERN_RAM + 1) == '1')	
+	else if (*(LED_PATTERN_FLASH_BLE + 1) == '1')	
 	{
     led_wireless_sim_status_indicator(led_status_counter);
 	}	
 #if (IF_SOFTDEIVE_USED)
-	else if (*(LED_PATTERN_RAM + 1) == '2')	
+	else if (*(LED_PATTERN_FLASH_BLE + 1) == '2')	
 	{
 		for (i=0; i<ANCS_NOTIF_LED_PATTERN_TYPE_TOTAL_NUMBER; i++)
 		{
@@ -1714,7 +1716,7 @@ void led_status_check(void)
 		}				
 #endif		
 	}
-	else if (*(LED_PATTERN_RAM + 1) == '3')
+	else if (*(LED_PATTERN_FLASH_BLE + 1) == '3')
 	{
 		for (i=0; i<ANCS_NOTIF_LED_PATTERN_TYPE_TOTAL_NUMBER; i++)
 		{
@@ -1731,15 +1733,15 @@ void led_status_check(void)
 		}
 	}	
 #endif	
-	else if (*(LED_PATTERN_RAM + 1) == '8')
+	else if (*(LED_PATTERN_FLASH_BLE + 1) == '8')
 	{
-		switch (*(LED_PATTERN_RAM + 2))
+		switch (*(LED_PATTERN_FLASH_BLE + 2))
 		{
 			case '0':
 			case '1':
 			case '2':
 			{
-			  led_flash_pattern_1(led_status_counter, 1 << (*(LED_PATTERN_RAM + 2) & 0xf), 1);
+			  led_flash_pattern_1(led_status_counter, 1 << (*(LED_PATTERN_FLASH_BLE + 2) & 0xf), 1);
 
 				break;
 			}
@@ -1747,7 +1749,7 @@ void led_status_check(void)
 			case '4':
 			case '5':
 			{
-			  led_flash_pattern_1(led_status_counter, 1 << ((*(LED_PATTERN_RAM + 2) & 0xf) - 2), 0);
+			  led_flash_pattern_1(led_status_counter, 1 << ((*(LED_PATTERN_FLASH_BLE + 2) & 0xf) - 2), 0);
 
 				break;
 			}
@@ -1756,7 +1758,7 @@ void led_status_check(void)
 			case '8':
 			case '9':
 			{
-			  led_flash_pattern_all(led_status_counter, 1 << ((*(LED_PATTERN_RAM + 2) & 0xf) - 6));
+			  led_flash_pattern_all(led_status_counter, 1 << ((*(LED_PATTERN_FLASH_BLE + 2) & 0xf) - 6));
 
 				break;
 			}
@@ -1771,7 +1773,7 @@ void led_status_check(void)
 			case 'h':
 			case 'i':
 			{
-			  led_flash_pattern_bar(*(LED_PATTERN_RAM + 2));
+			  led_flash_pattern_bar(*(LED_PATTERN_FLASH_BLE + 2));
 
 				break;
 			}
@@ -1782,7 +1784,7 @@ void led_status_check(void)
 			}
 		}
 	}
-	else if (*(LED_PATTERN_RAM + 1) == '9')
+	else if (*(LED_PATTERN_FLASH_BLE + 1) == '9')
 	{
     led_flash_pattern_1(led_status_counter, 2, 1);
 	}
@@ -1795,31 +1797,31 @@ void led_status_check(void)
     uint8_t led_flash_cycle;
 	  uint8_t led_string_length_bits = (*(uint8_t *)LED_PATTERN_FLASH_ADDR - 1) * 8 + led_flash_starting_length;
 		
-		if ((*(LED_PATTERN_RAM + 1) == 'A') || (*(LED_PATTERN_RAM + 1) == 'a'))
+		if ((*(LED_PATTERN_FLASH_BLE + 1) == 'A') || (*(LED_PATTERN_FLASH_BLE + 1) == 'a'))
 		{
 			led_flash_cycle = 2;
 		}
-		else if ((*(LED_PATTERN_RAM + 1) == 'B') || (*(LED_PATTERN_RAM + 1) == 'b'))
+		else if ((*(LED_PATTERN_FLASH_BLE + 1) == 'B') || (*(LED_PATTERN_FLASH_BLE + 1) == 'b'))
 		{
 			led_flash_cycle = 4;
 		}
-		else if ((*(LED_PATTERN_RAM + 1) == 'C') || (*(LED_PATTERN_RAM + 1) == 'c'))
+		else if ((*(LED_PATTERN_FLASH_BLE + 1) == 'C') || (*(LED_PATTERN_FLASH_BLE + 1) == 'c'))
 		{
 			led_flash_cycle = 8;
 		}
-		else if ((*(LED_PATTERN_RAM + 1) == 'D') || (*(LED_PATTERN_RAM + 1) == 'd'))
+		else if ((*(LED_PATTERN_FLASH_BLE + 1) == 'D') || (*(LED_PATTERN_FLASH_BLE + 1) == 'd'))
 		{
 			led_flash_cycle = 16;
 		}
-		else if ((*(LED_PATTERN_RAM + 1) == 'E') || (*(LED_PATTERN_RAM + 1) == 'e'))
+		else if ((*(LED_PATTERN_FLASH_BLE + 1) == 'E') || (*(LED_PATTERN_FLASH_BLE + 1) == 'e'))
 		{
 			led_flash_cycle = 32;
 		}
-		else if ((*(LED_PATTERN_RAM + 1) == 'F') || (*(LED_PATTERN_RAM + 1) == 'f'))
+		else if ((*(LED_PATTERN_FLASH_BLE + 1) == 'F') || (*(LED_PATTERN_FLASH_BLE + 1) == 'f'))
 		{
 			led_flash_cycle = 64;
 		}
-		else if ((*(LED_PATTERN_RAM + 1) == 'G') || (*(LED_PATTERN_RAM + 1) == 'g'))
+		else if ((*(LED_PATTERN_FLASH_BLE + 1) == 'G') || (*(LED_PATTERN_FLASH_BLE + 1) == 'g'))
 		{
 			led_flash_cycle = 128;
 		}
@@ -1879,7 +1881,7 @@ void led_status_check(void)
 			  char_led = (bit_led_in_total - led_flash_starting_length) / 8;
 				bit_led_in_char = (bit_led_in_total - led_flash_starting_length) % 8;
 				
-		    if (((*(LED_PATTERN_RAM + char_led + 2)) << bit_led_in_char) & 0x80)
+		    if (((*(LED_PATTERN_FLASH_BLE + char_led + 2)) << bit_led_in_char) & 0x80)
 			  {
 					if((led_status_counter / led_flash_cycle) % 2)
 					{
