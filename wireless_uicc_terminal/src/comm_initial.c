@@ -331,7 +331,7 @@ void update_user_configuration(void)
   }
 	
 	/* copy the LED flash pattern seting */
-	memcpy((uint8_t *)LED_PATTERN_FLASH_BLE, LED_PATTERN_RAM, KEY_LENGTH);
+	memcpy((uint8_t *)LED_PATTERN_BLE_FLASH, LED_PATTERN_RAM, KEY_LENGTH);
 		
   /* the configured default USIN card */
 	if ((*((uint8_t *)DEFAULT_USED_USIM_FLASH_ADDR)) == 0)
