@@ -201,10 +201,8 @@ void RTC2_IRQHandler(void)
 		
 	  /* re-load watch dog request register */
 	  NRF_WDT->RR[0] = 0x6E524635;
+		NRF_RTC2->CC[0] = NRF_RTC2->COUNTER + RTC2_COMPARE0_EVENT_INTERVAL_MS;
 
-		/* update RTC2 CC register value, to set RTC2 new interrupt event time */
-	  NRF_RTC2->CC[0] = (NRF_RTC2->COUNTER / 100) * 100 + RTC2_COMPARE0_EVENT_INTERVAL_MS;
-		
 		/* increase the counter */
 		status_check_couter++;
 		
@@ -352,10 +350,10 @@ void RTC2_IRQHandler(void)
 		}
 #endif
 		
-		/* update RTC2 CC register value, to set RTC2 new interrupt event time */
-		if (NRF_RTC2->CC[0] <= NRF_RTC2->COUNTER)
+		/* update CC */
+		if (NRF_RTC2->CC[0] < NRF_RTC2->COUNTER)
 		{
-			NRF_RTC2->CC[0] = (NRF_RTC2->COUNTER / 100) * 100 + RTC2_COMPARE0_EVENT_INTERVAL_MS;
+		  NRF_RTC2->CC[0] = NRF_RTC2->COUNTER + RTC2_COMPARE0_EVENT_INTERVAL_MS;
 		}
   }
 	
@@ -432,7 +430,7 @@ void rtc2_compare0_event_posepone(uint32_t posepone_time_ms)
   sd_nvic_ClearPendingIRQ(RTC2_IRQn); 
 
 	/* update RTC2 CC register value, to set RTC2 new interrupt event time */
-	NRF_RTC2->CC[0] = (NRF_RTC2->COUNTER / 100) * 100 + posepone_time_ms;
+	NRF_RTC2->CC[0] = NRF_RTC2->COUNTER + posepone_time_ms;
 }
 
 #if (IF_SOFTDEIVE_USED)

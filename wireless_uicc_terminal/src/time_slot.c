@@ -859,7 +859,8 @@ void handler_time_slot_event_signal_usim_client_random_access_connection_request
 			{
 				/* update RTC2 CC register value, to set RTC2 new interrupt event time */
 	      rtc2_compare0_event_posepone(RTC2_COMPARE0_EVENT_INTERVAL_MS);
-
+				
+        nrf_delay_us(150);
 				/* free the time slot request semaphore */
 				SEMAPHORE_TIME_SLOT_REQUEST = 0;
 				

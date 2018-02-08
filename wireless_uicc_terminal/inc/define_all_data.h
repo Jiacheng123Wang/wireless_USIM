@@ -194,7 +194,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if (IF_CONNECTION_CC_CODED)
   #define TIMER_SLOT_PHONE_CONNECTION_REQUEST_US          10000
 #else
-  #define TIMER_SLOT_PHONE_CONNECTION_REQUEST_US          2400
+  #define TIMER_SLOT_PHONE_CONNECTION_REQUEST_US          2100
 #endif
 /* time length in us for phone command 0xf2 process window time slot */
 #define TIMER_SLOT_PHONE_COMMAND_0xF2_US                  1500
