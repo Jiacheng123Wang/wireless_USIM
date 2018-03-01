@@ -336,12 +336,14 @@ void RTC2_IRQHandler(void)
 	    flash_data_write_task( );
 	  }
 		 
+#if (IF_SOFTDEIVE_USED)
 		/* BLE NUS received command */
 	  if (RECEIVED_STRING_NUS[0])
 		{
       nus_command_process(RECEIVED_STRING_NUS);
 		}
-		
+#endif
+				
 #ifdef PIN_LED_BLUE
 		/* led check */
 		if (status_check_couter % 2 == 0)

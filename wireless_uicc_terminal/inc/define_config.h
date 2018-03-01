@@ -26,12 +26,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define DEFINE_CONFIG_H__
 
 /* Custom borad pin profile definition */
-#define PIN_PROFILE                          1
+#define PIN_PROFILE                          7
 
 /* if print out the log information of USIM-PHONE interface, for debug purpose 
 |  1: log information printed
 |  0: not printed */
-#define IF_LOG_OUTPUT                        1
+#define IF_LOG_OUTPUT                        0
 
 /* if USIM binary EF data is updated to USIM card, UICC command 0xd6
 |  1: binary EF updated to USIM card
@@ -174,15 +174,45 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define PIN_VCC_SIM0          15
 
   /* USIM1 card reader PIN define */
-  #define PIN_CLOCK_SIM1        6
-  #define PIN_DATA_SIM1         30
-  #define PIN_RESET_SIM1        29
-  #define PIN_VCC_SIM1          12
+  // #define PIN_CLOCK_SIM1        6
+  // #define PIN_DATA_SIM1         30
+  // #define PIN_RESET_SIM1        29
+  // #define PIN_VCC_SIM1          12
+  #define PIN_VCC_SIM1          PIN_NULL
 
 #elif (PIN_PROFILE == 5)
+/* PCA100036 board */
+  #define PIN_LED_BLUE          24
+  #define PIN_LED_GREEN         23
+  #define PIN_LED_RED           20
+  #define PIN_LED_WHITE         19
+
+  /* USIM0 card reader PIN define */
+  #define PIN_CLOCK_SIM0        28
+  #define PIN_DATA_SIM0         29
+  #define PIN_RESET_SIM0        25
+  #define PIN_VCC_SIM0          2
+
+  /* USIM1 card reader PIN define */
+  // #define PIN_CLOCK_SIM1        14
+  // #define PIN_DATA_SIM1         13
+  // #define PIN_RESET_SIM1        17
+  // #define PIN_VCC_SIM1          16
+  #define PIN_VCC_SIM1          PIN_NULL
+
+  /* sim-phone interface PIN define*/
+  #define PIN_DATA_PHONE        11
+  #define PIN_RESET_PHONE       3
+  #define PIN_CLOCK_PHONE       4
+  
+  /* UART pin define */
+  #define RX_PIN_NUMBER        8
+  #define TX_PIN_NUMBER        6
+  #define CTS_PIN_NUMBER       7
+  #define RTS_PIN_NUMBER       5
 
 #elif (PIN_PROFILE == 6)
-/* SIM-phone interface PIN define, HWwatch single USIM */
+/* SIM-phone interface PIN define, HWwatch single USIM, 2 LED */
 /* 20170722 */
   #define PIN_LED_BLUE          21
   #define PIN_LED_GREEN         18
@@ -224,6 +254,32 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
   /* USIM1 card reader PIN define */
   #define PIN_VCC_SIM1          PIN_NULL
+
+#elif (PIN_PROFILE == 8)
+/* SIM-phone interface PIN define, HWwatch single USIM, 4 LED */
+/* 20170722 */
+  #define PIN_LED_BLUE          15
+  #define PIN_LED_GREEN         16
+  #define PIN_LED_WHITE         18
+  #define PIN_LED_RED           21
+ 
+  #define PIN_DATA_PHONE        5
+  #define PIN_RESET_PHONE       8
+  #define PIN_CLOCK_PHONE       1
+
+  /* USIM0 card reader PIN define */
+  #define PIN_CLOCK_SIM0        0
+  #define PIN_DATA_SIM0         14
+  #define PIN_RESET_SIM0        6
+  #define PIN_VCC_SIM0          12
+
+  /* USIM1 card reader PIN define */
+  // #define PIN_CLOCK_SIM1        6
+  // #define PIN_DATA_SIM1         30
+  // #define PIN_RESET_SIM1        29
+  // #define PIN_VCC_SIM1          12
+  #define PIN_VCC_SIM1          PIN_NULL
+
 #else
   #error "wrong PIN_PROFILE ......" 
 #endif
