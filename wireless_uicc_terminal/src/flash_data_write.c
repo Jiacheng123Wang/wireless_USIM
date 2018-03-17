@@ -42,7 +42,7 @@ uint32_t start_flash_page_update(uint32_t update_length_in_word, uint32_t flash_
 |
 --------------------------------------------------------------------------------*/
 {
-  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);	
+  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
 	FLASH_UPDATE_WAITING_STAGE = 0;
 	flash_page_update(update_length_in_word, flash_address_update_page, ram_data);
 	
@@ -134,7 +134,7 @@ void sys_event_flash_erase_write_handler(uint32_t sys_evt, void * p_context)
 #if (IF_LOG_OUTPUT)  
 	      printf("-------------------- flash page erase finished, continue to write, FLASH_UPDATE_WAITING_STAGE = %d --------------------\r\n", FLASH_UPDATE_WAITING_STAGE);
 #endif
-			  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);	
+			  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
 			  /* save the user config byte to flash */    
 				flash_page_update(FLASH_WRITE_DATA_SIZE_IN_WORD, USER_CONFIG_FLASH_ADDR, (uint32_t *)P_UINT8_FLASH_DATA_RAM_BUFFER);	
 			}

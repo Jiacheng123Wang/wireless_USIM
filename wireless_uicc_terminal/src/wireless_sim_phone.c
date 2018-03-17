@@ -177,7 +177,7 @@ void smart_usim_initialization(void)
 
   /* start watch dog timer */
   watch_dog_timer_init(WATCH_DOG_TIME_OUT_S);
-  NRF_RTC2->CC[0] = NRF_RTC2->COUNTER + (COMPARE0_EVENT_POSEPONE_USIM_MS);
+  NRF_RTC2->CC[0] = NRF_RTC2->COUNTER + (COMPARE0_EVENT_POSTPONE_USIM_MS);
 }
 
 /********************************************************************************/
@@ -421,9 +421,9 @@ void rtc2_radio_link_config(void)
 }
 
 /********************************************************************************/
-void rtc2_compare0_event_posepone(uint32_t posepone_time_ms)
+void rtc2_compare0_event_postpone(uint32_t postpone_time_ms)
 /*--------------------------------------------------------------------------------
-| posepone RTC2 compare0 event if the 
+| postpone RTC2 compare0 event if the 
 |
 --------------------------------------------------------------------------------*/
 {
@@ -432,7 +432,7 @@ void rtc2_compare0_event_posepone(uint32_t posepone_time_ms)
   sd_nvic_ClearPendingIRQ(RTC2_IRQn); 
 
 	/* update RTC2 CC register value, to set RTC2 new interrupt event time */
-	NRF_RTC2->CC[0] = NRF_RTC2->COUNTER + posepone_time_ms;
+	NRF_RTC2->CC[0] = NRF_RTC2->COUNTER + postpone_time_ms;
 }
 
 #if (IF_SOFTDEIVE_USED)

@@ -112,20 +112,20 @@ void time_slot_request_time_out(void)
 		case TIME_SLOT_SIGNAL_USIM_SERVER_RANDOM_NUMBER_GENERATION:
 		case TIME_SLOT_SIGNAL_USIM_SERVER_WIRELESS_AUTHENTICATION_SIM_DATA_SEND:
 		{
-			rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+			rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 		  break;
 		}
 		
 		case TIME_SLOT_SIGNAL_USIM_CARD_BINARY_UPDATE:
 		{
-			rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+			rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 				
 			break;
 		}
 		
 		default:
 		{
-			rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+			rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 		  break;
 		}		
 	}	
@@ -644,7 +644,7 @@ nrf_radio_signal_callback_return_param_t *time_slot_callback(uint8_t signal_type
 							      
 					TIME_SLOT_EVENT_TYPE = TIME_SLOT_EVENT_USIM_SERVER_RANDOM_NUMBER_GENERATION;					
 			    /* renew RTC2 CC event interrupt and watch-dog */
-					rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+					rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 					break;
 				}	
 									
@@ -654,7 +654,7 @@ nrf_radio_signal_callback_return_param_t *time_slot_callback(uint8_t signal_type
 					  TIMER_SLOT_PHONE_COMMAND_SIM_0x88_WIRELESS_US - TIMER_SLOT_SIGNAL_CALLBACK_MARGIN_US))
 					{
 				    /* renew RTC2 CC event interrupt and watch-dog */
-						rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+						rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 					  TIME_SLOT_EVENT_TYPE = TIME_SLOT_EVENT_DEFAULT_VALUE;
 					}
 					else
@@ -841,7 +841,7 @@ void handler_time_slot_event_signal_usim_client_random_access_connection_request
 		phone_connection_state_check(1);
 		
 		/* update RTC2 CC register value, to set RTC2 new interrupt event time */
-    rtc2_compare0_event_posepone(RTC2_COMPARE0_EVENT_INTERVAL_MS);
+    rtc2_compare0_event_postpone(RTC2_COMPARE0_EVENT_INTERVAL_MS);
 	}
 	else
 	{
@@ -858,7 +858,7 @@ void handler_time_slot_event_signal_usim_client_random_access_connection_request
 				((NEXT_PHONE_COMMAND_0XF2_TIME - NRF_RTC2->COUNTER) < TIME_SLOT_NEXT_COMMAND_0XF2_MARGIN_MS))))
 			{
 				/* update RTC2 CC register value, to set RTC2 new interrupt event time */
-	      rtc2_compare0_event_posepone(RTC2_COMPARE0_EVENT_INTERVAL_MS);
+	      rtc2_compare0_event_postpone(RTC2_COMPARE0_EVENT_INTERVAL_MS);
 				
         nrf_delay_us(150);
 				/* free the time slot request semaphore */
@@ -876,7 +876,7 @@ void handler_time_slot_event_signal_usim_client_random_access_connection_request
 			  phone_connection_state_check(1);
 				
 				/* update RTC2 CC register value, to set RTC2 new interrupt event time */
-	      rtc2_compare0_event_posepone(RTC2_COMPARE0_EVENT_INTERVAL_MS);
+	      rtc2_compare0_event_postpone(RTC2_COMPARE0_EVENT_INTERVAL_MS);
 		  }
 		}
 	}
@@ -894,7 +894,7 @@ void handler_time_slot_event_signal_usim_client_wireless_authentication(void)
 	{
 	  if (!RETURN_PHONE_AUTHENTICATION_WIRELESS)
     {
-      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 		  PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_STAGE = PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_stage1;
 
 			/* free the time slot request semaphore */
@@ -914,7 +914,7 @@ void handler_time_slot_event_signal_usim_client_wireless_authentication(void)
 	{
     if ((!RETURN_PHONE_AUTHENTICATION_WIRELESS) && (!connection_request_phone_post_decoding(PHONE_CONNECTION_REQUEST_TYPE, PHONE_CONNECTION_REQUEST_START_TIME)))
     {
-      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 		  PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_STAGE = PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_stage2;
 
 			/* free the time slot request semaphore */
@@ -926,7 +926,7 @@ void handler_time_slot_event_signal_usim_client_wireless_authentication(void)
       if (((NRF_RTC2->COUNTER - PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_START_TIME) < DATA_TX_TIME_MS) &&
 		  	(NRF_RTC2->COUNTER > PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_START_TIME))
       {
-        rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+        rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 			
 				/* free the time slot request semaphore */
 				SEMAPHORE_TIME_SLOT_REQUEST = 0;
@@ -937,7 +937,7 @@ void handler_time_slot_event_signal_usim_client_wireless_authentication(void)
 #if (IF_LOG_OUTPUT)
         printf("\r\n++++++++++++++++++++++++++++++ Time out for phone command authentication connection request, total time used = %ld ++++++++++++++++++++++++++++++++\r\n", NRF_RTC2->COUNTER - PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_START_TIME);
 #endif
-        rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+        rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 		  	PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_STAGE = PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_stage2;
 
 				/* free the time slot request semaphore */
@@ -951,7 +951,7 @@ void handler_time_slot_event_signal_usim_client_wireless_authentication(void)
   {
     if (!RETURN_PHONE_AUTHENTICATION_WIRELESS)
     {
-      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 		  PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_STAGE = PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_stage3;
 
 			/* free the time slot request semaphore */
@@ -975,7 +975,7 @@ void handler_time_slot_event_signal_usim_client_wireless_authentication(void)
   {
     if (!RETURN_PHONE_AUTHENTICATION_WIRELESS)
     {
-      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 		  PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_STAGE = PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_stage4;  
 
 			/* free the time slot request semaphore */
@@ -987,7 +987,7 @@ void handler_time_slot_event_signal_usim_client_wireless_authentication(void)
       if (((NRF_RTC2->COUNTER - PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_START_TIME) < DATA_TX_TIME_MS) &&
 			(NRF_RTC2->COUNTER > PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_START_TIME))
       {
-        rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+        rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 			
 				/* free the time slot request semaphore */
 				SEMAPHORE_TIME_SLOT_REQUEST = 0;
@@ -1002,7 +1002,7 @@ void handler_time_slot_event_signal_usim_client_wireless_authentication(void)
 #if (IF_LOG_OUTPUT)
         printf("\r\n++++++++++++++++++++++++++++++ Time out for phone command authentication transmission, total time used = %ld ++++++++++++++++++++++++++++++++\r\n", NRF_RTC2->COUNTER - PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_START_TIME);
 #endif
-        rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+        rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 			  PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_STAGE = PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_stage4;
 
 				/* free the time slot request semaphore */
@@ -1016,7 +1016,7 @@ void handler_time_slot_event_signal_usim_client_wireless_authentication(void)
   {
 	  if (!RETURN_PHONE_AUTHENTICATION_WIRELESS)
 	  {
-      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 		  PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_STAGE = PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_stage5;
 
 			/* free the time slot request semaphore */
@@ -1037,7 +1037,7 @@ void handler_time_slot_event_signal_usim_client_wireless_authentication(void)
   {
 	  if (!RETURN_PHONE_AUTHENTICATION_WIRELESS)
 	  {
-      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 	  	PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_STAGE = PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_stage6;
 
 			/* free the time slot request semaphore */
@@ -1053,7 +1053,7 @@ void handler_time_slot_event_signal_usim_client_wireless_authentication(void)
 	    if (((NRF_RTC2->COUNTER - PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_START_TIME) < DATA_TX_TIME_MS) &&
 		    (NRF_RTC2->COUNTER > PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_START_TIME))
 	    {
-        rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+        rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 			
 				/* free the time slot request semaphore */
 				SEMAPHORE_TIME_SLOT_REQUEST = 0;
@@ -1068,7 +1068,7 @@ void handler_time_slot_event_signal_usim_client_wireless_authentication(void)
 #if (IF_LOG_OUTPUT)
 	      printf("\r\n++++++++++++++++++++++++++++++ Time out for phone command authentication SIM data receive, total time used = %ld ++++++++++++++++++++++++++++++++\r\n", NRF_RTC2->COUNTER - PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_START_TIME);
 #endif
-        rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+        rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 			  PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_STAGE = PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_stage6;
 
 				/* free the time slot request semaphore */
@@ -1091,7 +1091,7 @@ void handler_time_slot_event_signal_usim_client_wireless_authentication(void)
       printf("\r\n-------------------------- phone command authentication stage 6 --------------------------------------------------------\r\n");
 	    printf_log_rx(*READ_BYTE_UICC_TERMINAL, READ_BYTE_UICC_TERMINAL + 1);
 #endif
-      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 		  PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_STAGE = PHONE_COMMAND_AUTHENTICATION_WIRELESS_BLE_stage7;
 
 			/* free the time slot request semaphore */
@@ -1157,13 +1157,13 @@ void handler_time_slot_event_signal_usim_server_wireless_sim_command_receive(voi
 			printf("transmitted: ");
 			printf_log_tx(KEY_LENGTH, AUTHENTICATE_RESULT);
 #endif						
-      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 		}
     else
     {
 			if (main_watch_phone_sim_wireless_ble_stage1( ))
 			{
-        rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+        rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 			}
     }					
 	}
@@ -1172,7 +1172,7 @@ void handler_time_slot_event_signal_usim_server_wireless_sim_command_receive(voi
     if (((NRF_RTC2->COUNTER - SIM_DATA_RECEIVE_COMMAND_START_TIME) < DATA_TX_TIME_MS) &&
 			(NRF_RTC2->COUNTER > SIM_DATA_RECEIVE_COMMAND_START_TIME) && (!FLAG_PHONE_COMMAND_READ))
     {
-      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 			
 			/* free the time slot request semaphore */
 			SEMAPHORE_TIME_SLOT_REQUEST = 0;
@@ -1187,7 +1187,7 @@ void handler_time_slot_event_signal_usim_server_wireless_sim_command_receive(voi
 #if (IF_LOG_OUTPUT)
       printf("\r\n++++++++++++++++++++++++++++++ Time out for SIM data receive phone command, total time used = %ld ++++++++++++++++++++++++++++++++\r\n", NRF_RTC2->COUNTER - SIM_DATA_RECEIVE_COMMAND_START_TIME);
 #endif
-      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
     }						
 	}						
 }
@@ -1225,7 +1225,7 @@ void handler_time_slot_event_signal_usim_server_send_file_data(void)
     if (((NRF_RTC2->COUNTER - SIM_DATA_RECEIVE_COMMAND_START_TIME) < DATA_TX_TIME_MS) &&
 			(NRF_RTC2->COUNTER > SIM_DATA_RECEIVE_COMMAND_START_TIME) && (!FLAG_PHONE_COMMAND_READ))
     {
-      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 			
 			/* free the time slot request semaphore */
 			SEMAPHORE_TIME_SLOT_REQUEST = 0;
@@ -1241,7 +1241,7 @@ void handler_time_slot_event_signal_usim_server_send_file_data(void)
       printf("\r\n++++++++++++++++++++++++++++++ Time out for SIM data send, total time used = %ld ++++++++++++++++++++++++++++++++\r\n", NRF_RTC2->COUNTER - SIM_DATA_RECEIVE_COMMAND_START_TIME);
 #endif
 	    /* renew RTC2 CC event interrupt and watch-dog */
-			rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+			rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
     }						
 	}						
 }
@@ -1269,7 +1269,7 @@ void handler_time_slot_event_signal_usim_server_sim_config_data_receive(void)
     if (((NRF_RTC2->COUNTER - SIM_DATA_RECEIVE_COMMAND_START_TIME) < DATA_TX_TIME_MS) &&
 			(NRF_RTC2->COUNTER > SIM_DATA_RECEIVE_COMMAND_START_TIME) && (!FLAG_PHONE_COMMAND_READ))
     {
-      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 			
 			/* free the time slot request semaphore */
 			SEMAPHORE_TIME_SLOT_REQUEST = 0;
@@ -1285,7 +1285,7 @@ void handler_time_slot_event_signal_usim_server_sim_config_data_receive(void)
       printf("\r\n++++++++++++++++++++++++++++++ Time out for SIM data send, total time used = %ld ++++++++++++++++++++++++++++++++\r\n", NRF_RTC2->COUNTER - SIM_DATA_RECEIVE_COMMAND_START_TIME);
 #endif
 	    /* renew RTC2 CC event interrupt and watch-dog */
-			rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+			rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
     }						
 	}						
 }
@@ -1304,7 +1304,7 @@ void handler_time_slot_event_signal_usim_server_sim_command_authentication_0x88(
 	}
 	else
 	{
-    rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+    rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 
 		/* free the time slot request semaphore */
 		SEMAPHORE_TIME_SLOT_REQUEST = 0;
@@ -1325,7 +1325,7 @@ void handler_time_slot_event_signal_usim_server_sim_command_get_data_0xc0(void)
   }	
 	else
 	{
-    rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+    rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 
 		/* free the time slot request semaphore */
 		SEMAPHORE_TIME_SLOT_REQUEST = 0;
@@ -1342,7 +1342,7 @@ void handler_time_slot_event_signal_usim_server_wireless_authentication_sim_comm
 {
   if (USIM_SERVER_AUTHENTICATION_WIRELESS_BLE_STAGE == USIM_SERVER_AUTHENTICATION_WIRELESS_BLE_stage2)
   {
-    rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+    rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 	  TIME_SLOT_SIGNAL_TYPE_SET = TIME_SLOT_SIGNAL_USIM_SERVER_WIRELESS_AUTHENTICATION_SIM_DATA_SEND;	
 
 		/* free the time slot request semaphore */
@@ -1390,7 +1390,7 @@ void handler_time_slot_event_signal_usim_server_wireless_authentication_data_sen
     if (((NRF_RTC2->COUNTER - SIM_DATA_RECEIVE_COMMAND_START_TIME) < DATA_TX_TIME_MS) &&
 			(NRF_RTC2->COUNTER > SIM_DATA_RECEIVE_COMMAND_START_TIME) && (!FLAG_PHONE_COMMAND_READ))
     {
-      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 			
 			/* free the time slot request semaphore */
 			SEMAPHORE_TIME_SLOT_REQUEST = 0;
@@ -1405,7 +1405,7 @@ void handler_time_slot_event_signal_usim_server_wireless_authentication_data_sen
 #if (IF_LOG_OUTPUT)
       printf("\r\n++++++++++++++++++++++++++++++ Time out for SIM data send, total time used = %ld ++++++++++++++++++++++++++++++++\r\n", NRF_RTC2->COUNTER - SIM_DATA_RECEIVE_COMMAND_START_TIME);
 #endif
-      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
     }						
 	}						
 }
@@ -1442,7 +1442,7 @@ void handler_time_slot_event_signal_usim_server_ef_binary_update(void)
 #if (IF_LOG_OUTPUT)
       printf("\r\n--------------------------------- USIM binary update stage 0 --------------------------------------------\r\n");
 #endif
-      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 		
 		  /* free the time slot request semaphore */
 		  SEMAPHORE_TIME_SLOT_REQUEST = 0;
@@ -1462,7 +1462,7 @@ void handler_time_slot_event_signal_usim_server_ef_binary_update(void)
 #if (IF_LOG_OUTPUT)
       printf("\r\n--------------------------------- USIM binary update stage 1 --------------------------------------------\r\n");
 #endif
-      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 		
 		  /* free the time slot request semaphore */
 		  SEMAPHORE_TIME_SLOT_REQUEST = 0;
@@ -1483,7 +1483,7 @@ void handler_time_slot_event_signal_usim_server_ef_binary_update(void)
       printf("\r\n--------------------------------- USIM binary update stage 2 --------------------------------------------\r\n");
 #endif
 			
-	    rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+	    rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 		  SEMAPHORE_TIME_SLOT_REQUEST = 0;
       
 			if ((SELECTED_FILE_SIM == 0x7fff) || ((SELECTED_FILE_SIM >> 16) == 0x7fff))
@@ -1529,7 +1529,7 @@ void handler_time_slot_event_signal_usim_server_ef_binary_update(void)
 #if (IF_LOG_OUTPUT)
       printf("\r\n--------------------------------- USIM binary update stage 3 --------------------------------------------\r\n");
 #endif
-      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 
 		  /* free the time slot request semaphore */
 		  SEMAPHORE_TIME_SLOT_REQUEST = 0;
@@ -1551,7 +1551,7 @@ void handler_time_slot_event_signal_usim_server_ef_binary_update(void)
       printf("\r\n--------------------------------- USIM binary update stage 4 --------------------------------------------\r\n");
 #endif
 			
-	    rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+	    rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 		  SEMAPHORE_TIME_SLOT_REQUEST = 0;
       
 			usim_binary_update_file_id_clear(BINARY_UPDATE_FILE_ID);

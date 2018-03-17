@@ -33,7 +33,7 @@ void usim_client_connection_request_time_slot_request(void);
 void phone_data_send_check(void);
 void usim_server_listening_time_slot_request(void);
 uint32_t time_slot_request(uint32_t time_length_us);
-void rtc2_compare0_event_posepone(uint32_t posepone_time_ms);
+void rtc2_compare0_event_postpone(uint32_t postpone_time_ms);
 void led_status_check(void);
 void flash_data_write_check(void);
 void ble_stack_status_check(void);

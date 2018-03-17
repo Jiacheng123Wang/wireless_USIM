@@ -415,17 +415,17 @@ uint32_t packet_wireless_transmit(uint8_t *tx_info_byte)
     /* ACK receive */                          
     if(!(packet_radio_with_parameters_rx(ack_rx, DATA_CARRIER_FREQ, 1 << USIM_CLIENT_WIRELESS_LOGICAL_ADDRESS, NRF_RTC2->COUNTER, ACK_RX_TIME_MS)))
     {
-			rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+			rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
       return(0);
     }
     /* data packet transmit time out */
     if ((NRF_RTC2->COUNTER - initial_timer) > DATA_TX_TIME_MS)
     {
-			rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+			rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
       return(1);
     }
 		
-		rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+		rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
   }  
 }
 
@@ -447,7 +447,7 @@ uint32_t packet_wireless_receive(uint8_t *rx_info_byte, uint32_t start_time_ms, 
 	{
 	  if (packet_radio_with_parameters_rx(rx_info_byte, frequency, logical_address_rx, start_time_ms, time_length_ms - DATA_TX_TIME_INTERVAL_MS))
 	  {
-		  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 		  return(1);	
 	  }
 		
@@ -456,7 +456,7 @@ uint32_t packet_wireless_receive(uint8_t *rx_info_byte, uint32_t start_time_ms, 
 		{
 		  if (packet_radio_with_parameters_tx(ack_tx, frequency, logical_address_tx, start_time_ms, time_length_ms, tx_power_level_ack))
 		  {
-			  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+			  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 			  return(1);	
 		  }
 			else 
@@ -472,12 +472,12 @@ uint32_t packet_wireless_receive(uint8_t *rx_info_byte, uint32_t start_time_ms, 
 		}
 		if ((NRF_RTC2->COUNTER - start_time_ms) > time_length_ms - DATA_TX_TIME_INTERVAL_MS)
 		{
-			rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+			rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 			return(1);
 		}
 	}
 	
-	rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+	rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 	return(0);			 
 }
 

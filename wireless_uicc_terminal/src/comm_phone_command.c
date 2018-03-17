@@ -310,7 +310,7 @@ void clear_event_phone_command(void)
   /* clear GPIOTE channel 1, PIN_CLOCK_PHONE */
   gpio_event_in_clear_clock( );
 	/* renew RTC2 CC event interrupt and watch-dog */
-  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 		
   /* start timer1, for ETU timing */
   NRF_TIMER1->TASKS_START = 1;
@@ -363,7 +363,7 @@ void set_event_phone_command(void)
   /* enable GPIOTE event from CLK pin */
   gpio_event_in_set_clock( );
 	/* renew RTC2 CC event interrupt and watch-dog */
-  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);	
+  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
   /* stop ETU timer tick */
   NRF_TIMER1->TASKS_CLEAR = 1;
   NRF_TIMER1->TASKS_SHUTDOWN = 1;
@@ -397,7 +397,7 @@ void GPIOTE_IRQHandler(void)
 	    /* clear SIM data reab byes number */
 			SIM_READ_BYTES_NUMBER = 0;
 	    /* renew RTC2 CC event interrupt and watch-dog */
-			rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+			rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 			
 	    return;
 	  }
@@ -416,7 +416,7 @@ void GPIOTE_IRQHandler(void)
 			}
 			else if (USIM_SERVER_AUTHENTICATION_WIRELESS_BLE_STAGE == USIM_SERVER_AUTHENTICATION_WIRELESS_BLE_stage0)
 			{
-		    rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);	
+		    rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
 				/* stop timer1 */
 				NRF_TIMER1->TASKS_SHUTDOWN = 1;
 	    }
@@ -440,7 +440,7 @@ void GPIOTE_IRQHandler(void)
 			}
 			else if (USIM_SERVER_AUTHENTICATION_WIRELESS_BLE_STAGE == USIM_SERVER_AUTHENTICATION_WIRELESS_BLE_stage0)
 			{
-	      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);	
+	      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
 			  /* stop timer1 */
 			  NRF_TIMER1->TASKS_SHUTDOWN = 1;
       }
@@ -590,7 +590,7 @@ void start_ble_data(void)
 
   /* start softdevice and BLE service stack */
 	start_ble_ancs_c( ); 		
-	rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+	rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 	
 	/* check if softdevice is started */
 	if (nrf_sdh_is_enabled( ))
@@ -860,7 +860,7 @@ void SWI3_EGU3_IRQHandler(void)
 	    sim_file_3f00_selected_check( );
 			
 			/* renew RTC2 CC event interrupt and watch-dog */
-		  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 						
 			/* start sim clock signal */
 			clock_sim_start_4m(PIN_CLOCK_SIM);

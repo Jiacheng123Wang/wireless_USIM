@@ -45,6 +45,7 @@ void timer1_initialization(void)
   NVIC_SetPriority(TIMER1_IRQn, TIMER1_IRQ_PRIORITY);  
   
   NRF_TIMER1->MODE = TIMER_MODE_MODE_Timer;
+	/* 16M timer frequency */
   NRF_TIMER1->PRESCALER = 0;
   NRF_TIMER1->BITMODE = TIMER_BITMODE_BITMODE_32Bit << TIMER_BITMODE_BITMODE_Pos;
   NRF_TIMER1->TASKS_CLEAR = 1;
@@ -66,6 +67,7 @@ void read_byte(uint8_t *info_byte, uint8_t *check_bit, uint32_t etu_ticks, uint3
   /* initialization the read byte */
   *info_byte = 0;
 	
+	/* get the initial start time */
   NRF_TIMER1->TASKS_CAPTURE[0] = 1;
   time_now = NRF_TIMER1->CC[0]; 
 	
@@ -82,7 +84,6 @@ void read_byte(uint8_t *info_byte, uint8_t *check_bit, uint32_t etu_ticks, uint3
     NRF_TIMER1->TASKS_CAPTURE[0] = 1; 
   }
   
-
   /*** read bit 1 ***********************/
   *info_byte |= (nrf_gpio_pin_read(pin_number) << 1);
   while (time_now + etu_timing_offset + 3 * etu_ticks > NRF_TIMER1->CC[0])
@@ -156,10 +157,11 @@ void write_byte(uint8_t word_byte, uint8_t parity_bit, uint32_t etu_ticks, uint3
 {
   volatile uint32_t time_now; 
   
-  /* initial bit */	
+	/* get the initial start time */
   NRF_TIMER1->TASKS_CAPTURE[0] = 1;
   time_now = NRF_TIMER1->CC[0]; 
 	
+  /* initial bit */	
   nrf_gpio_pin_write(pin_number, 0);
   while (time_now + etu_ticks > NRF_TIMER1->CC[0])
   {
@@ -354,7 +356,7 @@ uint32_t read_bytes_phone(uint32_t read_length, uint8_t *bytes_info,
     while (nrf_gpio_pin_read(pin_number))
     {
       /* re-load watch dog request register */
-		  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
       if ((NRF_RTC2->COUNTER - initial_timer) > DATA_TX_TIME_MS)
       {				
         return(1);

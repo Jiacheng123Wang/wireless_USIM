@@ -691,7 +691,7 @@ static void apple_notification_setup(void)
 static void notif_print(ble_ancs_c_evt_notif_t * p_notif)
 {
 #if (IF_LOG_OUTPUT)
-	  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+	  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
     printf("\r\n=====================================================================================\r\n");					
     printf("\r\nNotification\r\n");
     printf("Event:       %s\r\n", (char *)lit_eventid[p_notif->evt_id]);

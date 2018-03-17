@@ -3143,7 +3143,7 @@ uint32_t sim_command_usim_card_update_binary_0xd6(uint32_t update_file_id)
 		{
 			if (((SELECTED_FILE_SIM != 0x7fff5f3b) && ((SELECTED_FILE_SIM >> 16) != 0x7fff5f3b)))
 			{
-			  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);	
+			  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
 			  if (sim_file_7fff_selected_check( ))
 			  {
 					/* stop SIM clock signal and timer 1*/
@@ -3159,7 +3159,7 @@ uint32_t sim_command_usim_card_update_binary_0xd6(uint32_t update_file_id)
 		      return(1);
 		    }
 			}
-		  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);	
+		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
 	    if (sim_command_select(0x4f20, ETU_TICKS_SIM))
 	    {
 				/* stop SIM clock signal and timer 1*/
@@ -3228,7 +3228,7 @@ uint32_t sim_command_usim_card_update_binary_0xd6(uint32_t update_file_id)
 
 		default:
 		{
-		  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);	
+		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
 	    if (sim_file_7fff_selected_check( ))
 	    {
 				/* stop SIM clock signal and timer 1*/
@@ -3236,7 +3236,7 @@ uint32_t sim_command_usim_card_update_binary_0xd6(uint32_t update_file_id)
 		
 	      return(1);
 	    }
-		  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);	
+		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
 	    if (sim_command_select(update_file_id, ETU_TICKS_SIM))
 	    {
 				/* stop SIM clock signal and timer 1*/
@@ -3332,7 +3332,7 @@ uint32_t sim_command_usim_card_update_binary_0xd6_ble(uint32_t update_file_id, u
 		{
 		  if (((SELECTED_FILE_SIM != 0x7fff5f3b) && ((SELECTED_FILE_SIM >> 16) != 0x7fff5f3b)))
 		  {
-		    rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);	
+		    rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
 		    if (sim_file_7fff_selected_check( ))
 		    {
 			    /* set SWI3_EGU3 for SIM card state reset, EF selection 7fff */
@@ -3361,7 +3361,7 @@ uint32_t sim_command_usim_card_update_binary_0xd6_ble(uint32_t update_file_id, u
 		{
 			if ((SELECTED_FILE_SIM != 0x7fff) && ((SELECTED_FILE_SIM >> 16) != 0x7fff))
 			{
-		    rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);	
+		    rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
 		    if (sim_file_7fff_selected_check( ))
 		    {
 			    /* set SWI3_EGU3 for SIM card state reset, EF selection 7fff */

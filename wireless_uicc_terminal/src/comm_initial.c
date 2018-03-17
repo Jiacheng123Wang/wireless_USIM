@@ -277,7 +277,7 @@ uint32_t usim_data_restore(void)
 		return(1);
 	}
 
-	rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);				
+	rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);				
   for (i=0; i<FLASH_WRITE_DATA_SIZE_IN_WORD; i++)
 	{
     if (ble_flash_word_write((uint32_t *)USER_CONFIG_FLASH_ADDR + i, *((uint32_t *)BACKUP_DATA_USER_CONFIG_FLASH_ADDR + i)))

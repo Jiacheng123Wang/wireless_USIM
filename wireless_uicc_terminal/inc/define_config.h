@@ -26,12 +26,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define DEFINE_CONFIG_H__
 
 /* Custom borad pin profile definition */
-#define PIN_PROFILE                          7
+#define PIN_PROFILE                          1
 
 /* if print out the log information of USIM-PHONE interface, for debug purpose 
 |  1: log information printed
 |  0: not printed */
-#define IF_LOG_OUTPUT                        0
+#define IF_LOG_OUTPUT                        1
 
 /* if USIM binary EF data is updated to USIM card, UICC command 0xd6
 |  1: binary EF updated to USIM card
@@ -92,11 +92,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define PIN_VCC_SIM0          2
 
   /* USIM1 card reader PIN define */
-  // #define PIN_CLOCK_SIM1        14
-  // #define PIN_DATA_SIM1         13
-  // #define PIN_RESET_SIM1        17
-  // #define PIN_VCC_SIM1          16
-  #define PIN_VCC_SIM1          PIN_NULL
+  #define PIN_CLOCK_SIM1        14
+  #define PIN_DATA_SIM1         13
+  #define PIN_RESET_SIM1        17
+  #define PIN_VCC_SIM1          16
+  // #define PIN_VCC_SIM1          PIN_NULL
 
   /* sim-phone interface PIN define*/
   #define PIN_DATA_PHONE        11
@@ -257,7 +257,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #elif (PIN_PROFILE == 8)
 /* SIM-phone interface PIN define, HWwatch single USIM, 4 LED */
-/* 20170722 */
+/* 20171227 */
   #define PIN_LED_BLUE          15
   #define PIN_LED_GREEN         16
   #define PIN_LED_WHITE         18
@@ -309,7 +309,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /*--------------------------------------------------------------------------------*/
 /* RTC2 interrupt event time interval, in ms */
 #define RTC2_COMPARE0_EVENT_INTERVAL_MS           100
-#define COMPARE0_EVENT_POSEPONE_USIM_MS           400
+#define COMPARE0_EVENT_POSTPONE_USIM_MS           400
 
 /* time interval for phone to transmit a wireless connection state package, in RTC2_COMPARE0_EVENT_INTERVAL_MS */
 // #define CONNECT_STATE_TIME_PHONE      40

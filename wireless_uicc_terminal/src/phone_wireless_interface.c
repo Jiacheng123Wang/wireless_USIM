@@ -59,7 +59,7 @@ extern uint8_t SYSTEM_KEY_SHUFFLE[16];
 extern volatile uint8_t FLAG_SWI3_EGU3_IRQn;
 
 #if (IF_DATA_CC_CODED || IF_CONNECTION_CC_CODED)
-  uint8_t CC_CODED_BYTE[256];	   
+  extern uint8_t CC_CODED_BYTE[256];	   
 #endif   
 
 /********************************************************************************/
@@ -492,7 +492,7 @@ uint32_t connection_request_phone(uint8_t connection_type)
       }
     }
 		
-		rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+		rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
   }
   
 	/* use global tmp variable */
@@ -531,7 +531,7 @@ uint32_t connection_request_phone(uint8_t connection_type)
         }
       }
 			
-			rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+			rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
     }
 
     /* Rx tried time out */    
@@ -546,7 +546,7 @@ uint32_t connection_request_phone(uint8_t connection_type)
       return(1);
     }
 		
-		rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+		rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
   }
   
 	return (connection_request_phone_post_decoding(connection_type, initial_timer));

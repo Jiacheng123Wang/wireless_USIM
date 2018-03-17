@@ -234,7 +234,7 @@ uint32_t soft_warm_reset_sim(uint32_t etu_length, uint32_t if_PPS)
   {
     while (nrf_gpio_pin_read(PIN_DATA_SIM))
     {
-      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
     }  
     nrf_delay_us(10);
     read_byte(READ_BYTE_UICC_TERMINAL + i, &check_bit, etu_length, PIN_DATA_SIM);
@@ -266,7 +266,7 @@ uint32_t soft_warm_reset_sim(uint32_t etu_length, uint32_t if_PPS)
     {
       while (nrf_gpio_pin_read(PIN_DATA_SIM))
       {
-        rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+        rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
       }  
 	    nrf_delay_us(10);
       read_byte(READ_BYTE_UICC_TERMINAL + i, &check_bit, etu_length, PIN_DATA_SIM);
@@ -299,7 +299,7 @@ uint32_t soft_warm_reset_sim(uint32_t etu_length, uint32_t if_PPS)
     {
       while (nrf_gpio_pin_read(PIN_DATA_SIM))
       {
-        rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+        rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
       }  
 	    nrf_delay_us(10);
       read_byte(READ_BYTE_UICC_TERMINAL + i, &check_bit, etu_length, PIN_DATA_SIM);
@@ -332,7 +332,7 @@ uint32_t soft_warm_reset_sim(uint32_t etu_length, uint32_t if_PPS)
     {
       while (nrf_gpio_pin_read(PIN_DATA_SIM))
       {
-        rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+        rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
       }  
 	    nrf_delay_us(10);
       read_byte(READ_BYTE_UICC_TERMINAL + i, &check_bit, etu_length, PIN_DATA_SIM);
@@ -365,7 +365,7 @@ uint32_t soft_warm_reset_sim(uint32_t etu_length, uint32_t if_PPS)
     {
       while (nrf_gpio_pin_read(PIN_DATA_SIM))
       {
-        rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+        rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
       }  
 	    nrf_delay_us(10);
       read_byte(READ_BYTE_UICC_TERMINAL + i, &check_bit, etu_length, PIN_DATA_SIM);
@@ -379,7 +379,7 @@ uint32_t soft_warm_reset_sim(uint32_t etu_length, uint32_t if_PPS)
   {
     while (nrf_gpio_pin_read(PIN_DATA_SIM))
     {
-      rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+      rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
     }  
     nrf_delay_us(10);
     read_byte(READ_BYTE_UICC_TERMINAL + i, &check_bit, etu_length, PIN_DATA_SIM);
@@ -394,7 +394,7 @@ uint32_t soft_warm_reset_sim(uint32_t etu_length, uint32_t if_PPS)
     {
       while (nrf_gpio_pin_read(PIN_DATA_SIM))
       {
-        rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+        rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
       }  
 	    nrf_delay_us(10);
       read_byte(READ_BYTE_UICC_TERMINAL + i, &check_bit, etu_length, PIN_DATA_SIM);
@@ -473,7 +473,7 @@ uint32_t soft_warm_reset_sim(uint32_t etu_length, uint32_t if_PPS)
     {
       while (nrf_gpio_pin_read(PIN_DATA_SIM))
       {
-        rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+        rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
       }  
 	    nrf_delay_us(10);
       read_byte(READ_BYTE_UICC_TERMINAL + i, &check_bit, etu_length, PIN_DATA_SIM);
@@ -596,7 +596,7 @@ uint32_t read_bytes_sim(uint32_t read_length, uint8_t *bytes_info,
     while (nrf_gpio_pin_read(pin_number))
     {
       /* re-load watch dog request register */
-		  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
       if ((NRF_RTC2->COUNTER - initial_timer) > (DATA_TX_TIME_MS << 1))
       {
 #if (IF_LOG_OUTPUT)    
@@ -606,7 +606,7 @@ uint32_t read_bytes_sim(uint32_t read_length, uint8_t *bytes_info,
         }
 #endif  
         /* re-load watch dog request register */
-			  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+			  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
         /* cold reset USIM*/
         reset_sim_cold( );  
           
@@ -631,7 +631,7 @@ uint32_t read_bytes_sim(uint32_t read_length, uint8_t *bytes_info,
           while (nrf_gpio_pin_read(pin_number))
           {
             /* re-load watch dog request register */
-					  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+					  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
             if ((NRF_RTC2->COUNTER - initial_timer) > DATA_TX_TIME_MS)
             {
 #if (IF_LOG_OUTPUT)    
@@ -641,7 +641,7 @@ uint32_t read_bytes_sim(uint32_t read_length, uint8_t *bytes_info,
 						  }
 #endif            
               /* re-load watch dog request register */
-						  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+						  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
               /* stop ETU timer tick */
               reset_sim_cold( );  
             
@@ -662,7 +662,7 @@ uint32_t read_bytes_sim(uint32_t read_length, uint8_t *bytes_info,
     while (nrf_gpio_pin_read(pin_number))
     {
       /* re-load watch dog request register */
-		  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
       if ((NRF_RTC2->COUNTER - initial_timer) > DATA_TX_TIME_MS)
       {
 #if (IF_LOG_OUTPUT)    
@@ -673,7 +673,7 @@ uint32_t read_bytes_sim(uint32_t read_length, uint8_t *bytes_info,
 				}
 #endif        
         /* re-load watch dog request register */
-			  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+			  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
         /* cold reset USIM*/
         reset_sim_cold( );
              
@@ -693,7 +693,7 @@ uint32_t read_bytes_sim(uint32_t read_length, uint8_t *bytes_info,
       while (nrf_gpio_pin_read(pin_number))
       {
         /* re-load watch dog request register */
-			  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+			  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
         if ((NRF_RTC2->COUNTER - initial_timer) > DATA_TX_TIME_MS)
         {
 #if (IF_LOG_OUTPUT)    
@@ -703,7 +703,7 @@ uint32_t read_bytes_sim(uint32_t read_length, uint8_t *bytes_info,
 					}
 #endif
           /* re-load watch dog request register */
-				  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+				  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
           /* cold reset USIM*/
           reset_sim_cold( );  
              
@@ -721,7 +721,7 @@ uint32_t read_bytes_sim(uint32_t read_length, uint8_t *bytes_info,
       while (nrf_gpio_pin_read(pin_number))
       {
         /* re-load watch dog request register */
-			  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+			  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
         if ((NRF_RTC2->COUNTER - initial_timer) > DATA_TX_TIME_MS)
         {
 #if (IF_LOG_OUTPUT)    
@@ -731,7 +731,7 @@ uint32_t read_bytes_sim(uint32_t read_length, uint8_t *bytes_info,
 					}
 #endif
           /* re-load watch dog request register */
-				  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+				  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
           /* cold reset USIM*/
           reset_sim_cold( );  
             
@@ -766,7 +766,7 @@ uint32_t sim_command_select_adf(uint32_t etu_length)
   uint8_t get_response_command[5] = {0x0, 0xc0, 0x0, 0x0, 0x0};
   
 	/* renew RTC2 CC event interrupt and watch-dog */
-  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 
   if (sim_command_read_adf_name(ADF_name, etu_length))
   {
@@ -777,7 +777,7 @@ uint32_t sim_command_select_adf(uint32_t etu_length)
   }
   
 	/* renew RTC2 CC event interrupt and watch-dog */
-  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 	
   select_command[4] = *(ADF_name + 0);
   write_bytes(5, select_command, etu_length, PIN_DATA_SIM);
@@ -789,7 +789,7 @@ uint32_t sim_command_select_adf(uint32_t etu_length)
   write_bytes(*(ADF_name + 0), ADF_name + 1, etu_length, PIN_DATA_SIM);
   
 	/* renew RTC2 CC event interrupt and watch-dog */
-  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 	
   read_bytes_sim(2, READ_BYTE_UICC_TERMINAL, PIN_DATA_SIM, etu_length, 1);
   if (*(READ_BYTE_UICC_TERMINAL + 1) == 0x6a && *(READ_BYTE_UICC_TERMINAL + 2) == 0x82)
@@ -801,7 +801,7 @@ uint32_t sim_command_select_adf(uint32_t etu_length)
   }
   
 	/* renew RTC2 CC event interrupt and watch-dog */
-  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 
   get_response_command[4] = *(READ_BYTE_UICC_TERMINAL + 2);
   write_bytes(5, get_response_command, etu_length, PIN_DATA_SIM);
@@ -828,7 +828,7 @@ uint32_t sim_command_read_adf_name(uint8_t *ADF_name, uint32_t etu_length)
   uint32_t i;
 	
 	/* renew RTC2 CC event interrupt and watch-dog */
-  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 	
   if (sim_command_select(0x2f00, etu_length))
   {
@@ -839,7 +839,7 @@ uint32_t sim_command_read_adf_name(uint8_t *ADF_name, uint32_t etu_length)
   }
   
 	/* renew RTC2 CC event interrupt and watch-dog */
-  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 	
   ADF_record_length = *(READ_BYTE_UICC_TERMINAL + 8) * 0x100 + *(READ_BYTE_UICC_TERMINAL + 9);
   read_record_command[4] = ADF_record_length;
@@ -879,7 +879,7 @@ uint32_t reset_sim_command_select_7fff(void)
   initial_timer = NRF_RTC2->COUNTER;
   
 	/* renew RTC2 CC event interrupt and watch-dog */
-  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
     
   write_bytes(5, select_command, ETU_TICKS_SIM, PIN_DATA_SIM);
   
@@ -972,7 +972,7 @@ uint32_t sim_file_7fff_selected_check(void)
 #endif
 		
 	/* renew RTC2 CC event interrupt and watch-dog */
-	rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+	rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 		
 	if (SELECTED_FILE_SIM == 0x3f00)
 	{
@@ -1002,7 +1002,7 @@ uint32_t sim_file_7fff_selected_check(void)
 	  else
 		{
 			/* renew RTC2 CC event interrupt and watch-dog */
-			rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+			rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 				
 			SELECTED_FILE_SIM = 0x3f00;				
 			if (PIN_DATA_SIM == PIN_DATA_SIM0)
@@ -1055,7 +1055,7 @@ uint32_t sim_file_3f00_selected_check(void)
 	}
 	
 	/* renew RTC2 CC event interrupt and watch-dog */
-	rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+	rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 	
 	if (SELECTED_FILE_SIM == 0x0)
 	{
@@ -1196,6 +1196,6 @@ void usim_initial_power_on(void)
   NRF_TIMER1->TASKS_CLEAR = 1;
   NRF_TIMER1->TASKS_SHUTDOWN = 1;
 	
-  rtc2_compare0_event_posepone(COMPARE0_EVENT_POSEPONE_USIM_MS);
+  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 }
 
