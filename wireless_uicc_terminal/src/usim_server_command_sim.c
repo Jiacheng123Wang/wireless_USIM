@@ -219,6 +219,12 @@ void main_usim_server_phone_command(void)
       break;
 		}
 
+	  case 0x8e:
+		{
+      usim_server_command_GSM_algorithm(PHONE_COMMAND, ETU_TICKS_PHONE, ETU_TICKS_SIM);
+      break;
+		}
+
     default:
 		{
 		  phone_command_default_response(PHONE_COMMAND, ETU_TICKS_PHONE, PIN_DATA_PHONE);				

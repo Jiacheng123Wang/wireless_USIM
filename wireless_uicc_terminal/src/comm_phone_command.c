@@ -430,7 +430,7 @@ void GPIOTE_IRQHandler(void)
 
 		  return;				
 		}
-		if ((*(READ_BYTE_UICC_TERMINAL + 2) != 0x35) && (*(READ_BYTE_UICC_TERMINAL + 2) != 0x10))
+		if ((*(READ_BYTE_UICC_TERMINAL + 2) != 0x35) && (*(READ_BYTE_UICC_TERMINAL + 2) != 0x10) && (*(READ_BYTE_UICC_TERMINAL + 2) != 0x3))
 		{
       /* clear SIM data reab byes number */
 		  SIM_READ_BYTES_NUMBER = 0;

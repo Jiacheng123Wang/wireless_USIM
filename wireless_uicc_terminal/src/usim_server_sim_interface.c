@@ -416,7 +416,12 @@ uint32_t soft_warm_reset_sim(uint32_t etu_length, uint32_t if_PPS)
   {
     *(READ_BYTE_UICC_TERMINAL + 0) = 0xff;
     *(READ_BYTE_UICC_TERMINAL + 1) = 0x10;
-    if (tmp_byte == 0x94)
+    if (tmp_byte == 0x11)
+		{
+	    *(READ_BYTE_UICC_TERMINAL + 2) = 0x11;
+      ETU_TICKS_SIM = 1488;			
+		}
+    else if (tmp_byte == 0x94)
 		{
 	    *(READ_BYTE_UICC_TERMINAL + 2) = 0x94;
       ETU_TICKS_SIM = 256;			

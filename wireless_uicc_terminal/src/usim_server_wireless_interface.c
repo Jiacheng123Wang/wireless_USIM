@@ -43,8 +43,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #if (IF_DATA_CC_CODED || IF_CONNECTION_CC_CODED)
   uint8_t CC_CODED_BYTE[256];	   
-#endif   
-	 
+#endif
+
 extern uint8_t SIM_SERVER_ON_USIM0_DISPLAY_TEXT[];  
 extern uint8_t SIM_SERVER_OFF_USIM0_DISPLAY_TEXT[];  
 extern uint8_t SIM_SERVER_ON_USIM1_DISPLAY_TEXT[];  
@@ -145,7 +145,7 @@ uint32_t main_watch_phone_sim_wireless_ble_stage1(void)
   }
 	
 	/* postpone RTC2 compare0 event interrupt */
-  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
+  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 
   return(0);
 }      
@@ -236,8 +236,8 @@ void main_watch_phone_sim_wireless(void)
   random_vector_generate(AUTH_CHALL_DATA_RAM, KEY_LENGTH, NRF_RTC2->COUNTER, RANDOM_BYTE_NUMBER_TIME_OUT_MS, 0);
 	      
 	/* postpone RTC2 compare0 event interrupt */
-  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
-}      
+  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
+}
 
 /********************************************************************************/
 void sim_connection_state_check(uint32_t conncetion_listen)
@@ -986,6 +986,10 @@ uint32_t usim_server_authentication_wireless_ble(uint8_t *phone_command, uint32_
 			
       return(1);
     }
+		if (*(READ_BYTE_UICC_TERMINAL +1) !=0x88)
+		{
+			
+		}
 
     write_bytes(*(phone_command + 5), phone_command + KEY_LENGTH + 6, ETU_TICKS_SIM, PIN_DATA_SIM);
   
@@ -1139,12 +1143,12 @@ uint32_t sim_file_update(uint32_t read_file_id, uint8_t *update_bytes_all_file)
 	{
 	  case 0x2fe2:
 		{
-		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
+		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 	    if (sim_file_3f00_selected_check( ))
 	    {
 	      return(1);
 	    }
-		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
+		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 			if ((SELECTED_FILE_SIM != 0x3f00) && ((SELECTED_FILE_SIM >> 16) != 0x3f00))
 			{
 				if(sim_command_select(0x3f00, ETU_TICKS_SIM))
@@ -1164,7 +1168,7 @@ uint32_t sim_file_update(uint32_t read_file_id, uint8_t *update_bytes_all_file)
 			  }
 #endif				
 			}			
-		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
+		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 	    if (sim_command_select(0x2fe2, ETU_TICKS_SIM))
 	    {
 	      return(1);
@@ -1187,7 +1191,7 @@ uint32_t sim_file_update(uint32_t read_file_id, uint8_t *update_bytes_all_file)
 
 		case 0x2f05:
 		{
-		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
+		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 	    if (sim_file_3f00_selected_check( ))
 	    {
 	      return(1);
@@ -1212,7 +1216,7 @@ uint32_t sim_file_update(uint32_t read_file_id, uint8_t *update_bytes_all_file)
 			  }
 #endif							
 			}			
-		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
+		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 	    if (sim_command_select(0x3f002f05, ETU_TICKS_SIM))
 	    {
 	      return(1);
@@ -1237,7 +1241,7 @@ uint32_t sim_file_update(uint32_t read_file_id, uint8_t *update_bytes_all_file)
 		{
 			if (((SELECTED_FILE_SIM != 0x7fff5f3b) && ((SELECTED_FILE_SIM >> 16) != 0x7fff5f3b)))
 			{
-			  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
+			  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 			  if (sim_file_7fff_selected_check( ))
 			  {
 				  return(1);
@@ -1247,7 +1251,7 @@ uint32_t sim_file_update(uint32_t read_file_id, uint8_t *update_bytes_all_file)
 		      return(1);
 		    }
 			}
-		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
+		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 	    if (sim_command_select(0x4f20, ETU_TICKS_SIM))
 	    {
 	      return(1);
@@ -1304,12 +1308,12 @@ uint32_t sim_file_update(uint32_t read_file_id, uint8_t *update_bytes_all_file)
 
 		default:
 		{
-		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
+		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 	    if (sim_file_7fff_selected_check( ))
 	    {
 	    return(1);
 	    }
-		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
+		  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 	    if (sim_command_select(read_file_id, ETU_TICKS_SIM))
 	    {
 	      return(1);
@@ -1402,11 +1406,10 @@ uint32_t sim_file_update(uint32_t read_file_id, uint8_t *update_bytes_all_file)
 #endif								
 			return(1);
 		}
-		
 	}
 	
 	/* for RUIM card (CDMA system, china telecom, ICCID: 898603.../898606.../898611...) */
-	/* CMCC: 898600.../898602...*/
+	/* CMCC: 898600.../898602.../898604.../898607...*/
 	/* CU:   898601...*/
 	if (read_file_id == 0x2fe2)
 	{
@@ -1539,7 +1542,7 @@ uint32_t usim_files_data_read_flash_write_USIM(uint8_t usim_no, uint8_t *usim_fi
 	/* USIM EF data update */
 	for (i=0; i<18; i++)
 	{
-    rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
+    rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
     if (sim_file_update(file_id_update[i], usim_files_all_data))
 	  {
 		  return (1);
@@ -1598,7 +1601,7 @@ uint32_t usim_files_data_read_flash_write_USIM(uint8_t usim_no, uint8_t *usim_fi
 #endif
 	}			
 	
-  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
+  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
 	
 	return (0);
 }
@@ -1622,7 +1625,7 @@ uint32_t usim_files_data_read_flash_write(uint8_t usim_no, uint8_t *usim_files_a
 	/* for RUIM card (CDMA system, china telecom, ICCID: 898603/898606/898611) */
 	if (IF_RUIM_USED == 1)
 	{
-#if (IF_LOG_OUTPUT)    
+#if (IF_LOG_OUTPUT)
 		printf("\r\n==================================================================================================================\r\n");
 		printf("++++++++++++++++++++++++++++++++++++++ Skip USIM data update! ++++++++++++++++++++++++++++++++++++++\r\n");
     printf_log_rx(FILE_SIZE_2FE2, (uint8_t *)USIM0_EF_DATA_RAM + EF_2FE2_OFFSET);
@@ -1633,6 +1636,6 @@ uint32_t usim_files_data_read_flash_write(uint8_t usim_no, uint8_t *usim_files_a
 	else
 	{
 		return(usim_files_data_read_flash_write_USIM(usim_no, usim_files_all_data));
-	}													 														 
+	}
 }
 
