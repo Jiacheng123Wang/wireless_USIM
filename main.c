@@ -32,20 +32,20 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* smart USIM connector initialization */
 void smart_usim_initialization(void);
 
-/********************************************************************************/	
+/********************************************************************************/
 int main(void)
 /*--------------------------------------------------------------------------------
 | Application main function
 |
 --------------------------------------------------------------------------------*/
 {
-	/* smart USIM connector initialization */
-	smart_usim_initialization( );
-	
-	/*----------------------------------------------------------------------------*/
+  /* smart USIM connector initialization */
+  smart_usim_initialization( );
+
+  /*----------------------------------------------------------------------------*/
   /* Enter main loop with power management */
   while (true)
-	{
+  {
 #if (IF_SOFTDEIVE_USED)
     app_sched_execute();
     if(nrf_sdh_is_enabled())
@@ -59,6 +59,6 @@ int main(void)
       __SEV();
       __WFE();
     }
-  }		
+  }
 }
 

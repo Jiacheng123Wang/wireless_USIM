@@ -60,38 +60,38 @@ uint32_t  PHONE_CONNECTION_REQUEST_TIME[7] = {0, 0, 0, 0, 0, 0, 0};
 // uint8_t   ICCID_2FE2_DATA[10] = {0x98, 0x10, 0x14, 0x30, 0x72, 0x59, 0x92, 0x51, 0x35, 0x39}; // No. 6,
 // uint8_t   ICCID_2FE2_DATA[10] = {0x98, 0x10, 0x14, 0x30, 0x72, 0x59, 0x92, 0x51, 0x45, 0x10}; // No. 8, iPhone 8P
 /*
-	89014103279529155401 // iPhone 8P
-	89014103279529155690
-	89014103279529155708
-	89014103279529155427
-	89014103279529155435 // iPhone 7
-	89014103279529155443
-	89014103279529155450 //not valid
-	89014103279529155484
-	89014103279529155492
-	89014103279529155500
-	89014103279529155526
-	89014103279529155534
-	89014103279529155542
-	89014103279529155559
-	89014103279529155591
-	89014103279529155625
-	89014103279529155633
-	89014103279529155641
-	89014103279529155658
-	89014103279529155666
-	89014103279529155674
-	89014103279529155682
-	89014103279529155724
-	89014103279529155732
-	89014103279529155567
-	89014103279529155575
-	89014103279529155583
-	89014103279529155740
-	89014103279529155765
-	89014103279529155773
-	89014103279529155468 //not valid
-	89014103279529155476
+  89014103279529155401 // iPhone 8P
+  89014103279529155690
+  89014103279529155708
+  89014103279529155427
+  89014103279529155435 // iPhone 7
+  89014103279529155443
+  89014103279529155450 //not valid
+  89014103279529155484
+  89014103279529155492
+  89014103279529155500
+  89014103279529155526
+  89014103279529155534
+  89014103279529155542
+  89014103279529155559
+  89014103279529155591
+  89014103279529155625
+  89014103279529155633
+  89014103279529155641
+  89014103279529155658
+  89014103279529155666
+  89014103279529155674
+  89014103279529155682
+  89014103279529155724
+  89014103279529155732
+  89014103279529155567
+  89014103279529155575
+  89014103279529155583
+  89014103279529155740
+  89014103279529155765
+  89014103279529155773
+  89014103279529155468 //not valid
+  89014103279529155476
 */
 /* ETU tick number for intial UICC-terminal ATR session */
 volatile uint16_t   ETU_TICKS_PHONE_ATR_SESSION = 1831;
@@ -154,7 +154,7 @@ volatile uint8_t    COMMOD_ENVELOPE_0XC2_COUNTER = 0;
 /* text type for idle mode text display, to indicate the status of wireless-SIM connection */
 volatile uint8_t    IDLE_MODE_TEXT_TYPE = 0;
 /* the start time of time slot request for connection request from USIM client (ms), from RTC2 */
-volatile uint32_t   PHONE_CONNECTION_REQUEST_START_TIME = 0;                
+volatile uint32_t   PHONE_CONNECTION_REQUEST_START_TIME = 0;
 /* the start time of time slot request for connection request listening from USIM server (ms), from RTC2 */
 volatile uint32_t   TIME_SLOT_REQUEST_START_TIME = 0;
 /* EF file ID for USIM card binary update */
@@ -240,22 +240,22 @@ volatile uint32_t   RETURN_PHONE_CONNECTION_REQUEST                  = SIGNAL_CA
 /* return value for time slot signal handler of USIM card binary update at USIM server side */
 volatile uint32_t   RETURN_USIM_FILE_BINAREY_UPDATE                  = SIGNAL_CALLBACK_RETURN_UNDO;
 /* time slot request semaphore, 1: lock the time slot request semaphore. 0: free the time slot request semaphore */
-volatile uint8_t    SEMAPHORE_TIME_SLOT_REQUEST = 0;  
+volatile uint8_t    SEMAPHORE_TIME_SLOT_REQUEST = 0;
 /* time slot request task type in side handler  */
-volatile uint8_t    TIME_SLOT_SIGNAL_TYPE_SET = TIME_SLOT_SIGNAL_DEFAULT_VALUE; 
+volatile uint8_t    TIME_SLOT_SIGNAL_TYPE_SET = TIME_SLOT_SIGNAL_DEFAULT_VALUE;
 /* time slot request task type in side time slot signal handler  */
-volatile uint8_t    TIME_SLOT_SIGNAL_TYPE; 
+volatile uint8_t    TIME_SLOT_SIGNAL_TYPE;
 /* time slot event type in side time slot event handler  */
 volatile uint8_t    TIME_SLOT_EVENT_TYPE = TIME_SLOT_EVENT_DEFAULT_VALUE;
-/* time slot request time length, in us */ 
-volatile uint32_t   TIME_SLOT_REQUEST_LENGTH_US = 1000; 
+/* time slot request time length, in us */
+volatile uint32_t   TIME_SLOT_REQUEST_LENGTH_US = 1000;
 /* phone connection request type, to indicate the request is a random access request or data transmission */
 volatile uint8_t    PHONE_CONNECTION_REQUEST_TYPE;
-/* flash data write task queue for different data flash write */           
-volatile uint32_t   FLASH_DATA_WRITE_CHECK_TASK_QUEUE = 0; 
+/* flash data write task queue for different data flash write */
+volatile uint32_t   FLASH_DATA_WRITE_CHECK_TASK_QUEUE = 0;
 /* start time in ms for connection time slot */
 volatile uint32_t   CONNECTION_SLOT_TIME_MS = 0;
 /* LED flash pattern */
 volatile uint8_t    LED_PATTERN_BLE_FLASH[16];
-	
+
 #endif

@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- 
+/* --------------------------------------------------------------------------
 Copyright (c) 2018, Jiacheng Wang
 All rights reserved.
 
@@ -26,22 +26,22 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define WATCH_COMMAND_SIM_H__
 
 #include <stdint.h>
-	
+
 void main_usim_server_phone_command(void);
 uint32_t usim_server_command_confirm_sim(uint8_t *phone_command, uint32_t etu_length);
 uint32_t usim_server_command_GSM_algorithm(uint8_t *bytes_command, uint32_t etu_length_phone,
          uint32_t etu_length_sim);
-uint32_t usim_server_command_get_data(uint8_t *bytes_command, uint32_t etu_length_phone, 
+uint32_t usim_server_command_get_data(uint8_t *bytes_command, uint32_t etu_length_phone,
          uint32_t etu_length_sim);
-uint32_t usim_server_command_verify(uint8_t *bytes_command, uint32_t etu_length_phone, 
+uint32_t usim_server_command_verify(uint8_t *bytes_command, uint32_t etu_length_phone,
          uint32_t etu_length_sim);
 uint32_t usim_server_command_status(uint8_t *bytes_command, uint32_t etu_length_phone);
 uint32_t usim_server_command_GSM_algorithm_ble(uint8_t *bytes_command, uint32_t etu_length_phone,
          uint32_t etu_length_sim, uint32_t start_time_us, uint32_t time_length_us);
-uint32_t usim_server_command_get_data_ble(uint8_t *bytes_command, uint32_t etu_length_phone, 
-				 uint32_t etu_length_sim, uint32_t start_time_us, uint32_t time_length_us);
-uint32_t usim_server_command_confirm_sim_ble(uint8_t *phone_command, uint32_t etu_length, 
-				 uint32_t start_time_us, uint32_t time_length_us);
+uint32_t usim_server_command_get_data_ble(uint8_t *bytes_command, uint32_t etu_length_phone,
+         uint32_t etu_length_sim, uint32_t start_time_us, uint32_t time_length_us);
+uint32_t usim_server_command_confirm_sim_ble(uint8_t *phone_command, uint32_t etu_length,
+         uint32_t start_time_us, uint32_t time_length_us);
 uint32_t usim_command_authentication_0x88(void);
 
 #endif

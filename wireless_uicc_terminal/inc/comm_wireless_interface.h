@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- 
+/* --------------------------------------------------------------------------
 Copyright (c) 2018, Jiacheng Wang
 All rights reserved.
 
@@ -34,12 +34,12 @@ uint32_t transmit_power_level_set(uint32_t power_level);
 uint32_t radio_mode_set(uint32_t mode);
 uint32_t radio_rssi_measurement(uint32_t frequency);
 uint32_t radio_carrier_detection(uint32_t max_CD_ms, uint32_t noise_threshold, uint32_t frequency);
-uint32_t wireless_sim_authentication_algorithm(uint8_t *user_password, uint8_t *system_key, 
+uint32_t wireless_sim_authentication_algorithm(uint8_t *user_password, uint8_t *system_key,
          uint8_t *challenge_data, volatile uint8_t *response_data);
-uint32_t packet_radio_with_parameters_tx(uint8_t *tx_packet, uint32_t frequency, 
+uint32_t packet_radio_with_parameters_tx(uint8_t *tx_packet, uint32_t frequency,
        uint32_t logical_address, uint32_t start_time, uint32_t time_length, uint32_t power_level);
-uint32_t packet_radio_with_parameters_rx(uint8_t *rx_packet, uint32_t frequency, 
-			 uint32_t logical_address, uint32_t start_time, uint32_t time_length);
+uint32_t packet_radio_with_parameters_rx(uint8_t *rx_packet, uint32_t frequency,
+       uint32_t logical_address, uint32_t start_time, uint32_t time_length);
 uint32_t packet_wireless_transmit_ble(uint8_t *tx_info_byte, uint32_t start_time_us, uint32_t time_length_us);
 uint32_t packet_wireless_receive_ble(uint8_t *rx_info_byte, uint32_t start_time_us, uint32_t time_length_us);
 uint32_t packet_wireless_transmit(uint8_t *tx_info_byte);
@@ -52,21 +52,21 @@ uint32_t distance_between_vector(uint8_t *input1_bit, uint8_t *input2_bit,
                    uint8_t bit_length);
 uint32_t min_index_value(uint32_t *vector_in, uint32_t vector_length,
      /**/ uint32_t *min_value, uint32_t *min_index);
-uint32_t encoder_halfrate (uint8_t *input_bit, uint32_t bit_length, 
+uint32_t encoder_halfrate (uint8_t *input_bit, uint32_t bit_length,
              uint8_t initial_state, uint8_t *encoded_bit);
 uint32_t decoder_hallfrate(uint8_t *input_receivebit, uint32_t bit_length,
        uint8_t initial_state, uint8_t *decoded_bit);
-uint32_t char2bit_sequence(uint8_t *char_sequence, uint8_t char_length, 
-	                       uint8_t *bit_sequence);
-uint32_t bit2char_sequence(uint8_t *bit_sequence, uint8_t char_length, 
-						   uint8_t *char_sequence);
-uint32_t ccencoder_byte_sequence_32(uint8_t *input_bytes, uint8_t encode_byte_length, 
+uint32_t char2bit_sequence(uint8_t *char_sequence, uint8_t char_length,
+                         uint8_t *bit_sequence);
+uint32_t bit2char_sequence(uint8_t *bit_sequence, uint8_t char_length,
+               uint8_t *char_sequence);
+uint32_t ccencoder_byte_sequence_32(uint8_t *input_bytes, uint8_t encode_byte_length,
          uint8_t *encoded_bytes);
-uint32_t ccdecoder_byte_sequence_32(uint8_t *input_bytes, uint8_t encode_byte_length, 
+uint32_t ccdecoder_byte_sequence_32(uint8_t *input_bytes, uint8_t encode_byte_length,
          uint8_t *decoded_bytes);
-uint32_t ccencoder_byte_sequence_64(uint8_t *input_bytes, uint8_t encode_byte_length, 
-		 uint8_t *encoded_bytes);
-uint32_t ccdecoder_byte_sequence_64(uint8_t *input_bytes, uint8_t encode_byte_length, 
-		 uint8_t *decoded_bytes);
+uint32_t ccencoder_byte_sequence_64(uint8_t *input_bytes, uint8_t encode_byte_length,
+     uint8_t *encoded_bytes);
+uint32_t ccdecoder_byte_sequence_64(uint8_t *input_bytes, uint8_t encode_byte_length,
+     uint8_t *decoded_bytes);
 #endif
 

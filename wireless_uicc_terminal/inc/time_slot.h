@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- 
+/* --------------------------------------------------------------------------
 Copyright (c) 2018, Jiacheng Wang
 All rights reserved.
 
@@ -29,7 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "app_error.h"
 #include "nrf_gpio.h"
 #include "nrf_soc.h"
-		
+
 void handler_time_slot_event_signal_usim_client_random_access_connection_request(void);
 void handler_time_slot_event_signal_usim_client_wireless_authentication(void);
 void handler_time_slot_event_signal_usim_server_wireless_sim_command_receive(void);

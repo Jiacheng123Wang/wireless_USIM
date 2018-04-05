@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- 
+/* --------------------------------------------------------------------------
 Copyright (c) 2018, Jiacheng Wang
 All rights reserved.
 
@@ -27,7 +27,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <stdint.h>
 #include <stdio.h>
-	
+
 uint32_t main_watch_phone_sim_wireless_ble_stage0(void);
 uint32_t main_watch_phone_sim_wireless_ble_stage1(void);
 void main_watch_phone_sim_wireless(void);

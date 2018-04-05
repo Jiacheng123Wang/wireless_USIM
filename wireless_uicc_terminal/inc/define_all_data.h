@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- 
+/* --------------------------------------------------------------------------
 Copyright (c) 2018, Jiacheng Wang
 All rights reserved.
 
@@ -30,8 +30,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define SWI3_EGU3_ISR_USIM_SERVER_SIM_COMMAND_AUTHENTICATION_stage3   2
 #define SWI3_EGU3_ISR_USIM_SERVER_WIRELESS_AUTHENTICATION_stage1      3
 #define SWI3_EGU3_ISR_SIM_CARD_STATE_RESET                            4
-#define SWI3_EGU3_ISR_STOP_BLE_STACK	                                5
-			
+#define SWI3_EGU3_ISR_STOP_BLE_STACK                                  5
+
 /* phone command fetch (0x12) type */
 #define FETCH_COMMAND_TYPE_NULL_VALUE                                         0
 #define FETCH_COMMAND_TYPE_DISPLAY_TEXT_ABOUT                                 1
@@ -56,10 +56,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define FETCH_COMMAND_TYPE_CONFIG_SYCH_TEXT_DISPLAY_CLIENT                    20
 #define FETCH_COMMAND_TYPE_PASSWORD_INPUT_TEXT_DISPLAY                        21
 #define FETCH_COMMAND_TYPE_SYSTEM_KEY_INPUT_TEXT_DISPLAY                      22
-#define FETCH_COMMAND_TYPE_IDLE_TEXT_CONFIG_SYCH_SERVER	                      23
+#define FETCH_COMMAND_TYPE_IDLE_TEXT_CONFIG_SYCH_SERVER                        23
 #define FETCH_COMMAND_TYPE_USIM_SWITCH_WIRELESS_OFF_DISPLAY_TEXT              24
 #define FETCH_COMMAND_TYPE_LED_PATTERN_UPDATED_TEXT_DISPLAY                   25
-#define FETCH_COMMAND_TYPE_COMMAND_LINE_INPUT		                              26
+#define FETCH_COMMAND_TYPE_COMMAND_LINE_INPUT                                  26
 #define FETCH_COMMAND_TYPE_CONFIG_SETTING_KEY_WORD_TEXT_DISPLAY               27
 #define FETCH_COMMAND_TYPE_CONFIG_SETTINGS_KEY_WORD_LIST_TEXT_DISPLAY         28
 #define FETCH_COMMAND_TYPE_LED_PATTERN_ERROR_TEXT_DISPLAY                     29
@@ -68,7 +68,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define FETCH_COMMAND_TYPE_SMART_USIM_TRAY_DEVICE_NAME_ERROR_TEXT_DISPLAY     32
 #define FETCH_COMMAND_TYPE_USIM0_EF_UPDATE_TEXT_DISPLAY                       33
 #define FETCH_COMMAND_TYPE_USIM1_EF_UPDATE_TEXT_DISPLAY                       34
-#define FETCH_COMMAND_TYPE_USIM_EF_UPDATE_ERROR_TEXT_DISPLAY                  35		 
+#define FETCH_COMMAND_TYPE_USIM_EF_UPDATE_ERROR_TEXT_DISPLAY                  35
 #define FETCH_COMMAND_TYPE_WIRELESS_SIM_RESET_FETCH                           36
 #define FETCH_COMMAND_TYPE_INITIAL_USAT_MENU_SETUP                            37
 #define FETCH_COMMAND_TYPE_USIM_SWITCH_USIM0_YES_WIRELESS_DISPLAY_TEXT        38
@@ -97,7 +97,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define FETCH_COMMAND_TYPE_BLE_ON_OFF_TEXT_DISPLAY                            61
 #define FETCH_COMMAND_TYPE_WIRELESS_SIM_ON_OFF_TEXT_DISPLAY                   62
 #define FETCH_COMMAND_TYPE_BLE_ON_OFF_0X88_TEXT_DISPLAY                       63
-#define FETCH_COMMAND_TYPE_UPDATE_ICCID		                                    64
+#define FETCH_COMMAND_TYPE_UPDATE_ICCID                                        64
 #define FETCH_COMMAND_TYPE_UPDATE_ICCID_TEXT_DISPLAY                          65
 
 /* idle text to indicate the wireless USIM status */
@@ -110,7 +110,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define IDLE_MODE_TEXT_TYPE_SIM_ON_USIM0_DISCONNECTED_CLIENT                  7
 #define IDLE_MODE_TEXT_TYPE_SIM_ON_USIM1_DISCONNECTED_CLIENT                  8
 #define IDLE_MODE_TEXT_TYPE_SIM_OFF_ADDRESS_CLIENT                            9
-	
+
 /* USAT menu items */
 #define USAT_MENU_ABOUT                                         1
 #define USAT_MENU_WIRELESS_USIM_ON_OFF                          2
@@ -161,8 +161,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define FLASH_DATA_WRITE_CHECK_WIRELESS_USIM_WORK_MODE_OFFSET_POS            12
 #define FLASH_DATA_WRITE_CHECK_BLE_ON_OFF_0X88_COMMAND_OFFSET_POS            13
 #define FLASH_DATA_WRITE_CHECK_ICCID_2FE2_FIXED_DATA_OFFSET_POS              14
-	
-/* USIM EF data update time lot stage, for binary update command */	
+
+/* USIM EF data update time lot stage, for binary update command */
 #define SIM_COMMAND_UPDATE_BINARY_0XD6_BLE_Stage0                  0
 #define SIM_COMMAND_UPDATE_BINARY_0XD6_BLE_Stage1                  1
 #define SIM_COMMAND_UPDATE_BINARY_0XD6_BLE_Stage2                  2
@@ -181,11 +181,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /* time in ms to wait before next time slot request try, if time slot request fails */
 #define TIME_SLOT_REQUEST_RETRY_INTERVAL_MS               5
-/* time to predicted phone command 0xf2, in ms. 
+/* time to predicted phone command 0xf2, in ms.
 |  within this time margin, stop time slot request to avoid miss phone command */
 #define TIME_SLOT_NEXT_COMMAND_0XF2_MARGIN_MS             100
 
-/* CC encoding and decoding time in us */  
+/* CC encoding and decoding time in us */
 #define TIMER_SLOT_CC_ENCODING_TIME_US                    500
 #define TIMER_SLOT_CC_DECODING_TIME_US                    5500
 /* time length in us for USIM server wireless connection signal listening windows tiem slot */
@@ -226,7 +226,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIMER_SLOT_USIM_CARD_BINARY_UPDATE_US             100000
 
 /* function time_slot_callback() time slot request type */
-#define	TIME_SLOT_SIGNAL_DEFAULT_VALUE                                      0xff
+#define  TIME_SLOT_SIGNAL_DEFAULT_VALUE                                      0xff
 #define TIME_SLOT_SIGNAL_PHONE_COMMAND                                      1
 #define TIME_SLOT_SIGNAL_PHONE_CONNECTION_REQUEST_RADIO_LINK                2
 #define TIME_SLOT_SIGNAL_USIM_SERVER_SIM_COMMAND_AUTHENTICATION             3
@@ -237,12 +237,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIME_SLOT_SIGNAL_USIM_SERVER_RANDOM_NUMBER_GENERATION               8
 #define TIME_SLOT_SIGNAL_USIM_SERVER_WIRELESS_AUTHENTICATION_SIM_COMMAND    9
 #define TIME_SLOT_SIGNAL_USIM_SERVER_WIRELESS_AUTHENTICATION_SIM_DATA_SEND  10
-#define	TIME_SLOT_SIGNAL_USIM_SERVER_SIM_CONFIG_DATA_RECEIVE                11
-#define	TIME_SLOT_SIGNAL_PHONE_COMMAND_WIRELESS_AUTHENTICATION              12
-#define	TIME_SLOT_SIGNAL_USIM_SERVER_SIM_COMMAND_ADF_SELECTION              13
-#define	TIME_SLOT_SIGNAL_USIM_CARD_BINARY_UPDATE                            14
-	
-#define	TIME_SLOT_EVENT_DEFAULT_VALUE                                       0xff
+#define  TIME_SLOT_SIGNAL_USIM_SERVER_SIM_CONFIG_DATA_RECEIVE                11
+#define  TIME_SLOT_SIGNAL_PHONE_COMMAND_WIRELESS_AUTHENTICATION              12
+#define  TIME_SLOT_SIGNAL_USIM_SERVER_SIM_COMMAND_ADF_SELECTION              13
+#define  TIME_SLOT_SIGNAL_USIM_CARD_BINARY_UPDATE                            14
+
+#define  TIME_SLOT_EVENT_DEFAULT_VALUE                                       0xff
 #define TIME_SLOT_EVENT_PHONE_COMMAND                                       1
 #define TIME_SLOT_EVENT_PHONE_CONNECTION_REQUEST_RADIO_LINK                 2
 #define TIME_SLOT_EVENT_USIM_SERVER_SIM_COMMAND_AUTHENTICATION              3
@@ -253,12 +253,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define TIME_SLOT_EVENT_USIM_SERVER_RANDOM_NUMBER_GENERATION                8
 #define TIME_SLOT_EVENT_USIM_SERVER_WIRELESS_AUTHENTICATION_SIM_COMMAND     9
 #define TIME_SLOT_EVENT_USIM_SERVER_WIRELESS_AUTHENTICATION_SIM_DATA_SEND   10
-#define	TIME_SLOT_EVENT_USIM_SERVER_SIM_CONFIG_DATA_RECEIVE                 11
-#define	TIME_SLOT_EVENT_PHONE_COMMAND_WIRELESS_AUTHENTICATION               12
-#define	TIME_SLOT_EVENT_USIM_SERVER_SIM_COMMAND_ADF_SELECTION               13
-#define	TIME_SLOT_EVENT_USIM_CARD_BINARY_UPDATE                             14
-		
-#define	SIGNAL_CALLBACK_RETURN_UNDO                                         0xff
+#define  TIME_SLOT_EVENT_USIM_SERVER_SIM_CONFIG_DATA_RECEIVE                 11
+#define  TIME_SLOT_EVENT_PHONE_COMMAND_WIRELESS_AUTHENTICATION               12
+#define  TIME_SLOT_EVENT_USIM_SERVER_SIM_COMMAND_ADF_SELECTION               13
+#define  TIME_SLOT_EVENT_USIM_CARD_BINARY_UPDATE                             14
+
+#define  SIGNAL_CALLBACK_RETURN_UNDO                                         0xff
 
 #define USIM_SERVER_COMMAND_GSM_ALGORITHM_BLE_stage0              0
 #define USIM_SERVER_COMMAND_GSM_ALGORITHM_BLE_stage1              1
@@ -288,7 +288,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define USIM_SERVER_AUTHENTICATION_WIRELESS_BLE_stage2            4
 
 /* command type for wireless USIM interface with connection request link */
-#define PHONE_CONNECTION_PIGGYBACK_UPDATE_BINARY                  0x11	
+#define PHONE_CONNECTION_PIGGYBACK_UPDATE_BINARY                  0x11
 #define USIM_PHONE_CONNECTION_COMMAND_CONFIG_SYNCH                0x33
 #define USIM_PHONE_CONNECTION_COMMAND_PHONE_WIRELESS_RESET        0x44
 #define USIM_PHONE_CONNECTION_COMMAND_CONFIG_RESTORE              0x55

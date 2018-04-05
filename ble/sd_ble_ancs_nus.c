@@ -1,30 +1,30 @@
 /**
  * Copyright (c) 2012 - 2017, Nordic Semiconductor ASA
- * 
+ *
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- * 
+ *
  * 1. Redistributions of source code must retain the above copyright notice, this
  *    list of conditions and the following disclaimer.
- * 
+ *
  * 2. Redistributions in binary form, except as embedded into a Nordic
  *    Semiconductor ASA integrated circuit in a product or a software update for
  *    such product, must reproduce the above copyright notice, this list of
  *    conditions and the following disclaimer in the documentation and/or other
  *    materials provided with the distribution.
- * 
+ *
  * 3. Neither the name of Nordic Semiconductor ASA nor the names of its
  *    contributors may be used to endorse or promote products derived from this
  *    software without specific prior written permission.
- * 
+ *
  * 4. This software, with or without modification, must only be used with a
  *    Nordic Semiconductor ASA integrated circuit.
- * 
+ *
  * 5. Any software provided in binary form under this license must not be reverse
  *    engineered, decompiled, modified and/or disassembled.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY NORDIC SEMICONDUCTOR ASA "AS IS" AND ANY EXPRESS
  * OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY, NONINFRINGEMENT, AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -35,7 +35,7 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
+ *
  */
 /** @file
  *
@@ -137,7 +137,7 @@ static uint16_t   m_ble_nus_max_data_len = BLE_GATT_ATT_MTU_DEFAULT - 3;        
 BLE_NUS_DEF(m_nus);                                                                 /**< BLE NUS service instance. */
 #define APP_FEATURE_NOT_SUPPORTED       BLE_GATT_STATUS_ATTERR_APP_BEGIN + 2        /**< Reply when unsupported features are requested. */
 /* Name of the device. Will be included in the advertising data. */
-char BLE_BROADCAST_DEVICE_NAME[16] = {15, 'w', 'i', 'r', 'e', 'l', 'e', 's', 's', 'S', 'I', 'M', '0', '0', '0', '0'};                                      
+char BLE_BROADCAST_DEVICE_NAME[16] = {15, 'w', 'i', 'r', 'e', 'l', 'e', 's', 's', 'S', 'I', 'M', '0', '0', '0', '0'};
 
 extern volatile uint8_t           FLASH_UPDATE_WAITING_STAGE;
 //+
@@ -230,27 +230,27 @@ static void delete_bonds(void);
 /**@snippet [Handling the data received over BLE] */
 void nus_data_handler(ble_nus_evt_t * p_evt)
 {
-	uint16_t i;
-	
+  uint16_t i;
+
   if (p_evt->type == BLE_NUS_EVT_RX_DATA)
   {
-		
-	*(RECEIVED_STRING_NUS) = (p_evt->params.rx_data.length < STRING_LENGTH_NUS ? p_evt->params.rx_data.length : STRING_LENGTH_NUS);
-	
+
+  *(RECEIVED_STRING_NUS) = (p_evt->params.rx_data.length < STRING_LENGTH_NUS ? p_evt->params.rx_data.length : STRING_LENGTH_NUS);
+
   for (i=0; i<(*RECEIVED_STRING_NUS); i++)
-	{
-		*(RECEIVED_STRING_NUS + i + 1) = *(p_evt->params.rx_data.p_data + i);
-	}
-		
+  {
+    *(RECEIVED_STRING_NUS + i + 1) = *(p_evt->params.rx_data.p_data + i);
+  }
+
 #if (IF_LOG_OUTPUT)
-	printf("\r\n========================================= BLE NUS received =========================================\r\n");
-	printf("length = %d,  ", p_evt->params.rx_data.length);
+  printf("\r\n========================================= BLE NUS received =========================================\r\n");
+  printf("length = %d,  ", p_evt->params.rx_data.length);
   for (i=0; i<(*RECEIVED_STRING_NUS); i++)
-	{
-		printf("%c", *(RECEIVED_STRING_NUS + i + 1));
-	}
-	printf("\r\n====================================================================================================\r\n");
-#endif	
+  {
+    printf("%c", *(RECEIVED_STRING_NUS + i + 1));
+  }
+  printf("\r\n====================================================================================================\r\n");
+#endif
   }
 }
 
@@ -287,15 +287,15 @@ void gatt_evt_handler(nrf_ble_gatt_t * p_gatt, nrf_ble_gatt_evt_t const * p_evt)
     if ((m_conn_handle == p_evt->conn_handle) && (p_evt->evt_id == NRF_BLE_GATT_EVT_ATT_MTU_UPDATED))
     {
         m_ble_nus_max_data_len = p_evt->params.att_mtu_effective - OPCODE_LENGTH - HANDLE_LENGTH;
-				
+
 #if (IF_LOG_OUTPUT)
         printf("Data len is set to 0x%X(%d)\r\n", m_ble_nus_max_data_len, m_ble_nus_max_data_len);
 #endif
     }
 #if (IF_LOG_OUTPUT)
-		printf("\r\n=====================================================================================\r\n");					
-		printf("ATT MTU exchange completed. central 0x%x peripheral 0x%x\r\n", p_gatt->att_mtu_desired_central, p_gatt->att_mtu_desired_periph);
-		printf("=====================================================================================\r\n");					
+    printf("\r\n=====================================================================================\r\n");
+    printf("ATT MTU exchange completed. central 0x%x peripheral 0x%x\r\n", p_gatt->att_mtu_desired_central, p_gatt->att_mtu_desired_periph);
+    printf("=====================================================================================\r\n");
 #endif
 }
 
@@ -305,58 +305,58 @@ void gatt_evt_handler(nrf_ble_gatt_t * p_gatt, nrf_ble_gatt_evt_t const * p_evt)
  */
 static void notif_led_flash(ble_ancs_c_evt_notif_t * p_notif)
 {
-	if (p_notif->evt_id == 0) /* Added */
-	{
-	  if (p_notif->category_id == 1) /* incoming call */
-	  {
-		  (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_INCOMING_CALL])++;
-	  }
-	  if (p_notif->category_id == 2) /* missed call */
-	  {
-		  (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_MISSED_CALL])++;
-	  }
-	  else if (p_notif->category_id == 4) /* social */
-	  {
-		  (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_SOCIAL])++;
-	  }
-	  else if (p_notif->category_id == 6) /* email */
-	  {
-		  (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_EMAIL])++;
-	  }
-		else /* others */
-		{
-		  (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_DEFAULT])++;
-		}
-	}
-	else if (p_notif->evt_id == 1) /* Modified */
-	{
-		
-	}
-	else if (p_notif->evt_id == 2) /* Removed */
-	{
-	  if (p_notif->category_id == 1) /* incoming call */
-	  {
-		  (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_INCOMING_CALL])--;
-	  }
-	  if (p_notif->category_id == 2) /* missed call */
-	  {
-		  (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_MISSED_CALL])--;
-	  }
-	  else if (p_notif->category_id == 4) /* social */
-	  {
-		  (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_SOCIAL])--;
-	  }
-	  else if (p_notif->category_id == 6) /* email */
-	  {
-		  (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_EMAIL])--;
-	  }
-		else /* others */
-		{
-		  (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_DEFAULT])--;
-		}
-	}
-	
-	return;
+  if (p_notif->evt_id == 0) /* Added */
+  {
+    if (p_notif->category_id == 1) /* incoming call */
+    {
+      (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_INCOMING_CALL])++;
+    }
+    if (p_notif->category_id == 2) /* missed call */
+    {
+      (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_MISSED_CALL])++;
+    }
+    else if (p_notif->category_id == 4) /* social */
+    {
+      (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_SOCIAL])++;
+    }
+    else if (p_notif->category_id == 6) /* email */
+    {
+      (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_EMAIL])++;
+    }
+    else /* others */
+    {
+      (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_DEFAULT])++;
+    }
+  }
+  else if (p_notif->evt_id == 1) /* Modified */
+  {
+
+  }
+  else if (p_notif->evt_id == 2) /* Removed */
+  {
+    if (p_notif->category_id == 1) /* incoming call */
+    {
+      (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_INCOMING_CALL])--;
+    }
+    if (p_notif->category_id == 2) /* missed call */
+    {
+      (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_MISSED_CALL])--;
+    }
+    else if (p_notif->category_id == 4) /* social */
+    {
+      (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_SOCIAL])--;
+    }
+    else if (p_notif->category_id == 6) /* email */
+    {
+      (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_EMAIL])--;
+    }
+    else /* others */
+    {
+      (ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_DEFAULT])--;
+    }
+  }
+
+  return;
 }
 //+
 
@@ -442,35 +442,35 @@ static void advertising_start(bool erase_bonds)
 static void pm_evt_handler(pm_evt_t const * p_evt)
 {
     ret_code_t ret;
-		uint32_t i;
+    uint32_t i;
 
     switch (p_evt->evt_id)
     {
         case PM_EVT_BONDED_PEER_CONNECTED:
         {
 #if (IF_LOG_OUTPUT)
-            printf("\r\n=====================================================================================\r\n");					
+            printf("\r\n=====================================================================================\r\n");
             printf("Connected to previously bonded device\r\n");
-            printf("=====================================================================================\r\n");					
+            printf("=====================================================================================\r\n");
 #endif
             m_peer_id = p_evt->peer_id;
-//+						
-						for (i=0; i<ANCS_NOTIF_LED_PATTERN_TYPE_TOTAL_NUMBER; i++)
-						{
-							ANCS_NOTIF_LED_PATTERN[i] = 0;
-						}
-//+						
+//+
+            for (i=0; i<ANCS_NOTIF_LED_PATTERN_TYPE_TOTAL_NUMBER; i++)
+            {
+              ANCS_NOTIF_LED_PATTERN[i] = 0;
+            }
+//+
         } break; // PM_EVT_BONDED_PEER_CONNECTED
 
         case PM_EVT_CONN_SEC_SUCCEEDED:
         {
 #if (IF_LOG_OUTPUT)
-            printf("\r\n=====================================================================================\r\n");					
+            printf("\r\n=====================================================================================\r\n");
             printf("Connection secured: role: %d, conn_handle: 0x%x, procedure: %d.\r\n",
                          ble_conn_state_role(p_evt->conn_handle),
                          p_evt->conn_handle,
                          p_evt->params.conn_sec_succeeded.procedure);
-						printf("=====================================================================================\r\n");					
+            printf("=====================================================================================\r\n");
 #endif
             m_peer_id = p_evt->peer_id;
 
@@ -488,9 +488,9 @@ static void pm_evt_handler(pm_evt_t const * p_evt)
              * Sometimes it is impossible, to secure the link, or the peer device does not support it.
              * How to handle this error is highly application dependent. */
 #if (IF_LOG_OUTPUT)
-          printf("\r\n=====================================================================================\r\n");					
+          printf("\r\n=====================================================================================\r\n");
           printf("-----------PM_EVT_CONN_SEC_FAILED......\r\n");
-					printf("=====================================================================================\r\n");					
+          printf("=====================================================================================\r\n");
 #endif
         } break;
 
@@ -500,9 +500,9 @@ static void pm_evt_handler(pm_evt_t const * p_evt)
             pm_conn_sec_config_t conn_sec_config = {.allow_repairing = true};
             pm_conn_sec_config_reply(p_evt->conn_handle, &conn_sec_config);
 #if (IF_LOG_OUTPUT)
-          printf("\r\n=====================================================================================\r\n");					
+          printf("\r\n=====================================================================================\r\n");
           printf("-----------PM_EVT_CONN_SEC_CONFIG_REQ......\r\n");
-					printf("=====================================================================================\r\n");					
+          printf("=====================================================================================\r\n");
 #endif
         } break;
 
@@ -519,9 +519,9 @@ static void pm_evt_handler(pm_evt_t const * p_evt)
                 APP_ERROR_CHECK(ret);
             }
 #if (IF_LOG_OUTPUT)
-          printf("\r\n=====================================================================================\r\n");					
+          printf("\r\n=====================================================================================\r\n");
           printf("-----------PM_EVT_STORAGE_FULL......\r\n");
-					printf("=====================================================================================\r\n");					
+          printf("=====================================================================================\r\n");
 #endif
         } break;
 
@@ -529,9 +529,9 @@ static void pm_evt_handler(pm_evt_t const * p_evt)
         {
           advertising_start(false);
 #if (IF_LOG_OUTPUT)
-          printf("\r\n=====================================================================================\r\n");					
+          printf("\r\n=====================================================================================\r\n");
           printf("-----------PM_EVT_PEERS_DELETE_SUCCEEDED......\r\n");
-					printf("=====================================================================================\r\n");					
+          printf("=====================================================================================\r\n");
 #endif
         } break;
 
@@ -540,9 +540,9 @@ static void pm_evt_handler(pm_evt_t const * p_evt)
           // The local database has likely changed, send service changed indications.
           pm_local_database_has_changed();
 #if (IF_LOG_OUTPUT)
-          printf("\r\n=====================================================================================\r\n");					
+          printf("\r\n=====================================================================================\r\n");
           printf("-----------PM_EVT_LOCAL_DB_CACHE_APPLY_FAILED......\r\n");
-					printf("=====================================================================================\r\n");					
+          printf("=====================================================================================\r\n");
 #endif
         } break;
 
@@ -553,11 +553,11 @@ static void pm_evt_handler(pm_evt_t const * p_evt)
                  && (p_evt->params.peer_data_update_succeeded.data_id == PM_PEER_DATA_ID_BONDING))
             {
 #if (IF_LOG_OUTPUT)
-                printf("\r\n=====================================================================================\r\n");					
+                printf("\r\n=====================================================================================\r\n");
                 printf("\tm_whitelist_peer_cnt %ld, MAX_PEERS_WLIST %d",
                                m_whitelist_peer_cnt + 1,
                                BLE_GAP_WHITELIST_ADDR_MAX_COUNT);
-							  printf("=====================================================================================\r\n");					
+                printf("=====================================================================================\r\n");
 #endif
 
                 if (m_whitelist_peer_cnt < BLE_GAP_WHITELIST_ADDR_MAX_COUNT)
@@ -583,9 +583,9 @@ static void pm_evt_handler(pm_evt_t const * p_evt)
           // Assert.
           APP_ERROR_CHECK(p_evt->params.peer_data_update_failed.error);
 #if (IF_LOG_OUTPUT)
-          printf("\r\n=====================================================================================\r\n");					
+          printf("\r\n=====================================================================================\r\n");
           printf("-----------PM_EVT_PEER_DATA_UPDATE_FAILED......\r\n");
-					printf("=====================================================================================\r\n");					
+          printf("=====================================================================================\r\n");
 #endif
         } break;
 
@@ -594,9 +594,9 @@ static void pm_evt_handler(pm_evt_t const * p_evt)
           // Assert.
           APP_ERROR_CHECK(p_evt->params.peer_delete_failed.error);
 #if (IF_LOG_OUTPUT)
-          printf("\r\n=====================================================================================\r\n");					
+          printf("\r\n=====================================================================================\r\n");
           printf("-----------PM_EVT_PEER_DELETE_FAILED......\r\n");
-					printf("=====================================================================================\r\n");					
+          printf("=====================================================================================\r\n");
 #endif
         } break;
 
@@ -605,9 +605,9 @@ static void pm_evt_handler(pm_evt_t const * p_evt)
           // Assert.
           APP_ERROR_CHECK(p_evt->params.peers_delete_failed_evt.error);
 #if (IF_LOG_OUTPUT)
-          printf("\r\n=====================================================================================\r\n");					
+          printf("\r\n=====================================================================================\r\n");
           printf("-----------PM_EVT_PEERS_DELETE_FAILED......\r\n");
-					printf("=====================================================================================\r\n");					
+          printf("=====================================================================================\r\n");
 #endif
         } break;
 
@@ -616,9 +616,9 @@ static void pm_evt_handler(pm_evt_t const * p_evt)
           // Assert.
           APP_ERROR_CHECK(p_evt->params.error_unexpected.error);
 #if (IF_LOG_OUTPUT)
-          printf("\r\n=====================================================================================\r\n");					
+          printf("\r\n=====================================================================================\r\n");
           printf("-----------PM_EVT_ERROR_UNEXPECTED......\r\n");
-					printf("=====================================================================================\r\n");					
+          printf("=====================================================================================\r\n");
 #endif
         } break;
 
@@ -678,9 +678,9 @@ static void apple_notification_setup(void)
     APP_ERROR_CHECK(ret);
 
 #if (IF_LOG_OUTPUT)
-    printf("\r\n=====================================================================================\r\n");					
+    printf("\r\n=====================================================================================\r\n");
     printf("Notifications Enabled.\r\n");
-    printf("=====================================================================================\r\n");					
+    printf("=====================================================================================\r\n");
 #endif
 }
 
@@ -691,8 +691,8 @@ static void apple_notification_setup(void)
 static void notif_print(ble_ancs_c_evt_notif_t * p_notif)
 {
 #if (IF_LOG_OUTPUT)
-	  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
-    printf("\r\n=====================================================================================\r\n");					
+    rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
+    printf("\r\n=====================================================================================\r\n");
     printf("\r\nNotification\r\n");
     printf("Event:       %s\r\n", (char *)lit_eventid[p_notif->evt_id]);
     printf("Category ID: %s\r\n", (char *)lit_catid[p_notif->category_id]);
@@ -731,9 +731,9 @@ static void notif_print(ble_ancs_c_evt_notif_t * p_notif)
         printf(" Negative Action\r\n");
 #endif
     }
-		
+
 #if (IF_LOG_OUTPUT)
-    printf("=====================================================================================\r\n");					
+    printf("=====================================================================================\r\n");
 #endif
 }
 
@@ -746,17 +746,17 @@ static void notif_attr_print(ble_ancs_c_attr_t * p_attr)
     if (p_attr->attr_len != 0)
     {
 #if (IF_LOG_OUTPUT && NRF_LOG_ENABLED)
-        printf("\r\n=====================================================================================\r\n");	
+        printf("\r\n=====================================================================================\r\n");
         printf("%s: %s\r\n", (char *)lit_attrid[p_attr->attr_id], (char *)nrf_log_push((char *)p_attr->p_attr_data));
-        printf("=====================================================================================\r\n");					
+        printf("=====================================================================================\r\n");
 #endif
     }
     else if (p_attr->attr_len == 0)
     {
 #if (IF_LOG_OUTPUT)
-        printf("\r\n=====================================================================================\r\n");					
+        printf("\r\n=====================================================================================\r\n");
         printf("%s: (N/A)\r\n", (char *)lit_attrid[p_attr->attr_id]);
-        printf("=====================================================================================\r\n");					
+        printf("=====================================================================================\r\n");
 #endif
     }
 }
@@ -770,17 +770,17 @@ static void app_attr_print(ble_ancs_c_attr_t * p_attr)
     if (p_attr->attr_len != 0)
     {
 #if (IF_LOG_OUTPUT)
-        printf("\r\n=====================================================================================\r\n");					
+        printf("\r\n=====================================================================================\r\n");
         printf("%s: %s\r\n", (char *)lit_appid[p_attr->attr_id], (char *)p_attr->p_attr_data);
-        printf("=====================================================================================\r\n");					
+        printf("=====================================================================================\r\n");
 #endif
     }
     else if (p_attr->attr_len == 0)
     {
 #if (IF_LOG_OUTPUT)
-        printf("\r\n=====================================================================================\r\n");					
+        printf("\r\n=====================================================================================\r\n");
         printf("%s: (N/A)\r\n", (char *) lit_appid[p_attr->attr_id]);
-        printf("=====================================================================================\r\n");					
+        printf("=====================================================================================\r\n");
 #endif
     }
 }
@@ -795,33 +795,33 @@ static void err_code_print(uint16_t err_code_np)
     {
         case BLE_ANCS_NP_UNKNOWN_COMMAND:
 #if (IF_LOG_OUTPUT)
-            printf("\r\n=====================================================================================\r\n");					
+            printf("\r\n=====================================================================================\r\n");
             printf("Error: Command ID was not recognized by the Notification Provider. \r\n");
-            printf("=====================================================================================\r\n");					
+            printf("=====================================================================================\r\n");
 #endif
             break;
 
         case BLE_ANCS_NP_INVALID_COMMAND:
 #if (IF_LOG_OUTPUT)
-            printf("\r\n=====================================================================================\r\n");					
+            printf("\r\n=====================================================================================\r\n");
             printf("Error: Command failed to be parsed on the Notification Provider. \r\n");
-            printf("=====================================================================================\r\n");					
+            printf("=====================================================================================\r\n");
 #endif
             break;
 
         case BLE_ANCS_NP_INVALID_PARAMETER:
 #if (IF_LOG_OUTPUT)
-            printf("\r\n=====================================================================================\r\n");					
+            printf("\r\n=====================================================================================\r\n");
             printf("Error: Parameter does not refer to an existing object on the Notification Provider. \r\n");
-            printf("=====================================================================================\r\n");					
+            printf("=====================================================================================\r\n");
 #endif
             break;
 
         case BLE_ANCS_NP_ACTION_FAILED:
 #if (IF_LOG_OUTPUT)
-            printf("\r\n=====================================================================================\r\n");					
+            printf("\r\n=====================================================================================\r\n");
             printf("Error: Perform Notification Action Failed on the Notification Provider. \r\n");
-            printf("=====================================================================================\r\n");					
+            printf("=====================================================================================\r\n");
 #endif
             break;
 
@@ -861,9 +861,9 @@ static void on_ancs_c_evt(ble_ancs_c_evt_t * p_evt)
     {
         case BLE_ANCS_C_EVT_DISCOVERY_COMPLETE:
 #if (IF_LOG_OUTPUT)
-            printf("\r\n=====================================================================================\r\n");					
+            printf("\r\n=====================================================================================\r\n");
             printf("Apple Notification Center Service discovered on the server.\r\n");
-            printf("=====================================================================================\r\n");					
+            printf("=====================================================================================\r\n");
 #endif
             ret = nrf_ble_ancs_c_handles_assign(&m_ancs_c, p_evt->conn_handle, &p_evt->service);
             APP_ERROR_CHECK(ret);
@@ -874,8 +874,8 @@ static void on_ancs_c_evt(ble_ancs_c_evt_t * p_evt)
             m_notification_latest = p_evt->notif;
             notif_print(&m_notification_latest);
 //+
-						notif_led_flash(&m_notification_latest);
-//+												
+            notif_led_flash(&m_notification_latest);
+//+
             break;
 
         case BLE_ANCS_C_EVT_NOTIF_ATTRIBUTE:
@@ -886,23 +886,23 @@ static void on_ancs_c_evt(ble_ancs_c_evt_t * p_evt)
                 m_notif_attr_app_id_latest = p_evt->attr;
             }
             break;
-						
+
         case BLE_ANCS_C_EVT_DISCOVERY_FAILED:
 #if (IF_LOG_OUTPUT)
-            printf("\r\n=====================================================================================\r\n");					
+            printf("\r\n=====================================================================================\r\n");
             printf("Apple Notification Center Service not discovered on the server.\r\n");
-            printf("=====================================================================================\r\n");					
+            printf("=====================================================================================\r\n");
 #endif
             break;
 
         case BLE_ANCS_C_EVT_APP_ATTRIBUTE:
             app_attr_print(&p_evt->attr);
             break;
-						
+
         case BLE_ANCS_C_EVT_NP_ERROR:
             err_code_print(p_evt->err_code_np);
             break;
-						
+
         default:
             // No implementation needed.
             break;
@@ -940,17 +940,17 @@ static void gap_params_init(void)
  */
 static void gatt_init(void)
 {
-	 ret_code_t ret;
-	
+   ret_code_t ret;
+
     // ret = nrf_ble_gatt_init(&m_gatt, NULL);
     // APP_ERROR_CHECK(ret);
-//+   	
-	ret = nrf_ble_gatt_init(&m_gatt, gatt_evt_handler);
-	APP_ERROR_CHECK(ret);
+//+
+  ret = nrf_ble_gatt_init(&m_gatt, gatt_evt_handler);
+  APP_ERROR_CHECK(ret);
 
-	ret = nrf_ble_gatt_att_mtu_periph_set(&m_gatt, NRF_SDH_BLE_GATT_MAX_MTU_SIZE);
-	APP_ERROR_CHECK(ret);
-//+   
+  ret = nrf_ble_gatt_att_mtu_periph_set(&m_gatt, NRF_SDH_BLE_GATT_MAX_MTU_SIZE);
+  APP_ERROR_CHECK(ret);
+//+
 
 }
 
@@ -989,7 +989,7 @@ static void conn_params_init(void)
     // cp_init.disconnect_on_fail             = true;
     // cp_init.evt_handler                    = NULL;
     cp_init.error_handler                  = conn_params_error_handler;
-//+		
+//+
     cp_init.disconnect_on_fail             = false;
     cp_init.evt_handler                    = on_conn_params_evt;
 //+
@@ -1073,35 +1073,35 @@ static void on_adv_evt(ble_adv_evt_t ble_adv_evt)
     {
         case BLE_ADV_EVT_FAST:
 #if (IF_LOG_OUTPUT)
-            printf("\r\n=====================================================================================\r\n");					
+            printf("\r\n=====================================================================================\r\n");
             printf("Fast advertising\r\n");
-            printf("=====================================================================================\r\n");					
+            printf("=====================================================================================\r\n");
 #endif
             break;
 
         case BLE_ADV_EVT_SLOW:
 #if (IF_LOG_OUTPUT)
-            printf("\r\n=====================================================================================\r\n");					
+            printf("\r\n=====================================================================================\r\n");
             printf("Slow advertising\r\n");
-            printf("=====================================================================================\r\n");					
+            printf("=====================================================================================\r\n");
 #endif
             break;
 
         case BLE_ADV_EVT_FAST_WHITELIST:
 #if (IF_LOG_OUTPUT)
-            printf("\r\n=====================================================================================\r\n");					
+            printf("\r\n=====================================================================================\r\n");
             printf("Fast advertising with Whitelist\r\n");
-            printf("=====================================================================================\r\n");					
+            printf("=====================================================================================\r\n");
 #endif
             break;
 
         case BLE_ADV_EVT_IDLE:
 #if (IF_LOG_OUTPUT)
-            printf("\r\n=====================================================================================\r\n");					
+            printf("\r\n=====================================================================================\r\n");
             printf("BLE Adv. Idle........, re-start advertising \r\n");
-            printf("=====================================================================================\r\n");					
+            printf("=====================================================================================\r\n");
 #endif
-						advertising_start(false);
+            advertising_start(false);
             break;
 
         case BLE_ADV_EVT_WHITELIST_REQUEST:
@@ -1114,11 +1114,11 @@ static void on_adv_evt(ble_adv_evt_t ble_adv_evt)
             ret = pm_whitelist_get(whitelist_addrs, &addr_cnt, whitelist_irks, &irk_cnt);
             APP_ERROR_CHECK(ret);
 #if (IF_LOG_OUTPUT)
-            printf("\r\n=====================================================================================\r\n");					
+            printf("\r\n=====================================================================================\r\n");
             printf("pm_whitelist_get returns %ld addr in whitelist and %ld irk whitelist\r\n",
                            addr_cnt,
                            irk_cnt);
-			      printf("=====================================================================================\r\n");					
+            printf("=====================================================================================\r\n");
 #endif
 
             // Apply the whitelist.
@@ -1149,9 +1149,9 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
     {
         case BLE_GAP_EVT_CONNECTED:
 #if (IF_LOG_OUTPUT)
-            printf("\r\n=====================================================================================\r\n");					
+            printf("\r\n=====================================================================================\r\n");
             printf("Connected.\r\n");
-            printf("=====================================================================================\r\n");					
+            printf("=====================================================================================\r\n");
 #endif
 
             m_cur_conn_handle = p_ble_evt->evt.gap_evt.conn_handle;
@@ -1161,9 +1161,9 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 
         case BLE_GAP_EVT_DISCONNECTED:
 #if (IF_LOG_OUTPUT)
-            printf("\r\n=====================================================================================\r\n");					
+            printf("\r\n=====================================================================================\r\n");
             printf("Disconnected, re-start advertising\r\n");
-            printf("=====================================================================================\r\n");					
+            printf("=====================================================================================\r\n");
 #endif
             m_cur_conn_handle = BLE_CONN_HANDLE_INVALID;
             ret               = app_timer_stop(m_sec_req_timer_id);
@@ -1193,9 +1193,9 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
         case BLE_GAP_EVT_PHY_UPDATE_REQUEST:
         {
 #if (IF_LOG_OUTPUT)
-            printf("\r\n=====================================================================================\r\n");					
+            printf("\r\n=====================================================================================\r\n");
             printf("PHY update request.\r\n");
-            printf("=====================================================================================\r\n");					
+            printf("=====================================================================================\r\n");
 #endif
             ble_gap_phys_t const phys =
             {
@@ -1208,116 +1208,116 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 #endif
 
         case BLE_GATTC_EVT_TIMEOUT:
-				{
+        {
             // Disconnect on GATT Client timeout event.
 #if (IF_LOG_OUTPUT)
-            printf("\r\n=====================================================================================\r\n");					
+            printf("\r\n=====================================================================================\r\n");
             printf("GATT Client Timeout.\r\n");
-            printf("=====================================================================================\r\n");					
+            printf("=====================================================================================\r\n");
 #endif
             ret = sd_ble_gap_disconnect(p_ble_evt->evt.gattc_evt.conn_handle,
                                         BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION);
             APP_ERROR_CHECK(ret);
             break;
-				}
+        }
 
         case BLE_GATTS_EVT_TIMEOUT:
-				{
+        {
             // Disconnect on GATT Server timeout event.
 #if (IF_LOG_OUTPUT)
-            printf("\r\n=====================================================================================\r\n");					
+            printf("\r\n=====================================================================================\r\n");
             printf("GATT Server Timeout.\r\n");
-            printf("=====================================================================================\r\n");					
+            printf("=====================================================================================\r\n");
 #endif
             ret = sd_ble_gap_disconnect(p_ble_evt->evt.gatts_evt.conn_handle,
                                         BLE_HCI_REMOTE_USER_TERMINATED_CONNECTION);
             APP_ERROR_CHECK(ret);
             break;
-				}
+        }
 
 //+
-				case BLE_GAP_EVT_SEC_PARAMS_REQUEST:
-				{
+        case BLE_GAP_EVT_SEC_PARAMS_REQUEST:
+        {
 #if (IF_LOG_OUTPUT)
             printf("------------- BLE_GAP_EVT_SEC_PARAMS_REQUEST ......\r\n");
 #endif
-						// // Pairing not supported
-						// ret = sd_ble_gap_sec_params_reply(m_conn_handle, BLE_GAP_SEC_STATUS_PAIRING_NOT_SUPP, NULL, NULL);
-						// APP_ERROR_CHECK(ret);
-						break;
-				}
+            // // Pairing not supported
+            // ret = sd_ble_gap_sec_params_reply(m_conn_handle, BLE_GAP_SEC_STATUS_PAIRING_NOT_SUPP, NULL, NULL);
+            // APP_ERROR_CHECK(ret);
+            break;
+        }
 
 #if !defined (S112)
-		    case BLE_GAP_EVT_DATA_LENGTH_UPDATE_REQUEST:
-		    {
-		        ble_gap_data_length_params_t dl_params;
+        case BLE_GAP_EVT_DATA_LENGTH_UPDATE_REQUEST:
+        {
+            ble_gap_data_length_params_t dl_params;
 
-		        // Clearing the struct will effectivly set members to @ref BLE_GAP_DATA_LENGTH_AUTO
-		        memset(&dl_params, 0, sizeof(ble_gap_data_length_params_t));
-		        ret = sd_ble_gap_data_length_update(p_ble_evt->evt.gap_evt.conn_handle, &dl_params, NULL);
-		        APP_ERROR_CHECK(ret);
-		        break;
-		    }
+            // Clearing the struct will effectivly set members to @ref BLE_GAP_DATA_LENGTH_AUTO
+            memset(&dl_params, 0, sizeof(ble_gap_data_length_params_t));
+            ret = sd_ble_gap_data_length_update(p_ble_evt->evt.gap_evt.conn_handle, &dl_params, NULL);
+            APP_ERROR_CHECK(ret);
+            break;
+        }
 #endif //!defined (S112)
 
-				case BLE_GATTS_EVT_SYS_ATTR_MISSING:
-				{
-						// No system attributes have been stored.
-						ret = sd_ble_gatts_sys_attr_set(m_conn_handle, NULL, 0, 0);
-						APP_ERROR_CHECK(ret);
-						break;
-				}
+        case BLE_GATTS_EVT_SYS_ATTR_MISSING:
+        {
+            // No system attributes have been stored.
+            ret = sd_ble_gatts_sys_attr_set(m_conn_handle, NULL, 0, 0);
+            APP_ERROR_CHECK(ret);
+            break;
+        }
 
-		    case BLE_EVT_USER_MEM_REQUEST:
-				{
-		        ret = sd_ble_user_mem_reply(p_ble_evt->evt.gattc_evt.conn_handle, NULL);
-		        APP_ERROR_CHECK(ret);
-		        break;
-			  }
+        case BLE_EVT_USER_MEM_REQUEST:
+        {
+            ret = sd_ble_user_mem_reply(p_ble_evt->evt.gattc_evt.conn_handle, NULL);
+            APP_ERROR_CHECK(ret);
+            break;
+        }
 
-		    case BLE_GATTS_EVT_RW_AUTHORIZE_REQUEST:
-		    {
-		        ble_gatts_evt_rw_authorize_request_t  req;
-		        ble_gatts_rw_authorize_reply_params_t auth_reply;
+        case BLE_GATTS_EVT_RW_AUTHORIZE_REQUEST:
+        {
+            ble_gatts_evt_rw_authorize_request_t  req;
+            ble_gatts_rw_authorize_reply_params_t auth_reply;
 
-		        req = p_ble_evt->evt.gatts_evt.params.authorize_request;
+            req = p_ble_evt->evt.gatts_evt.params.authorize_request;
 
-		        if (req.type != BLE_GATTS_AUTHORIZE_TYPE_INVALID)
-		        {
-		            if ((req.request.write.op == BLE_GATTS_OP_PREP_WRITE_REQ)     ||
-		                (req.request.write.op == BLE_GATTS_OP_EXEC_WRITE_REQ_NOW) ||
-		                (req.request.write.op == BLE_GATTS_OP_EXEC_WRITE_REQ_CANCEL))
-		            {
-		                if (req.type == BLE_GATTS_AUTHORIZE_TYPE_WRITE)
-		                {
-		                    auth_reply.type = BLE_GATTS_AUTHORIZE_TYPE_WRITE;
-		                }
-		                else
-		                {
-		                    auth_reply.type = BLE_GATTS_AUTHORIZE_TYPE_READ;
-		                }
-		                auth_reply.params.write.gatt_status = APP_FEATURE_NOT_SUPPORTED;
-		                ret = sd_ble_gatts_rw_authorize_reply(p_ble_evt->evt.gatts_evt.conn_handle,
-		                                                               &auth_reply);
-		                APP_ERROR_CHECK(ret);
-		            }
-		        }
+            if (req.type != BLE_GATTS_AUTHORIZE_TYPE_INVALID)
+            {
+                if ((req.request.write.op == BLE_GATTS_OP_PREP_WRITE_REQ)     ||
+                    (req.request.write.op == BLE_GATTS_OP_EXEC_WRITE_REQ_NOW) ||
+                    (req.request.write.op == BLE_GATTS_OP_EXEC_WRITE_REQ_CANCEL))
+                {
+                    if (req.type == BLE_GATTS_AUTHORIZE_TYPE_WRITE)
+                    {
+                        auth_reply.type = BLE_GATTS_AUTHORIZE_TYPE_WRITE;
+                    }
+                    else
+                    {
+                        auth_reply.type = BLE_GATTS_AUTHORIZE_TYPE_READ;
+                    }
+                    auth_reply.params.write.gatt_status = APP_FEATURE_NOT_SUPPORTED;
+                    ret = sd_ble_gatts_rw_authorize_reply(p_ble_evt->evt.gatts_evt.conn_handle,
+                                                                   &auth_reply);
+                    APP_ERROR_CHECK(ret);
+                }
+            }
 #if (IF_LOG_OUTPUT)
             printf("------------- BLE_GATTS_EVT_RW_AUTHORIZE_REQUEST ......\r\n");
 #endif
-		        break; // BLE_GATTS_EVT_RW_AUTHORIZE_REQUEST
-				}
+            break; // BLE_GATTS_EVT_RW_AUTHORIZE_REQUEST
+        }
 
-				case BLE_GATTS_EVT_HVN_TX_COMPLETE:
-				{
+        case BLE_GATTS_EVT_HVN_TX_COMPLETE:
+        {
 #if (IF_LOG_OUTPUT)
           printf("================================ Handle Value Notification transmission complete ================================\r\n");
 #endif
 
-					break;
-				}
+          break;
+        }
 //+
-	        default:
+          default:
             // No implementation needed.
             break;
     }
@@ -1417,7 +1417,7 @@ static void services_init(void)
 
     ret = ble_ancs_c_init(&m_ancs_c, &ancs_init_obj);
     APP_ERROR_CHECK(ret);
-		
+
 //+
     ble_nus_init_t nus_init;
 
@@ -1427,7 +1427,7 @@ static void services_init(void)
 
     ret = ble_nus_init(&m_nus, &nus_init);
     APP_ERROR_CHECK(ret);
-//+		
+//+
 }
 
 /**@brief Function for initializing the advertising functionality.
@@ -1498,10 +1498,10 @@ void power_manage(void)
 static void sdh_event_handler_register(void)
 {
   /* Register a handler for SoC events. */
-	/* flash erase/write handler */
-	NRF_SDH_SOC_OBSERVER(m_sys_observer_flash_erase_write, 0, sys_event_flash_erase_write_handler, NULL);
-	/* time slot signal handler */
-	NRF_SDH_SOC_OBSERVER(m_sys_observer_time_slot, 0, nrf_evt_signal_handler, NULL);
+  /* flash erase/write handler */
+  NRF_SDH_SOC_OBSERVER(m_sys_observer_flash_erase_write, 0, sys_event_flash_erase_write_handler, NULL);
+  /* time slot signal handler */
+  NRF_SDH_SOC_OBSERVER(m_sys_observer_time_slot, 0, nrf_evt_signal_handler, NULL);
 }
 
 /********************************************************************************/
@@ -1511,21 +1511,21 @@ void ble_device_name_init(void)
 |
 --------------------------------------------------------------------------------*/
 {
-	uint32_t i;
-	uint32_t device_id0 = NRF_FICR->DEVICEID[0];
-	
-	if (*(uint8_t *)SMART_USIM_DEVICE_NAME_FLASH_ADDR < 16)
-	{
-		for (i=0; i<(*(uint8_t *)SMART_USIM_DEVICE_NAME_FLASH_ADDR) + 1; i++)
-		{
-			BLE_BROADCAST_DEVICE_NAME[i] = *((uint8_t *)SMART_USIM_DEVICE_NAME_FLASH_ADDR + i);
-		}
-	}
-	else
-	{
+  uint32_t i;
+  uint32_t device_id0 = NRF_FICR->DEVICEID[0];
+
+  if (*(uint8_t *)SMART_USIM_DEVICE_NAME_FLASH_ADDR < 16)
+  {
+    for (i=0; i<(*(uint8_t *)SMART_USIM_DEVICE_NAME_FLASH_ADDR) + 1; i++)
+    {
+      BLE_BROADCAST_DEVICE_NAME[i] = *((uint8_t *)SMART_USIM_DEVICE_NAME_FLASH_ADDR + i);
+    }
+  }
+  else
+  {
     sprintf((char *)BLE_BROADCAST_DEVICE_NAME + 12, "%x", (uint8_t)(device_id0 >> 8));
     sprintf((char *)BLE_BROADCAST_DEVICE_NAME + 14, "%x", (uint8_t)device_id0);
-	}
+  }
 }
 
 /********************************************************************************/
@@ -1535,10 +1535,10 @@ void nus_send_bytes(uint8_t *bytes_string, uint16_t bytes_length)
 |
 --------------------------------------------------------------------------------*/
 {
-	uint16_t       length;
+  uint16_t       length;
   uint32_t       err_code;
-	
-  length = bytes_length;	
+
+  length = bytes_length;
   do
   {
     err_code = ble_nus_string_send(&m_nus, bytes_string, &length);
@@ -1552,7 +1552,7 @@ void nus_send_bytes(uint8_t *bytes_string, uint16_t bytes_length)
 /********************************************************************************/
 void init_ble_ancs_c(void)
 {
-	ble_device_name_init( );
+  ble_device_name_init( );
   timers_init();
   scheduler_init();
 }
@@ -1561,22 +1561,22 @@ void init_ble_ancs_c(void)
 void start_ble_ancs_c(void)
 {
   bool erase_bonds = 0;
-  static bool if_initial_start_ble = 0;			
-		
-	if ((*(uint8_t *)BLE_BOND_DEL_STATUS_FLASH_ADDR) & 1)	
-	{
-		erase_bonds = 1;
-		
-	  BLE_BOND_DEL_STATUS_RAM = 0;
-		
-		start_flash_page_update(FLASH_WRITE_DATA_SIZE_IN_WORD, USER_CONFIG_FLASH_ADDR, (uint32_t *)P_UINT8_FLASH_DATA_RAM_BUFFER);
-	}
-		
+  static bool if_initial_start_ble = 0;
+
+  if ((*(uint8_t *)BLE_BOND_DEL_STATUS_FLASH_ADDR) & 1)
+  {
+    erase_bonds = 1;
+
+    BLE_BOND_DEL_STATUS_RAM = 0;
+
+    start_flash_page_update(FLASH_WRITE_DATA_SIZE_IN_WORD, USER_CONFIG_FLASH_ADDR, (uint32_t *)P_UINT8_FLASH_DATA_RAM_BUFFER);
+  }
+
   /* BLE softdevice stack initialization */
-	init_ble_ancs_c( );
-	
+  init_ble_ancs_c( );
+
   ble_stack_init();
-	/* start BLE stack and service */
+  /* start BLE stack and service */
   sdh_event_handler_register();
   gap_params_init();
   gatt_init();
@@ -1585,11 +1585,11 @@ void start_ble_ancs_c(void)
   advertising_init();
   conn_params_init();
 
-	if (if_initial_start_ble == 0)
-	{
+  if (if_initial_start_ble == 0)
+  {
     peer_manager_init();
-		if_initial_start_ble = 1;
-	}
+    if_initial_start_ble = 1;
+  }
 
   // Start execution.
 #if (IF_LOG_OUTPUT)

@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- 
+/* --------------------------------------------------------------------------
 Copyright (c) 2018, Jiacheng Wang
 All rights reserved.
 
@@ -32,13 +32,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 uint32_t phone_command_status_response_0xf2(uint8_t *bytes_command, uint32_t etu_length, uint32_t pin_number_phone);
 uint32_t phone_command_unblock_pin_0x2c(uint8_t *phone_command, uint32_t etu_length);
 uint32_t phone_command_verify_0x20(uint8_t *phone_command, uint32_t etu_length);
-uint32_t phone_command_select_0xa4(uint8_t *phone_command, uint32_t etu_length, 
+uint32_t phone_command_select_0xa4(uint8_t *phone_command, uint32_t etu_length,
          uint32_t start_time_us, uint32_t time_length_us);
 uint32_t phone_command_read_binary_0xb0(uint8_t *phone_command, uint32_t etu_length);
-uint32_t phone_command_update_binary_0xd6(uint8_t *phone_command, uint32_t etu_length, 
+uint32_t phone_command_update_binary_0xd6(uint8_t *phone_command, uint32_t etu_length,
          uint32_t start_time_us, uint32_t time_length_us);
 uint32_t phone_command_read_record_0xb2(uint8_t *phone_command, uint32_t etu_length);
-uint32_t phone_command_update_record_0xdc(uint8_t *phone_command, uint32_t etu_length, 
+uint32_t phone_command_update_record_0xdc(uint8_t *phone_command, uint32_t etu_length,
          uint32_t start_time_us, uint32_t time_length_us);
 uint32_t printf_selected_file(uint64_t selected_file);
 uint32_t sim_command_usim_card_update_binary_0xd6_ble(uint32_t update_file_id, uint32_t start_time_us, uint32_t time_length_us);

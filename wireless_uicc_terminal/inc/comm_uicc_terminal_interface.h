@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- 
+/* --------------------------------------------------------------------------
 Copyright (c) 2018, Jiacheng Wang
 All rights reserved.
 
@@ -35,12 +35,12 @@ void printf_log_tx(uint32_t bytes_size, uint8_t *bytes_infor);
 void printf_log_rx(uint32_t bytes_size, uint8_t *bytes_infor);
 void get_parity_byte(uint32_t length_byte, uint8_t *byte_in, uint8_t *byte_parity);
 void get_parity_bit(uint8_t byte_in, uint8_t *bit_parity);
-uint32_t write_bytes(uint32_t bytes_length, uint8_t *bytes_info, uint32_t etu_length, 
+uint32_t write_bytes(uint32_t bytes_length, uint8_t *bytes_info, uint32_t etu_length,
         uint32_t pin_number);
-uint32_t read_bytes_phone(uint32_t read_length, uint8_t *bytes_info, 
+uint32_t read_bytes_phone(uint32_t read_length, uint8_t *bytes_info,
         uint32_t pin_number, uint32_t etu_length);
 uint32_t parity_bit_check(uint32_t length_byte, uint8_t *byte_in, uint8_t *bit_parity);
-uint32_t read_bytes_ble(uint32_t read_length, uint8_t *bytes_info, uint32_t pin_number, 
+uint32_t read_bytes_ble(uint32_t read_length, uint8_t *bytes_info, uint32_t pin_number,
          uint32_t etu_length, uint32_t start_time_us, uint32_t time_length_us);
 
 #endif

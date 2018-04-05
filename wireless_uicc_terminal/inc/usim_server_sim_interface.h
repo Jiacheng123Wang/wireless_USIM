@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- 
+/* --------------------------------------------------------------------------
 Copyright (c) 2018, Jiacheng Wang
 All rights reserved.
 
@@ -30,7 +30,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 void set_default_usim0(void);
 void set_default_usim0_etu(void);
-#if (PIN_VCC_SIM1 != PIN_NULL)					
+#if (PIN_VCC_SIM1 != PIN_NULL)
 void set_default_usim1(void);
 void set_default_usim1_etu(void);
 #endif

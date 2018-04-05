@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- 
+/* --------------------------------------------------------------------------
 Copyright (c) 2018, Jiacheng Wang
 All rights reserved.
 
@@ -42,11 +42,11 @@ uint32_t start_flash_page_update(uint32_t update_length_in_word, uint32_t flash_
 |
 --------------------------------------------------------------------------------*/
 {
-  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
-	FLASH_UPDATE_WAITING_STAGE = 0;
-	flash_page_update(update_length_in_word, flash_address_update_page, ram_data);
-	
-	return(0);
+  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
+  FLASH_UPDATE_WAITING_STAGE = 0;
+  flash_page_update(update_length_in_word, flash_address_update_page, ram_data);
+
+  return(0);
 }
 
 /********************************************************************************/
@@ -58,63 +58,63 @@ uint32_t flash_page_update(uint32_t update_length_in_word, uint32_t flash_addres
 --------------------------------------------------------------------------------*/
 {
   uint32_t i;
-	
-	/* page erase */ 
-	if (FLASH_UPDATE_WAITING_STAGE == 0)
-	{
-	  if (IF_SOFTDEVICE_RUNNING)
-	  {
-	    if (sd_flash_page_erase(flash_address_update_page / FLASH_PAGE_SIZE) == NRF_SUCCESS)
-		  {
-				FLASH_UPDATE_WAITING_STAGE = 1;
-			  return(0);
-			}
-			else
-			{
-				FLASH_UPDATE_WAITING_STAGE = 0;
-			  return(1);				
-			}
-		}
-		else
-		{
-	    if (ble_flash_page_erase(flash_address_update_page / FLASH_PAGE_SIZE) == NRF_SUCCESS)
-		  {
-				FLASH_UPDATE_WAITING_STAGE = 1;
-			}
-			else
-			{
-				FLASH_UPDATE_WAITING_STAGE = 0;
-			  return(1);				
-			}
-		}		
-	}
-		
-	/* page data words write */
-	if (FLASH_UPDATE_WAITING_STAGE == 1)
-	{
-		if (IF_SOFTDEVICE_RUNNING)
-		{			
-		  if (sd_flash_write((uint32_t *)flash_address_update_page, (uint32_t const *)ram_data, update_length_in_word) != NRF_SUCCESS)
-		  {
-			  FLASH_UPDATE_WAITING_STAGE = 0;
-			  return(1);
-		  }
-		}
-		else
-		{			
-			for (i=0; i< update_length_in_word; i++)
-			{
-		    if (ble_flash_word_write((uint32_t *)flash_address_update_page + i, *(ram_data + i)))
-				{
-				  FLASH_UPDATE_WAITING_STAGE = 0;
-					return(1);	
-				} 
-			} 
-		}		
-	}
-	
-  FLASH_UPDATE_WAITING_STAGE = 0;		
-	return(0);	
+
+  /* page erase */
+  if (FLASH_UPDATE_WAITING_STAGE == 0)
+  {
+    if (IF_SOFTDEVICE_RUNNING)
+    {
+      if (sd_flash_page_erase(flash_address_update_page / FLASH_PAGE_SIZE) == NRF_SUCCESS)
+      {
+        FLASH_UPDATE_WAITING_STAGE = 1;
+        return(0);
+      }
+      else
+      {
+        FLASH_UPDATE_WAITING_STAGE = 0;
+        return(1);
+      }
+    }
+    else
+    {
+      if (ble_flash_page_erase(flash_address_update_page / FLASH_PAGE_SIZE) == NRF_SUCCESS)
+      {
+        FLASH_UPDATE_WAITING_STAGE = 1;
+      }
+      else
+      {
+        FLASH_UPDATE_WAITING_STAGE = 0;
+        return(1);
+      }
+    }
+  }
+
+  /* page data words write */
+  if (FLASH_UPDATE_WAITING_STAGE == 1)
+  {
+    if (IF_SOFTDEVICE_RUNNING)
+    {
+      if (sd_flash_write((uint32_t *)flash_address_update_page, (uint32_t const *)ram_data, update_length_in_word) != NRF_SUCCESS)
+      {
+        FLASH_UPDATE_WAITING_STAGE = 0;
+        return(1);
+      }
+    }
+    else
+    {
+      for (i=0; i< update_length_in_word; i++)
+      {
+        if (ble_flash_word_write((uint32_t *)flash_address_update_page + i, *(ram_data + i)))
+        {
+          FLASH_UPDATE_WAITING_STAGE = 0;
+          return(1);
+        }
+      }
+    }
+  }
+
+  FLASH_UPDATE_WAITING_STAGE = 0;
+  return(0);
 }
 
 #if (IF_SOFTDEIVE_USED)
@@ -128,17 +128,17 @@ void sys_event_flash_erase_write_handler(uint32_t sys_evt, void * p_context)
   switch (sys_evt)
   {
     case NRF_EVT_FLASH_OPERATION_SUCCESS:
-		{
-			if (FLASH_UPDATE_WAITING_STAGE == 1)
-			{
-#if (IF_LOG_OUTPUT)  
-	      printf("-------------------- flash page erase finished, continue to write, FLASH_UPDATE_WAITING_STAGE = %d --------------------\r\n", FLASH_UPDATE_WAITING_STAGE);
+    {
+      if (FLASH_UPDATE_WAITING_STAGE == 1)
+      {
+#if (IF_LOG_OUTPUT)
+        printf("-------------------- flash page erase finished, continue to write, FLASH_UPDATE_WAITING_STAGE = %d --------------------\r\n", FLASH_UPDATE_WAITING_STAGE);
 #endif
-			  rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);	
-			  /* save the user config byte to flash */    
-				flash_page_update(FLASH_WRITE_DATA_SIZE_IN_WORD, USER_CONFIG_FLASH_ADDR, (uint32_t *)P_UINT8_FLASH_DATA_RAM_BUFFER);	
-			}
-		}			
-  }	
+        rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
+        /* save the user config byte to flash */
+        flash_page_update(FLASH_WRITE_DATA_SIZE_IN_WORD, USER_CONFIG_FLASH_ADDR, (uint32_t *)P_UINT8_FLASH_DATA_RAM_BUFFER);
+      }
+    }
+  }
 }
 #endif

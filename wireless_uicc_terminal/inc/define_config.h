@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- 
+/* --------------------------------------------------------------------------
 Copyright (c) 2018, Jiacheng Wang
 All rights reserved.
 
@@ -28,7 +28,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* Custom borad pin profile definition */
 #define PIN_PROFILE                          7
 
-/* if print out the log information of USIM-PHONE interface, for debug purpose 
+/* if print out the log information of USIM-PHONE interface, for debug purpose
 |  1: log information printed
 |  0: not printed */
 #define IF_LOG_OUTPUT                        0
@@ -39,25 +39,25 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define IF_USIM_BINARY_UPDATE                1
 
 /* if convolutional code is used for data transmission link
-|  1: cc coding is used 
+|  1: cc coding is used
 |  0: cc coding not used */
 #define IF_DATA_CC_CODED                     1
 
-/* if convolutional code is used for connection request random access link  
-|  1: cc coding is used 
+/* if convolutional code is used for connection request random access link
+|  1: cc coding is used
 |  0: cc coding not used */
 #define IF_CONNECTION_CC_CODED               0
 
 /* if softdevice BLE stack code is complied in the final target
 |  1: softdevice is compiled in the target
-|  0: not compiled 
+|  0: not compiled
 |  it should be the same as the value in the Makefile */
 #define IF_SOFTDEIVE_USED                    1
 
-/* nRF GIOP pin number for UICC-terminal interface, used for null pin define (1 USIM card case) 
+/* nRF GIOP pin number for UICC-terminal interface, used for null pin define (1 USIM card case)
 |  PIN_VCC_SIM1 == 0xFF: only 1 USIM
 |  PIN_VCC_SIM1 != 0xFF: 2 USIMs             */
-#define PIN_NULL               0xFF          
+#define PIN_NULL               0xFF
 
 #if (PIN_PROFILE == 0)
   #define PIN_DATA_PHONE       12
@@ -102,7 +102,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define PIN_DATA_PHONE        11
   #define PIN_RESET_PHONE       3
   #define PIN_CLOCK_PHONE       4
-  
+
   /* UART pin define */
   #define RX_PIN_NUMBER        8
   #define TX_PIN_NUMBER        6
@@ -140,7 +140,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* 20170722 */
   #define PIN_LED_BLUE          21
   #define PIN_LED_GREEN         18
- 
+
   #define PIN_DATA_PHONE        16
   #define PIN_RESET_PHONE       5
   #define PIN_CLOCK_PHONE       12
@@ -162,7 +162,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* 20170722 */
   #define PIN_LED_BLUE          21
   #define PIN_LED_GREEN         18
- 
+
   #define PIN_DATA_PHONE        14
   #define PIN_RESET_PHONE       5
   #define PIN_CLOCK_PHONE       16
@@ -204,7 +204,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define PIN_DATA_PHONE        11
   #define PIN_RESET_PHONE       3
   #define PIN_CLOCK_PHONE       4
-  
+
   /* UART pin define */
   #define RX_PIN_NUMBER        8
   #define TX_PIN_NUMBER        6
@@ -216,7 +216,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* 20170722 */
   #define PIN_LED_BLUE          21
   #define PIN_LED_GREEN         18
- 
+
   #define PIN_DATA_PHONE        16
   #define PIN_RESET_PHONE       5
   #define PIN_CLOCK_PHONE       14
@@ -241,7 +241,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define PIN_LED_GREEN         16
   #define PIN_LED_WHITE         18
   #define PIN_LED_RED           21
- 
+
   #define PIN_DATA_PHONE        8
   #define PIN_RESET_PHONE       6
   #define PIN_CLOCK_PHONE       14
@@ -262,7 +262,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define PIN_LED_GREEN         16
   #define PIN_LED_WHITE         18
   #define PIN_LED_RED           21
- 
+
   #define PIN_DATA_PHONE        5
   #define PIN_RESET_PHONE       8
   #define PIN_CLOCK_PHONE       1
@@ -281,7 +281,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define PIN_VCC_SIM1          PIN_NULL
 
 #else
-  #error "wrong PIN_PROFILE ......" 
+  #error "wrong PIN_PROFILE ......"
 #endif
 
 /* SIM card reader ETU define, in 16M timer ticks
@@ -315,11 +315,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 // #define CONNECT_STATE_TIME_PHONE      40
 #define CONNECT_STATE_TIME_PHONE             10
 
-/* time for phone do not receive feedback confirm message for wireless connection request from watch, 
+/* time for phone do not receive feedback confirm message for wireless connection request from watch,
 *  in CONNECT_STATE_TIME * CONNECT_STATE_TIME_PHONE * 500ms, phone assume there is no connection between SIM-phone */
 #define PHONE_DISCONNECT_TIME                30
 
-/* time for SIM do not receive wireless connection request from phone, in CONNECT_STATE_TIME * 200ms, 
+/* time for SIM do not receive wireless connection request from phone, in CONNECT_STATE_TIME * 200ms,
 |  SIM assume there is no connection between SIM-phone */
 #define SIM_DISCONNECT_TIME                  300
 
@@ -335,7 +335,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 |  */
 #define RADIO_MODE                           1
 
-/* radio transmission power for data transmissiom 
+/* radio transmission power for data transmissiom
 |  0: -30dBm for nRF51, -40dBm for nRF52
 |  1: -20dBm
 |  2: -16dBm
@@ -343,7 +343,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 |  4: -8dBm
 |  5: -4dBm
 |  6: 0dBm
-|  7: 4dBm 
+|  7: 4dBm
 |  8: 3dBm, nRF52 only */
 #define RADIO_TX_POWER_DATA            7
 /* Tx power level for ACK/NACK feedback */
@@ -391,12 +391,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define CARRIER_FREQ_THRE            94
 #else
   #define CARRIER_FREQ_THRE            90
-#endif  
+#endif
 
 /* maximal carrier frequency colliding detection time, in ms */
 #define MAX_CD_TIME_MS                 10
 /* carrier colliding detection, background signal level in -dBm */
-/* Set the threshold for good carrier frequency search, for radio mode 2Mbps, the minimal measured 
+/* Set the threshold for good carrier frequency search, for radio mode 2Mbps, the minimal measured
 |  RSSI is -93dBm, for mode 250Kbps and 1Mbps, the minimal measured RSSI is -102dBm */
 #define TX_RSSI_THRED                  CARRIER_FREQ_THRE
 
@@ -408,7 +408,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #if (IF_DATA_CC_CODED || IF_CONNECTION_CC_CODED)
   /* cc encoder byte number for each coding block = (1 << ENCODE_BLOCK_INDEX ) */
   #define ENCODE_BLOCK_INDEX          0
-#endif 
+#endif
 
 /* interrupt priority for events */
 #define TIMER1_IRQ_PRIORITY         2

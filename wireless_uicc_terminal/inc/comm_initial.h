@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- 
+/* --------------------------------------------------------------------------
 Copyright (c) 2018, Jiacheng Wang
 All rights reserved.
 
@@ -32,7 +32,7 @@ uint32_t start_oscillator_16m(void);
 void stop_oscillator_16m(void);
 uint8_t byte_string_comparison(uint32_t byte_length, uint8_t *byte_1, uint8_t *byte_2);
 void usim_data_initialization(void);
-void watch_dog_timer_init(uint32_t time_out_s); 
+void watch_dog_timer_init(uint32_t time_out_s);
 void update_user_configuration(void);
 void update_etu_time(void);
 uint8_t random_vector_generate(uint8_t *p_buff, uint8_t size, uint32_t start_time_us, uint32_t time_length_us, uint8_t if_bias_correction);

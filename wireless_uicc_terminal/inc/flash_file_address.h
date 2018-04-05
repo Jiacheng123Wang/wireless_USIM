@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- 
+/* --------------------------------------------------------------------------
 Copyright (c) 2018, Jiacheng Wang
 All rights reserved.
 
@@ -51,7 +51,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define USER_CONFIG_OFFSET_BYTES             0
 #define USIM0_EF_OFFSET_BYTES                256
 #define USIM1_EF_OFFSET_BYTES                640
-/* offset USER_CONFIG_OFFSET_BYTES: user setting configurations 
+/* offset USER_CONFIG_OFFSET_BYTES: user setting configurations
 | byte 1 ~ 16: user password for wireless SIM connection authentication
 | byte 17 ~ 20: wireless SIM authentication flag, 1: authentication on, 0: authentication off
 */
@@ -104,7 +104,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define ICCID_2FE2_FIXED_DATA_OFFSET_IN_CONFIG                  (USER_CONFIG_OFFSET_BYTES + 93)
 
 /* total bytes number of user config */
-#define USER_CONFIG_ALL_BYTES_LENGTH                            103                        
+#define USER_CONFIG_ALL_BYTES_LENGTH                            103
 
 /*---------------------- user config flash data address -----------------------*/
 /* smart wireless USIM name for BLE device: 4 words = 16 bytes */
@@ -117,9 +117,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define LED_PATTERN_FLASH_ADDR                 (USER_CONFIG_FLASH_ADDR + LED_PATTERN_OFFSET_IN_CONFIG)
 /* logical address: 1 byte */
 #define DEVICE_LOG_ADD_FLASH_ADDR              (USER_CONFIG_FLASH_ADDR + DEVICE_LOG_ADD_OFFSET_IN_CONFIG)
-/* wireless SIM air interface on/off 
-|  0: wireless SIM off 
-|  1: wireless SIM on */       
+/* wireless SIM air interface on/off
+|  0: wireless SIM off
+|  1: wireless SIM on */
 #define WIRELESS_SIM_ON_OFF_FLASH_ADDR          (USER_CONFIG_FLASH_ADDR + WIRELESS_SIM_ON_OFF_OFFSET_IN_CONFIG)
 /* USIM server side call On/Off flag: 1 word = 4 bytes */
 /* 0: USIM server side call off */
@@ -131,19 +131,19 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define BLE_BOND_DEL_STATUS_FLASH_ADDR          (USER_CONFIG_FLASH_ADDR + BLE_BOND_DELETE_OFFSET_IN_CONFIG)
 /* wireless USIM mode
 0: fixed wireless USIM client mode
-1: wireless USIM auto mode, the USIM card presnece detection is performed, 
-   if there ther are USIM cards, working at server mode, 
+1: wireless USIM auto mode, the USIM card presnece detection is performed,
+   if there ther are USIM cards, working at server mode,
    if there is no USIM card, swith to client mode */
 #define WIRELESS_USIM_WORK_MODE_FLASH_ADDR      (USER_CONFIG_FLASH_ADDR + WIRELESS_USIM_WORK_MODE_OFFSET_IN_CONFIG)
-/* USIM clock frequency flag, 
+/* USIM clock frequency flag,
 |  byte 0, 1: 3.25MHz, 2: 3.84MHz, others: random selection between 3.25MHz and 3.84MHz
 |  byte 1, 0: no updated, 1: updated
 |  byte 2, ETU ticks byte, 0x94/0x95/0x96 */
 #define PHONE_USIM_CLK_FREQ_FLASH_ADDR          (USER_CONFIG_FLASH_ADDR + USIM_CLK_FREQ_OFFSET_IN_CONFIG)
 /* the default used USIM, 0: USIM0, 1: USIM1 */
 #define DEFAULT_USED_USIM_FLASH_ADDR            (USER_CONFIG_FLASH_ADDR + DEFAULT_USED_USIM_OFFSET_IN_CONFIG)
-/* USIM data read mode when phone power on, 4bytes. 
-1: read ICCID data and check it with the data in flash, 
+/* USIM data read mode when phone power on, 4bytes.
+1: read ICCID data and check it with the data in flash,
 0: skip read ICCID, only check if the flach data is available */
 #define USIM_DATA_MODE_FLASH_ADDR                 (USER_CONFIG_FLASH_ADDR + USIM_DATA_MODE_OFFSET_IN_CONFIG)
 /* ICCID data mode
@@ -158,7 +158,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* fixed ICCID data
 20-digital, 10 bytes */
 #define ICCID_2FE2_FIXED_DATA_FLASH_ADDR           (USER_CONFIG_FLASH_ADDR + ICCID_2FE2_FIXED_DATA_OFFSET_IN_CONFIG)
- 
+
 
 /*--------------------- USIM card EF total file size ----------------------*/
 /* total size of EF data save to flash */
@@ -393,18 +393,18 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* flag if the USIM file 6f42 data in flash is updated from USIM card: 1 byte */
 #define FLAG_USIM1_EF_6F42_FLASH_ADDR (FLAG_USIM1_EF_2FE2_FLASH_ADDR + 17)
 
-/* RAM buffer for data store 
+/* RAM buffer for data store
 |  byte 0 ~ 255:     user config settings
-|  byte 256 ~ 639:   USIM0 EF data 
+|  byte 256 ~ 639:   USIM0 EF data
 |  byte 640 ~ 1023:  USIM1 EF data
-----------------------------------------------------------------------*/			
+----------------------------------------------------------------------*/
 uint8_t P_UINT8_FLASH_DATA_RAM_BUFFER[FLASH_WRITE_DATA_SIZE_IN_WORD << 2];
 // uint8_t P_UINT8_FLASH_DATA_RAM_BUFFER[4096];
 
 /*----------------------- user config settings in RAM buffer ------------------------*/
 /* smart USIM device name for BLE briadcast */
 #define SMART_USIM_DEVICE_NAME_RAM           (P_UINT8_FLASH_DATA_RAM_BUFFER + SMART_USIM_DEVICE_NAME_OFFSET_IN_CONFIG)
-/* user passwoord for wireless SIM air interface authentication, 16 bytes = 128 bits, 
+/* user passwoord for wireless SIM air interface authentication, 16 bytes = 128 bits,
 |  will be transmitted in the data packet */
 #define USER_PASSWORD_RAM                    (P_UINT8_FLASH_DATA_RAM_BUFFER + USER_PASSWORD_OFFSET_IN_CONFIG)
 /* system for wireless SIM air interface authentication, 16 bytes = 128 bits,
@@ -417,9 +417,9 @@ uint8_t P_UINT8_FLASH_DATA_RAM_BUFFER[FLASH_WRITE_DATA_SIZE_IN_WORD << 2];
 #define LED_PATTERN_RAM                      (P_UINT8_FLASH_DATA_RAM_BUFFER + LED_PATTERN_OFFSET_IN_CONFIG)
 /* device logical address saved in RAM: 1 ~ 7 */
 #define DEVICE_LOGICAL_ADDRESS_RAM           (*(P_UINT8_FLASH_DATA_RAM_BUFFER + DEVICE_LOG_ADD_OFFSET_IN_CONFIG))
-/* wireless SIM air interface on/off 
-|  0: wireless SIM off 
-|  1: wireless SIM on */       
+/* wireless SIM air interface on/off
+|  0: wireless SIM off
+|  1: wireless SIM on */
 #define WIRELESS_SIM_ON_OFF_RAM              (*(P_UINT8_FLASH_DATA_RAM_BUFFER + WIRELESS_SIM_ON_OFF_OFFSET_IN_CONFIG))
 /* USIM server side call On/Off flag: 1 word = 4 bytes */
 /* 0: USIM server side call off */
@@ -431,30 +431,30 @@ uint8_t P_UINT8_FLASH_DATA_RAM_BUFFER[FLASH_WRITE_DATA_SIZE_IN_WORD << 2];
 #define BLE_BOND_DEL_STATUS_RAM              (*(P_UINT8_FLASH_DATA_RAM_BUFFER + BLE_BOND_DELETE_OFFSET_IN_CONFIG))
 /* wireless USIM mode
 0: fixed wireless USIM client mode
-1: wireless USIM auto mode, the USIM card presnece detection is performed, 
-   if there ther are USIM cards, working at server mode, 
+1: wireless USIM auto mode, the USIM card presnece detection is performed,
+   if there ther are USIM cards, working at server mode,
    if there is no USIM card, swith to client mode */
 #define WIRELESS_USIM_WORK_MODE_RAM          (*(P_UINT8_FLASH_DATA_RAM_BUFFER + WIRELESS_USIM_WORK_MODE_OFFSET_IN_CONFIG))
-/* USIM clock frequency flag, 
+/* USIM clock frequency flag,
 |  byte 0, 1: 3.25MHz, 2: 3.84MHz, others: random selection between 3.25MHz and 3.84MHz
 |  byte 1, 0: no updated, 1: updated
 |  byte 2, ETU ticks byte, 0x94/0x95/0x96 */
 #define PHONE_USIM_CLK_FREQ_RAM              (P_UINT8_FLASH_DATA_RAM_BUFFER + USIM_CLK_FREQ_OFFSET_IN_CONFIG)
 /* the default used USIM, 0: USIM0, 1: USIM1 */
-#define DEFAULT_USED_USIM_RAM				         (*(P_UINT8_FLASH_DATA_RAM_BUFFER + DEFAULT_USED_USIM_OFFSET_IN_CONFIG))
-/* USIM data read mode when phone power on, 4bytes. 
-1: read ICCID data and check it with the data in flash, 
+#define DEFAULT_USED_USIM_RAM                 (*(P_UINT8_FLASH_DATA_RAM_BUFFER + DEFAULT_USED_USIM_OFFSET_IN_CONFIG))
+/* USIM data read mode when phone power on, 4bytes.
+1: read ICCID data and check it with the data in flash,
 0: skip read ICCID, only check if the flach data is available */
-#define USIM_DATA_MODE_RAM                   (*(P_UINT8_FLASH_DATA_RAM_BUFFER + USIM_DATA_MODE_OFFSET_IN_CONFIG))   
+#define USIM_DATA_MODE_RAM                   (*(P_UINT8_FLASH_DATA_RAM_BUFFER + USIM_DATA_MODE_OFFSET_IN_CONFIG))
 /* ICCID data mode
 0: read the 2FE2 data from USIM card, from USIM0 and USIM1 respectively
 1: both USIM0 and USIM1 use the same 2FE2 data, read from USIM0
 2: both USIM0 and USIM1 use the same fixed 2FE2 data */
-#define ICCID_2FE2_DATA_MODE_RAM             (*(P_UINT8_FLASH_DATA_RAM_BUFFER + ICCID_2FE2_DATA_MODE_OFFSET_IN_CONFIG)) 
+#define ICCID_2FE2_DATA_MODE_RAM             (*(P_UINT8_FLASH_DATA_RAM_BUFFER + ICCID_2FE2_DATA_MODE_OFFSET_IN_CONFIG))
 /* BEL stack softdevice on/off when phone command authentication 0x88
 0: BLE off when 0x88 command
 1: BLE off when 0x88 command */
-#define AUTHEN_0x88_BLE_ON_OFF_RAM           (*(P_UINT8_FLASH_DATA_RAM_BUFFER + AUTHEN_0x88_BLE_ON_OFF_OFFSET_IN_CONFIG)) 
+#define AUTHEN_0x88_BLE_ON_OFF_RAM           (*(P_UINT8_FLASH_DATA_RAM_BUFFER + AUTHEN_0x88_BLE_ON_OFF_OFFSET_IN_CONFIG))
 /* fixed ICCID data
 20-digital, 10 bytes */
 #define ICCID_2FE2_FIXED_DATA_MODE_RAM       (P_UINT8_FLASH_DATA_RAM_BUFFER + ICCID_2FE2_FIXED_DATA_OFFSET_IN_CONFIG)
@@ -463,6 +463,6 @@ uint8_t P_UINT8_FLASH_DATA_RAM_BUFFER[FLASH_WRITE_DATA_SIZE_IN_WORD << 2];
 /*------------------------- USIM card EF data in RAM buffer ----------------------------*/
 #define USIM0_EF_DATA_RAM                    (P_UINT8_FLASH_DATA_RAM_BUFFER + USIM0_EF_OFFSET_BYTES)
 #define USIM1_EF_DATA_RAM                    (P_UINT8_FLASH_DATA_RAM_BUFFER + USIM1_EF_OFFSET_BYTES)
-	
+
 #endif
 

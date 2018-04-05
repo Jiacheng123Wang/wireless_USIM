@@ -1,4 +1,4 @@
-/* -------------------------------------------------------------------------- 
+/* --------------------------------------------------------------------------
 Copyright (c) 2018, Jiacheng Wang
 All rights reserved.
 
@@ -27,7 +27,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-				
+
 void saadc_init_config(void);
 void phone_sim_pin_setup(void);
 void gpio_event_in_config(void);
@@ -47,38 +47,38 @@ uint32_t usim_existence_detection(void);
 uint32_t soft_warm_reset_phone(uint32_t etu_length, uint32_t pin_number_io);
 uint32_t write_phone_response(uint32_t bytes_length, uint8_t *bytes_info, uint32_t etu_length);
 uint32_t phone_command_pin_0x24(uint8_t *bytes_command, uint32_t etu_length_phone);
-uint32_t phone_command_terminal_profile_0x10(uint8_t *phone_command, uint32_t etu_length, 
+uint32_t phone_command_terminal_profile_0x10(uint8_t *phone_command, uint32_t etu_length,
          uint32_t pin_number_phone);
 uint32_t phone_command_fetch_0x12(uint8_t *bytes_command, uint32_t etu_length, uint32_t pin_number_phone);
 uint32_t phone_command_fetch_reset(uint8_t *bytes_command, uint32_t etu_length, uint32_t pin_number_phone);
-uint32_t phone_command_fetch_diaplay_text(uint8_t *bytes_command, uint8_t string_length, 
+uint32_t phone_command_fetch_diaplay_text(uint8_t *bytes_command, uint8_t string_length,
          uint8_t *display_string, uint32_t etu_length, uint32_t pin_number_phone);
-uint32_t phone_command_fetch_diaplay_text_variable(uint8_t *bytes_command, uint8_t string_length, 
+uint32_t phone_command_fetch_diaplay_text_variable(uint8_t *bytes_command, uint8_t string_length,
          uint8_t *display_string, uint32_t etu_length, uint32_t pin_number_phone, uint8_t variable_bytes);
-uint32_t phone_command_fetch_at_cfun0(uint8_t *bytes_command, uint32_t etu_length, 
+uint32_t phone_command_fetch_at_cfun0(uint8_t *bytes_command, uint32_t etu_length,
          uint32_t pin_number_phone);
-uint32_t phone_command_fetch_idle_mode_text(uint8_t *bytes_command, uint8_t string_length, 
+uint32_t phone_command_fetch_idle_mode_text(uint8_t *bytes_command, uint8_t string_length,
          uint8_t *display_string, uint32_t etu_length, uint32_t pin_number_phone);
-uint32_t phone_command_fetch_idle_mode_text_variable(uint8_t *bytes_command, uint8_t string_length, 
+uint32_t phone_command_fetch_idle_mode_text_variable(uint8_t *bytes_command, uint8_t string_length,
          uint8_t *display_string, uint32_t etu_length, uint32_t pin_number_phone);
 uint32_t phone_command_search_record_0xa2(uint8_t *phone_command, uint32_t etu_length);
 uint32_t phone_command_envelope_0xc2(uint8_t *phone_command, uint32_t etu_length, uint32_t start_time_us, uint32_t time_length_us);
 uint32_t phone_command_terminal_response_0x14(uint8_t *phone_command, uint32_t etu_length,
          uint32_t start_time_us, uint32_t time_length_us);
-uint32_t phone_command_fetch_set_initial_item(uint8_t *bytes_command, uint32_t etu_length, 
+uint32_t phone_command_fetch_set_initial_item(uint8_t *bytes_command, uint32_t etu_length,
          uint32_t pin_number_phone);
 uint32_t phone_command_manage_channel_0x70(uint8_t *bytes_command, uint32_t etu_length_phone);
 uint32_t phone_command_default_response(uint8_t *bytes_command, uint32_t etu_length, uint32_t pin_number_phone);
 uint32_t phone_command_authentication_wireless_test(void);
-uint32_t phone_command_fetch_get_input_command_line(uint8_t *bytes_command, uint32_t etu_length, 
-				 uint32_t pin_number_phone);
-uint32_t phone_command_fetch_update_iccid(uint8_t *bytes_command, uint32_t etu_length, 
-				 uint32_t pin_number_phone);
+uint32_t phone_command_fetch_get_input_command_line(uint8_t *bytes_command, uint32_t etu_length,
+         uint32_t pin_number_phone);
+uint32_t phone_command_fetch_update_iccid(uint8_t *bytes_command, uint32_t etu_length,
+         uint32_t pin_number_phone);
 uint32_t usta_command_line(uint8_t *command_line_string);
-uint32_t phone_command_fetch_set_menu(uint8_t *bytes_command, uint32_t etu_length, 
+uint32_t phone_command_fetch_set_menu(uint8_t *bytes_command, uint32_t etu_length,
      uint32_t pin_number_phone, uint8_t next_fetch_bytes_length);
 uint32_t phone_usat_menu_selection(uint8_t usat_menu_type, uint8_t *status_bytes);
 
 #endif
 
-        
+
