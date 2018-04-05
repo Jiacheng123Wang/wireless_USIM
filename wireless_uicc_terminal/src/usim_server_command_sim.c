@@ -108,7 +108,7 @@ void main_usim_server_phone_command(void)
 				IF_2FE2_SELECTED = 0;
 
 			  write_bytes(1, confirm_bytes, ETU_TICKS_PHONE, PIN_DATA_PHONE);
-			  write_bytes(10, ICCID_2FE2_DATA, ETU_TICKS_PHONE, PIN_DATA_PHONE);
+			  write_bytes(10, ICCID_2FE2_FIXED_DATA_MODE_RAM, ETU_TICKS_PHONE, PIN_DATA_PHONE);
 			  write_bytes(2, status_bytes, ETU_TICKS_PHONE, PIN_DATA_PHONE);
 			}
 			else

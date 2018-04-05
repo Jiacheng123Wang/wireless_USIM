@@ -97,6 +97,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define FETCH_COMMAND_TYPE_BLE_ON_OFF_TEXT_DISPLAY                            61
 #define FETCH_COMMAND_TYPE_WIRELESS_SIM_ON_OFF_TEXT_DISPLAY                   62
 #define FETCH_COMMAND_TYPE_BLE_ON_OFF_0X88_TEXT_DISPLAY                       63
+#define FETCH_COMMAND_TYPE_UPDATE_ICCID		                                    64
+#define FETCH_COMMAND_TYPE_UPDATE_ICCID_TEXT_DISPLAY                          65
 
 /* idle text to indicate the wireless USIM status */
 #define IDLE_MODE_TEXT_TYPE_WIRELESS_USIM0_SIM_ON_SERVER                      1
@@ -115,7 +117,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define USAT_MENU_USIM_SWITCH                                   3
 #define USAT_MENU_BLE_ON_OFF                                    4
 #define USAT_MENU_CONFIG_SETTINGS                               5
-#define USAT_MENU_DEVICE_RESET                                  6
+#define USAT_MENU_UPDATE_ICCID                                  6
+#define USAT_MENU_DEVICE_RESET                                  7
 
 /* task queue position, require run task with BLE stopped */
 #define BLE_STOPPED_TASK_CONFIG_RESTORE_POS                     1
@@ -157,6 +160,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define FLASH_DATA_WRITE_CHECK_ICCID_2FE2_DATA_MODE_OFFSET_POS               11
 #define FLASH_DATA_WRITE_CHECK_WIRELESS_USIM_WORK_MODE_OFFSET_POS            12
 #define FLASH_DATA_WRITE_CHECK_BLE_ON_OFF_0X88_COMMAND_OFFSET_POS            13
+#define FLASH_DATA_WRITE_CHECK_ICCID_2FE2_FIXED_DATA_OFFSET_POS              14
 	
 /* USIM EF data update time lot stage, for binary update command */	
 #define SIM_COMMAND_UPDATE_BINARY_0XD6_BLE_Stage0                  0

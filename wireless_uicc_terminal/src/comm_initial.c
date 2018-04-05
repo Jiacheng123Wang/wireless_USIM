@@ -248,12 +248,22 @@ void usim_data_initialization(void)
 	0: read the 2FE2 data from USIM card, from USIM0 and USIM1 respectively
 	1: both USIM0 and USIM1 use the same 2FE2 data, read from USIM0
 	2: both USIM0 and USIM1 use the same fixed 2FE2 data */
-	ICCID_2FE2_DATA_MODE_RAM = 0;
+	ICCID_2FE2_DATA_MODE_RAM = 2;
 	/* BEL stack softdevice on/off when phone command authentication 0x88
 	0: BLE off when 0x88 command
 	1: BLE on when 0x88 command */
-	AUTHEN_0x88_BLE_ON_OFF_RAM = 0; 
+	AUTHEN_0x88_BLE_ON_OFF_RAM = 0;
 	
+  *(ICCID_2FE2_FIXED_DATA_MODE_RAM + 0) = 0x98;
+	*(ICCID_2FE2_FIXED_DATA_MODE_RAM + 1) = 0x10;
+	*(ICCID_2FE2_FIXED_DATA_MODE_RAM + 2) = 0x14;
+	*(ICCID_2FE2_FIXED_DATA_MODE_RAM + 3) = 0x30;
+	*(ICCID_2FE2_FIXED_DATA_MODE_RAM + 4) = 0x72;
+	*(ICCID_2FE2_FIXED_DATA_MODE_RAM + 5) = 0x59;
+	*(ICCID_2FE2_FIXED_DATA_MODE_RAM + 6) = 0x92;
+	*(ICCID_2FE2_FIXED_DATA_MODE_RAM + 7) = 0x51;
+	*(ICCID_2FE2_FIXED_DATA_MODE_RAM + 8) = 0x45;
+	*(ICCID_2FE2_FIXED_DATA_MODE_RAM + 9) = 0x53;	
   /* write the data bytes to flash */
 	for (i=0; i<FLASH_WRITE_DATA_SIZE_IN_WORD; i++)
 	{

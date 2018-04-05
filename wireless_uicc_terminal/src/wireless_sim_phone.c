@@ -80,6 +80,7 @@ extern uint8_t WIRELESS_USIM_WORK_MODE_SUCCESSFULLY_DISPLAY_TEXT[];
 extern uint8_t BLE_ON_OFF_DISPLAY_TEXT[];
 extern uint8_t WIRELESS_SIM_ON_OFF_DISPLAY_TEXT[];
 extern uint8_t BLE_ON_OFF_0X88_DISPLAY_TEXT[];
+extern uint8_t FIXED_ICCID_DATA_DISPLAY_TEXT[];
 
 #if (IF_SOFTDEIVE_USED)
 extern volatile uint8_t    ANCS_NOTIF_LED_PATTERN[ANCS_NOTIF_LED_PATTERN_TYPE_TOTAL_NUMBER];
@@ -950,6 +951,20 @@ void flash_data_write_check(void)
 				/* set USAT command mark to display text on phone screen */
 		    FETCH_COMMAND_TYPE = FETCH_COMMAND_TYPE_BLE_ON_OFF_0X88_TEXT_DISPLAY;
 		    USAT_BYTE_LENGTH_BACK = 14 + strlen((char *)BLE_ON_OFF_0X88_DISPLAY_TEXT);				
+			}			
+			else if ((FLASH_DATA_WRITE_CHECK_TASK_QUEUE >> FLASH_DATA_WRITE_CHECK_ICCID_2FE2_FIXED_DATA_OFFSET_POS) & 1)
+			{
+#if (IF_LOG_OUTPUT)
+		    printf ("===============================================================================\r\n");
+		    printf ("============= Hi, the same value, fixed ICCID data update flash write completed =============\r\n");
+		    printf ("===============================================================================\r\n");
+#endif		
+				/* clear the mark bit for flash data write check */
+				FLASH_DATA_WRITE_CHECK_TASK_QUEUE &= (~(1 << FLASH_DATA_WRITE_CHECK_ICCID_2FE2_FIXED_DATA_OFFSET_POS));
+				
+				/* set USAT command mark to display text on phone screen */
+	      FETCH_COMMAND_TYPE = FETCH_COMMAND_TYPE_UPDATE_ICCID_TEXT_DISPLAY;  
+	      USAT_BYTE_LENGTH_BACK = 14 + strlen((char *)FIXED_ICCID_DATA_DISPLAY_TEXT);
 			}			
 			else
 		  {

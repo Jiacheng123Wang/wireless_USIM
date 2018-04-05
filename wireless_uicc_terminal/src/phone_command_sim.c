@@ -1164,6 +1164,9 @@ uint32_t phone_command_select_0xa4(uint8_t *phone_command, uint32_t etu_length,
 
           case 0x7fff6f42:
 					{
+						/* in SD running, reset the system in phone command response time out */
+			      return(1);
+						
             selecet_fd[1] = 0x1e;    
             write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
             
@@ -1863,6 +1866,9 @@ uint32_t phone_command_select_0xa4(uint8_t *phone_command, uint32_t etu_length,
 
         case 0x7fff6f42:
 				{
+					/* in SD running, reset the system in phone command response time out */
+		      return(1);
+					
           selecet_fd[1] = 0x1e;    
           write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
           
@@ -2647,6 +2653,12 @@ uint32_t phone_command_read_binary_0xb0(uint8_t *phone_command, uint32_t etu_len
 	
     switch ((*(phone_command + 3)) & 0x1f)
     {
+			/* 5f3b4f52 */
+	    case 0x02:
+			{
+				phone_command_read_binary_file_data(phone_command, etu_length, 0x4f52, tmp_length, read_offset, confirm_bytes, status_bytes);
+        break;
+			}
 			/* 6FAD */
 	    case 0x03:
 			{
@@ -2867,7 +2879,7 @@ uint32_t phone_command_read_binary_0xb0(uint8_t *phone_command, uint32_t etu_len
         else if (*((uint8_t *)ICCID_2FE2_DATA_MODE_FLASH_ADDR) == 2)
 				{					 
 				  write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
-				  write_bytes(tmp_length, ICCID_2FE2_DATA, etu_length, PIN_DATA_PHONE); 
+				  write_bytes(tmp_length, ICCID_2FE2_FIXED_DATA_MODE_RAM, etu_length, PIN_DATA_PHONE); 
 				  write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
 				}
         break;
@@ -4094,7 +4106,7 @@ uint32_t phone_command_update_record_0xdc(uint8_t *phone_command, uint32_t etu_l
 			status_bytes[0] = 0x91;
 			status_bytes[1] = USAT_BYTE_LENGTH_BACK_INIT;
 		}
-		else if ((phone_dial_command_type >= 0x0001) && (phone_dial_command_type <= 0x0006))
+		else if ((phone_dial_command_type >= 0x0001) && (phone_dial_command_type <= 0x0007))
 		{
 			phone_usat_menu_selection(phone_dial_command_type, status_bytes);
 		}

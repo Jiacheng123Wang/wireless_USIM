@@ -36,8 +36,7 @@ extern uint8_t   FREQ_BIN_PATTEN[83];
 extern uint8_t   PASSWORD_SHUFFLE[16];	 
 extern uint8_t   SYSTEM_KEY_SHUFFLE[16];	 
 extern uint32_t  PHONE_CONNECTION_REQUEST_TIME[7];
-extern uint8_t   ICCID_2FE2_DATA[10];
-	
+
 extern volatile uint16_t   ETU_TICKS_PHONE_ATR_SESSION;                  
 extern volatile uint16_t   ETU_TICKS_PHONE;                           
 extern volatile uint16_t   ETU_TICKS_SIM;                            

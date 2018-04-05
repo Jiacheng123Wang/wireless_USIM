@@ -100,9 +100,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define ICCID_2FE2_DATA_MODE_OFFSET_IN_CONFIG                   (USER_CONFIG_OFFSET_BYTES + 91)
 /* size: 1 byte */
 #define AUTHEN_0x88_BLE_ON_OFF_OFFSET_IN_CONFIG                 (USER_CONFIG_OFFSET_BYTES + 92)
+/* size: 10 byte */
+#define ICCID_2FE2_FIXED_DATA_OFFSET_IN_CONFIG                  (USER_CONFIG_OFFSET_BYTES + 93)
 
 /* total bytes number of user config */
-#define USER_CONFIG_ALL_BYTES_LENGTH                            93                        
+#define USER_CONFIG_ALL_BYTES_LENGTH                            103                        
 
 /*---------------------- user config flash data address -----------------------*/
 /* smart wireless USIM name for BLE device: 4 words = 16 bytes */
@@ -153,6 +155,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 0: BLE off when 0x88 command
 1: BLE off when 0x88 command */
 #define AUTHEN_0x88_BLE_ON_OFF_FLASH_ADDR         (USER_CONFIG_FLASH_ADDR + AUTHEN_0x88_BLE_ON_OFF_OFFSET_IN_CONFIG)
+/* fixed ICCID data
+20-digital, 10 bytes */
+#define ICCID_2FE2_FIXED_DATA_FLASH_ADDR           (USER_CONFIG_FLASH_ADDR + ICCID_2FE2_FIXED_DATA_OFFSET_IN_CONFIG)
  
 
 /*--------------------- USIM card EF total file size ----------------------*/
@@ -450,6 +455,9 @@ uint8_t P_UINT8_FLASH_DATA_RAM_BUFFER[FLASH_WRITE_DATA_SIZE_IN_WORD << 2];
 0: BLE off when 0x88 command
 1: BLE off when 0x88 command */
 #define AUTHEN_0x88_BLE_ON_OFF_RAM           (*(P_UINT8_FLASH_DATA_RAM_BUFFER + AUTHEN_0x88_BLE_ON_OFF_OFFSET_IN_CONFIG)) 
+/* fixed ICCID data
+20-digital, 10 bytes */
+#define ICCID_2FE2_FIXED_DATA_MODE_RAM       (P_UINT8_FLASH_DATA_RAM_BUFFER + ICCID_2FE2_FIXED_DATA_OFFSET_IN_CONFIG)
 
 
 /*------------------------- USIM card EF data in RAM buffer ----------------------------*/

@@ -101,7 +101,7 @@ uint8_t CONFIG_RESTORE_DISPLAY_TEXT[] = "Restore Config to Default Setting";
 uint8_t LED_PATTERN_UPDATED_DISPLAY_TEXT[] = "LED Pattern Updated";
 uint8_t LED_PATTERN_ERROR_DISPLAY_TEXT[] = "LED Pattern String Length is not Enough, Please Try Again.";
 uint8_t WRONG_CONFIG_SETTING_KEY_WORD_DISPLAY_TEXT[] = "Config setting command input wrong, input \"000\" for command list";
-uint8_t CONFIG_SETTINGS_KEY_WORD_LIST_DISPLAY_TEXT[] = "Command: RST, LED, PWD, KEY, NAM, CRS, CSY, DBN, USM, RCR, ADD, ICD, UWM, DUM, AUT";
+uint8_t CONFIG_SETTINGS_KEY_WORD_LIST_DISPLAY_TEXT[] = "Command: RST, LED, PWD, KEY, NAM, CRS, CSY, DBN, USM, RCR, ADD, ICD, UWM, DUM, AUT, NAA";
 uint8_t USIM0_EF_UPDATE_DISPLAY_TEXT[] = "Update USIM1 File Data";
 uint8_t USIM1_EF_UPDATE_DISPLAY_TEXT[] = "Update USIM2 File Data";
 uint8_t USIM_EF_UPDATE_ERROR_DISPLAY_TEXT[] = "Update USIM File Data Error, Wireless USIM Client Mode or Wrong USIM No. (Correct: 1 or 2)";
@@ -123,7 +123,7 @@ uint8_t BLE_ON_0X88_COMMAND_DISPLAY_TEXT[] = "Set BLE On for Phone Command Authe
 uint8_t BLE_ON_OFF_DISPLAY_TEXT[] = "BLE On/Off Set Successfully";
 uint8_t WIRELESS_SIM_ON_OFF_DISPLAY_TEXT[] = "Wireless USIM On/Off Set Successfully";
 uint8_t BLE_ON_OFF_0X88_DISPLAY_TEXT[] = "BLE On/Off for 0x88 Command Set Successfully";
-	
+uint8_t FIXED_ICCID_DATA_DISPLAY_TEXT[] ="Fixed ICCID Data Update  Successfully";
 /********************************************************************************/
 void phone_sim_pin_setup(void)
 /*--------------------------------------------------------------------------------
@@ -1869,6 +1869,36 @@ uint32_t phone_command_fetch_get_input_command_line(uint8_t *bytes_command, uint
 }
 
 /********************************************************************************/
+uint32_t phone_command_fetch_update_iccid(uint8_t *bytes_command, uint32_t etu_length, 
+     uint32_t pin_number_phone)
+/*--------------------------------------------------------------------------------
+| USAT command to get phone input command line interface
+|
+--------------------------------------------------------------------------------*/
+{
+  uint8_t USAT_bytes_0[30] = {0x12, 0xd0, 70, 0x81, 0x3, 0x1, 0x23, 0x1, 0x82, 0x2, 0x81, 0x82, 0x8d, 55, 0x4, 
+                             'C', 'u', 'r', 'r', 'e', 'n', 't', ' ', 'I', 'C', 'C', 'I', 'D', ':', ' '};
+  uint8_t USAT_bytes_1[20];
+  uint8_t USAT_bytes_2[25] = {'.', ' ', 'I', 'n', 'p', 'u', 't', ' ', 'N', 'e', 'w', ' ', 'I', 'C', 'C', 'I', 'D', ':', ' ',
+		                          0x91, 0x2, 20, 20, 0x90, 0x0};
+  uint8_t i;
+	
+	/* initial the ICCID */
+	for (i=0; i<10; i++)
+	{
+		USAT_bytes_1[2 * i] = (*(ICCID_2FE2_FIXED_DATA_MODE_RAM + i) & 0xf) | 0x30;
+		USAT_bytes_1[2 * i + 1] = ((*(ICCID_2FE2_FIXED_DATA_MODE_RAM + i) >> 4) & 0xf) | 0x30;
+	}
+	
+  /* write SIM response to phone */   
+  write_bytes(30, USAT_bytes_0, etu_length, pin_number_phone);   
+  write_bytes(20, USAT_bytes_1, etu_length, pin_number_phone);   
+  write_bytes(25, USAT_bytes_2, etu_length, pin_number_phone);   
+  
+  return(0);
+}
+
+/********************************************************************************/
 uint32_t phone_command_fetch_set_menu(uint8_t *bytes_command, uint32_t etu_length, 
      uint32_t pin_number_phone, uint8_t next_fetch_bytes_length)
 /*--------------------------------------------------------------------------------
@@ -2487,6 +2517,13 @@ uint32_t phone_command_fetch_0x12(uint8_t *bytes_command, uint32_t etu_length, u
       break;
 		}
 		
+    case FETCH_COMMAND_TYPE_UPDATE_ICCID:
+		{
+      phone_command_fetch_update_iccid(bytes_command, etu_length, pin_number_phone);  
+      USAT_BYTE_LENGTH_BACK = 0;
+      break;
+		}
+		
 		case FETCH_COMMAND_TYPE_CONFIG_SETTING_KEY_WORD_TEXT_DISPLAY:
 	  {
       phone_command_fetch_diaplay_text(bytes_command, strlen((char *)WRONG_CONFIG_SETTING_KEY_WORD_DISPLAY_TEXT), WRONG_CONFIG_SETTING_KEY_WORD_DISPLAY_TEXT, etu_length, pin_number_phone);  
@@ -2722,6 +2759,13 @@ uint32_t phone_command_fetch_0x12(uint8_t *bytes_command, uint32_t etu_length, u
       break;
 		}		
 
+    case FETCH_COMMAND_TYPE_UPDATE_ICCID_TEXT_DISPLAY:
+		{
+      phone_command_fetch_diaplay_text(bytes_command, strlen((char *)FIXED_ICCID_DATA_DISPLAY_TEXT), FIXED_ICCID_DATA_DISPLAY_TEXT, etu_length, pin_number_phone);  
+      FETCH_COMMAND_TYPE = FETCH_COMMAND_TYPE_NULL_VALUE;  
+      USAT_BYTE_LENGTH_BACK = 0;
+      break;
+		}
 	  /* normal phone-SIM fetch command session */            
 		/* to be updated for co-exist with BLE stack */
     default:
@@ -2903,6 +2947,17 @@ uint32_t phone_usat_menu_selection(uint8_t usat_menu_type, uint8_t *status_bytes
       *(status_bytes + 0) = 0x91;
       *(status_bytes + 1) = 128;     
 			USAT_BYTE_LENGTH_BACK = 128;
+      
+      break;
+		}
+		
+    case USAT_MENU_UPDATE_ICCID:
+		{
+      FETCH_COMMAND_TYPE = FETCH_COMMAND_TYPE_UPDATE_ICCID;
+  
+      *(status_bytes + 0) = 0x91;
+      *(status_bytes + 1) = 72;     
+			USAT_BYTE_LENGTH_BACK = 72;
       
       break;
 		}
@@ -3119,6 +3174,28 @@ uint32_t phone_command_terminal_response_0x14(uint8_t *phone_command, uint32_t e
           status_bytes[0] = 0x91;
           status_bytes[1] = usta_command_return_value;
 				}
+				
+        break;
+			}
+			
+      case FETCH_COMMAND_TYPE_UPDATE_ICCID:
+			{
+				for (i=0; i<10; i++)
+				{
+					*(ICCID_2FE2_FIXED_DATA_MODE_RAM + i) = (*(READ_BYTE_UICC_TERMINAL + 16 + 2 * i) & 0xf) | 
+						(*(READ_BYTE_UICC_TERMINAL + 16 + 2 * i + 1) << 4);
+				}
+#if (IF_LOG_OUTPUT)
+		    if (IF_SOFTDEVICE_RUNNING == 0)
+		    {
+          printf("====================== Input ICCID bytes =======================\r\n");
+			    printf_log_rx(10, ICCID_2FE2_FIXED_DATA_MODE_RAM);
+		    }
+#endif
+				/* set flash write flag */
+				FLASH_DATA_WRITE_CHECK_TASK_QUEUE |= (1 << FLASH_DATA_WRITE_TASK_OFFSET_POS);
+				/* clear the mark bit for flash data write check */
+				FLASH_DATA_WRITE_CHECK_TASK_QUEUE |= (1 << FLASH_DATA_WRITE_CHECK_ICCID_2FE2_FIXED_DATA_OFFSET_POS);
 				
         break;
 			}
@@ -3949,7 +4026,7 @@ uint32_t usta_command_line(uint8_t *command_line_string)
 					PHONE_LOCAL_USED_USIM &= (~(1 << 0));
 					/* set bit2=1 */
 					PHONE_LOCAL_USED_USIM |= (1 << 2);
-					set_default_usim1_etu( );		
+					set_default_usim1_etu( );
 				}	
 			}
 			
@@ -4007,6 +4084,15 @@ uint32_t usta_command_line(uint8_t *command_line_string)
 	    USAT_BYTE_LENGTH_BACK = 14 + strlen((char *)BLE_ON_0X88_COMMAND_DISPLAY_TEXT);
 	    return(14 + strlen((char *)BLE_ON_0X88_COMMAND_DISPLAY_TEXT));
 		}
+	}
+	/* UWM: wireless USIM working mode */
+	else if (((*(command_line_string + 1) == 'n') || (*(command_line_string + 1) == 'N')) &&
+		((*(command_line_string + 2) == 'a') || (*(command_line_string + 2) == 'A')) &&
+		((*(command_line_string + 3) == 'a') || (*(command_line_string + 3) == 'A')))
+	{
+    /* network access again */
+	  FETCH_COMMAND_TYPE = FETCH_COMMAND_TYPE_WIRELESS_SIM_RESET_FETCH;
+	  return(11);
 	}
 	/* 000: display command key word list */
 	else if (((*(command_line_string + 1) == '0') || (*(command_line_string + 1) == '9')) &&

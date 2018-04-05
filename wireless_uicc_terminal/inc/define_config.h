@@ -26,12 +26,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define DEFINE_CONFIG_H__
 
 /* Custom borad pin profile definition */
-#define PIN_PROFILE                          1
+#define PIN_PROFILE                          7
 
 /* if print out the log information of USIM-PHONE interface, for debug purpose 
 |  1: log information printed
 |  0: not printed */
-#define IF_LOG_OUTPUT                        1
+#define IF_LOG_OUTPUT                        0
 
 /* if USIM binary EF data is updated to USIM card, UICC command 0xd6
 |  1: binary EF updated to USIM card

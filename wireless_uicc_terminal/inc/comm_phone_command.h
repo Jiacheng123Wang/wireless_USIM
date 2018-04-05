@@ -72,6 +72,8 @@ uint32_t phone_command_default_response(uint8_t *bytes_command, uint32_t etu_len
 uint32_t phone_command_authentication_wireless_test(void);
 uint32_t phone_command_fetch_get_input_command_line(uint8_t *bytes_command, uint32_t etu_length, 
 				 uint32_t pin_number_phone);
+uint32_t phone_command_fetch_update_iccid(uint8_t *bytes_command, uint32_t etu_length, 
+				 uint32_t pin_number_phone);
 uint32_t usta_command_line(uint8_t *command_line_string);
 uint32_t phone_command_fetch_set_menu(uint8_t *bytes_command, uint32_t etu_length, 
      uint32_t pin_number_phone, uint8_t next_fetch_bytes_length);
