@@ -101,7 +101,7 @@ void simple_uart_put_with_timeout(uint8_t cr)
 
   NRF_UART0->TXD = (uint8_t)cr;
 
-  while (NRF_UART0->EVENTS_TXDRDY!=1)
+  while (NRF_UART0->EVENTS_TXDRDY != 1)
   {
     // Wait for TXD data to be sent
     if ((NRF_RTC2->COUNTER - time_now) > 10)

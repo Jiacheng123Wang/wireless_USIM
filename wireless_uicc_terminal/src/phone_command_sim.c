@@ -1164,9 +1164,6 @@ uint32_t phone_command_select_0xa4(uint8_t *phone_command, uint32_t etu_length,
 
           case 0x7fff6f42:
           {
-            /* in SD running, reset the system in phone command response time out */
-            return(1);
-
             selecet_fd[1] = 0x1e;
             write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
 
@@ -1866,9 +1863,6 @@ uint32_t phone_command_select_0xa4(uint8_t *phone_command, uint32_t etu_length,
 
         case 0x7fff6f42:
         {
-          /* in SD running, reset the system in phone command response time out */
-          return(1);
-
           selecet_fd[1] = 0x1e;
           write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
 

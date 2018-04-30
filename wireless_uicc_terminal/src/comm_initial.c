@@ -334,12 +334,17 @@ void update_user_configuration(void)
 {
   uint32_t i;
 
+  /* check the config data in flash */
+  if ((*((uint32_t *)USIM0_EF_2FE2_FLASH_ADDR + 0) == 0xFFFFFFFF) && (*((uint32_t *)USIM0_EF_2FE2_FLASH_ADDR + 1) == 0xFFFFFFFF))
+  {
+    usim_data_restore( );
+  }
   /* read the config data from flash */
   for (i=0; i<(FLASH_WRITE_DATA_SIZE_IN_WORD << 2); i++)
   {
     *(P_UINT8_FLASH_DATA_RAM_BUFFER + i) = *((uint8_t *)USER_CONFIG_FLASH_ADDR + i);
   }
-
+  
   /* copy the LED flash pattern seting */
   memcpy((uint8_t *)LED_PATTERN_BLE_FLASH, LED_PATTERN_RAM, KEY_LENGTH);
 
