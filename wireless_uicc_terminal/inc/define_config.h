@@ -60,6 +60,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define PIN_NULL               0xFF
 
 #if (PIN_PROFILE == 0)
+/* wireless USIM card, no LED */
   #define PIN_DATA_PHONE       12
   #define PIN_RESET_PHONE      29
   #define PIN_CLOCK_PHONE      30
@@ -71,10 +72,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define PIN_VCC_SIM0          2
 
   /* USIM1 card reader PIN define */
-  #define PIN_CLOCK_SIM1        14
-  #define PIN_DATA_SIM1         13
-  #define PIN_RESET_SIM1        17
-  #define PIN_VCC_SIM1          16
+  // #define PIN_CLOCK_SIM1        14
+  // #define PIN_DATA_SIM1         13
+  // #define PIN_RESET_SIM1        17
+  // #define PIN_VCC_SIM1          16
+  #define PIN_VCC_SIM1          PIN_NULL
 
 #elif (PIN_PROFILE == 1)
 /* EV board */
@@ -136,7 +138,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define PIN_VCC_SIM1          30
 
 #elif (PIN_PROFILE == 3)
-/* SIM-phone interface PIN define, iPhone double USIM */
+/* SIM-phone interface PIN define, iPhone double USIM, 2 LED */
 /* 20170722 */
   #define PIN_LED_BLUE          21
   #define PIN_LED_GREEN         18
@@ -158,7 +160,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define PIN_VCC_SIM1          8
 
 #elif (PIN_PROFILE == 4)
-/* SIM-phone interface PIN define, iPhone single USIM */
+/* SIM-phone interface PIN define, iPhone single USIM, 2 LED */
 /* 20170722 */
   #define PIN_LED_BLUE          21
   #define PIN_LED_GREEN         18
@@ -235,7 +237,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define PIN_VCC_SIM1          PIN_NULL
 
 #elif (PIN_PROFILE == 7)
-/* SIM-phone interface PIN define, iPhone single USIM */
+/* SIM-phone interface PIN define, iPhone single USIM, 4 LED */
 /* 20171227 */
   #define PIN_LED_BLUE          15
   #define PIN_LED_GREEN         16
@@ -411,10 +413,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 
 /* interrupt priority for events */
-#define TIMER1_IRQ_PRIORITY         2
-#define GPIOTE_IRQ_PRIORITY         3
+#define GPIOTE_IRQ_PRIORITY         2
 #define SWI3_EGU3_IRQ_PRIORITY      5
 #define RADIO_LINK_IRQ_PRIORITY     7
+
+#define RTC2          RTC2
 
 #endif
 

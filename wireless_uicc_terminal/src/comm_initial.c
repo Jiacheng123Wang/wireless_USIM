@@ -248,7 +248,7 @@ void usim_data_initialization(void)
   0: read the 2FE2 data from USIM card, from USIM0 and USIM1 respectively
   1: both USIM0 and USIM1 use the same 2FE2 data, read from USIM0
   2: both USIM0 and USIM1 use the same fixed 2FE2 data */
-  ICCID_2FE2_DATA_MODE_RAM = 2;
+  ICCID_2FE2_DATA_MODE_RAM = 0;
   /* BEL stack softdevice on/off when phone command authentication 0x88
   0: BLE off when 0x88 command
   1: BLE on when 0x88 command */

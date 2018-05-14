@@ -41,9 +41,6 @@ void timer1_initialization(void)
 |
 --------------------------------------------------------------------------------*/
 {
-  NVIC_EnableIRQ(TIMER1_IRQn);
-  NVIC_SetPriority(TIMER1_IRQn, TIMER1_IRQ_PRIORITY);
-
   NRF_TIMER1->MODE = TIMER_MODE_MODE_Timer;
   /* 16M timer frequency */
   NRF_TIMER1->PRESCALER = 0;
