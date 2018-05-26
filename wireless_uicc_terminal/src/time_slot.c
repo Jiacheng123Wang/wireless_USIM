@@ -1161,7 +1161,7 @@ void handler_time_slot_event_signal_usim_server_wireless_sim_command_receive(voi
     }
     else
     {
-      if (main_watch_phone_sim_wireless_ble_stage1( ))
+      if (main_usim_server_wireless_sim_ble_stage1( ))
       {
         rtc2_compare0_event_postpone(COMPARE0_EVENT_POSTPONE_USIM_MS);
       }

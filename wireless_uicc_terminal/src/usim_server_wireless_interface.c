@@ -54,9 +54,9 @@ static volatile uint8_t    IF_RUIM_USED = 0;
 
 #if (IF_SOFTDEIVE_USED)
 /********************************************************************************/
-uint32_t main_watch_phone_sim_wireless_ble_stage0(void)
+uint32_t main_usim_server_wireless_sim_ble_stage0(void)
 /*--------------------------------------------------------------------------------
-| phone command over the air between phone and watch
+| phone command over the air between usim server and client, stage0 in side BLE stack time slot
 | 0x88: authentication
 | 0xbb: wireless get the SIM EF data
 |
@@ -79,9 +79,9 @@ uint32_t main_watch_phone_sim_wireless_ble_stage0(void)
   return(0);
 }
 /********************************************************************************/
-uint32_t main_watch_phone_sim_wireless_ble_stage1(void)
+uint32_t main_usim_server_wireless_sim_ble_stage1(void)
 /*--------------------------------------------------------------------------------
-| phone command over the air between phone and watch
+| phone command over the air between usim server and client, stage1 in side BLE stack time slot
 | 0x88: authentication
 | 0xbb: wireless get the SIM EF data
 |
@@ -155,7 +155,7 @@ uint32_t main_watch_phone_sim_wireless_ble_stage1(void)
 /********************************************************************************/
 void main_watch_phone_sim_wireless(void)
 /*--------------------------------------------------------------------------------
-| phone command over the air between phone and watch
+| phone command over the air between usim server and client
 | 0x88: authentication
 | 0xbb: wireless get the SIM EF data
 |
@@ -242,8 +242,8 @@ void main_watch_phone_sim_wireless(void)
 /********************************************************************************/
 void sim_connection_state_check(uint32_t conncetion_listen)
 /*--------------------------------------------------------------------------------
-| radio link connection status check at SIM side, watch listen to if there is an
-| access resuest from phone
+| radio link connection status check at USIM server side, listening if there is an
+| access resuest from USIM client side
 |
 --------------------------------------------------------------------------------*/
 {
@@ -292,7 +292,7 @@ void sim_connection_state_check(uint32_t conncetion_listen)
 #if (IF_SOFTDEIVE_USED)
     if (IF_SOFTDEVICE_RUNNING)
     {
-      main_watch_phone_sim_wireless_ble_stage0( );
+      main_usim_server_wireless_sim_ble_stage0( );
     }
     else
 #endif
@@ -422,7 +422,7 @@ void sim_connection_state_check(uint32_t conncetion_listen)
 /********************************************************************************/
 uint32_t connection_listening_sim(uint32_t start_time_us, uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
-| radio link connection listen at SIM side
+| radio link connection listen at USIM server side
 |
 --------------------------------------------------------------------------------*/
 {
@@ -803,7 +803,7 @@ uint32_t radio_carrier_search(uint32_t max_serach_time_ms)
 /********************************************************************************/
 uint32_t phone_logical_address_search(void)
 /*--------------------------------------------------------------------------------
-| search logical address for wireless phone-SIM interface
+| search logical address for wireless USIM interface
 |
 --------------------------------------------------------------------------------*/
 {
@@ -819,7 +819,7 @@ uint32_t phone_logical_address_search(void)
 /********************************************************************************/
 uint32_t radio_carrier_search_ble(void)
 /*--------------------------------------------------------------------------------
-| search a radio carrier according the received RSSI
+| search a radio carrier according the received RSSI, inside BLE stack time slot
 |
 --------------------------------------------------------------------------------*/
 {
@@ -834,7 +834,7 @@ uint32_t radio_carrier_search_ble(void)
 /********************************************************************************/
 uint32_t received_command_sim(uint8_t *bytes_command, uint32_t etu_length)
 /*--------------------------------------------------------------------------------
-| watch receive the phone command over the air
+| USIM server receive the phone command over the air
 |
 --------------------------------------------------------------------------------*/
 {
@@ -880,7 +880,7 @@ uint32_t received_command_sim(uint8_t *bytes_command, uint32_t etu_length)
 /********************************************************************************/
 uint32_t usim_server_authentication_wireless(uint8_t *phone_command)
 /*--------------------------------------------------------------------------------
-| wireless SIM authentication phone command of watch side, 0x88
+| wireless SIM authentication phone command of server side, 0x88
 |
 --------------------------------------------------------------------------------*/
 {
@@ -956,7 +956,7 @@ uint32_t usim_server_authentication_wireless(uint8_t *phone_command)
 /********************************************************************************/
 uint32_t usim_server_authentication_wireless_ble(uint8_t *phone_command, uint32_t start_time_us, uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
-| wireless SIM authentication phone command of watch side, 0x88
+| wireless SIM authentication phone command of server side, 0x88
 |
 --------------------------------------------------------------------------------*/
 {
@@ -1048,7 +1048,7 @@ uint32_t usim_server_authentication_wireless_ble(uint8_t *phone_command, uint32_
 /********************************************************************************/
 uint32_t sim_command_send(uint8_t *phone_command, uint32_t start_time_us, uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
-| watch send SIM EF file content to phone over the air
+| USIM server send SIM EF file content to phone over the air
 |
 --------------------------------------------------------------------------------*/
 {
@@ -1505,7 +1505,7 @@ uint32_t usim_server_command_receive_data(uint8_t *received_data, uint32_t start
 }
 
 /********************************************************************************/
-uint32_t usim_files_data_read_flash_write_USIM(uint8_t usim_no, uint8_t *usim_files_all_data)
+uint32_t usim_files_data_read_flash_write_usim(uint8_t usim_no, uint8_t *usim_files_all_data)
 /*--------------------------------------------------------------------------------
 | second USIM (not used by phone) files update to flash
 |
@@ -1607,9 +1607,9 @@ uint32_t usim_files_data_read_flash_write_USIM(uint8_t usim_no, uint8_t *usim_fi
 }
 
 /********************************************************************************/
-uint32_t usim_files_data_read_flash_write_RUIM(uint8_t usim_no, uint8_t *usim_files_all_data)
+uint32_t usim_files_data_read_flash_write_ruim(uint8_t usim_no, uint8_t *usim_files_all_data)
 /*--------------------------------------------------------------------------------
-| second USIM (not used by phone) files update to flash
+| RUIM data flash wrtie, to be updated
 |
 --------------------------------------------------------------------------------*/
 {
@@ -1631,11 +1631,11 @@ uint32_t usim_files_data_read_flash_write(uint8_t usim_no, uint8_t *usim_files_a
     printf_log_rx(FILE_SIZE_2FE2, (uint8_t *)USIM0_EF_DATA_RAM + EF_2FE2_OFFSET);
     printf("\r\n==================================================================================================================\r\n");
 #endif
-    return(usim_files_data_read_flash_write_RUIM(usim_no, usim_files_all_data));
+    return(usim_files_data_read_flash_write_ruim(usim_no, usim_files_all_data));
   }
   else
   {
-    return(usim_files_data_read_flash_write_USIM(usim_no, usim_files_all_data));
+    return(usim_files_data_read_flash_write_usim(usim_no, usim_files_all_data));
   }
 }
 

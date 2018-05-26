@@ -56,7 +56,8 @@ static volatile uint16_t   UPDATE_BNARY_OFFSET_6FC4 = 0;
 static volatile uint16_t   UPDATE_BNARY_OFFSET_6F56 = 0;
 
 /********************************************************************************/
-uint32_t phone_command_status_response_0xf2(uint8_t *bytes_command, uint32_t etu_length, uint32_t pin_number_phone)
+uint32_t phone_command_status_response_0xf2(uint8_t *bytes_command, uint32_t etu_length, 
+         uint32_t pin_number_phone)
 /*--------------------------------------------------------------------------------
 | phone command 0xf2: status
 |
@@ -2295,9 +2296,10 @@ uint32_t phone_command_read_binary_2fe2(uint8_t *phone_command, uint32_t etu_len
 }
 
 /********************************************************************************/
-uint32_t get_usim_file_position_index(uint32_t file_id, uint8_t *file_size, uint32_t *file_offset, uint32_t *flag_offset)
+uint32_t get_usim_file_position_index(uint32_t file_id, uint8_t *file_size, 
+         uint32_t *file_offset, uint32_t *flag_offset)
 /*--------------------------------------------------------------------------------
-| read binary from USIM card
+| get the EF data bytes position offset in the RAM/flash variables
 |
 --------------------------------------------------------------------------------*/
 {
@@ -2548,7 +2550,7 @@ uint32_t phone_command_read_binary_usim_card(uint32_t file_id, uint8_t usim_card
 uint32_t phone_command_read_binary_file_data(uint8_t *phone_command, uint32_t etu_length, uint32_t file_id,
          uint32_t tmp_length, uint32_t read_offset, uint8_t *confirm_bytes, uint8_t *status_bytes)
 /*--------------------------------------------------------------------------------
-| read binary file 6F78
+| read binary file from wireless interface/USIM card
 |
 --------------------------------------------------------------------------------*/
 {
@@ -2957,7 +2959,7 @@ uint32_t phone_command_read_binary_0xb0(uint8_t *phone_command, uint32_t etu_len
 /********************************************************************************/
 void stop_sim_clock_timer1(void)
 /*--------------------------------------------------------------------------------
-| SIM command 0xD6 to update EF data
+| Stop USIM clock signal and timer1 (timing control for USIM-phone interface)
 |
 --------------------------------------------------------------------------------*/
 {
@@ -3299,7 +3301,7 @@ uint32_t sim_command_usim_card_update_binary_0xd6(uint32_t update_file_id)
 /********************************************************************************/
 uint32_t sim_command_usim_card_update_binary_0xd6_ble(uint32_t update_file_id, uint32_t start_time_us, uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
-| SIM command 0xD6 to update EF data
+| SIM command 0xD6 to update EF data inside BLE stack time slot
 |
 --------------------------------------------------------------------------------*/
 {
@@ -3588,7 +3590,7 @@ uint32_t sim_command_update_binary_all_files(uint32_t update_file_id, uint32_t u
 uint32_t phone_command_update_binary_0xd6_file(uint8_t *phone_command, uint8_t update_offset,
          uint8_t update_length)
 /*--------------------------------------------------------------------------------
-| phone command 0xd6: update binary for necessary EFs
+| phone command 0xd6: update binary for necessary EFs in the flash data
 |
 --------------------------------------------------------------------------------*/
 {
@@ -4050,7 +4052,7 @@ uint32_t phone_command_read_record_0xb2(uint8_t *phone_command, uint32_t etu_len
 uint32_t phone_command_update_record_0xdc(uint8_t *phone_command, uint32_t etu_length,
          uint32_t start_time_us, uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
-| phone command 0xdc: update record
+| phone command 0xdc: update record, used for user command interface by dialing
 |
 --------------------------------------------------------------------------------*/
 {

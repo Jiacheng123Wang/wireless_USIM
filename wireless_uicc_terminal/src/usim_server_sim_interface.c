@@ -94,7 +94,7 @@ void set_default_usim1_etu(void)
 /********************************************************************************/
 void sim_clock_signal_config(uint32_t pin_clock)
 /*--------------------------------------------------------------------------------
-| 4M SIM clock signal config
+| 4M SIM clock signal config, use GPIOTE channel 0
 |
 --------------------------------------------------------------------------------*/
 {
@@ -118,7 +118,7 @@ void sim_clock_signal_config(uint32_t pin_clock)
   /* Clears the timer, sets it to 0 */
   NRF_TIMER2->TASKS_CLEAR = 1;
 
-  /* Load the initial values to TIMER2 CC registers, timer 2 clock frequency is 16MHz,
+  /* Load the initial values to TIMER2 CC registers, TIMER2 clock frequency is 16MHz,
   every 2 clock tick toggle the pin, the clock frequecy output from the pin is 4MHz */
   NRF_TIMER2->CC[0] = 2;
 }
@@ -158,7 +158,7 @@ void clock_sim_stop_4m(uint32_t pin_clock)
 /********************************************************************************/
 void uicc_reader_sim_pin_setup(void)
 /*--------------------------------------------------------------------------------
-| Watch-SIM interface GPIO pin setting
+| phone-USIM interface GPIO pin setting
 |
 --------------------------------------------------------------------------------*/
 {
@@ -957,7 +957,7 @@ uint32_t reset_sim_command_select_7fff(void)
 /********************************************************************************/
 uint32_t sim_file_7fff_selected_check(void)
 /*--------------------------------------------------------------------------------
-| SIM file selection for 0x7fff,
+| check the USIM file selection for 0x7fff
 |
 --------------------------------------------------------------------------------*/
 {

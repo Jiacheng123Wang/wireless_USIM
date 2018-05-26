@@ -40,7 +40,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /********************************************************************************/
 void main_usim_server_phone_command(void)
 /*--------------------------------------------------------------------------------
-| main function for watch phone to USIM interface
+| main function for phone command of USIM interface at USIM server side, use USIM data locally
 |
 --------------------------------------------------------------------------------*/
 {
@@ -241,7 +241,7 @@ void main_usim_server_phone_command(void)
 /********************************************************************************/
 uint32_t usim_server_command_confirm_sim(uint8_t *phone_command, uint32_t etu_length)
 /*--------------------------------------------------------------------------------
-| read USIM feedback to watch phone command, byte *(phone_command + 2))
+| read USIM feedback to phone command confirm, byte *(phone_command + 2))
 |
 --------------------------------------------------------------------------------*/
 {
@@ -295,7 +295,7 @@ uint32_t usim_server_command_confirm_sim(uint8_t *phone_command, uint32_t etu_le
 uint32_t usim_server_command_GSM_algorithm(uint8_t *bytes_command, uint32_t etu_length_phone,
          uint32_t etu_length_sim)
 /*--------------------------------------------------------------------------------
-| watch phone command session, supported phone command:
+| phone command session by local SIM data at USIM server side, supported phone command:
 | a4: selection
 | 10: terminal profile
 | 14: terminal response
@@ -369,7 +369,7 @@ uint32_t usim_server_command_GSM_algorithm(uint8_t *bytes_command, uint32_t etu_
 uint32_t usim_server_command_get_data(uint8_t *bytes_command, uint32_t etu_length_phone,
          uint32_t etu_length_sim)
 /*--------------------------------------------------------------------------------
-| watch phone command session, supported phone command:
+| phone command session by local SIM data at USIM server side, supported phone command:
 | B0: read binary
 | C0: get response
 | 12: fetch
@@ -453,7 +453,7 @@ uint32_t usim_server_command_get_data(uint8_t *bytes_command, uint32_t etu_lengt
 uint32_t usim_server_command_verify(uint8_t *bytes_command, uint32_t etu_length_phone,
          uint32_t etu_length_sim)
 /*--------------------------------------------------------------------------------
-| watch phone command session, supported phone command:
+| phone command session by local SIM data at USIM server side, supported phone command:
 | 20: verify
 | 2C: unblock pin
 |
@@ -477,7 +477,7 @@ uint32_t usim_server_command_verify(uint8_t *bytes_command, uint32_t etu_length_
 /********************************************************************************/
 uint32_t usim_server_command_status(uint8_t *bytes_command, uint32_t etu_length_phone)
 /*--------------------------------------------------------------------------------
-| watch phone command status session, command 0xf2
+| phone command status session, command 0xf2
 |
 --------------------------------------------------------------------------------*/
 {
@@ -544,7 +544,7 @@ uint32_t usim_server_command_status(uint8_t *bytes_command, uint32_t etu_length_
 uint32_t usim_server_command_confirm_sim_ble(uint8_t *phone_command, uint32_t etu_length,
          uint32_t start_time_us, uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
-| read USIM feedback to watch phone command, byte *(phone_command + 2))
+| read USIM feedback to phone command, byte *(phone_command + 2)), inside BLE stack time slot
 |
 --------------------------------------------------------------------------------*/
 {
@@ -595,7 +595,7 @@ uint32_t usim_server_command_confirm_sim_ble(uint8_t *phone_command, uint32_t et
 uint32_t usim_server_command_GSM_algorithm_ble(uint8_t *bytes_command, uint32_t etu_length_phone,
          uint32_t etu_length_sim, uint32_t start_time_us, uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
-| watch phone command session, supported phone command:
+| phone command session inside BLE stack time slot, supported phone command:
 | 88: run GSM algorithm
 |
 --------------------------------------------------------------------------------*/
@@ -690,7 +690,7 @@ uint32_t usim_server_command_GSM_algorithm_ble(uint8_t *bytes_command, uint32_t 
 uint32_t usim_server_command_get_data_ble(uint8_t *bytes_command, uint32_t etu_length_phone,
          uint32_t etu_length_sim, uint32_t start_time_us, uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
-| watch phone command session, supported phone command:
+| phone command session inside BLE stack time slot supported phone command:
 | B0: read binary
 | C0: get response
 | 12: fetch
@@ -814,7 +814,8 @@ uint32_t usim_server_command_get_data_ble(uint8_t *bytes_command, uint32_t etu_l
 /********************************************************************************/
 uint32_t usim_command_authentication_0x88(void)
 /*--------------------------------------------------------------------------------
-| USIM command authentication 0x88
+| USIM command authentication 0x88 by fixed data, just give a response to command 
+| 0X88, not for user authentication
 |
 --------------------------------------------------------------------------------*/
 {

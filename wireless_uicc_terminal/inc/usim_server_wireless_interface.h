@@ -28,8 +28,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdint.h>
 #include <stdio.h>
 
-uint32_t main_watch_phone_sim_wireless_ble_stage0(void);
-uint32_t main_watch_phone_sim_wireless_ble_stage1(void);
+uint32_t main_usim_server_wireless_sim_ble_stage0(void);
+uint32_t main_usim_server_wireless_sim_ble_stage1(void);
 void main_watch_phone_sim_wireless(void);
 void sim_connection_state_check(uint32_t conncetion_listen);
 uint32_t radio_carrier_search(uint32_t max_serach_time_ms);

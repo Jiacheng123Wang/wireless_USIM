@@ -127,7 +127,7 @@ uint8_t FIXED_ICCID_DATA_DISPLAY_TEXT[] ="Fixed ICCID Data Update  Successfully"
 /********************************************************************************/
 void phone_sim_pin_setup(void)
 /*--------------------------------------------------------------------------------
-| Phone-SIM interface GPIO pin setting
+| Phone-USIM interface GPIO pin setting and LED initialization
 |
 --------------------------------------------------------------------------------*/
 {
@@ -171,7 +171,8 @@ void phone_sim_pin_setup(void)
 /********************************************************************************/
 void saadc_init_config(void)
 /*--------------------------------------------------------------------------------
-| SAADC configuration initialization to get DC sample value from phone VDD pin
+| SAADC configuration initialization to get DC sample value from VDD pin of 
+| USIM-Phone interface
 |
 --------------------------------------------------------------------------------*/
 {
@@ -224,7 +225,7 @@ void saadc_init_config(void)
 /********************************************************************************/
 int32_t saadc_sample_value_get(void)
 /*--------------------------------------------------------------------------------
-| get one ADC sample value from phone VDD pin
+| get one ADC sample value from VDD pin of USIM-Phone interface
 |
 --------------------------------------------------------------------------------*/
 {
@@ -281,6 +282,7 @@ int32_t saadc_sample_value_get(void)
 void gpio_event_in_config(void)
 /*--------------------------------------------------------------------------------
 | GPIO pin input event interrupt configuration
+| softwear interrupt SWI3_EGU3_IRQn enable
 |
 --------------------------------------------------------------------------------*/
 {
@@ -1454,7 +1456,7 @@ void wireless_usim_client_mode_set(void)
 /********************************************************************************/
 void wireless_usim_server_mode_set(void)
 /*--------------------------------------------------------------------------------
-| if smart SIM connector is configured as wireless-USIM client mode, set the
+| if smart SIM connector is configured as wireless-USIM server mode, set the
 | value of PHONE_LOCAL_USED_USIM
 |
 --------------------------------------------------------------------------------*/
@@ -1825,7 +1827,7 @@ uint32_t phone_command_fetch_diaplay_text_variable(uint8_t *bytes_command, uint8
      uint8_t *display_string, uint32_t etu_length, uint32_t pin_number_phone, uint8_t variable_bytes)
 /*--------------------------------------------------------------------------------
 | USAT command text display, text display_string displayed on the phone screen
-\ with the number of phone SIM logical address
+\ with the number of variable_bytes
 |
 --------------------------------------------------------------------------------*/
 {
@@ -1872,7 +1874,7 @@ uint32_t phone_command_fetch_get_input_command_line(uint8_t *bytes_command, uint
 uint32_t phone_command_fetch_update_iccid(uint8_t *bytes_command, uint32_t etu_length,
      uint32_t pin_number_phone)
 /*--------------------------------------------------------------------------------
-| USAT command to get phone input command line interface
+| USAT command to get phone input ICCID number
 |
 --------------------------------------------------------------------------------*/
 {
@@ -1903,7 +1905,7 @@ uint32_t phone_command_fetch_set_menu(uint8_t *bytes_command, uint32_t etu_lengt
      uint32_t pin_number_phone, uint8_t next_fetch_bytes_length)
 /*--------------------------------------------------------------------------------
 | USAT command set menu, for configuration parameters setting of wireless
-| SIM interface
+| USIM interface
 |
 --------------------------------------------------------------------------------*/
 {
@@ -1974,7 +1976,7 @@ uint32_t phone_command_fetch_idle_mode_text_variable(uint8_t *bytes_command, uin
      uint8_t *display_string, uint32_t etu_length, uint32_t pin_number_phone)
 /*--------------------------------------------------------------------------------
 | USAT command text display in idle mode, string display_string displayed on the
-| phone screen with number
+| phone screen with the number of device logical addresss
 |
 --------------------------------------------------------------------------------*/
 {
@@ -3547,7 +3549,7 @@ uint32_t phone_command_terminal_response_0x14(uint8_t *phone_command, uint32_t e
 /********************************************************************************/
 uint32_t phone_command_default_response(uint8_t *bytes_command, uint32_t etu_length, uint32_t pin_number_phone)
 /*--------------------------------------------------------------------------------
-| phone command default response
+| phone command default response, for wrong phone command byte read
 |
 --------------------------------------------------------------------------------*/
 {

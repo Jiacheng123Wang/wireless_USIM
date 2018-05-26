@@ -66,7 +66,7 @@ extern volatile uint8_t FLAG_SWI3_EGU3_IRQn;
 void phone_command_authentication_main(void)
 /*--------------------------------------------------------------------------------
 | phone command between phone-SIM interface at USIM server side locally and
-| wireless USIM client aide.
+| wireless USIM client side.
 | phone command 0x88: authentication
 |
 --------------------------------------------------------------------------------*/

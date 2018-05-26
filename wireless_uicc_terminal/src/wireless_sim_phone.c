@@ -94,7 +94,7 @@ void (*handler_function)(void);
 /********************************************************************************/
 void ble_tx_data_process(uint8_t *data_tx)
 /*--------------------------------------------------------------------------------
-|
+| data send by BLE NUS
 |
 --------------------------------------------------------------------------------*/
 {
@@ -134,7 +134,7 @@ void ble_tx_data_process(uint8_t *data_tx)
 /********************************************************************************/
 void smart_usim_initialization(void)
 /*--------------------------------------------------------------------------------
-|  smart USIM connector initialization
+| smart USIM connector initialization
 |
 --------------------------------------------------------------------------------*/
 {
@@ -440,7 +440,7 @@ void rtc2_compare0_event_postpone(uint32_t postpone_time_ms)
 /********************************************************************************/
 uint32_t time_slot_request(uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
-| request time slot for UICC-terminal radio interface
+| request time slot for wireless USIm interface
 |
 --------------------------------------------------------------------------------*/
 {
@@ -460,7 +460,7 @@ uint32_t time_slot_request(uint32_t time_length_us)
 /********************************************************************************/
 void usim_client_connection_request_time_slot_request(void)
 /*--------------------------------------------------------------------------------
-| request time slot for UICC-terminal radio interface
+| request time slot for wireless USIm interface
 |
 --------------------------------------------------------------------------------*/
 {
@@ -484,7 +484,7 @@ void usim_client_connection_request_time_slot_request(void)
 /********************************************************************************/
 void usim_server_listening_time_slot_request(void)
 /*--------------------------------------------------------------------------------
-| request time slot for UICC-terminal radio interface
+| request time slot for wireless USIm interface
 |
 --------------------------------------------------------------------------------*/
 {

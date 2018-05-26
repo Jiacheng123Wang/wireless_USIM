@@ -160,7 +160,7 @@ uint32_t transmit_power_level_set(uint32_t power_level)
 /********************************************************************************/
 uint32_t radio_mode_set(uint32_t mode)
 /*--------------------------------------------------------------------------------
-| Radio Tx mode level:
+| Radio Tx mode:
 | 0:        250kbps, not for nRF52
 | 1:        1Mbps
 | 2:        2Mbps
@@ -484,7 +484,7 @@ uint32_t packet_wireless_receive(uint8_t *rx_info_byte, uint32_t start_time_ms, 
 /********************************************************************************/
 uint32_t packet_wireless_transmit_ble(uint8_t *tx_info_byte, uint32_t start_time_us, uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
-| data packet wireless transmission
+| data packet wireless transmission within BLE time slot
 |
 --------------------------------------------------------------------------------*/
 {
@@ -507,7 +507,7 @@ uint32_t packet_wireless_transmit_ble(uint8_t *tx_info_byte, uint32_t start_time
 /********************************************************************************/
 uint32_t packet_wireless_receive_ble(uint8_t *rx_info_byte, uint32_t start_time_us, uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
-| data packet wireless receiving
+| data packet wireless receiving within BLE time slot
 |
 --------------------------------------------------------------------------------*/
 {

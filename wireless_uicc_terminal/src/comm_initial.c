@@ -41,7 +41,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /********************************************************************************/
 uint32_t start_oscillator_16m(void)
 /*--------------------------------------------------------------------------------
-| initialization of 16M oscillators
+| start 16M oscillators for radio
 |
 --------------------------------------------------------------------------------*/
 {
@@ -76,7 +76,7 @@ uint32_t start_oscillator_16m(void)
 /********************************************************************************/
 __INLINE void stop_oscillator_16m(void)
 /*--------------------------------------------------------------------------------
-| Function for initialization 16M oscillators
+| Stop 16 MHz crystal oscillator
 |
 --------------------------------------------------------------------------------*/
 {
@@ -87,8 +87,8 @@ __INLINE void stop_oscillator_16m(void)
 /********************************************************************************/
 uint8_t byte_string_comparison(uint32_t byte_length, uint8_t *byte_1, uint8_t *byte_2)
 /*--------------------------------------------------------------------------------
-| 1: the 2 string are different
-| 0: the 2 string are the same
+| 1: the 2 strings are different
+| 0: the 2 strings are the same
 |
 --------------------------------------------------------------------------------*/
 {
@@ -106,12 +106,13 @@ uint8_t byte_string_comparison(uint32_t byte_length, uint8_t *byte_1, uint8_t *b
 }
 
 /********************************************************************************/
-uint8_t random_vector_generate(uint8_t *p_buff, uint8_t size, uint32_t start_time, uint32_t time_length, uint8_t if_bias_correction)
+uint8_t random_vector_generate(uint8_t *p_buff, uint8_t size, uint32_t start_time, 
+        uint32_t time_length, uint8_t if_bias_correction)
 /*--------------------------------------------------------------------------------
 | Function for getting vector of random numbers
 | p_buff: Pointer to unit8_t buffer for storing the bytes
 | length: Number of bytes to take from pool and place in p_buff
-| start_time/time_length in us for BLE stack running, TIMER0 used( in time slot),
+| start_time/time_length in us for BLE stack running, TIMER0 used(in time slot),
 |         in ms for BLE not running, RTC2 used
 |
 --------------------------------------------------------------------------------*/
@@ -155,6 +156,7 @@ uint8_t random_vector_generate(uint8_t *p_buff, uint8_t size, uint32_t start_tim
 void usim_data_initialization(void)
 /*--------------------------------------------------------------------------------
 | USIM EF data initialization, the USIM EF data is just as an example
+| user configuration initialization
 |
 --------------------------------------------------------------------------------*/
 {
@@ -371,7 +373,7 @@ void update_user_configuration(void)
 /********************************************************************************/
 void update_etu_time(void)
 /*--------------------------------------------------------------------------------
-| read the ETU time stored in flash
+| read the ETU time stored in flash, for UICC-terminal interface
 |
 --------------------------------------------------------------------------------*/
 {
