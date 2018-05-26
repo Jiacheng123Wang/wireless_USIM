@@ -7,6 +7,7 @@ wireless_uicc_terminal/lib/
 # ignore file .DS_Store
 .DS_Store
 
-#ignore some files in hardware/ directory
-hardware/_*
-hardware/~*
+#ignore some files in doc/hardware/ directory
+doc/~*
+doc/hardware/_*
+doc/hardware/~*
