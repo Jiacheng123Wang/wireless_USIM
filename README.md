@@ -1,5 +1,5 @@
 # wireless_USIM
-wireless USIM interface software &amp; hardware. The basic functionality is to implement USIM sharing between multiple cellular devices by wireless interface, especially between smart phone and watch. For more information, refer doc/Wireless_SIM_Interface.pptx. 
+Wireless USIM interface software &amp; hardware. The basic functionality is to implement USIM sharing between multiple cellular devices by wireless interface. Especially between smart phone and watch. For more information, refer doc/Wireless_SIM_Interface.pptx. 
 
 Based on nRF52832-CIAA Multi-protocol 2.4GHz SoC. nRF-SDK 14.2.0 required, download from https://developer.nordicsemi.com/nRF5_SDK/nRF5_SDK_v14.x.x/
 
