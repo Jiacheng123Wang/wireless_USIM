@@ -192,7 +192,8 @@ uint32_t radio_mode_set(uint32_t mode)
 
 /********************************************************************************/
 uint32_t packet_radio_with_parameters_tx(uint8_t *tx_packet, uint32_t frequency,
-       uint32_t logical_address, uint32_t start_time, uint32_t time_length, uint32_t power_level)
+         uint32_t logical_address, uint32_t start_time, uint32_t time_length,
+         uint32_t power_level)
 /*--------------------------------------------------------------------------------
 | Radio package transmission with configured parameters
 | start_time/time_length in us for BLE stack running, TIMER0 used (in time slot),
@@ -294,7 +295,7 @@ uint32_t packet_radio_with_parameters_tx(uint8_t *tx_packet, uint32_t frequency,
 
 /********************************************************************************/
 uint32_t packet_radio_with_parameters_rx(uint8_t *rx_packet, uint32_t frequency,
-       uint32_t logical_address, uint32_t start_time, uint32_t time_length)
+         uint32_t logical_address, uint32_t start_time, uint32_t time_length)
 /*--------------------------------------------------------------------------------
 | radio receiving with time out
 | start_time/time_length in us for BLE stack running, TIMER0 used( in time slot),
@@ -430,7 +431,8 @@ uint32_t packet_wireless_transmit(uint8_t *tx_info_byte)
 }
 
 /********************************************************************************/
-uint32_t packet_wireless_receive(uint8_t *rx_info_byte, uint32_t start_time_ms, uint32_t time_length_ms)
+uint32_t packet_wireless_receive(uint8_t *rx_info_byte, uint32_t start_time_ms,
+         uint32_t time_length_ms)
 /*--------------------------------------------------------------------------------
 | data packet wireless receiving
 |
@@ -482,7 +484,8 @@ uint32_t packet_wireless_receive(uint8_t *rx_info_byte, uint32_t start_time_ms, 
 }
 
 /********************************************************************************/
-uint32_t packet_wireless_transmit_ble(uint8_t *tx_info_byte, uint32_t start_time_us, uint32_t time_length_us)
+uint32_t packet_wireless_transmit_ble(uint8_t *tx_info_byte, uint32_t start_time_us,
+         uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
 | data packet wireless transmission within BLE time slot
 |
@@ -505,7 +508,8 @@ uint32_t packet_wireless_transmit_ble(uint8_t *tx_info_byte, uint32_t start_time
 }
 
 /********************************************************************************/
-uint32_t packet_wireless_receive_ble(uint8_t *rx_info_byte, uint32_t start_time_us, uint32_t time_length_us)
+uint32_t packet_wireless_receive_ble(uint8_t *rx_info_byte, uint32_t start_time_us,
+         uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
 | data packet wireless receiving within BLE time slot
 |
@@ -628,7 +632,8 @@ uint32_t radio_rssi_measurement(uint32_t frequency)
 }
 
 /********************************************************************************/
-uint32_t radio_carrier_detection(uint32_t max_CD_ms, uint32_t noise_threshold, uint32_t frequency)
+uint32_t radio_carrier_detection(uint32_t max_CD_ms, uint32_t noise_threshold,
+         uint32_t frequency)
 /*--------------------------------------------------------------------------------
 | frequency carrier detection, wait for some time if the backgroup noise is larger the
 | the threshold
@@ -679,22 +684,23 @@ uint32_t wireless_sim_authentication_algorithm(uint8_t *user_password, uint8_t *
 #if (IF_DATA_CC_CODED || IF_CONNECTION_CC_CODED)
 /***************************************************************************/
 uint32_t encoder_halfrate (uint8_t *input_bit, uint32_t bit_length,
-             uint8_t initial_state, uint8_t *encoded_bit)
+         uint8_t initial_state, uint8_t *encoded_bit)
 /* --------------------------------------------------------------------------
-   cc encoder, 1/2 code rate
-   memory_length = 3
-   encoder_number = 2
-   encoder0 {1, 0, 0, 1}
-   encoder1 {1, 1, 0, 1}
-
-   INPUT --->
-   input_bit:         the input bit sequence to be cc encoded, size of bit_length
-   bit_length:        the length of bit sequence
-   initial_state:     the cc encoder initial state
-
-   <---OUTPUT
-   encoded_bit:       the encoded bits with size of 2 * bit_length
- * -------------------------------------------------------------------------- */
+| cc encoder, 1/2 code rate
+| memory_length = 3
+| encoder_number = 2
+| encoder0 {1, 0, 0, 1}
+| encoder1 {1, 1, 0, 1}
+|
+| INPUT --->
+| input_bit:         the input bit sequence to be cc encoded, size of bit_length
+| bit_length:        the length of bit sequence
+| initial_state:     the cc encoder initial state
+|
+| <---OUTPUT
+| encoded_bit:       the encoded bits with size of 2 * bit_length
+|
+----------------------------------------------------------------------------- */
 {
   uint32_t i;
   uint8_t current_state;
@@ -733,22 +739,23 @@ uint32_t encoder_halfrate (uint8_t *input_bit, uint32_t bit_length,
 
 /***************************************************************************/
 uint32_t decoder_hallfrate(uint8_t *input_receivebit, uint32_t bit_length,
-       uint8_t initial_state, uint8_t *decoded_bit)
+         uint8_t initial_state, uint8_t *decoded_bit)
 /* --------------------------------------------------------------------------
-   cc decoder by Viterbi algorithm, 1/2 code rate
-   memory_length = 3
-   encoder_number = 2
-   encoder0 {1, 0, 0, 1}
-   encoder1 {1, 1, 0, 1}
-
-   INPUT --->
-   input_receivebit: the received hard bit sequence to be decoded, size of 2 * bit_length
-   bit_length:       the decoding  bit length
-   initial_state:    the cc encoder initial state
-
-   <---OUTPUT
-   decoded_bit:       the decoded bits with size of bit_length
- * -------------------------------------------------------------------------- */
+| cc decoder by Viterbi algorithm, 1/2 code rate
+| memory_length = 3
+| encoder_number = 2
+| encoder0 {1, 0, 0, 1}
+| encoder1 {1, 1, 0, 1}
+|
+| INPUT --->
+| input_receivebit: the received hard bit sequence to be decoded, size of 2 * bit_length
+| bit_length:       the decoding  bit length
+| initial_state:    the cc encoder initial state
+|
+| <---OUTPUT
+| decoded_bit:       the decoded bits with size of bit_length
+|
+----------------------------------------------------------------------------- */
 {
   /** loop control variable **/
   uint32_t i;
@@ -986,8 +993,9 @@ uint32_t decoder_hallfrate(uint8_t *input_receivebit, uint32_t bit_length,
 /***************************************************************************/
 uint32_t int2bit(uint8_t state, uint8_t bit_length, /**/uint8_t *bit_array)
 /* --------------------------------------------------------------------------
- * Map the state integer number to a bit array
- * -------------------------------------------------------------------------- */
+| Map the state integer number to a bit array
+|
+----------------------------------------------------------------------------- */
 {
   uint32_t i;
 
@@ -1002,9 +1010,9 @@ uint32_t int2bit(uint8_t state, uint8_t bit_length, /**/uint8_t *bit_array)
 /***************************************************************************/
 uint32_t bit2int(uint8_t *bit_array, uint8_t bit_length, /**/uint8_t *state)
 /* --------------------------------------------------------------------------
- * Map a bit array to the corresponding integer state number
- * --------------------------------------------------------------------------
- */
+| Map a bit array to the corresponding integer state number
+|
+----------------------------------------------------------------------------- */
 {
   uint32_t i;
 
@@ -1019,10 +1027,11 @@ uint32_t bit2int(uint8_t *bit_array, uint8_t bit_length, /**/uint8_t *state)
 
 /***************************************************************************/
 uint32_t char2bit_sequence(uint8_t *char_sequence, uint8_t char_length,
-                    uint8_t *bit_sequence)
+         uint8_t *bit_sequence)
 /* --------------------------------------------------------------------------
- * Map the char (uint8_t) sequence to bit sequence
- * -------------------------------------------------------------------------- */
+| Map the char (uint8_t) sequence to bit sequence
+|
+----------------------------------------------------------------------------- */
 {
   uint32_t i;
 
@@ -1036,10 +1045,11 @@ uint32_t char2bit_sequence(uint8_t *char_sequence, uint8_t char_length,
 
 /***************************************************************************/
 uint32_t bit2char_sequence(uint8_t *bit_sequence, uint8_t char_length,
-                    uint8_t *char_sequence)
+         uint8_t *char_sequence)
 /* --------------------------------------------------------------------------
- * Map the bit sequence to char (uint8_t) sequence
- * -------------------------------------------------------------------------- */
+| Map the bit sequence to char (uint8_t) sequence
+|
+----------------------------------------------------------------------------- */
 {
   uint32_t i;
 
@@ -1053,10 +1063,11 @@ uint32_t bit2char_sequence(uint8_t *bit_sequence, uint8_t char_length,
 
 /***************************************************************************/
 uint32_t distance_between_vector(uint8_t *input1_bit, uint8_t *input2_bit,
-                   uint8_t bit_length)
+         uint8_t bit_length)
 /* --------------------------------------------------------------------------
- * Euclid distance between 2 bit vectors
- * -------------------------------------------------------------------------- */
+| Euclid distance between 2 bit vectors
+|
+---------------------------------------------------------------------------- */
 {
   uint32_t tmp = 0;
   uint32_t i;
@@ -1075,11 +1086,11 @@ uint32_t distance_between_vector(uint8_t *input1_bit, uint8_t *input2_bit,
 
 /***************************************************************************/
 uint32_t min_index_value(uint32_t *vector_in, uint32_t vector_length,
-     /**/ uint32_t *min_value, uint32_t *min_index)
+         /**/ uint32_t *min_value, uint32_t *min_index)
 /* --------------------------------------------------------------------------
- * Minimal value and its index in the input vector
- *
- * -------------------------------------------------------------------------- */
+| Minimal value and its index in the input vector
+|
+----------------------------------------------------------------------------- */
 {
   uint32_t i;
 
@@ -1102,10 +1113,11 @@ uint32_t min_index_value(uint32_t *vector_in, uint32_t vector_length,
 uint32_t ccencoder_byte_sequence_32(uint8_t *input_bytes, uint8_t encode_block_index,
          uint8_t *encoded_bytes)
 /* --------------------------------------------------------------------------
- *  CC encoder for length of byte 32  (256 bits)
- *  encode_block_index --> cc encoder byte length for each encoding block =
- *                  (1 << encode_block_index )
- * -------------------------------------------------------------------------- */
+| CC encoder for length of byte 32  (256 bits)
+| encode_block_index --> cc encoder byte length for each encoding block =
+|                 (1 << encode_block_index )
+|
+----------------------------------------------------------------------------- */
 {
   uint32_t i;
   uint8_t bytes_length = 32;
@@ -1137,10 +1149,11 @@ uint32_t ccencoder_byte_sequence_32(uint8_t *input_bytes, uint8_t encode_block_i
 uint32_t ccdecoder_byte_sequence_32(uint8_t *input_bytes, uint8_t encode_block_index,
          uint8_t *decoded_bytes)
 /* --------------------------------------------------------------------------
- *  CC decoder for length of byte 32  (256 bits)
- *  encode_block_index --> cc encoder byte length for each encoding block =
- *                  (1 << encode_block_index )
- * -------------------------------------------------------------------------- */
+| CC decoder for length of byte 32  (256 bits)
+| encode_block_index --> cc encoder byte length for each encoding block =
+|                 (1 << encode_block_index )
+|
+----------------------------------------------------------------------------- */
 {
   uint32_t i;
   uint8_t bytes_length = 32;
@@ -1168,15 +1181,15 @@ uint32_t ccdecoder_byte_sequence_32(uint8_t *input_bytes, uint8_t encode_block_i
   return(0);
 }
 
-
 /***************************************************************************/
 uint32_t ccencoder_byte_sequence_64(uint8_t *input_bytes, uint8_t encode_block_index,
          uint8_t *encoded_bytes)
 /* --------------------------------------------------------------------------
- *  CC encoder for length of byte 64  (512 bits)
- *  encode_block_index --> cc encoder byte length for each encoding block =
- *                  (1 << encode_block_index )
- * -------------------------------------------------------------------------- */
+| CC encoder for length of byte 64  (512 bits)
+| encode_block_index --> cc encoder byte length for each encoding block =
+|                 (1 << encode_block_index )
+|
+----------------------------------------------------------------------------- */
 {
   uint32_t i;
   uint8_t bytes_length = 64;
@@ -1210,10 +1223,11 @@ uint32_t ccencoder_byte_sequence_64(uint8_t *input_bytes, uint8_t encode_block_i
 uint32_t ccdecoder_byte_sequence_64(uint8_t *input_bytes, uint8_t encode_block_index,
          uint8_t *decoded_bytes)
 /* --------------------------------------------------------------------------
- *  CC decoder for length of byte 64  (512 bits)
- *  encode_block_index --> cc encoder byte length for each encoding block =
- *                  (1 << encode_block_index )
- * -------------------------------------------------------------------------- */
+| CC decoder for length of byte 64  (512 bits)
+| encode_block_index --> cc encoder byte length for each encoding block =
+|                  (1 << encode_block_index )
+|
+----------------------------------------------------------------------------- */
 {
   uint32_t i;
   uint8_t bytes_length = 64;

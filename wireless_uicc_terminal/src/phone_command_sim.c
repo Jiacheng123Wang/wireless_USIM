@@ -56,7 +56,7 @@ static volatile uint16_t   UPDATE_BNARY_OFFSET_6FC4 = 0;
 static volatile uint16_t   UPDATE_BNARY_OFFSET_6F56 = 0;
 
 /********************************************************************************/
-uint32_t phone_command_status_response_0xf2(uint8_t *bytes_command, uint32_t etu_length, 
+uint32_t phone_command_status_response_0xf2(uint8_t *bytes_command, uint32_t etu_length,
          uint32_t pin_number_phone)
 /*--------------------------------------------------------------------------------
 | phone command 0xf2: status
@@ -1939,7 +1939,8 @@ uint32_t phone_command_select_0xa4(uint8_t *phone_command, uint32_t etu_length,
 #if (IF_SOFTDEIVE_USED)
       if (IF_SOFTDEVICE_RUNNING)
       {
-        if (read_bytes_ble(*(phone_command + 5), READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
+        if (read_bytes_ble(*(phone_command + 5), READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE,
+            etu_length, start_time_us, time_length_us))
         {
           write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
           return(1);
@@ -2249,7 +2250,8 @@ uint32_t phone_command_read_binary_2fe2(uint8_t *phone_command, uint32_t etu_len
   }
 
   /* compare the ICCID read from USIM card and the ICCID saved in flalsh */
-  if (byte_string_comparison(FILE_SIZE_2FE2, bytes_all_file + EF_2FE2_OFFSET, (uint8_t *)usim_flash_address + EF_2FE2_OFFSET))
+  if (byte_string_comparison(FILE_SIZE_2FE2, bytes_all_file + EF_2FE2_OFFSET,
+      (uint8_t *)usim_flash_address + EF_2FE2_OFFSET))
   {
 #if (IF_LOG_OUTPUT)
     if (!IF_SOFTDEVICE_RUNNING)
@@ -2259,7 +2261,7 @@ uint32_t phone_command_read_binary_2fe2(uint8_t *phone_command, uint32_t etu_len
       printf_log_rx(FILE_SIZE_2FE2, (uint8_t *)usim_flash_address + EF_2FE2_OFFSET);
     }
 #endif
-
+    /* clear the USIM flash data updated flag, the flash data will be updated */
     *(bytes_all_file + FLAG_2F05_OFFSET) = 0;
     *(bytes_all_file + FLAG_6F07_OFFSET) = 0;
     *(bytes_all_file + FLAG_6F08_OFFSET) = 0;
@@ -2279,7 +2281,8 @@ uint32_t phone_command_read_binary_2fe2(uint8_t *phone_command, uint32_t etu_len
     *(bytes_all_file + FLAG_6F42_OFFSET) = 0;
 
     /* write the read EF data to flash */
-    start_flash_page_update(FLASH_WRITE_DATA_SIZE_IN_WORD, USER_CONFIG_FLASH_ADDR, (uint32_t *)P_UINT8_FLASH_DATA_RAM_BUFFER);
+    start_flash_page_update(FLASH_WRITE_DATA_SIZE_IN_WORD, USER_CONFIG_FLASH_ADDR,
+                            (uint32_t *)P_UINT8_FLASH_DATA_RAM_BUFFER);
 
   }
 #if (IF_LOG_OUTPUT)
@@ -2296,7 +2299,7 @@ uint32_t phone_command_read_binary_2fe2(uint8_t *phone_command, uint32_t etu_len
 }
 
 /********************************************************************************/
-uint32_t get_usim_file_position_index(uint32_t file_id, uint8_t *file_size, 
+uint32_t get_usim_file_position_index(uint32_t file_id, uint8_t *file_size,
          uint32_t *file_offset, uint32_t *flag_offset)
 /*--------------------------------------------------------------------------------
 | get the EF data bytes position offset in the RAM/flash variables
@@ -2547,8 +2550,9 @@ uint32_t phone_command_read_binary_usim_card(uint32_t file_id, uint8_t usim_card
 }
 
 /********************************************************************************/
-uint32_t phone_command_read_binary_file_data(uint8_t *phone_command, uint32_t etu_length, uint32_t file_id,
-         uint32_t tmp_length, uint32_t read_offset, uint8_t *confirm_bytes, uint8_t *status_bytes)
+uint32_t phone_command_read_binary_file_data(uint8_t *phone_command, uint32_t etu_length,
+         uint32_t file_id, uint32_t tmp_length, uint32_t read_offset, uint8_t *confirm_bytes,
+         uint8_t *status_bytes)
 /*--------------------------------------------------------------------------------
 | read binary file from wireless interface/USIM card
 |
@@ -2972,7 +2976,8 @@ void stop_sim_clock_timer1(void)
 
 #if (IF_USIM_BINARY_UPDATE)
 /********************************************************************************/
-uint32_t sim_command_update_binary_get_offset_0xd6(uint8_t *phone_command, uint32_t update_file_id)
+uint32_t sim_command_update_binary_get_offset_0xd6(uint8_t *phone_command,
+         uint32_t update_file_id)
 /*--------------------------------------------------------------------------------
 | get the update binary USIM command offset data
 |
@@ -3299,7 +3304,8 @@ uint32_t sim_command_usim_card_update_binary_0xd6(uint32_t update_file_id)
 }
 
 /********************************************************************************/
-uint32_t sim_command_usim_card_update_binary_0xd6_ble(uint32_t update_file_id, uint32_t start_time_us, uint32_t time_length_us)
+uint32_t sim_command_usim_card_update_binary_0xd6_ble(uint32_t update_file_id,
+         uint32_t start_time_us, uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
 | SIM command 0xD6 to update EF data inside BLE stack time slot
 |
@@ -4135,8 +4141,9 @@ uint32_t printf_selected_file(uint64_t selected_file)
 |
 --------------------------------------------------------------------------------*/
 {
-  printf("selected file: %x, %x, %x, %x, %x, %x\r\n", (uint8_t)(selected_file >> 40), (uint8_t)(selected_file >> 32),
-    (uint8_t)(selected_file >> 24), (uint8_t)(selected_file >> 16), (uint8_t)(selected_file >> 8), (uint8_t)selected_file);
+  printf("selected file: %x, %x, %x, %x, %x, %x\r\n", (uint8_t)(selected_file >> 40),
+         (uint8_t)(selected_file >> 32), (uint8_t)(selected_file >> 24), (uint8_t)(selected_file >> 16),
+         (uint8_t)(selected_file >> 8), (uint8_t)selected_file);
 
   return(0);
 }

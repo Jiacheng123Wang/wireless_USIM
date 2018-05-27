@@ -815,7 +815,7 @@ uint32_t usim_server_command_get_data_ble(uint8_t *bytes_command, uint32_t etu_l
 uint32_t usim_command_authentication_0x88(void)
 /*--------------------------------------------------------------------------------
 | USIM command authentication 0x88 by fixed data, just give a response to command 
-| 0X88, not for user authentication
+| 0x88, not for user authentication
 |
 --------------------------------------------------------------------------------*/
 {

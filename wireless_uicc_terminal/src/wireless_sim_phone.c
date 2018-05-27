@@ -184,7 +184,7 @@ void smart_usim_initialization(void)
 /********************************************************************************/
 void RTC2_IRQHandler(void)
 /*--------------------------------------------------------------------------------
-| RTC2 tick interrupt handler, for radio link connection
+| RTC2 tick interrupt handler, for radio link connection and other routine tasks
 |
 --------------------------------------------------------------------------------*/
 {
@@ -379,7 +379,7 @@ void RTC2_IRQHandler(void)
 /********************************************************************************/
 void rtc2_radio_link_config(void)
 /*--------------------------------------------------------------------------------
-| RTC2 initial configuration, for radio link connection
+| RTC2 initial configuration, for radio link connection and other routine tasks
 |
 --------------------------------------------------------------------------------*/
 {
@@ -424,7 +424,7 @@ void rtc2_radio_link_config(void)
 /********************************************************************************/
 void rtc2_compare0_event_postpone(uint32_t postpone_time_ms)
 /*--------------------------------------------------------------------------------
-| postpone RTC2 compare0 event if the
+| postpone RTC2 compare0 event if some events need more time
 |
 --------------------------------------------------------------------------------*/
 {
@@ -440,7 +440,7 @@ void rtc2_compare0_event_postpone(uint32_t postpone_time_ms)
 /********************************************************************************/
 uint32_t time_slot_request(uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
-| request time slot for wireless USIm interface
+| request time slot for wireless USIM interface
 |
 --------------------------------------------------------------------------------*/
 {
@@ -460,7 +460,7 @@ uint32_t time_slot_request(uint32_t time_length_us)
 /********************************************************************************/
 void usim_client_connection_request_time_slot_request(void)
 /*--------------------------------------------------------------------------------
-| request time slot for wireless USIm interface
+| request time slot for wireless USIM interface
 |
 --------------------------------------------------------------------------------*/
 {
@@ -484,7 +484,7 @@ void usim_client_connection_request_time_slot_request(void)
 /********************************************************************************/
 void usim_server_listening_time_slot_request(void)
 /*--------------------------------------------------------------------------------
-| request time slot for wireless USIm interface
+| request time slot for wireless USIM interface for USIM server
 |
 --------------------------------------------------------------------------------*/
 {
@@ -513,7 +513,7 @@ void ble_stack_status_check(void)
 {
   static uint8_t ble_check_counter = 0;
 
-  /* BLE stack stopeed for USIM switch skip BLE staus check */
+  /* BLE stack softdevice stopeed for USIM switch, skip BLE staus check */
   if (FLAG_USIM_SWITCH)
   {
     ble_check_counter++;
@@ -669,7 +669,7 @@ void flash_data_write_task(void)
     /* count the flash write try times */
     write_try_counter++;
 
-    /* overtime, clear the flash, try again */
+    /* overtime, clear the flag, try again */
     if (write_try_counter > 100)
     {
       FLASH_UPDATE_WAITING_STAGE = 0;
@@ -1042,7 +1042,7 @@ void phone_data_send_check(void)
 /********************************************************************************/
 void led_wireless_sim_status_indicator(uint32_t led_status_counter)
 /*--------------------------------------------------------------------------------
-| LED indicator for wireless sim connection status
+| LED indicator for wireless USIM connection status
 |
 --------------------------------------------------------------------------------*/
 {
@@ -1081,7 +1081,8 @@ void led_wireless_sim_status_indicator(uint32_t led_status_counter)
 }
 
 /********************************************************************************/
-void led_flash_pattern_1(uint32_t led_status_counter, uint8_t speed_factor, uint8_t flash_pattern)
+void led_flash_pattern_1(uint32_t led_status_counter, uint8_t speed_factor,
+     uint8_t flash_pattern)
 /*--------------------------------------------------------------------------------
 | LED flash pattern
 |
@@ -2079,7 +2080,7 @@ void usim_power_on_status_check(void)
 /********************************************************************************/
 void usim_file_update_status_check(void)
 /*--------------------------------------------------------------------------------
-| USIM EF data flash save status check
+| USIM EF data flash write status check
 |
 --------------------------------------------------------------------------------*/
 {

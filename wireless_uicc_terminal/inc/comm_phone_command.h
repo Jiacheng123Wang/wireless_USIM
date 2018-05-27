@@ -49,12 +49,15 @@ uint32_t write_phone_response(uint32_t bytes_length, uint8_t *bytes_info, uint32
 uint32_t phone_command_pin_0x24(uint8_t *bytes_command, uint32_t etu_length_phone);
 uint32_t phone_command_terminal_profile_0x10(uint8_t *phone_command, uint32_t etu_length,
          uint32_t pin_number_phone);
-uint32_t phone_command_fetch_0x12(uint8_t *bytes_command, uint32_t etu_length, uint32_t pin_number_phone);
-uint32_t phone_command_fetch_reset(uint8_t *bytes_command, uint32_t etu_length, uint32_t pin_number_phone);
+uint32_t phone_command_fetch_0x12(uint8_t *bytes_command, uint32_t etu_length,
+         uint32_t pin_number_phone);
+uint32_t phone_command_fetch_reset(uint8_t *bytes_command, uint32_t etu_length,
+         uint32_t pin_number_phone);
 uint32_t phone_command_fetch_diaplay_text(uint8_t *bytes_command, uint8_t string_length,
          uint8_t *display_string, uint32_t etu_length, uint32_t pin_number_phone);
 uint32_t phone_command_fetch_diaplay_text_variable(uint8_t *bytes_command, uint8_t string_length,
-         uint8_t *display_string, uint32_t etu_length, uint32_t pin_number_phone, uint8_t variable_bytes);
+         uint8_t *display_string, uint32_t etu_length, uint32_t pin_number_phone,
+         uint8_t variable_bytes);
 uint32_t phone_command_fetch_at_cfun0(uint8_t *bytes_command, uint32_t etu_length,
          uint32_t pin_number_phone);
 uint32_t phone_command_fetch_idle_mode_text(uint8_t *bytes_command, uint8_t string_length,
@@ -62,13 +65,15 @@ uint32_t phone_command_fetch_idle_mode_text(uint8_t *bytes_command, uint8_t stri
 uint32_t phone_command_fetch_idle_mode_text_variable(uint8_t *bytes_command, uint8_t string_length,
          uint8_t *display_string, uint32_t etu_length, uint32_t pin_number_phone);
 uint32_t phone_command_search_record_0xa2(uint8_t *phone_command, uint32_t etu_length);
-uint32_t phone_command_envelope_0xc2(uint8_t *phone_command, uint32_t etu_length, uint32_t start_time_us, uint32_t time_length_us);
+uint32_t phone_command_envelope_0xc2(uint8_t *phone_command, uint32_t etu_length,
+         uint32_t start_time_us, uint32_t time_length_us);
 uint32_t phone_command_terminal_response_0x14(uint8_t *phone_command, uint32_t etu_length,
          uint32_t start_time_us, uint32_t time_length_us);
 uint32_t phone_command_fetch_set_initial_item(uint8_t *bytes_command, uint32_t etu_length,
          uint32_t pin_number_phone);
 uint32_t phone_command_manage_channel_0x70(uint8_t *bytes_command, uint32_t etu_length_phone);
-uint32_t phone_command_default_response(uint8_t *bytes_command, uint32_t etu_length, uint32_t pin_number_phone);
+uint32_t phone_command_default_response(uint8_t *bytes_command, uint32_t etu_length,
+         uint32_t pin_number_phone);
 uint32_t phone_command_authentication_wireless_test(void);
 uint32_t phone_command_fetch_get_input_command_line(uint8_t *bytes_command, uint32_t etu_length,
          uint32_t pin_number_phone);

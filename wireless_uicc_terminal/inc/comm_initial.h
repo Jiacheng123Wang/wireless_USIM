@@ -35,7 +35,8 @@ void usim_data_initialization(void);
 void watch_dog_timer_init(uint32_t time_out_s);
 void update_user_configuration(void);
 void update_etu_time(void);
-uint8_t random_vector_generate(uint8_t *p_buff, uint8_t size, uint32_t start_time_us, uint32_t time_length_us, uint8_t if_bias_correction);
+uint8_t random_vector_generate(uint8_t *p_buff, uint8_t size, uint32_t start_time_us,
+        uint32_t time_length_us, uint8_t if_bias_correction);
 uint32_t usim_data_restore(void);
 
 #endif

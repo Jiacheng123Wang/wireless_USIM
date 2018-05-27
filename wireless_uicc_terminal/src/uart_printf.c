@@ -41,6 +41,10 @@ void uart_initialization(void)
 
 /********************************************************************************/
 uint8_t simple_uart_get(void)
+/*--------------------------------------------------------------------------------
+| read a byte from UART
+|
+--------------------------------------------------------------------------------*/
 {
   while (NRF_UART0->EVENTS_RXDRDY != 1)
   {
@@ -53,6 +57,10 @@ uint8_t simple_uart_get(void)
 
 /********************************************************************************/
 uint32_t simple_uart_get_with_timeout(uint32_t timeout_ms, uint8_t *rx_data)
+/*--------------------------------------------------------------------------------
+| read a byte from UART with a limited time
+|
+--------------------------------------------------------------------------------*/
 {
   uint32_t initial_timer;
 
@@ -83,6 +91,10 @@ uint32_t simple_uart_get_with_timeout(uint32_t timeout_ms, uint8_t *rx_data)
 
 /********************************************************************************/
 void simple_uart_put(uint8_t cr)
+/*--------------------------------------------------------------------------------
+| write a byte to UART
+|
+--------------------------------------------------------------------------------*/
 {
   NRF_UART0->TXD = (uint8_t)cr;
 
@@ -96,6 +108,10 @@ void simple_uart_put(uint8_t cr)
 
 /********************************************************************************/
 void simple_uart_put_with_timeout(uint8_t cr)
+/*--------------------------------------------------------------------------------
+| write a byte to UART with a limited time
+|
+--------------------------------------------------------------------------------*/
 {
   uint32_t time_now = NRF_RTC2->COUNTER;
 
@@ -114,20 +130,21 @@ void simple_uart_put_with_timeout(uint8_t cr)
 }
 
 /********************************************************************************/
-void simple_uart_config(  uint8_t rts_pin_number,
-                          uint8_t txd_pin_number,
-                          uint8_t cts_pin_number,
-                          uint8_t rxd_pin_number,
-                          bool    hwfc)
+void simple_uart_config(uint8_t rts_pin_number, uint8_t txd_pin_number,
+     uint8_t cts_pin_number, uint8_t rxd_pin_number, bool hwfc)
+/*--------------------------------------------------------------------------------
+| UART configuration
+|
+--------------------------------------------------------------------------------*/
 {
-/* @snippet [Configure UART RX and TX pin] */
+/* Configure UART RX and TX pin */
   nrf_gpio_cfg_output_H0H1(txd_pin_number);
   nrf_gpio_cfg_input(rxd_pin_number, NRF_GPIO_PIN_NOPULL);
 
   NRF_UART0->PSELTXD = txd_pin_number;
   NRF_UART0->PSELRXD = rxd_pin_number;
 
-/* snippet [Configure UART RX and TX pin] */
+/* Configure UART RX and TX pin */
   if (hwfc)
   {
     nrf_gpio_cfg_output(rts_pin_number);
@@ -146,6 +163,10 @@ void simple_uart_config(  uint8_t rts_pin_number,
 
 /********************************************************************************/
 void simple_uart_putstring(const uint8_t *str)
+/*--------------------------------------------------------------------------------
+| write a byte sreing to UART
+|
+--------------------------------------------------------------------------------*/
 {
   uint32_t i = 0;
   uint8_t ch = str[i++];
@@ -159,6 +180,10 @@ void simple_uart_putstring(const uint8_t *str)
 
 /********************************************************************************/
 void simple_uart_getstring(uint8_t *str, uint8_t *str_length)
+/*--------------------------------------------------------------------------------
+| read a byte sreing from UART
+|
+--------------------------------------------------------------------------------*/
 {
   uint_fast8_t i = 0;
   uint8_t ch;
@@ -178,34 +203,45 @@ void simple_uart_getstring(uint8_t *str, uint8_t *str_length)
 }
 
 /********************************************************************************/
-void simple_uart_getstring_with_timeout(uint32_t timeout_ms, uint8_t max_length, uint8_t *str, uint8_t *str_length)
+void simple_uart_getstring_with_timeout(uint32_t timeout_ms, uint8_t max_length,
+     uint8_t *str, uint8_t *str_length)
+/*--------------------------------------------------------------------------------
+| read a byte sreing from UART with limited time
+|
+--------------------------------------------------------------------------------*/
 {
   uint_fast8_t i = 0;
   uint8_t ch;
 
   while (1)
   {
-  if ((!simple_uart_get_with_timeout(timeout_ms, &ch)) && (i < max_length))
-  {
+    if ((!simple_uart_get_with_timeout(timeout_ms, &ch)) && (i < max_length))
+    {
       if (ch != '\n')
+      {
         str[i++] = ch;
+      }
       else
       {
         str[i++] = '\n';
-      *str_length = i;
+        *str_length = i;
         return;
       }
     }
-  else
-  {
-    *str_length = i;
+    else
+    {
+      *str_length = i;
       return;
-  }
+    }
   }
 }
 
 /********************************************************************************/
 int _write(int fd, const char *str, int len)
+/*--------------------------------------------------------------------------------
+| printf the string to UART
+|
+--------------------------------------------------------------------------------*/
 {
   int i;
 
@@ -218,6 +254,10 @@ int _write(int fd, const char *str, int len)
 
 /********************************************************************************/
 int _read(int file, char *p_char, int len)
+/*--------------------------------------------------------------------------------
+| scanf the string from UART
+|
+--------------------------------------------------------------------------------*/
 {
   int ret_len = len;
   uint8_t input;
@@ -227,7 +267,7 @@ int _read(int file, char *p_char, int len)
     input = simple_uart_get();
     while (input)
     {
-        // No implementation needed.
+      // No implementation needed.
     }
     *p_char++ = input;
   }

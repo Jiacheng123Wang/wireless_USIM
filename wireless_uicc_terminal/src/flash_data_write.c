@@ -35,7 +35,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "wireless_sim_phone.h"
 
 /********************************************************************************/
-uint32_t start_flash_page_update(uint32_t update_length_in_word, uint32_t flash_address_update_page, uint32_t *ram_data)
+uint32_t start_flash_page_update(uint32_t update_length_in_word,
+         uint32_t flash_address_update_page, uint32_t *ram_data)
 /*--------------------------------------------------------------------------------
 | update flash page data, the data length in word is update_length_in_word,
 | the data in RAM to be written to flash is started in ram_data
@@ -50,7 +51,8 @@ uint32_t start_flash_page_update(uint32_t update_length_in_word, uint32_t flash_
 }
 
 /********************************************************************************/
-uint32_t flash_page_update(uint32_t update_length_in_word, uint32_t flash_address_update_page, uint32_t *ram_data)
+uint32_t flash_page_update(uint32_t update_length_in_word,
+         uint32_t flash_address_update_page, uint32_t *ram_data)
 /*--------------------------------------------------------------------------------
 | update flash page data, the data length in word is update_length_in_word,
 | the data in RAM to be written to flash is started in ram_data

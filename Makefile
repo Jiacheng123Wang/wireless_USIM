@@ -1,4 +1,4 @@
-# if softdevice stack is used, 1: used, 0: not used
+# if softdevice stack is used, 1: used, 0: not used, it should be the same value as in define_config.h
 IF_SOFTDEIVE_USED := 1
 
 # if LIB file used, 1: used, 0: not used

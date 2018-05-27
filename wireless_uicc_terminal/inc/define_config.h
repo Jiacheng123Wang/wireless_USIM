@@ -338,7 +338,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define RADIO_MODE                           1
 
 /* radio transmission power for data transmissiom
-|  0: -30dBm for nRF51, -40dBm for nRF52
+|  0: -40dBm
 |  1: -20dBm
 |  2: -16dBm
 |  3: -12dBm
@@ -346,15 +346,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 |  5: -4dBm
 |  6: 0dBm
 |  7: 4dBm
-|  8: 3dBm, nRF52 only */
+|  8: 3dBm */
 #define RADIO_TX_POWER_DATA            7
 /* Tx power level for ACK/NACK feedback */
 #define POWER_LEVEL_ACK                7
 /* Tx power level for phone connection request */
 #define POWER_LEVEL_CONNECTION         7
 
-/* time resolution is 1us */
-/* time duration for SIM to listen command from phone in us */
+/* time resolution is ms */
+/* time duration for SIM to listen command from phone in ms */
 #if (IF_CONNECTION_CC_CODED)
   #define SIM_LISTEN_TIME_MS             15
 #else
@@ -373,9 +373,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   #define PHONE_REQUEST_WAIT_TIME_MS     2
 #endif
 /* time resolution is 1ms */
-/* max time for a data package transmission, may be several transmission try */
+/* max time for a data package transmission, may be several transmission try, in ms */
 #define DATA_TX_TIME_MS                980
-/* max waiting time for a data package receiving */
+/* max waiting time for a data package receiving, in ms */
 #define DATA_RX_TIME_MS                980
 
 /* time interval for each data package transmission try, if no ACK confirm message received, in ms */
@@ -416,8 +416,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #define GPIOTE_IRQ_PRIORITY         2
 #define SWI3_EGU3_IRQ_PRIORITY      5
 #define RADIO_LINK_IRQ_PRIORITY     7
-
-#define RTC2          RTC2
 
 #endif
 

@@ -27,6 +27,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "define_config.h"
 
+/* extern global variable claim , the same variables in global_data_exchange.h */
 extern uint8_t   READ_BYTE_UICC_TERMINAL[256];
 extern uint8_t   GLOBAL_TMP_RAM[256];
 extern uint8_t   USIM_SERVER_COMMAND_WIRELESS_RECEIVE[256];

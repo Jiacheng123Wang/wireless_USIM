@@ -36,13 +36,11 @@ uint8_t simple_uart_get(void);
 uint32_t simple_uart_get_with_timeout(uint32_t timeout_ms, uint8_t *rx_data);
 void simple_uart_put(uint8_t cr);
 void simple_uart_put_with_timeout(uint8_t cr);
-void simple_uart_config(  uint8_t rts_pin_number,
-                          uint8_t txd_pin_number,
-                          uint8_t cts_pin_number,
-                          uint8_t rxd_pin_number,
-                          bool    hwfc);
+void simple_uart_config(uint8_t rts_pin_number, uint8_t txd_pin_number, uint8_t cts_pin_number,
+     uint8_t rxd_pin_number, bool hwfc);
 void simple_uart_putstring(const uint8_t *str);
 void simple_uart_getstring(uint8_t *str, uint8_t *str_length);
-void simple_uart_getstring_with_timeout(uint32_t timeout_ms, uint8_t max_length, uint8_t *str, uint8_t *str_length);
+void simple_uart_getstring_with_timeout(uint32_t timeout_ms, uint8_t max_length, uint8_t *str,
+     uint8_t *str_length);
 
 #endif

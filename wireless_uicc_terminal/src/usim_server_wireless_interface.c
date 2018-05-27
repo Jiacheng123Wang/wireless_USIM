@@ -954,9 +954,10 @@ uint32_t usim_server_authentication_wireless(uint8_t *phone_command)
 
 #if (IF_SOFTDEIVE_USED)
 /********************************************************************************/
-uint32_t usim_server_authentication_wireless_ble(uint8_t *phone_command, uint32_t start_time_us, uint32_t time_length_us)
+uint32_t usim_server_authentication_wireless_ble(uint8_t *phone_command,
+         uint32_t start_time_us, uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
-| wireless SIM authentication phone command of server side, 0x88
+| wireless SIM authentication phone command of server side inside BLE stack time slot, 0x88
 |
 --------------------------------------------------------------------------------*/
 {
@@ -1046,7 +1047,8 @@ uint32_t usim_server_authentication_wireless_ble(uint8_t *phone_command, uint32_
 #endif
 
 /********************************************************************************/
-uint32_t sim_command_send(uint8_t *phone_command, uint32_t start_time_us, uint32_t time_length_us)
+uint32_t sim_command_send(uint8_t *phone_command, uint32_t start_time_us,
+         uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
 | USIM server send SIM EF file content to phone over the air
 |
@@ -1424,9 +1426,10 @@ uint32_t sim_file_update(uint32_t read_file_id, uint8_t *update_bytes_all_file)
 }
 
 /********************************************************************************/
-uint32_t usim_server_command_receive_data(uint8_t *received_data, uint32_t start_time_us, uint32_t time_length_us)
+uint32_t usim_server_command_receive_data(uint8_t *received_data, uint32_t start_time_us,
+         uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
-| watch receive the data send from phone wireless
+| USIM server receive the data send from USIM client from wireless interface
 |
 --------------------------------------------------------------------------------*/
 {
@@ -1507,7 +1510,7 @@ uint32_t usim_server_command_receive_data(uint8_t *received_data, uint32_t start
 /********************************************************************************/
 uint32_t usim_files_data_read_flash_write_usim(uint8_t usim_no, uint8_t *usim_files_all_data)
 /*--------------------------------------------------------------------------------
-| second USIM (not used by phone) files update to flash
+| USIM EF files date update to flash
 |
 --------------------------------------------------------------------------------*/
 {
@@ -1615,6 +1618,7 @@ uint32_t usim_files_data_read_flash_write_ruim(uint8_t usim_no, uint8_t *usim_fi
 {
   return(0);
 }
+
 /********************************************************************************/
 uint32_t usim_files_data_read_flash_write(uint8_t usim_no, uint8_t *usim_files_all_data)
 /*--------------------------------------------------------------------------------

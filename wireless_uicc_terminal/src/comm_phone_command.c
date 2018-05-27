@@ -903,7 +903,7 @@ void SWI3_EGU3_IRQHandler(void)
 
 /********************************************************************************/
 uint32_t read_phone_command(uint8_t *bytes_command, uint32_t pin_number,
-     uint32_t etu_length)
+         uint32_t etu_length)
 /*--------------------------------------------------------------------------------
 | phone command read, 5 bytes
 |
@@ -1752,7 +1752,7 @@ uint32_t phone_command_manage_channel_0x70(uint8_t *bytes_command, uint32_t etu_
 
 /********************************************************************************/
 uint32_t phone_command_terminal_profile_0x10(uint8_t *phone_command, uint32_t etu_length,
-     uint32_t pin_number_phone)
+         uint32_t pin_number_phone)
 /*--------------------------------------------------------------------------------
 | phone command terminal profile session, command 0x10, only read the data from
 | phone, not forward the data to SIM
@@ -1782,7 +1782,8 @@ uint32_t phone_command_terminal_profile_0x10(uint8_t *phone_command, uint32_t et
 }
 
 /********************************************************************************/
-uint32_t phone_command_fetch_reset(uint8_t *bytes_command, uint32_t etu_length, uint32_t pin_number_phone)
+uint32_t phone_command_fetch_reset(uint8_t *bytes_command, uint32_t etu_length,
+         uint32_t pin_number_phone)
 /*--------------------------------------------------------------------------------
 | USAT command NAA reset, phone start to access the network again
 |
@@ -1802,7 +1803,7 @@ uint32_t phone_command_fetch_reset(uint8_t *bytes_command, uint32_t etu_length, 
 
 /********************************************************************************/
 uint32_t phone_command_fetch_diaplay_text(uint8_t *bytes_command, uint8_t string_length,
-     uint8_t *display_string, uint32_t etu_length, uint32_t pin_number_phone)
+         uint8_t *display_string, uint32_t etu_length, uint32_t pin_number_phone)
 /*--------------------------------------------------------------------------------
 | USAT command text display, string display_string displayed on the phone screen
 |
@@ -1823,8 +1824,9 @@ uint32_t phone_command_fetch_diaplay_text(uint8_t *bytes_command, uint8_t string
 }
 
 /********************************************************************************/
-uint32_t phone_command_fetch_diaplay_text_variable(uint8_t *bytes_command, uint8_t string_length,
-     uint8_t *display_string, uint32_t etu_length, uint32_t pin_number_phone, uint8_t variable_bytes)
+uint32_t phone_command_fetch_diaplay_text_variable(uint8_t *bytes_command,
+         uint8_t string_length, uint8_t *display_string, uint32_t etu_length,
+         uint32_t pin_number_phone, uint8_t variable_bytes)
 /*--------------------------------------------------------------------------------
 | USAT command text display, text display_string displayed on the phone screen
 \ with the number of variable_bytes
@@ -1847,8 +1849,8 @@ uint32_t phone_command_fetch_diaplay_text_variable(uint8_t *bytes_command, uint8
 }
 
 /********************************************************************************/
-uint32_t phone_command_fetch_get_input_command_line(uint8_t *bytes_command, uint32_t etu_length,
-     uint32_t pin_number_phone)
+uint32_t phone_command_fetch_get_input_command_line(uint8_t *bytes_command,
+         uint32_t etu_length, uint32_t pin_number_phone)
 /*--------------------------------------------------------------------------------
 | USAT command to get phone input command line interface
 |
@@ -1972,8 +1974,9 @@ uint32_t phone_command_fetch_idle_mode_text(uint8_t *bytes_command, uint8_t stri
 }
 
 /********************************************************************************/
-uint32_t phone_command_fetch_idle_mode_text_variable(uint8_t *bytes_command, uint8_t string_length,
-     uint8_t *display_string, uint32_t etu_length, uint32_t pin_number_phone)
+uint32_t phone_command_fetch_idle_mode_text_variable(uint8_t *bytes_command,
+         uint8_t string_length, uint8_t *display_string, uint32_t etu_length,
+         uint32_t pin_number_phone)
 /*--------------------------------------------------------------------------------
 | USAT command text display in idle mode, string display_string displayed on the
 | phone screen with the number of device logical addresss
@@ -2027,7 +2030,8 @@ uint32_t phone_command_search_record_0xa2(uint8_t *phone_command, uint32_t etu_l
 }
 
 /********************************************************************************/
-uint32_t phone_command_fetch_0x12(uint8_t *bytes_command, uint32_t etu_length, uint32_t pin_number_phone)
+uint32_t phone_command_fetch_0x12(uint8_t *bytes_command, uint32_t etu_length,
+         uint32_t pin_number_phone)
 /*--------------------------------------------------------------------------------
 | phone command terminal fetch session, command 0x12
 |
@@ -2979,7 +2983,8 @@ uint32_t phone_usat_menu_selection(uint8_t usat_menu_type, uint8_t *status_bytes
 }
 
 /********************************************************************************/
-uint32_t phone_command_envelope_0xc2(uint8_t *phone_command, uint32_t etu_length, uint32_t start_time_us, uint32_t time_length_us)
+uint32_t phone_command_envelope_0xc2(uint8_t *phone_command, uint32_t etu_length,
+         uint32_t start_time_us, uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
 | phone command envelope session, command 0xc2
 |
@@ -3547,7 +3552,8 @@ uint32_t phone_command_terminal_response_0x14(uint8_t *phone_command, uint32_t e
 }
 
 /********************************************************************************/
-uint32_t phone_command_default_response(uint8_t *bytes_command, uint32_t etu_length, uint32_t pin_number_phone)
+uint32_t phone_command_default_response(uint8_t *bytes_command, uint32_t etu_length,
+         uint32_t pin_number_phone)
 /*--------------------------------------------------------------------------------
 | phone command default response, for wrong phone command byte read
 |

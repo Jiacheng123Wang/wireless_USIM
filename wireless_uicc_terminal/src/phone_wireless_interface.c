@@ -239,8 +239,9 @@ void main_smart_phone_sim_local_wireless(uint32_t start_time_us, uint32_t time_l
 /********************************************************************************/
 void phone_connection_state_check(uint8_t status_connection_request)
 /*--------------------------------------------------------------------------------
-| radio link connection status check at phone side, phone transmit an access request
-| and listen the ACK feedback to check if there is radio link between phone and watch
+| radio link connection status check at USIM client side, transmit an access request
+| and listen the ACK feedback to check if there is radio link between wireless USIM
+| server and client
 |
 --------------------------------------------------------------------------------*/
 {
@@ -383,7 +384,7 @@ void phone_connection_state_check(uint8_t status_connection_request)
 /********************************************************************************/
 uint32_t connection_request_phone(uint8_t connection_type)
 /*--------------------------------------------------------------------------------
-| radio link transmission at phone side for random access request
+| radio link transmission at USIM client side for random access request
 |
 --------------------------------------------------------------------------------*/
 {
@@ -555,7 +556,7 @@ uint32_t connection_request_phone(uint8_t connection_type)
 /********************************************************************************/
 uint32_t connection_request_phone_post_decoding(uint8_t connection_type, uint32_t initial_timer)
 /*--------------------------------------------------------------------------------
-| radio link transmission at phone side for random access request
+| USIM client random access request received message decoding and post-process
 |
 --------------------------------------------------------------------------------*/
 {
@@ -774,9 +775,11 @@ uint32_t connection_request_phone_post_decoding(uint8_t connection_type, uint32_
 
 #if (IF_SOFTDEIVE_USED)
 /********************************************************************************/
-uint32_t connection_request_phone_ble(uint8_t connection_type, uint32_t start_time_us, uint32_t time_length_us)
+uint32_t connection_request_phone_ble(uint8_t connection_type, uint32_t start_time_us,
+         uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
-| radio link transmission at phone side for random access request
+| radio link transmission at USIM client side for random access request, inside BLE
+| stack time slot
 |
 --------------------------------------------------------------------------------*/
 {
@@ -876,7 +879,7 @@ uint32_t connection_request_phone_ble(uint8_t connection_type, uint32_t start_ti
 /********************************************************************************/
 uint32_t phone_command_authentication_wireless(uint8_t *phone_command)
 /*--------------------------------------------------------------------------------
-| phone autherntication cammand 0x88 over the air
+| phone authentication cammand 0x88 over the air
 |
 --------------------------------------------------------------------------------*/
 {
@@ -1033,7 +1036,7 @@ uint32_t phone_command_authentication_wireless(uint8_t *phone_command)
 uint32_t phone_command_authentication_wireless_ble(uint8_t *phone_command,
          uint32_t start_time_us, uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
-| phone autherntication cammand 0x88 over the air
+| phone authentication cammand 0x88 over the air, inside BLE stack time slot
 |
 --------------------------------------------------------------------------------*/
 {
@@ -1192,7 +1195,7 @@ uint32_t phone_command_authentication_wireless_ble(uint8_t *phone_command,
 /********************************************************************************/
 uint32_t phone_command_get_file_data(uint16_t file_id, uint8_t *file_data)
 /*--------------------------------------------------------------------------------
-| get the EFs data from the watch over the air, send phone command: 0xbb
+| get the EFs data from the USIM server over the air, send phone command: 0xbb
 |
 --------------------------------------------------------------------------------*/
 {
@@ -1228,7 +1231,8 @@ uint32_t phone_command_get_file_data(uint16_t file_id, uint8_t *file_data)
 /********************************************************************************/
 uint32_t phone_command_get_file_data_blank(uint16_t file_id, uint8_t *file_data)
 /*--------------------------------------------------------------------------------
-| get the EFs data from the watch over the air, send phone command: 0xbb
+| get the EFs data from the USIM server over the air with BLE softdevice stopped,
+| send phone command: 0xbb
 |
 --------------------------------------------------------------------------------*/
 {
@@ -1433,7 +1437,7 @@ uint32_t phone_command_get_file_data_blank(uint16_t file_id, uint8_t *file_data)
 /********************************************************************************/
 uint32_t phone_command_send_data(uint8_t *send_data, uint8_t data_length, uint8_t data_type)
 /*--------------------------------------------------------------------------------
-| phone send data to watch, phone command: 0xcc,
+| USIM client send data to server, phone command: 0xcc,
 | data type: data_type, for different data
 |
 --------------------------------------------------------------------------------*/
@@ -1476,7 +1480,7 @@ uint32_t phone_command_send_data(uint8_t *send_data, uint8_t data_length, uint8_
 #if (IF_LOG_OUTPUT)
     printf("\r\n============= Hi, connection is not valid in phone_command_send_data =============\r\n");
 #endif
-    /* mark the phone-watch disconnection state */
+    /* mark the wireless USIM interface disconnection state */
     WIRELESS_SIM_CONNECTION_STATUS = 0;
 
     if (return_connection_request != SIM_LISTENING_RETURN_16M_OSC_ERROR)
@@ -1488,9 +1492,9 @@ uint32_t phone_command_send_data(uint8_t *send_data, uint8_t data_length, uint8_
   }
   else /* data packet transmission */
   {
-    /* mark the phone-watch connection state */
+    /* mark the wireless USIM interface connection state */
     WIRELESS_SIM_CONNECTION_STATUS = 1;
-    /* addtional time for phone to wait for random challange data generation at watch side */
+    /* addtional time for USIM client to wait for random challange data generation at watch side */
     nrf_delay_ms(RANDOM_BYTE_NUMBER_TIME_OUT_MS + 1);
 
     /* add the wireless UICC-terminal authentication running result data */
@@ -1498,7 +1502,7 @@ uint32_t phone_command_send_data(uint8_t *send_data, uint8_t data_length, uint8_
     {
       *(READ_BYTE_UICC_TERMINAL + i) = AUTHENTICATE_RESULT[i - 6];
     }
-    /* add the phone send data */
+    /* add the USIM client send data */
     for (i=6 + KEY_LENGTH; i<6 + KEY_LENGTH + data_length; i++)
     {
       *(READ_BYTE_UICC_TERMINAL + i) = *(send_data + i - (6 + KEY_LENGTH));
@@ -1518,7 +1522,7 @@ uint32_t phone_command_send_data(uint8_t *send_data, uint8_t data_length, uint8_
 #endif
     {
 #if (IF_LOG_OUTPUT)
-      printf("--------------- phone send data time out in phone_command_send_data --------------\r\n");
+      printf("--------------- USIM client send data time out in phone_command_send_data --------------\r\n");
 #endif
       stop_oscillator_16m( );
 

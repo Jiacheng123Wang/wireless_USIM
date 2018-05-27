@@ -42,7 +42,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /********************************************************************************/
 void set_default_usim0(void)
 /*--------------------------------------------------------------------------------
-| set USIM0 is the default phone used local SIM
+| set USIM0 be the default phone used local SIM
 |
 --------------------------------------------------------------------------------*/
 {
@@ -68,7 +68,7 @@ void set_default_usim0_etu(void)
 /********************************************************************************/
 void set_default_usim1(void)
 /*--------------------------------------------------------------------------------
-| set USIM1 is the default phone used local SIM
+| set USIM1 be the default phone used local SIM
 |
 --------------------------------------------------------------------------------*/
 {
@@ -158,7 +158,7 @@ void clock_sim_stop_4m(uint32_t pin_clock)
 /********************************************************************************/
 void uicc_reader_sim_pin_setup(void)
 /*--------------------------------------------------------------------------------
-| phone-USIM interface GPIO pin setting
+| phone-USIM interface GPIO pin setting for USIM card reader
 |
 --------------------------------------------------------------------------------*/
 {
@@ -566,6 +566,10 @@ uint32_t sim_command_select(uint32_t selected_file_ID, uint32_t etu_length)
 
 /********************************************************************************/
 uint32_t reset_sim_cold(void)
+/*--------------------------------------------------------------------------------
+| cold reset USIM card
+|
+--------------------------------------------------------------------------------*/
 {
   /* USIM card reader initialization */
   nrf_delay_ms(5);
@@ -957,7 +961,7 @@ uint32_t reset_sim_command_select_7fff(void)
 /********************************************************************************/
 uint32_t sim_file_7fff_selected_check(void)
 /*--------------------------------------------------------------------------------
-| check the USIM file selection for 0x7fff
+| check the USIM file selection status for 0x7fff
 |
 --------------------------------------------------------------------------------*/
 {

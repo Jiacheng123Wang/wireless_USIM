@@ -50,7 +50,8 @@ void timer1_initialization(void)
 }
 
 /********************************************************************************/
-void read_byte(uint8_t *info_byte, uint8_t *check_bit, uint32_t etu_ticks, uint32_t pin_number)
+void read_byte(uint8_t *info_byte, uint8_t *check_bit, uint32_t etu_ticks,
+               uint32_t pin_number)
 /*--------------------------------------------------------------------------------
 |  read a byte and its check bit from the pin_number
 |  The initial delay has some dajustment to adapt the ETU error for each bit
@@ -145,7 +146,8 @@ void read_byte(uint8_t *info_byte, uint8_t *check_bit, uint32_t etu_ticks, uint3
 }
 
 /********************************************************************************/
-void write_byte(uint8_t word_byte, uint8_t parity_bit, uint32_t etu_ticks, uint32_t pin_number)
+void write_byte(uint8_t word_byte, uint8_t parity_bit, uint32_t etu_ticks,
+                uint32_t pin_number)
 /*--------------------------------------------------------------------------------
 |  write a byte and its check bit to the pin_number
 |  Limitation: no write error parity bit check and re-write the same byte again

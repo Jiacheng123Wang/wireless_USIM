@@ -38,8 +38,10 @@ uint32_t usim_server_authentication_wireless(uint8_t *phone_command);
 uint32_t sim_file_update(uint32_t read_file_id, uint8_t *update_bytes_all_file);
 uint32_t connection_listening_sim(uint32_t start_time_us, uint32_t time_length_us);
 uint32_t sim_command_send(uint8_t *phone_command, uint32_t start_time_us, uint32_t time_length_us);
-uint32_t usim_server_authentication_wireless_ble(uint8_t *phone_command, uint32_t start_time_us, uint32_t time_length_us);
-uint32_t usim_server_command_receive_data(uint8_t *received_data, uint32_t start_time_us, uint32_t time_length_us);
+uint32_t usim_server_authentication_wireless_ble(uint8_t *phone_command, uint32_t start_time_us,
+         uint32_t time_length_us);
+uint32_t usim_server_command_receive_data(uint8_t *received_data, uint32_t start_time_us,
+         uint32_t time_length_us);
 uint32_t phone_logical_address_search(void);
 uint32_t radio_carrier_search_ble(void);
 uint32_t usim_files_data_read_flash_write(uint8_t usim_no, uint8_t *usim_files_all_data);

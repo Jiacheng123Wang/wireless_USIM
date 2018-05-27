@@ -40,10 +40,13 @@ uint32_t packet_radio_with_parameters_tx(uint8_t *tx_packet, uint32_t frequency,
        uint32_t logical_address, uint32_t start_time, uint32_t time_length, uint32_t power_level);
 uint32_t packet_radio_with_parameters_rx(uint8_t *rx_packet, uint32_t frequency,
        uint32_t logical_address, uint32_t start_time, uint32_t time_length);
-uint32_t packet_wireless_transmit_ble(uint8_t *tx_info_byte, uint32_t start_time_us, uint32_t time_length_us);
-uint32_t packet_wireless_receive_ble(uint8_t *rx_info_byte, uint32_t start_time_us, uint32_t time_length_us);
+uint32_t packet_wireless_transmit_ble(uint8_t *tx_info_byte, uint32_t start_time_us,
+         uint32_t time_length_us);
+uint32_t packet_wireless_receive_ble(uint8_t *rx_info_byte, uint32_t start_time_us,
+         uint32_t time_length_us);
 uint32_t packet_wireless_transmit(uint8_t *tx_info_byte);
-uint32_t packet_wireless_receive(uint8_t *rx_info_byte, uint32_t start_time_ms, uint32_t time_length_ms);
+uint32_t packet_wireless_receive(uint8_t *rx_info_byte, uint32_t start_time_ms,
+         uint32_t time_length_ms);
 
 /*------------------------------------------------------------------------------*/
 uint32_t int2bit(uint8_t state, uint8_t bit_length, /**/uint8_t *bit_array);

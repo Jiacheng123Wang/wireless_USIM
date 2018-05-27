@@ -87,6 +87,7 @@ __INLINE void stop_oscillator_16m(void)
 /********************************************************************************/
 uint8_t byte_string_comparison(uint32_t byte_length, uint8_t *byte_1, uint8_t *byte_2)
 /*--------------------------------------------------------------------------------
+| return value:
 | 1: the 2 strings are different
 | 0: the 2 strings are the same
 |
@@ -110,8 +111,8 @@ uint8_t random_vector_generate(uint8_t *p_buff, uint8_t size, uint32_t start_tim
         uint32_t time_length, uint8_t if_bias_correction)
 /*--------------------------------------------------------------------------------
 | Function for getting vector of random numbers
-| p_buff: Pointer to unit8_t buffer for storing the bytes
-| length: Number of bytes to take from pool and place in p_buff
+| p_buff-->: Pointer to unit8_t buffer for storing the bytes
+| length-->: Number of bytes to take from pool and place in p_buff
 | start_time/time_length in us for BLE stack running, TIMER0 used(in time slot),
 |         in ms for BLE not running, RTC2 used
 |
@@ -330,7 +331,7 @@ void watch_dog_timer_init(uint32_t time_out_s)
 /********************************************************************************/
 void update_user_configuration(void)
 /*--------------------------------------------------------------------------------
-| read the user config parameters stored in flash
+| read the user config parameters in flash
 |
 --------------------------------------------------------------------------------*/
 {
@@ -373,7 +374,7 @@ void update_user_configuration(void)
 /********************************************************************************/
 void update_etu_time(void)
 /*--------------------------------------------------------------------------------
-| read the ETU time stored in flash, for UICC-terminal interface
+| read the ETU time in flash, for UICC-terminal interface
 |
 --------------------------------------------------------------------------------*/
 {
