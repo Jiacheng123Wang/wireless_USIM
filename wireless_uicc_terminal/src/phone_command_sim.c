@@ -376,6 +376,307 @@ uint32_t usim_initial_selected_file_check(void)
 }
 
 /********************************************************************************/
+uint32_t get_fcp_file_size_offset(uint32_t file_id, uint8_t *fcp_size, uint32_t *fcp_offset)
+/*--------------------------------------------------------------------------------
+| get the EF data bytes position offset in the flash data page
+|
+--------------------------------------------------------------------------------*/
+{
+  switch (file_id)
+  {
+    case 0x3f00:
+    {
+      *fcp_size = FCP_SIZE_3F00;
+      *fcp_offset = FCP_OFFSET_3F00;
+
+      break;
+    }
+
+    case 0x2fe2:
+    {
+      *fcp_size = FCP_SIZE_2FE2;
+      *fcp_offset = FCP_OFFSET_2FE2;
+
+      break;
+    }
+
+    case 0x2f05:
+    {
+      *fcp_size = FCP_SIZE_2F05;
+      *fcp_offset = FCP_OFFSET_2F05;
+
+      break;
+    }
+
+    case 0x2f00:
+    {
+      *fcp_size = FCP_SIZE_2F00;
+      *fcp_offset = FCP_OFFSET_2F00;
+
+      break;
+    }
+
+    case 0x6f38:
+    {
+      *fcp_size = FCP_SIZE_6F38;
+      *fcp_offset = FCP_OFFSET_6F38;
+
+      break;
+    }
+
+    case 0x6f07:
+    {
+      *fcp_size = FCP_SIZE_6F07;
+      *fcp_offset = FCP_OFFSET_6F07;
+
+      break;
+    }
+
+    case 0x6f08:
+    {
+      *fcp_size = FCP_SIZE_6F08;
+      *fcp_offset = FCP_OFFSET_6F08;
+
+      break;
+    }
+
+    case 0x6f09:
+    {
+      *fcp_size = FCP_SIZE_6F09;
+      *fcp_offset = FCP_OFFSET_6F09;
+
+      break;
+    }
+
+    case 0x6f31:
+    {
+      *fcp_size = FCP_SIZE_6F31;
+      *fcp_offset = FCP_OFFSET_6F31;
+
+      break;
+    }
+
+    case 0x6f78:
+    {
+      *fcp_size = FCP_SIZE_6F78;
+      *fcp_offset = FCP_OFFSET_6F78;
+
+      break;
+    }
+
+    case 0x6f7E:
+    {
+      *fcp_size = FCP_SIZE_6F7E;
+      *fcp_offset = FCP_OFFSET_6F7E;
+
+      break;
+    }
+
+    case 0x6f73:
+    {
+      *fcp_size = FCP_SIZE_6F73;
+      *fcp_offset = FCP_OFFSET_6F73;
+
+      break;
+    }
+
+    case 0x6f7B:
+    {
+      *fcp_size = FCP_SIZE_6F7B;
+      *fcp_offset = FCP_OFFSET_6F7B;
+
+      break;
+    }
+
+    case 0x6f5B:
+    {
+      *fcp_size = FCP_SIZE_6F5B;
+      *fcp_offset = FCP_OFFSET_6F5B;
+
+      break;
+    }
+
+    case 0x6f5C:
+    {
+      *fcp_size = FCP_SIZE_6F5C;
+      *fcp_offset = FCP_OFFSET_6F5C;
+
+      break;
+    }
+
+    case 0x6fC4:
+    {
+      *fcp_size = FCP_SIZE_6FC4;
+      *fcp_offset = FCP_OFFSET_6FC4;
+
+      break;
+    }
+
+    case 0x6fAD:
+    {
+      *fcp_size = FCP_SIZE_6FAD;
+      *fcp_offset = FCP_OFFSET_6FAD;
+
+      break;
+    }
+
+    case 0x6fB7:
+    {
+      *fcp_size = FCP_SIZE_6FB7;
+      *fcp_offset = FCP_OFFSET_6FB7;
+
+      break;
+    }
+
+    case 0x6f06:
+    {
+      *fcp_size = FCP_SIZE_6F06;
+      *fcp_offset = FCP_OFFSET_6F06;
+
+      break;
+    }
+
+    case 0x4f20:
+    {
+      *fcp_size = FCP_SIZE_4F20;
+      *fcp_offset = FCP_OFFSET_4F20;
+
+      break;
+    }
+
+    case 0x4f52:
+    {
+      *fcp_size = FCP_SIZE_4F52;
+      *fcp_offset = FCP_OFFSET_4F52;
+
+      break;
+    }
+
+    case 0x6f56:
+    {
+      *fcp_size = FCP_SIZE_6F56;
+      *fcp_offset = FCP_OFFSET_6F56;
+
+      break;
+    }
+
+    case 0x6f4B:
+    {
+      *fcp_size = FCP_SIZE_6F4B;
+      *fcp_offset = FCP_OFFSET_6F4B;
+
+      break;
+    }
+
+    case 0x6f49:
+    {
+      *fcp_size = FCP_SIZE_6F49;
+      *fcp_offset = FCP_OFFSET_6F49;
+
+      break;
+    }
+
+    case 0x6f3C:
+    {
+      *fcp_size = FCP_SIZE_6F3C;
+      *fcp_offset = FCP_OFFSET_6F3C;
+
+      break;
+    }
+
+    case 0x6f43:
+    {
+      *fcp_size = FCP_SIZE_6F43;
+      *fcp_offset = FCP_OFFSET_6F43;
+
+      break;
+    }
+
+    case 0x6f42:
+    {
+      *fcp_size = FCP_SIZE_6F42;
+      *fcp_offset = FCP_OFFSET_6F42;
+
+      break;
+    }
+
+    case 0x6f46:
+    {
+      *fcp_size = FCP_SIZE_6F46;
+      *fcp_offset = FCP_OFFSET_6F46;
+
+      break;
+    }
+
+    default:
+    {
+      *fcp_size = 0xff;
+      *fcp_offset = 0xffffffff;
+
+      break;
+    }
+  }
+
+  return(0);
+}
+
+/********************************************************************************/
+uint32_t response_file_selection(uint32_t file_id, uint32_t etu_length,
+         uint32_t start_time_us, uint32_t time_length_us)
+/*--------------------------------------------------------------------------------
+| get the EF data bytes position offset in the flash data page
+|
+--------------------------------------------------------------------------------*/
+{
+  uint8_t fcp_size = 0;
+  uint32_t fcp_offset = 0;
+  uint8_t selecet_fd[2] = {0x61, 0x00};
+  uint8_t wrong_parameter_bytes[2] = {0x6a, 0x87};
+  uint8_t no_file_bytes[2] = {0x6a, 0x82};
+
+  get_fcp_file_size_offset(file_id, &fcp_size, &fcp_offset);
+
+  if ((fcp_size == 0xff) && (fcp_offset == 0xffffffff))
+  {
+#if (IF_LOG_OUTPUT)
+    if (!IF_SOFTDEVICE_RUNNING)
+    {
+      printf("selected file not found......\r\n");
+    }
+#endif
+
+    write_bytes(2, no_file_bytes, etu_length, PIN_DATA_PHONE);
+  }
+  else
+  {
+    selecet_fd[1] = fcp_size;
+    write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
+
+#if (IF_SOFTDEIVE_USED)
+    if (IF_SOFTDEVICE_RUNNING)
+    {
+      if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
+      {
+        write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
+        return(1);
+      }
+    }
+    else
+#endif
+    {
+      if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
+      {
+        write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
+        return(1);
+      }
+    }
+    write_phone_response(fcp_size, (uint8_t *)FCP_DATA_PAGE_FLASH_ADDR + fcp_offset, etu_length);
+  }
+
+  return(0);
+}
+
+/********************************************************************************/
 uint32_t phone_command_select_0xa4(uint8_t *phone_command, uint32_t etu_length,
          uint32_t start_time_us, uint32_t time_length_us)
 /*--------------------------------------------------------------------------------
@@ -385,7 +686,6 @@ uint32_t phone_command_select_0xa4(uint8_t *phone_command, uint32_t etu_length,
 {
   uint8_t selecet_fd[2];
   uint8_t confirm_bytes[1] = {0xa4};
-  uint8_t no_file_bytes[2] = {0x6a, 0x82};
   uint8_t wrong_parameter_bytes[2] = {0x6a, 0x87};
   uint8_t status_bytes[2] = {0x90, 0x0};
   uint8_t class_not_support_bytes[2] = {0x6e, 0x0};
@@ -478,7 +778,7 @@ uint32_t phone_command_select_0xa4(uint8_t *phone_command, uint32_t etu_length,
             return(1);
           }
         }
-        write_phone_response(0x39, M_FILE_CONTROL_PARAMETER_ADF + 1, etu_length);
+        write_phone_response(FCP_SIZE_ADF, (uint8_t *)FCP_DATA_PAGE_FLASH_ADDR + FCP_OFFSET_ADF, etu_length);
       }
       else if ((*(READ_BYTE_UICC_TERMINAL + 1) ==0x3f) && (*(READ_BYTE_UICC_TERMINAL + 2) ==0x0))
       {
@@ -490,28 +790,8 @@ uint32_t phone_command_select_0xa4(uint8_t *phone_command, uint32_t etu_length,
         }
 #endif
 
-        selecet_fd[1] = 0x2b;
-        write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-        if (IF_SOFTDEVICE_RUNNING)
-        {
-          if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-          {
-            write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-            return(1);
-          }
-        }
-        else
-#endif
-        {
-          if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-          {
-            write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-            return(1);
-          }
-        }
-        write_phone_response(0x2b, M_FILE_CONTROL_PARAMETER_3F00 + 1, etu_length);
+        /* response to the file selection command */
+        response_file_selection(0x3f00, etu_length, start_time_us, time_length_us);
       }
       else
       {
@@ -539,751 +819,8 @@ uint32_t phone_command_select_0xa4(uint8_t *phone_command, uint32_t etu_length,
           printf_selected_file(SELECTED_FILE);
         }
 #endif
-
-        switch (SELECTED_FILE)
-        {
-          case 0x2fe2:
-          {
-            selecet_fd[1] = 0x25;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_2FE2 + 1, etu_length);
-            break;
-          }
-
-          case 0x2f05:
-          {
-            selecet_fd[1] = 0x25;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_2F05 + 1, etu_length);
-            break;
-          }
-
-          case 0x2f00:
-          {
-            selecet_fd[1] = 0x28;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x28, M_FILE_CONTROL_PARAMETER_2F00 + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6fb7:
-          {
-            selecet_fd[1] = 0x28;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x28, M_FILE_CONTROL_PARAMETER_7FFF_6FB7 + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6fad:
-          {
-            selecet_fd[1] = 0x25;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6FAD + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6f07:
-          {
-            selecet_fd[1] = 0x25;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F07 + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6f78:
-          {
-            selecet_fd[1] = 0x25;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F78 + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6f7e:
-          {
-            selecet_fd[1] = 0x25;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F7E + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6f38:
-          {
-            selecet_fd[1] = 0x25;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F38 + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6f08:
-          {
-            selecet_fd[1] = 0x25;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F08 + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6f09:
-          {
-            selecet_fd[1] = 0x25;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F09 + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6f5b:
-          {
-            selecet_fd[1] = 0x25;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F5B + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6f5c:
-          {
-            selecet_fd[1] = 0x25;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F5C + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6fc4:
-          {
-            selecet_fd[1] = 0x24;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x24, M_FILE_CONTROL_PARAMETER_7FFF_6FC4 + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6f7b:
-          {
-            selecet_fd[1] = 0x25;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F7B + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6f06:
-          {
-            selecet_fd[1] = 0x28;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x28, M_FILE_CONTROL_PARAMETER_7FFF_6F06 + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6f31:
-          {
-            selecet_fd[1] = 0x25;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F31 + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6f73:
-          {
-            selecet_fd[1] = 0x25;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F73 + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6f56:
-          {
-            selecet_fd[1] = 0x25;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F56 + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6f4b:
-          {
-            selecet_fd[1] = 0x27;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(selecet_fd[1], M_FILE_CONTROL_PARAMETER_7FFF_6F4B + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6f49:
-          {
-            selecet_fd[1] = 0x27;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(selecet_fd[1], M_FILE_CONTROL_PARAMETER_7FFF_6F49 + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6f3c:
-          {
-            selecet_fd[1] = 0x27;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(selecet_fd[1], M_FILE_CONTROL_PARAMETER_7FFF_6F3C + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6f43:
-          {
-            selecet_fd[1] = 0x24;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(selecet_fd[1], M_FILE_CONTROL_PARAMETER_7FFF_6F43 + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6f42:
-          {
-            selecet_fd[1] = 0x1e;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(selecet_fd[1], M_FILE_CONTROL_PARAMETER_7FFF_6F42 + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff6f46:
-          {
-            selecet_fd[1] = 0x18;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x18, M_FILE_CONTROL_PARAMETER_7FFF_6F46 + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff5f3b4f52:
-          {
-            selecet_fd[1] = 0x25;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_5F3B_4F52 + 1, etu_length);
-            break;
-          }
-
-          case 0x7fff5f3b4f20:
-          {
-            selecet_fd[1] = 0x25;
-            write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-            if (IF_SOFTDEVICE_RUNNING)
-            {
-              if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            else
-#endif
-            {
-              if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-              {
-                write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-                return(1);
-              }
-            }
-            write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_5F3B_4F20 + 1, etu_length);
-            break;
-          }
-
-          default:
-          {
-#if (IF_LOG_OUTPUT)
-            if (!IF_SOFTDEVICE_RUNNING)
-            {
-              printf("selected file not found......\r\n");
-            }
-#endif
-
-            write_bytes(2, no_file_bytes, etu_length, PIN_DATA_PHONE);
-            break;
-          }
-        }
+        /* response to the file selection command */
+        response_file_selection(SELECTED_FILE & 0xFFFF, etu_length, start_time_us, time_length_us);
       }
     }
     else if (*(phone_command + 5) == 0x4)
@@ -1319,619 +856,8 @@ uint32_t phone_command_select_0xa4(uint8_t *phone_command, uint32_t etu_length,
         printf_selected_file(SELECTED_FILE);
       }
 #endif
-
-      switch (SELECTED_FILE)
-      {
-        case 0x7fff6fb7:
-        {
-          selecet_fd[1] = 0x28;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(0x28, M_FILE_CONTROL_PARAMETER_7FFF_6FB7 + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6fad:
-        {
-          selecet_fd[1] = 0x25;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6FAD + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6f07:
-        {
-          selecet_fd[1] = 0x25;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F07 + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6f78:
-        {
-          selecet_fd[1] = 0x25;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F78 + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6f7e:
-        {
-          selecet_fd[1] = 0x25;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F7E + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6f38:
-        {
-          selecet_fd[1] = 0x25;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F38 + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6f08:
-        {
-          selecet_fd[1] = 0x25;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F08 + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6f09:
-        {
-          selecet_fd[1] = 0x25;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F09 + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6f5b:
-        {
-          selecet_fd[1] = 0x25;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F5B + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6f5c:
-        {
-          selecet_fd[1] = 0x25;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F5C + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6fc4:
-        {
-          selecet_fd[1] = 0x24;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(0x24, M_FILE_CONTROL_PARAMETER_7FFF_6FC4 + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6f7b:
-        {
-          selecet_fd[1] = 0x25;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F7B + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6f06:
-        {
-          selecet_fd[1] = 0x28;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(0x28, M_FILE_CONTROL_PARAMETER_7FFF_6F06 + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6f31:
-        {
-          selecet_fd[1] = 0x25;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F31 + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6f73:
-        {
-          selecet_fd[1] = 0x25;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F73 + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6f56:
-        {
-          selecet_fd[1] = 0x25;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_6F56 + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6f4b:
-        {
-          selecet_fd[1] = 0x27;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(selecet_fd[1], M_FILE_CONTROL_PARAMETER_7FFF_6F4B + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6f49:
-        {
-          selecet_fd[1] = 0x27;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(selecet_fd[1], M_FILE_CONTROL_PARAMETER_7FFF_6F49 + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6f3c:
-        {
-          selecet_fd[1] = 0x28;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(selecet_fd[1], M_FILE_CONTROL_PARAMETER_7FFF_6F3C + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6f43:
-        {
-          selecet_fd[1] = 0x25;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(selecet_fd[1], M_FILE_CONTROL_PARAMETER_7FFF_6F43 + 1, etu_length);
-          break;
-        }
-
-        case 0x7fff6f42:
-        {
-          selecet_fd[1] = 0x1e;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(selecet_fd[1], M_FILE_CONTROL_PARAMETER_7FFF_6F42 + 1, etu_length);
-
-          break;
-        }
-
-        case 0x7fff6f46:
-        {
-          selecet_fd[1] = 0x18;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(0x18, M_FILE_CONTROL_PARAMETER_7FFF_6F46 + 1, etu_length);
-
-          break;
-        }
-
-        default:
-        {
-#if (IF_LOG_OUTPUT)
-          if (!IF_SOFTDEVICE_RUNNING)
-          {
-            printf("selected file not found......\r\n");
-          }
-#endif
-
-          write_bytes(2, no_file_bytes, etu_length, PIN_DATA_PHONE);
-
-          break;
-        }
-      }
+      /* response to the file selection command */
+      response_file_selection(SELECTED_FILE & 0xFFFF, etu_length, start_time_us, time_length_us);
     }
     else if (*(phone_command + 5) == 0x6)
     {
@@ -1969,77 +895,8 @@ uint32_t phone_command_select_0xa4(uint8_t *phone_command, uint32_t etu_length,
         printf_selected_file(SELECTED_FILE);
       }
 #endif
-      switch (SELECTED_FILE)
-      {
-        case 0x7fff5f3b4f20:
-        {
-          selecet_fd[1] = 0x25;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_5F3B_4F20 + 1, etu_length);
-
-          break;
-        }
-
-        case 0x7fff5f3b4f52:
-        {
-          selecet_fd[1] = 0x25;
-          write_bytes(2, selecet_fd, etu_length, PIN_DATA_PHONE);
-
-#if (IF_SOFTDEIVE_USED)
-          if (IF_SOFTDEVICE_RUNNING)
-          {
-            if (read_bytes_ble(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length, start_time_us, time_length_us))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          else
-#endif
-          {
-            if (read_bytes_phone(5, READ_BYTE_UICC_TERMINAL, PIN_DATA_PHONE, etu_length))
-            {
-              write_bytes(2, wrong_parameter_bytes, etu_length, PIN_DATA_PHONE);
-              return(1);
-            }
-          }
-          write_phone_response(0x25, M_FILE_CONTROL_PARAMETER_7FFF_5F3B_4F52 + 1, etu_length);
-
-          break;
-        }
-
-        default:
-        {
-#if (IF_LOG_OUTPUT)
-          if (!IF_SOFTDEVICE_RUNNING)
-          {
-            printf("selected file not found......\r\n");
-          }
-#endif
-          write_bytes(2, no_file_bytes, etu_length, PIN_DATA_PHONE);
-
-          break;
-        }
-      }
+      /* response to the file selection command */
+      response_file_selection(SELECTED_FILE & 0xFFFF, etu_length, start_time_us, time_length_us);
     }
     else if (*(phone_command + 5) == 0x10)
     {
@@ -2088,7 +945,7 @@ uint32_t phone_command_select_0xa4(uint8_t *phone_command, uint32_t etu_length,
           return(1);
         }
       }
-      write_phone_response(0x39, M_FILE_CONTROL_PARAMETER_ADF + 1, etu_length);
+      write_phone_response(FCP_SIZE_ADF, (uint8_t *)FCP_DATA_PAGE_FLASH_ADDR + FCP_OFFSET_ADF, etu_length);
     }
     else
     {
@@ -2670,7 +1527,7 @@ uint32_t phone_command_read_binary_0xb0(uint8_t *phone_command, uint32_t etu_len
       case 0x04:
       {
         write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
-        write_bytes(tmp_length, UPDATED_BYTES_7FFF_6F38 + read_offset + 1, etu_length, PIN_DATA_PHONE);
+        write_bytes(tmp_length, UPDATED_BYTES_7FFF_6F38 + read_offset, etu_length, PIN_DATA_PHONE);
         write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
 
         break;
@@ -2888,7 +1745,7 @@ uint32_t phone_command_read_binary_0xb0(uint8_t *phone_command, uint32_t etu_len
       case 0x7fff6f38:
       {
         write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
-        write_bytes(tmp_length, UPDATED_BYTES_7FFF_6F38 + read_offset + 1, etu_length, PIN_DATA_PHONE);
+        write_bytes(tmp_length, UPDATED_BYTES_7FFF_6F38 + read_offset, etu_length, PIN_DATA_PHONE);
         write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
 
         break;
@@ -2897,7 +1754,7 @@ uint32_t phone_command_read_binary_0xb0(uint8_t *phone_command, uint32_t etu_len
       case 0x7fff6f43:
       {
         write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
-        write_bytes(tmp_length, UPDATED_BYTES_7FFF_6F43 + read_offset + 1, etu_length, PIN_DATA_PHONE);
+        write_bytes(tmp_length, UPDATED_BYTES_7FFF_6F43 + read_offset, etu_length, PIN_DATA_PHONE);
         write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
 
         break;
@@ -2906,7 +1763,7 @@ uint32_t phone_command_read_binary_0xb0(uint8_t *phone_command, uint32_t etu_len
       case 0x7fff6f46:
       {
         write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
-        write_bytes(tmp_length, UPDATED_BYTES_7FFF_6F46 + read_offset + 1, etu_length, PIN_DATA_PHONE);
+        write_bytes(tmp_length, UPDATED_BYTES_7FFF_6F46 + read_offset, etu_length, PIN_DATA_PHONE);
         write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
 
         break;
@@ -3820,7 +2677,7 @@ uint32_t phone_command_update_binary_0xd6(uint8_t *phone_command, uint32_t etu_l
     {
       for (i=0; i<update_length; i++)
       {
-        UPDATED_BYTES_7FFF_6F43[update_offset + i + 1] = *(READ_BYTE_UICC_TERMINAL + 1 + i);
+        UPDATED_BYTES_7FFF_6F43[update_offset + i] = *(READ_BYTE_UICC_TERMINAL + 1 + i);
       }
       break;
     }
@@ -3910,7 +2767,7 @@ uint32_t phone_command_read_record_0xb2(uint8_t *phone_command, uint32_t etu_len
     {
       for (i=0; i<tmp_length; i++)
       {
-        *(bytes_read + i) = UPDATED_BYTES_2F00[read_offset + i + 1];
+        *(bytes_read + i) = UPDATED_BYTES_2F00[read_offset + i];
       }
       break;
     }

@@ -36,8 +36,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /* start page number for flash user data */
 /* 2 pages for FDS defined in sdk_config.h */
 /* 2 pages for user config setting and USIM EF data */
-#define EF_FILES_START_PAGE                      (FLASH_PAGE_NUMBER - 2 - (FDS_VIRTUAL_PAGES * FDS_VIRTUAL_PAGE_SIZE * 4 / FLASH_PAGE_SIZE))
+/* 2 pages for FCP */
+#define EF_FILES_START_PAGE                      (FLASH_PAGE_NUMBER - 4 - (FDS_VIRTUAL_PAGES * FDS_VIRTUAL_PAGE_SIZE * 4 / FLASH_PAGE_SIZE))
 // #define EF_FILES_START_PAGE                      (FLASH_PAGE_NUMBER - 4)
+
+/*--------------------------- page offset 2, FCP data page -----------------------------*/
+#define FCP_DATA_PAGE_FLASH_ADDR                 (FLASH_PAGE_SIZE * (EF_FILES_START_PAGE + 2))
 
 /*------------------------- page offset 0, data backup page ----------------------------*/
 #define BACKUP_DATA_USER_CONFIG_FLASH_ADDR       (FLASH_PAGE_SIZE * EF_FILES_START_PAGE)
