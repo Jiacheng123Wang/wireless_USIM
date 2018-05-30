@@ -70,78 +70,122 @@ void read_byte(uint8_t *info_byte, uint8_t *check_bit, uint32_t etu_ticks,
   time_now = NRF_TIMER1->CC[0];
 
   /* waiting time for the initial bit */
-  while (time_now + etu_timing_offset + etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + etu_timing_offset + etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
 
   /*** read bit 0 ***********************/
   *info_byte |= (nrf_gpio_pin_read(pin_number) << 0);
-  while (time_now + etu_timing_offset + 2 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + etu_timing_offset + 2 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
 
   /*** read bit 1 ***********************/
   *info_byte |= (nrf_gpio_pin_read(pin_number) << 1);
-  while (time_now + etu_timing_offset + 3 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + etu_timing_offset + 3 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
 
   /*** read bit 2 ***********************/
   *info_byte |= (nrf_gpio_pin_read(pin_number) << 2);
-  while (time_now + etu_timing_offset + 4 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + etu_timing_offset + 4 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
 
   /*** read bit 3 ***********************/
   *info_byte |= (nrf_gpio_pin_read(pin_number) << 3);
-  while (time_now + etu_timing_offset + 5 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + etu_timing_offset + 5 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
 
   /*** read bit 4 ***********************/
   *info_byte |= (nrf_gpio_pin_read(pin_number) << 4);
-  while (time_now + etu_timing_offset + 6 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + etu_timing_offset + 6 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
 
   /*** read bit 5 ***********************/
   *info_byte |= (nrf_gpio_pin_read(pin_number) << 5);
-  while (time_now + etu_timing_offset + 7 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + etu_timing_offset + 7 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
 
   /*** read bit 6 ***********************/
   *info_byte |= (nrf_gpio_pin_read(pin_number) << 6);
-  while (time_now + etu_timing_offset + 8 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + etu_timing_offset + 8 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
 
   /*** read bit 7 ***********************/
   *info_byte |= (nrf_gpio_pin_read(pin_number) << 7);
-  while (time_now + etu_timing_offset + 9 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + etu_timing_offset + 9 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
 
   /*** read check bit ***********************/
   *check_bit = nrf_gpio_pin_read(pin_number);
-  while (time_now + etu_timing_offset + 10 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + etu_timing_offset + 10 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
 
   /* wait for the guard time */
-  while (time_now + etu_timing_offset + 11 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + etu_timing_offset + 11 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
 }
 
@@ -162,72 +206,116 @@ void write_byte(uint8_t word_byte, uint8_t parity_bit, uint32_t etu_ticks,
 
   /* initial bit */
   nrf_gpio_pin_write(pin_number, 0);
-  while (time_now + etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
 
   /* bit 0 */
   nrf_gpio_pin_write(pin_number, (word_byte >> 0) & 0x01);
-  while (time_now + 2 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + 2 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
   /* bit 1 */
   nrf_gpio_pin_write(pin_number, (word_byte >> 1) & 0x01);
-  while (time_now + 3 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + 3 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
   /* bit 2 */
   nrf_gpio_pin_write(pin_number, (word_byte >> 2) & 0x01);
-  while (time_now + 4 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + 4 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
   /* bit 3 */
   nrf_gpio_pin_write(pin_number, (word_byte >> 3) & 0x01);
-  while (time_now + 5 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + 5 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
   /* bit 4 */
   nrf_gpio_pin_write(pin_number, (word_byte >> 4) & 0x01);
-  while (time_now + 6 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + 6 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
   /* bit 5 */
   nrf_gpio_pin_write(pin_number, (word_byte >> 5) & 0x01);
-  while (time_now + 7 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + 7 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
   /* bit 6 */
   nrf_gpio_pin_write(pin_number, (word_byte >> 6) & 0x01);
-  while (time_now + 8 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + 8 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
   /* bit 7 */
   nrf_gpio_pin_write(pin_number, (word_byte >> 7) & 0x01);
-  while (time_now + 9 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + 9 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
 
   /* parity bit */
   nrf_gpio_pin_write(pin_number, parity_bit);
-  while (time_now + 10 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + 10 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
 
   /* guard time, 2 ETU */
   nrf_gpio_pin_write(pin_number, 1);
-  while (time_now + 12 * etu_ticks > NRF_TIMER1->CC[0])
+  while (1)
   {
     NRF_TIMER1->TASKS_CAPTURE[0] = 1;
+    if(time_now + 12 * etu_ticks < NRF_TIMER1->CC[0])
+    {
+      break;
+    }
   }
 }
 
