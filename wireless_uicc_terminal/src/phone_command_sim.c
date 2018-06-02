@@ -1486,6 +1486,7 @@ uint32_t phone_command_read_binary_0xb0(uint8_t *phone_command, uint32_t etu_len
   uint8_t tmp_bytes[2] = {0x69, 0x86};
   uint8_t confirm_bytes[1] = {0xb0};
   uint8_t status_bytes[2] = {0x90, 0x0};
+  uint16_t selected_file_tmp;
 
   usim_initial_selected_file_check( );
 
@@ -1513,111 +1514,97 @@ uint32_t phone_command_read_binary_0xb0(uint8_t *phone_command, uint32_t etu_len
       /* 5f3b4f52 */
       case 0x02:
       {
-        phone_command_read_binary_file_data(phone_command, etu_length, 0x4f52, tmp_length, read_offset, confirm_bytes, status_bytes);
+        selected_file_tmp = 0x4f52;
         break;
       }
       /* 6FAD */
       case 0x03:
       {
-        phone_command_read_binary_file_data(phone_command, etu_length, 0x6fad, tmp_length, read_offset, confirm_bytes, status_bytes);
+        selected_file_tmp = 0x6fad;
         break;
       }
 
       /* 6F38 */
       case 0x04:
       {
-        write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
-        write_bytes(tmp_length, UPDATED_BYTES_7FFF_6F38 + read_offset, etu_length, PIN_DATA_PHONE);
-        write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
-
+        selected_file_tmp = 0x6f38;
         break;
       }
 
       /* 6F56 */
       case 0x05:
       {
-        phone_command_read_binary_file_data(phone_command, etu_length, 0x6f56, tmp_length, read_offset, confirm_bytes, status_bytes);
-
+        selected_file_tmp = 0x6f56;
         break;
       }
 
       /* 6F78 */
       case 0x06:
       {
-        phone_command_read_binary_file_data(phone_command, etu_length, 0x6f78, tmp_length, read_offset, confirm_bytes, status_bytes);
-
+        selected_file_tmp = 0x6f78;
         break;
       }
 
       /* 6F07 */
       case 0x07:
       {
-        phone_command_read_binary_file_data(phone_command, etu_length, 0x6f07, tmp_length, read_offset, confirm_bytes, status_bytes);
-
+        selected_file_tmp = 0x6f07;
         break;
       }
 
       /* 6F08 */
       case 0x08:
       {
-        phone_command_read_binary_file_data(phone_command, etu_length, 0x6f08, tmp_length, read_offset, confirm_bytes, status_bytes);
-
+        selected_file_tmp = 0x6f08;
         break;
       }
 
       /* 6F09 */
       case 0x09:
       {
-        phone_command_read_binary_file_data(phone_command, etu_length, 0x6f09, tmp_length, read_offset, confirm_bytes, status_bytes);
-
+        selected_file_tmp = 0x6f09;
         break;
       }
 
       /* 6F7E */
       case 0x0b:
       {
-        phone_command_read_binary_file_data(phone_command, etu_length, 0x6f7e, tmp_length, read_offset, confirm_bytes, status_bytes);
-
+        selected_file_tmp = 0x6f7e;
         break;
       }
 
       /* 6F73 */
       case 0x0c:
       {
-        phone_command_read_binary_file_data(phone_command, etu_length, 0x6f73, tmp_length, read_offset, confirm_bytes, status_bytes);
-
+        selected_file_tmp = 0x6f73;
         break;
       }
 
       /* 6F7B */
       case 0x0d:
       {
-        phone_command_read_binary_file_data(phone_command, etu_length, 0x6f7b, tmp_length, read_offset, confirm_bytes, status_bytes);
-
+        selected_file_tmp = 0x6f7b;
         break;
       }
 
       /* 6F5B */
       case 0x0f:
       {
-        phone_command_read_binary_file_data(phone_command, etu_length, 0x6f5b, tmp_length, read_offset, confirm_bytes, status_bytes);
-
+        selected_file_tmp = 0x6f5b;
         break;
       }
 
       /* 6F5C */
       case 0x10:
       {
-        phone_command_read_binary_file_data(phone_command, etu_length, 0x6f5c, tmp_length, read_offset, confirm_bytes, status_bytes);
-
+        selected_file_tmp = 0x6f5c;
         break;
       }
 
       /* 6F31 */
       case 0x12:
       {
-        phone_command_read_binary_file_data(phone_command, etu_length, 0x6f31, tmp_length, read_offset, confirm_bytes, status_bytes);
-
+        selected_file_tmp = 0x6f31;
         break;
       }
 
@@ -1632,14 +1619,7 @@ uint32_t phone_command_read_binary_0xb0(uint8_t *phone_command, uint32_t etu_len
           printf("--------------------------------------------------------------------\r\n");
         }
 #endif
-        /* write SIM response to phone, Command not allowed, no EF selected */
-        write_bytes(2, tmp_bytes, etu_length, PIN_DATA_PHONE);
-
-#if (PHONE == 0)
-        /* stop SIM clock */
-        clock_sim_stop_4m(PIN_CLOCK_SIM);
-#endif
-        return(1);
+        selected_file_tmp = 0xffff;
       }
     }
   }
@@ -1647,70 +1627,20 @@ uint32_t phone_command_read_binary_0xb0(uint8_t *phone_command, uint32_t etu_len
   {
     read_offset = (*(phone_command + 3)) * 0x100 + (*(phone_command + 4));
 
-    switch (SELECTED_FILE)
+    selected_file_tmp = SELECTED_FILE & 0xFFFF;
+  }
+
+  switch (selected_file_tmp)
+  {
+    case 0x2fe2:
     {
-      case 0x2fe2:
+      if (*((uint8_t *)ICCID_2FE2_DATA_MODE_FLASH_ADDR) == 0)
       {
-        if (*((uint8_t *)ICCID_2FE2_DATA_MODE_FLASH_ADDR) == 0)
+        /* get SIM EF data by wireless interface */
+        if ((PHONE_LOCAL_USED_USIM & 0xF0) != 0)
         {
-          /* get SIM EF data by wireless interface */
-          if ((PHONE_LOCAL_USED_USIM & 0xF0) != 0)
-          {
-            /* wireless USIM0 */
-            if ((PHONE_WIRELESS_USED_USIM & 1) == 0)
-            {
-              if (*(USIM0_EF_DATA_RAM + FLAG_2FE2_OFFSET) == 0)
-              {
-                phone_command_get_file_data(0xffff, USIM0_EF_DATA_RAM);
-              }
-              write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
-              write_bytes(tmp_length, USIM0_EF_DATA_RAM + EF_2FE2_OFFSET + read_offset, etu_length, PIN_DATA_PHONE);
-              write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
-            }
-            /* wireless USIM1 */
-            else
-            {
-              if (*(USIM1_EF_DATA_RAM + FLAG_2FE2_OFFSET) == 0)
-              {
-                phone_command_get_file_data(0xffee, USIM1_EF_DATA_RAM);
-              }
-              write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
-              write_bytes(tmp_length, USIM1_EF_DATA_RAM + EF_2FE2_OFFSET + read_offset, etu_length, PIN_DATA_PHONE);
-              write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
-            }
-          }
-          else
-          {
-            /* USIM0 is used by phone locally */
-            if (((PHONE_LOCAL_USED_USIM >> 0) & 1) == 1)
-            {
-              if (*(USIM0_EF_DATA_RAM + FLAG_2FE2_OFFSET) == 0)
-              {
-                phone_command_read_binary_2fe2(phone_command, etu_length, 0);
-              }
-
-              write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
-              write_bytes(tmp_length, USIM0_EF_DATA_RAM + EF_2FE2_OFFSET + read_offset, etu_length, PIN_DATA_PHONE);
-              write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
-            }
-            /* USIM1 is used by phone locally */
-            else
-            {
-              if (*(USIM1_EF_DATA_RAM + FLAG_2FE2_OFFSET) == 0)
-              {
-                phone_command_read_binary_2fe2(phone_command, etu_length, 1);
-              }
-
-              write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
-              write_bytes(tmp_length, USIM1_EF_DATA_RAM + EF_2FE2_OFFSET + read_offset, etu_length, PIN_DATA_PHONE);
-              write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
-            }
-          }
-        }
-        else if (*((uint8_t *)ICCID_2FE2_DATA_MODE_FLASH_ADDR) == 1)
-        {
-          /* get SIM EF data by wireless interface */
-          if ((PHONE_LOCAL_USED_USIM & 0xF0) != 0)
+          /* wireless USIM0 */
+          if ((PHONE_WIRELESS_USED_USIM & 1) == 0)
           {
             if (*(USIM0_EF_DATA_RAM + FLAG_2FE2_OFFSET) == 0)
             {
@@ -1720,8 +1650,22 @@ uint32_t phone_command_read_binary_0xb0(uint8_t *phone_command, uint32_t etu_len
             write_bytes(tmp_length, USIM0_EF_DATA_RAM + EF_2FE2_OFFSET + read_offset, etu_length, PIN_DATA_PHONE);
             write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
           }
-          /* read USIM EF data from USIM card */
+          /* wireless USIM1 */
           else
+          {
+            if (*(USIM1_EF_DATA_RAM + FLAG_2FE2_OFFSET) == 0)
+            {
+              phone_command_get_file_data(0xffee, USIM1_EF_DATA_RAM);
+            }
+            write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
+            write_bytes(tmp_length, USIM1_EF_DATA_RAM + EF_2FE2_OFFSET + read_offset, etu_length, PIN_DATA_PHONE);
+            write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
+          }
+        }
+        else
+        {
+          /* USIM0 is used by phone locally */
+          if (((PHONE_LOCAL_USED_USIM >> 0) & 1) == 1)
           {
             if (*(USIM0_EF_DATA_RAM + FLAG_2FE2_OFFSET) == 0)
             {
@@ -1732,82 +1676,120 @@ uint32_t phone_command_read_binary_0xb0(uint8_t *phone_command, uint32_t etu_len
             write_bytes(tmp_length, USIM0_EF_DATA_RAM + EF_2FE2_OFFSET + read_offset, etu_length, PIN_DATA_PHONE);
             write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
           }
+          /* USIM1 is used by phone locally */
+          else
+          {
+            if (*(USIM1_EF_DATA_RAM + FLAG_2FE2_OFFSET) == 0)
+            {
+              phone_command_read_binary_2fe2(phone_command, etu_length, 1);
+            }
+
+            write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
+            write_bytes(tmp_length, USIM1_EF_DATA_RAM + EF_2FE2_OFFSET + read_offset, etu_length, PIN_DATA_PHONE);
+            write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
+          }
         }
-        else if (*((uint8_t *)ICCID_2FE2_DATA_MODE_FLASH_ADDR) == 2)
+      }
+      else if (*((uint8_t *)ICCID_2FE2_DATA_MODE_FLASH_ADDR) == 1)
+      {
+        /* get SIM EF data by wireless interface */
+        if ((PHONE_LOCAL_USED_USIM & 0xF0) != 0)
         {
+          if (*(USIM0_EF_DATA_RAM + FLAG_2FE2_OFFSET) == 0)
+          {
+            phone_command_get_file_data(0xffff, USIM0_EF_DATA_RAM);
+          }
           write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
-          write_bytes(tmp_length, ICCID_2FE2_FIXED_DATA_MODE_RAM, etu_length, PIN_DATA_PHONE);
+          write_bytes(tmp_length, USIM0_EF_DATA_RAM + EF_2FE2_OFFSET + read_offset, etu_length, PIN_DATA_PHONE);
           write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
         }
-        break;
-      }
-
-      case 0x7fff6f38:
-      {
-        write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
-        write_bytes(tmp_length, UPDATED_BYTES_7FFF_6F38 + read_offset, etu_length, PIN_DATA_PHONE);
-        write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
-
-        break;
-      }
-
-      case 0x7fff6f43:
-      {
-        write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
-        write_bytes(tmp_length, UPDATED_BYTES_7FFF_6F43 + read_offset, etu_length, PIN_DATA_PHONE);
-        write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
-
-        break;
-      }
-
-      case 0x7fff6f46:
-      {
-        write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
-        write_bytes(tmp_length, UPDATED_BYTES_7FFF_6F46 + read_offset, etu_length, PIN_DATA_PHONE);
-        write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
-
-        break;
-      }
-
-      case 0x2f05:
-      case 0x7fff6fad:
-      case 0x7fff6f07:
-      case 0x7fff6f78:
-      case 0x7fff6f7e:
-      case 0x7fff6f73:
-      case 0x7fff6f08:
-      case 0x7fff6f09:
-      case 0x7fff6f5b:
-      case 0x7fff6f5c:
-      case 0x7fff6fc4:
-      case 0x7fff6f31:
-      case 0x7fff6f7b:
-      case 0x7fff6f56:
-      case 0x7fff5f3b4f20:
-      case 0x7fff5f3b4f52:
-      {
-        phone_command_read_binary_file_data(phone_command, etu_length, (SELECTED_FILE & 0xFFFF), tmp_length, read_offset, confirm_bytes, status_bytes);
-
-        break;
-      }
-
-      default:
-      {
-#if (IF_LOG_OUTPUT)
-        if (!IF_SOFTDEVICE_RUNNING)
+        /* read USIM EF data from USIM card */
+        else
         {
-          printf("Wrong file ID in phone_command_read_binary_0xb0, error...\r\n");
-          printf_selected_file(SELECTED_FILE);
+          if (*(USIM0_EF_DATA_RAM + FLAG_2FE2_OFFSET) == 0)
+          {
+            phone_command_read_binary_2fe2(phone_command, etu_length, 0);
+          }
+
+          write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
+          write_bytes(tmp_length, USIM0_EF_DATA_RAM + EF_2FE2_OFFSET + read_offset, etu_length, PIN_DATA_PHONE);
+          write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
         }
-#endif
-        /* write SIM response to phone, Command not allowed, no EF selected */
-        write_bytes(2, tmp_bytes, etu_length, PIN_DATA_PHONE);
-
-        /* stop SIM clock */
-        clock_sim_stop_4m(PIN_CLOCK_SIM);
-
-        return(1);
       }
+      else if (*((uint8_t *)ICCID_2FE2_DATA_MODE_FLASH_ADDR) == 2)
+      {
+        write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
+        write_bytes(tmp_length, ICCID_2FE2_FIXED_DATA_MODE_RAM, etu_length, PIN_DATA_PHONE);
+        write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
+      }
+      break;
+    }
+
+    case 0x6f38:
+    {
+      write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
+      write_bytes(tmp_length, UPDATED_BYTES_7FFF_6F38 + read_offset, etu_length, PIN_DATA_PHONE);
+      write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
+
+      break;
+    }
+
+    case 0x6f43:
+    {
+      write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
+      write_bytes(tmp_length, UPDATED_BYTES_7FFF_6F43 + read_offset, etu_length, PIN_DATA_PHONE);
+      write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
+
+      break;
+    }
+
+    case 0x6f46:
+    {
+      write_bytes(1, confirm_bytes, etu_length, PIN_DATA_PHONE);
+      write_bytes(tmp_length, UPDATED_BYTES_7FFF_6F46 + read_offset, etu_length, PIN_DATA_PHONE);
+      write_bytes(2, status_bytes, etu_length, PIN_DATA_PHONE);
+
+      break;
+    }
+
+    case 0x2f05:
+    case 0x6fad:
+    case 0x6f07:
+    case 0x6f78:
+    case 0x6f7e:
+    case 0x6f73:
+    case 0x6f08:
+    case 0x6f09:
+    case 0x6f5b:
+    case 0x6f5c:
+    case 0x6fc4:
+    case 0x6f31:
+    case 0x6f7b:
+    case 0x6f56:
+    case 0x4f20:
+    case 0x4f52:
+    {
+      phone_command_read_binary_file_data(phone_command, etu_length, (SELECTED_FILE & 0xFFFF), tmp_length, read_offset, confirm_bytes, status_bytes);
+
+      break;
+    }
+
+    default:
+    {
+#if (IF_LOG_OUTPUT)
+      if (!IF_SOFTDEVICE_RUNNING)
+      {
+        printf("Wrong file ID in phone_command_read_binary_0xb0, error...\r\n");
+        printf_selected_file(SELECTED_FILE);
+      }
+#endif
+      /* write SIM response to phone, Command not allowed, no EF selected */
+      write_bytes(2, tmp_bytes, etu_length, PIN_DATA_PHONE);
+
+      /* stop SIM clock */
+      clock_sim_stop_4m(PIN_CLOCK_SIM);
+
+      return(1);
     }
   }
 
@@ -1818,7 +1800,7 @@ uint32_t phone_command_read_binary_0xb0(uint8_t *phone_command, uint32_t etu_len
 }
 
 /********************************************************************************/
-void stop_sim_clock_timer1(void)
+__INLINE void stop_sim_clock_timer1(void)
 /*--------------------------------------------------------------------------------
 | Stop USIM clock signal and timer1 (timing control for USIM-phone interface)
 |
@@ -2459,101 +2441,104 @@ uint32_t phone_command_update_binary_0xd6_file(uint8_t *phone_command, uint8_t u
 {
 #if (IF_USIM_BINARY_UPDATE)
   uint8_t task_queue_offset_pos = 0;
+  uint16_t selected_file_tmp;
 
-  switch (SELECTED_FILE)
+  selected_file_tmp = SELECTED_FILE & 0xFFFF;
+
+  switch (selected_file_tmp)
   {
-    case 0x7fff6f08:
+    case 0x6f08:
     {
       task_queue_offset_pos = SIM_FILE_UPDATE_BINARY_6F08_OFFSET_POS;
       UPDATE_BNARY_OFFSET_6F08 = (*(phone_command + 3)) << 8 | (*(phone_command + 4));
       break;
     }
 
-    case 0x7fff6f09:
+    case 0x6f09:
     {
       task_queue_offset_pos = SIM_FILE_UPDATE_BINARY_6F09_OFFSET_POS;
       UPDATE_BNARY_OFFSET_6F09 = (*(phone_command + 3)) << 8 | (*(phone_command + 4));
       break;
     }
 
-    case 0x7fff6f5b:
+    case 0x6f5b:
     {
       task_queue_offset_pos = SIM_FILE_UPDATE_BINARY_6F5B_OFFSET_POS;
       UPDATE_BNARY_OFFSET_6F5B = (*(phone_command + 3)) << 8 | (*(phone_command + 4));
       break;
     }
 
-    case 0x7fff5f3b4f52:
+    case 0x4f52:
     {
       task_queue_offset_pos = SIM_FILE_UPDATE_BINARY_4F52_OFFSET_POS;
       UPDATE_BNARY_OFFSET_4F52 = (*(phone_command + 3)) << 8 | (*(phone_command + 4));
       break;
     }
 
-    case 0x7fff5f3b4f20:
+    case 0x4f20:
     {
       task_queue_offset_pos = SIM_FILE_UPDATE_BINARY_4F20_OFFSET_POS;
       UPDATE_BNARY_OFFSET_4F20 = (*(phone_command + 3)) << 8 | (*(phone_command + 4));
       break;
     }
 
-    case 0x7fff6f73:
+    case 0x6f73:
     {
       task_queue_offset_pos = SIM_FILE_UPDATE_BINARY_6F73_OFFSET_POS;
       UPDATE_BNARY_OFFSET_6F73 = (*(phone_command + 3)) << 8 | (*(phone_command + 4));
       break;
     }
 
-    case 0x7fff6f7e:
+    case 0x6f7e:
     {
       task_queue_offset_pos = SIM_FILE_UPDATE_BINARY_6F7E_OFFSET_POS;
       UPDATE_BNARY_OFFSET_6F7E = (*(phone_command + 3)) << 8 | (*(phone_command + 4));
       break;
     }
 
-    case 0x7fff6f7b:
+    case 0x6f7b:
     {
       task_queue_offset_pos = SIM_FILE_UPDATE_BINARY_6F7B_OFFSET_POS;
       UPDATE_BNARY_OFFSET_6F7B = (*(phone_command + 3)) << 8 | (*(phone_command + 4));
       break;
     }
 
-    case 0x7fff6f31:
+    case 0x6f31:
     {
       task_queue_offset_pos = SIM_FILE_UPDATE_BINARY_6F31_OFFSET_POS;
       UPDATE_BNARY_OFFSET_6F31 = (*(phone_command + 3)) << 8 | (*(phone_command + 4));
       break;
     }
 
-    case 0x7fff6f78:
+    case 0x6f78:
     {
       task_queue_offset_pos = SIM_FILE_UPDATE_BINARY_6F78_OFFSET_POS;
       UPDATE_BNARY_OFFSET_6F78 = (*(phone_command + 3)) << 8 | (*(phone_command + 4));
       break;
     }
 
-    case 0x7fff6fad:
+    case 0x6fad:
     {
       task_queue_offset_pos = SIM_FILE_UPDATE_BINARY_6FAD_OFFSET_POS;
       UPDATE_BNARY_OFFSET_6FAD = (*(phone_command + 3)) << 8 | (*(phone_command + 4));
       break;
     }
 
-    case 0x7fff6f5c:
+    case 0x6f5c:
     {
       task_queue_offset_pos = SIM_FILE_UPDATE_BINARY_6F5C_OFFSET_POS;
       UPDATE_BNARY_OFFSET_6F5C = (*(phone_command + 3)) << 8 | (*(phone_command + 4));
       break;
     }
 
-    case 0x7fff6fc4:
+    case 0x6fc4:
     {
       task_queue_offset_pos = SIM_FILE_UPDATE_BINARY_6FC4_OFFSET_POS;
       UPDATE_BNARY_OFFSET_6FC4 = (*(phone_command + 3)) << 8 | (*(phone_command + 4));
       break;
     }
 
-    case 0x7fff6f56:
+    case 0x6f56:
     {
       task_queue_offset_pos = SIM_FILE_UPDATE_BINARY_6F56_OFFSET_POS;
       UPDATE_BNARY_OFFSET_6F56 = (*(phone_command + 3)) << 8 | (*(phone_command + 4));
@@ -2562,7 +2547,7 @@ uint32_t phone_command_update_binary_0xd6_file(uint8_t *phone_command, uint8_t u
   }
 #endif
 
-  sim_command_update_binary_all_files(SELECTED_FILE & 0xFFFF, update_offset, update_length, READ_BYTE_UICC_TERMINAL + 1);
+  sim_command_update_binary_all_files(selected_file_tmp, update_offset, update_length, READ_BYTE_UICC_TERMINAL + 1);
 
 #if (IF_USIM_BINARY_UPDATE)
   SIM_FILE_UPDATE_BINARY_TASK_QUEUE |= (0x1 << task_queue_offset_pos);
