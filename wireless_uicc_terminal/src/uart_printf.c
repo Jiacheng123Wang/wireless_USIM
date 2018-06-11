@@ -25,8 +25,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "uart_printf.h"
 #include "define_config.h"
 #include "nrf_library_update.h"
-#include "nrf52.h"
-#include "nrf_soc.h"
 
 #if (IF_LOG_OUTPUT)
 /********************************************************************************/

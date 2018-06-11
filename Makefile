@@ -25,7 +25,6 @@ SRC_FILES += \
   $(SDK_ROOT)/components/toolchain/system_nrf52.c \
   $(SDK_ROOT)/components/libraries/util/app_util_platform.c \
   $(SDK_ROOT)/components/drivers_nrf/ble_flash/ble_flash.c \
-  $(SDK_ROOT)/components/drivers_nrf/ppi/nrf_drv_ppi.c \
 
 # Source files for	IF_SOFTDEIVE_USED = 1
 ifeq ($(IF_SOFTDEIVE_USED), 1)	
@@ -152,7 +151,7 @@ INC_FOLDERS += \
 
 # ifeq ($(IF_USE_LIBS), 0)
 INC_FOLDERS += \
-  $(PROJ_DIR)/wireless_uicc_terminal/inc  
+  $(PROJ_DIR)/wireless_uicc_terminal/inc
 # endif
 	
 LIB_FILENAME := $(PROJ_DIR)/wireless_uicc_terminal/lib/$(TARGETS).a
@@ -268,6 +267,7 @@ erase:
 	
 recover:
 	nrfjprog --recover -f nrf52
+	nrfjprog -f nrf52 --eraseall
 	
 archieve: 
 	$(NO_ECHO) $(AR) $(LIB_FILENAME) $(OBJECT_FILES)
