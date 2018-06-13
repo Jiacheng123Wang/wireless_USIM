@@ -2266,8 +2266,8 @@ void idle_mode_text_diaplay_status_check(void)
 |
 --------------------------------------------------------------------------------*/
 {
-  /* return immediately if there are USAT command pending */
-  if (USAT_BYTE_LENGTH_BACK)
+  /* return immediately if there are USAT command pending or Config sync in progress */
+  if ((USAT_BYTE_LENGTH_BACK) || ((USIM_PHONE_CONNECTION_COMMAND >> CONFIG_SYNCH_POS) & 1))
   {
     return;
   }

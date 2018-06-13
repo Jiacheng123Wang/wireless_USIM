@@ -2496,6 +2496,7 @@ uint32_t phone_command_fetch_0x12(uint8_t *bytes_command, uint32_t etu_length,
       phone_command_fetch_idle_mode_text(bytes_command, strlen((char *)CONFIG_SYCH_IDLE_DISPLAY_TEXT), CONFIG_SYCH_IDLE_DISPLAY_TEXT, etu_length, pin_number_phone);
       USAT_BYTE_LENGTH_BACK = 0;
       FETCH_COMMAND_TYPE = FETCH_COMMAND_TYPE_NULL_VALUE;
+      IDLE_MODE_TEXT_TYPE = IDLE_MODE_TEXT_TYPE_CONFIG_SYCH_SERVER;
       break;
     }
 
