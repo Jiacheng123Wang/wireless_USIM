@@ -551,7 +551,7 @@ void ble_stack_status_check(void)
 #endif
     /* BLE is set enable in configuration */
     /* if the BLE stack is stopped recently, do not start BLE stack */
-    if ((*((uint8_t *)BLE_STATUS_ON_OFF_FLASH_ADDR)) && (((NRF_RTC2->COUNTER - BLE_STOP_TIME) > 5000) || (NRF_RTC2->COUNTER < BLE_STOP_TIME)))
+    if ((*((uint8_t *)BLE_STATUS_ON_OFF_FLASH_ADDR)) && (((NRF_RTC2->COUNTER - BLE_STOP_TIME) > 30000) || (NRF_RTC2->COUNTER < BLE_STOP_TIME)))
     {
 #if (IF_LOG_OUTPUT)
       printf("====================== Start BLE Stack =======================\r\n");

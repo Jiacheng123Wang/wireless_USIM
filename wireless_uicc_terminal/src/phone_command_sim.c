@@ -1769,7 +1769,7 @@ uint32_t phone_command_read_binary_0xb0(uint8_t *phone_command, uint32_t etu_len
     case 0x4f20:
     case 0x4f52:
     {
-      phone_command_read_binary_file_data(phone_command, etu_length, (SELECTED_FILE & 0xFFFF), tmp_length, read_offset, confirm_bytes, status_bytes);
+      phone_command_read_binary_file_data(phone_command, etu_length, selected_file_tmp, tmp_length, read_offset, confirm_bytes, status_bytes);
 
       break;
     }
